@@ -593,7 +593,8 @@ void DP (){
 };
 
 int main(int argc, char* argv[]){
-
+    // printf("Hello");
+    
     /////// TIME THE FUNCTION ////////
     clock_t start_time, end_time;
     start_time = clock();
@@ -611,7 +612,7 @@ int main(int argc, char* argv[]){
     num_activities = 60;
     horizon = 289;
 
-    activities = malloc(num_activities*sizeof(Activity));
+    activities = malloc(num_activities*sizeof(Activity)); // reserve la memoire pour les activites
     
     for(int i = 0; i < num_activities; i++){
         activities[i].id = i;
@@ -685,7 +686,7 @@ int main(int argc, char* argv[]){
         activities[a].t2 = horizon;
         activities[a].group = 5;
     }
-    activities[num_activities -1].group = 0;
+    activities[num_activities -1].group = 0; // activities[0].group = 0; deja ?
 
     
 
@@ -717,6 +718,7 @@ int main(int argc, char* argv[]){
     
     free_activities();
     free_bucket(bucket, horizon, num_activities);
+    
     end_time = clock();  // Capture the ending time
     total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
     printf("Total time used: %f seconds\n", total_time);

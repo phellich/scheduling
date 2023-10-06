@@ -35,12 +35,12 @@ typedef struct Activity {
 }Activity;
 
 typedef struct Label Label;                                 // holds data about a particular state or decision at a certain step in the process
-struct Label {
+struct Label {                                              // like a tree
     int acity;                                              // additional activity identifier ? (faster than L->act->id)
-    int time;                                               
-    int duration;
-    double cost;
-    double utility;
+    int time;                                               // current time 
+    int duration;                                           // time since the start 
+    double cost;                                            // cumulative cost
+    double utility;                                         // cumulative 
     Group_mem * mem;
     Label* previous;
     Activity* act;
@@ -204,7 +204,7 @@ int feasible(Label* L, Activity* a){
             //printf(" Minimum duration %d, %d, %d, %d \n", L->duration, L->act->min_duration, L->acity, L->act->id);
             return 0;
         }
-        // temps actuel + trajet pour a + duree min de a + trajet de a a home > fin de journee ? 
+        // temps actuel + trajet pour a + duree min de a + trajet de a a home > fin de journee 
         // Ie enough time left in the horizon to add this activity
         if(L->time + time_x(L->act, a) + a->min_duration + time_x(a, &activities[num_activities-1]) >= horizon -1){
             return 0;
@@ -255,7 +255,7 @@ int dominates(Label* L1, Label* L2){
                         }
                     }
                 }
-                else{
+                else{  // difference of the actual label U - U_duration of the current activity ine the label - 
                     if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
                         if(dom_mem_contains(L1,L2)){
                             return 2;
@@ -335,7 +335,7 @@ void free_activities(){
 };
 
 ///////////////////////////////////////////////////////////////////
-////////////////////////// CHATGPT CODE ///////////////////////////
+////////////////////////// CHATGPT CODE /////////////////////////// node ?
 ///////////////////////////////////////////////////////////////////
 
 Group_mem* createNode(int data) {
@@ -664,7 +664,6 @@ int main(int argc, char* argv[]){
     int  x []= {84, 29, 1, 44, 71, 45, 70, 48, 3, 70, 1, 8, 79, 38, 14, 7, 75, 19, 75, 86, 46, 5, 53, 95, 22, 22, 4, 73, 20, 69, 46, 77, 29, 73, 31, 40, 91, 40, 23, 50, 90, 68, 81, 30, 68, 8, 86, 78, 85, 34, 88, 27, 57, 99, 2, 32, 19, 36, 10, 66, 41, 83, 90, 38, 99, 29, 85, 56, 15, 47, 30, 76, 17, 9, 6, 95, 80, 91, 12, 79, 51, 3, 23, 17, 43, 28, 49, 69, 51, 73, 64, 90, 29, 22, 91, 22, 66, 35, 60, 81, 92, 16, 26, 19, 6, 48, 15, 27, 28, 78, 95, 84, 29, 9, 87, 50, 12, 74, 44, 76, 49, 61, 59, 69, 21, 55, 41, 67, 55, 63, 9, 26, 4, 98, 91, 18, 79, 51, 6, 35, 81, 57, 52, 66, 51, 61, 82, 74, 74, 37};
 	int  y []= {84, 37, 84, 71, 59, 90, 92, 40, 53, 2, 88, 13, 32, 68, 9, 30, 5, 68, 20, 21, 5, 25, 69, 89, 20, 48, 41, 92, 5, 93, 74, 40, 29, 3, 27, 12, 72, 98, 64, 53, 66, 14, 17, 28, 34, 82, 46, 95, 54, 78, 40, 37, 20, 42, 83, 70, 67, 22, 64, 71, 3, 85, 53, 70, 15, 53, 99, 87, 50, 35, 6, 39, 45, 73, 8, 48, 18, 1, 6, 11, 99, 45, 12, 97, 42, 66, 78, 86, 4, 99, 83, 81, 74, 99, 71, 37, 66, 61, 67, 7, 44, 48, 69, 74, 68, 33, 35, 89, 17, 2, 66, 12, 78, 43, 61, 14, 19, 73, 4, 10, 94, 84, 99, 62, 95, 61, 80, 83, 8, 25, 29, 48, 31, 85, 6, 12, 36, 62, 53, 14, 87, 11, 59, 88, 52, 40, 14, 64, 20, 40};
     
-
     num_activities = 60;                                    // # d'activites
     horizon = 289;                                          // # de times horizons possibles en comptant 0
 
@@ -676,8 +675,8 @@ int main(int argc, char* argv[]){
         activities[i].y = y[i];
         activities[i].t1 = 5;                               // earliest time to start
         activities[i].t2 = horizon-1;                       // latest time to start
-        activities[i].t3 = horizon-1;                       // desired time to start
-        activities[i].min_duration = 24;                    // en m je crois ou en time interval ? 2h
+        activities[i].t3 = horizon-1;                       // maximum duration
+        activities[i].min_duration = 24;                    // en m je crois ou en time interval (2h)
         activities[i].des_duration = 30;                    // en m (ie 6*5m) ou en time inter ? 2h30
         activities[i].group = 0; // (i+1);                  // groupes initialises plus tard
     }
@@ -776,7 +775,7 @@ int main(int argc, char* argv[]){
         printf( "%s","the element in list is null in the end ? " );
     }
     else {
-        printf("%s, %d ", "The solution of the first element in list ", 9);
+        printf("%s, %d ", "The solution of the first element in list ", 9); // pq 9 ?
     }
     
     // else{

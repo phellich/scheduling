@@ -311,7 +311,7 @@ void delete_list(L_list* L){
 };
 
 // frees up the memory occupied by the bucket
-// d'abord free la memory de chaque L_list componenet, then of the bucket itself
+// d'abord free la memory de chaque L_list componenent, then of the bucket itself
 void free_bucket(L_list** bucket, int h, int a){    
     for (int i = 0; i < h; i ++) {
         for(int j = 0; j < a; j ++){
@@ -339,6 +339,7 @@ void free_activities(){
 ///////////////////////////////////////////////////////////////////
 
 Group_mem* createNode(int data) {
+    /* Purpose: Allocates memory for and initializes a new Group_mem node with provided data */
     Group_mem* newNode = (Group_mem*)malloc(sizeof(Group_mem));
     newNode->g = data;
     newNode->next = NULL;
@@ -369,7 +370,9 @@ Group_mem* copyLinkedList(Group_mem* head) {
     return newHead;
 };
 
-Group_mem* unionLinkedLists(Group_mem* head1, Group_mem* head2, int pipi) {
+Group_mem* interLinkedLists(Group_mem* head1, Group_mem* head2, int pipi) {
+    /* Creates a new linked list that contains nodes representing the union of head1 and head2 
+    plus an additional node with g as pipi.*/
     int pp = 0;
     if (head1 == NULL || head2 == NULL) {
         Group_mem* newNode = createNode(pipi);
@@ -414,7 +417,8 @@ Group_mem* unionLinkedLists(Group_mem* head1, Group_mem* head2, int pipi) {
 ////////////////////// END CHATGPT CODE ///////////////////////////
 ///////////////////////////////////////////////////////////////////
 
-Label* create_l(Activity* aa){
+Label* create_label(Activity* aa){
+    /* Allocates memory for and initializes a new Label with the specified Activity */
     Label* L = malloc(sizeof(Label));
     L->acity  = 0;
     L->time = aa->min_duration;
@@ -431,37 +435,41 @@ Label* create_l(Activity* aa){
 };
 
 Label* label(Label* L0, Activity* a){
+    /*  Generates a new label L based on an existing label L0 and an activity a */
     Label* L = malloc(sizeof(Label));
     L->acity = a->id;
     L->time = L0->time + time_x(L0->act, a);
     L->utility = L0->utility  + distance_x(L0->act ,a);
     L->duration = L0->duration;
     
-    ///////////////////////////////////////////////////////////////////////
-    /////// check whether the state remains in the same activity //////////
-    ///////////////////////////////////////////////////////////////////////
-
-    if(a->id == L0->acity){ L->time += 1; L->duration += 1; L->mem = copyLinkedList(L0->mem);
-    }else{ 
-        L->mem = unionLinkedLists(L0->mem,a->memory, a->group);
+    // check whether the state remains in the same activity 
+    if(a->id == L0->acity){ 
+        L->time += 1; 
+        L->duration += 1; 
+        L->mem = copyLinkedList(L0->mem);
+    }
+    else{ 
+        L->mem = interLinkedLists(L0->mem, a->memory, a->group);
         L->utility -= (time_Ut[L->acity][L->time]); 
         L->utility -= (duration_Ut[L0->acity][L0->duration]);
         if(a->id == num_activities-1){
             L->duration = 0;
             L->time = horizon-1;
-        }else{
+        }
+        else{
             L->duration = a->min_duration;
             L->time += L->duration;
         }
     }
-    ////////////////////////////////////////////////////////////////////
+
     L->cost = L0->cost + distance_x(L0->act, a);
     L->previous = L0;
     L->act = a;
+
     return L;
 };
 
-L_list* l_remove(L_list* L){
+L_list* remove_label(L_list* L){
     /* Removes the label from the provided list node and adjusts the connections of adjacent nodes. */
     free(L->element);
     L->element=NULL;
@@ -472,7 +480,8 @@ L_list* l_remove(L_list* L){
         L_re = L->next;
         free(L);
         return L_re;
-    }if(L->previous != NULL && L->next == NULL){
+    }
+    if(L->previous != NULL && L->next == NULL){
         L->previous->next = NULL;
         L_re = NULL;
         free(L);
@@ -523,12 +532,14 @@ Label* find_best(L_list* B, int o){
 };
 
 void add_memory(int at, int c){
-    if(activities[at].memory== NULL){
+    /* Adds memory (a Group_mem node) to an activity in the global activities array */
+    if(activities[at].memory== NULL){                           // If the specified activity (indexed by at) doesn't already have memory, it initializes its memory with c.
         activities[at].memory = malloc(sizeof(Group_mem));
         activities[at].memory->g = c;
         activities[at].memory->previous = NULL;
         activities[at].memory->next = NULL;
-    }else{
+    }
+    else{                                                       // Otherwise, it finds the last node in the existing memory list and adds a new Group_mem node with g set to c at the end of the list.
         Group_mem* pp = activities[at].memory;
         while(pp->next != NULL){
             pp = pp->next;
@@ -541,16 +552,23 @@ void add_memory(int at, int c){
 };
 
 int DSSR(Label* L){
+    /* To detect cycles based on the group of activities within a sequence of labels and, if a cycle is detected, update the memory of some labels in the sequence 
+     "this combination has been done before" */
     double min = INFINITY;
     Label* p = L;
     int cycle = 0;
     int c_activity = 0;
     int group_activity = 0;
-    while (p != NULL && cycle == 0){
-        while(p != NULL && p->acity == num_activities-1){p = p->previous;}
+
+    while (p != NULL && cycle == 0){ // iterates through the labels starting from L in the reverse direction until it reaches the beginning or detects a cycle
+        while(p != NULL && p->acity == num_activities-1){ // skips labels that correspond to the last activity
+            p = p->previous;
+        }
         Label* pp = p;
-        while(pp != NULL && pp->acity == p->acity){pp = pp->previous;}
-        while(pp != NULL && cycle == 0){
+        while(pp != NULL && pp->acity == p->acity){ //  skips labels that have the same activity as p.
+            pp = pp->previous;
+        }
+        while(pp != NULL && cycle == 0){ //  checks for a cycle by looking for a previous label with the same group as p. If found, records the activity and group,
             if (pp->act->group == p->act->group){
                 cycle = 1;
                 c_activity = p->acity;
@@ -562,7 +580,9 @@ int DSSR(Label* L){
     }
     if(cycle){
         Label * pp = p;
-        while(pp != NULL && pp->acity == c_activity){pp = pp->previous;}
+        while(pp != NULL && pp->acity == c_activity){
+            pp = pp->previous;
+        }
         //printf(" >> %d \n", c_activity);
         while(pp != NULL && pp->acity != c_activity){
             //printf(" >> %d", pp->acity);
@@ -579,7 +599,7 @@ void DP (){
         printf(" BUCKET IS NULL %d", 0); 
     }
 
-    Label * ll = create_l(&activities[0]);                  // starting label 
+    Label * ll = create_label(&activities[0]);                  // starting label 
     bucket[ll->time][0].element = ll;                       // 2D data structure where the first dimension 
                                                             // represents time and the second represents activities.
    
@@ -614,7 +634,7 @@ void DP (){
                             //if(list_1->element==NULL){break;}
                             // If a label in the bucket is dominated by L1, it's removed from the list. 
                             if(dominates(L1, list_1->element)){
-                                list_1 = l_remove(list_1);
+                                list_1 = remove_label(list_1);
                             }
                             // Conversely, if L1 is dominated by a label in the bucket, L1 is discarded, 
                             // and no further comparison is needed for L1.
@@ -650,6 +670,8 @@ void DP (){
 
 int main(int argc, char* argv[]){
     
+    printf("\n LAUNCHING \n");
+
     /////// TIME THE FUNCTION ////////
     clock_t start_time, end_time;
     start_time = clock();
@@ -663,7 +685,7 @@ int main(int argc, char* argv[]){
     // A passer en argument, dans l'ordre des activites et groupees par type ? 
     int  x []= {84, 29, 1, 44, 71, 45, 70, 48, 3, 70, 1, 8, 79, 38, 14, 7, 75, 19, 75, 86, 46, 5, 53, 95, 22, 22, 4, 73, 20, 69, 46, 77, 29, 73, 31, 40, 91, 40, 23, 50, 90, 68, 81, 30, 68, 8, 86, 78, 85, 34, 88, 27, 57, 99, 2, 32, 19, 36, 10, 66, 41, 83, 90, 38, 99, 29, 85, 56, 15, 47, 30, 76, 17, 9, 6, 95, 80, 91, 12, 79, 51, 3, 23, 17, 43, 28, 49, 69, 51, 73, 64, 90, 29, 22, 91, 22, 66, 35, 60, 81, 92, 16, 26, 19, 6, 48, 15, 27, 28, 78, 95, 84, 29, 9, 87, 50, 12, 74, 44, 76, 49, 61, 59, 69, 21, 55, 41, 67, 55, 63, 9, 26, 4, 98, 91, 18, 79, 51, 6, 35, 81, 57, 52, 66, 51, 61, 82, 74, 74, 37};
 	int  y []= {84, 37, 84, 71, 59, 90, 92, 40, 53, 2, 88, 13, 32, 68, 9, 30, 5, 68, 20, 21, 5, 25, 69, 89, 20, 48, 41, 92, 5, 93, 74, 40, 29, 3, 27, 12, 72, 98, 64, 53, 66, 14, 17, 28, 34, 82, 46, 95, 54, 78, 40, 37, 20, 42, 83, 70, 67, 22, 64, 71, 3, 85, 53, 70, 15, 53, 99, 87, 50, 35, 6, 39, 45, 73, 8, 48, 18, 1, 6, 11, 99, 45, 12, 97, 42, 66, 78, 86, 4, 99, 83, 81, 74, 99, 71, 37, 66, 61, 67, 7, 44, 48, 69, 74, 68, 33, 35, 89, 17, 2, 66, 12, 78, 43, 61, 14, 19, 73, 4, 10, 94, 84, 99, 62, 95, 61, 80, 83, 8, 25, 29, 48, 31, 85, 6, 12, 36, 62, 53, 14, 87, 11, 59, 88, 52, 40, 14, 64, 20, 40};
-    
+
     num_activities = 60;                                    // # d'activites
     horizon = 289;                                          // # de times horizons possibles en comptant 0
 
@@ -750,13 +772,14 @@ int main(int argc, char* argv[]){
     // dynamic programming       
     // it's populating or updating the "bucket" with feasible solutions or labels
     create_bucket(horizon, num_activities);
-    DP();                                               
+    DP();                                            
     
     // This initializes li to point to the last element of the "bucket." 
     // It's presumably the final set of solutions or labels that the algorithm is interested in 
     L_list* li = &bucket[horizon-1][num_activities-1];  
     
     // This process will continue until no more cycles are detected in the best solution
+    // printf("Checkpoint 2 \n");
     int count = 0;
     while(DSSR(find_best(li,0))){                       // detect cycles in the current best solution
         free_bucket(bucket, horizon, num_activities);
@@ -766,6 +789,7 @@ int main(int argc, char* argv[]){
         li = &bucket[horizon-1][num_activities-1];
     };
 
+    // printf("Checkpoint 3 \n");
     printf("Total DSSR iterations , %d \n", count);
     find_best(li,1);                                    //  some final action or determination is made on the best solution
     if(li==NULL){
@@ -786,7 +810,7 @@ int main(int argc, char* argv[]){
     //     }
     // }
     //printf("%d",a);
-    
+    // printf("Checkpoint 4 \n");
     free_activities();
     free_bucket(bucket, horizon, num_activities);
     

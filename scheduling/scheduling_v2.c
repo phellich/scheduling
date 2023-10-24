@@ -93,6 +93,10 @@ Label* get_final_schedule() {
     return final_schedule;
 }
 
+void set_num_activities(int pynum_activities) {
+    num_activities = pynum_activities;
+};
+
 void set_activities_pointer(Activity* activities_array) {
     activities = activities_array;
 };
@@ -674,7 +678,6 @@ int main(int argc, char* argv[]){
     clock_t start_time, end_time;
     start_time = clock();
     
-    num_activities = 60;                                    // # d'activites
     horizon = 289;                                          // # de times horizons possibles en comptant 0
 
     // dynamic programming       

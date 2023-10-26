@@ -205,7 +205,7 @@ def initialize_duration_utility(num_activities):
     return duration_Ut_c
 
 
-def initialize_thetas():
+def initialize_thetas(): # REVOIR LES SIGNES
     thetas = np.zeros(12)
 
     thetas[0] = 0
@@ -289,11 +289,9 @@ def main_test():
     activities_array = initialize_activities(NUM_ACTIVITIES)
     pyduration_Ut = initialize_duration_utility(NUM_ACTIVITIES)
     pytime_Ut = initialize_start_utility(NUM_ACTIVITIES)
-    thetas = initialize_thetas()
 
     lib.set_start_utility(pytime_Ut)
     lib.set_duration_utility(pyduration_Ut)
-    lib.set_theta_parameters(thetas.ctypes.data_as(ctypes.POINTER(ctypes.c_double)))
     lib.set_activities_pointer(activities_array)
 
     lib.main()
@@ -325,7 +323,7 @@ def main_iterative():
     activities_array = initialize_activities_2(activity_csv, NUM_ACTIVITIES) 
     pyduration_Ut = initialize_duration_utility(NUM_ACTIVITIES)
     pytime_Ut = initialize_start_utility(NUM_ACTIVITIES)
-    thetas = initialize_thetas()
+    thetas = initialize_thetas() # REVOIR LES SIGNES
 
     lib.set_num_activities(NUM_ACTIVITIES)
     lib.set_start_utility(pytime_Ut)
@@ -365,3 +363,5 @@ def main_iterative():
 if __name__ == "__main__":
     # main_test()
     main_iterative()
+
+    # coord en m !! see swiss national grid

@@ -32,7 +32,7 @@ struct Label {                                              // like a tree
     int acity;                                              // additional activity identifier ? (faster than L->act->id)
     int time;                                               // current time 
     int duration;                                           // time since the start 
-    double cost;                                            // cumulative cost
+    double cost;                                            // cumulative cost stuff : QUASI INUTILE !! C'est que la distance parcourue.. 
     double utility;                                         // cumulative utility
     Group_mem * mem;
     Label* previous;
@@ -247,7 +247,7 @@ int feasible(Label* L, Activity* a){
     return 1;                               // si tout va bien
 };
 
-int dominates(Label* L1, Label* L2){
+int dominates(Label* L1, Label* L2){                                                      // UTILITY STUFF
     /* checks if Label L1 dominates Label L2 based on certain criteria. 
     It can return 0 (no dominance), 1 (L2 is NULL, so L1 dominates by default), or 2 (L1 dominates L2 based on the criteria). */
 
@@ -444,7 +444,7 @@ Label* label(Label* L0, Activity* a){
     Label* L = malloc(sizeof(Label));
     L->acity = a->id;
     L->time = L0->time + time_x(L0->act, a);
-    L->utility = L0->utility  + distance_x(L0->act ,a);
+    L->utility = L0->utility  + distance_x(L0->act ,a);                                  // UTILITY STUFF
     L->duration = L0->duration;
     
     // check whether the state remains in the same activity 
@@ -455,8 +455,8 @@ Label* label(Label* L0, Activity* a){
     }
     else{ 
         L->mem = interLinkedLists(L0->mem, a->memory, a->group);
-        L->utility -= (time_Ut[L->acity][L->time]); 
-        L->utility -= (duration_Ut[L0->acity][L0->duration]);
+        L->utility -= (time_Ut[L->acity][L->time]);                                  // UTILITY STUFF
+        L->utility -= (duration_Ut[L0->acity][L0->duration]);                                 // UTILITY STUFF
         if(a->id == num_activities-1){
             L->duration = 0;
             L->time = horizon-1;
@@ -467,7 +467,7 @@ Label* label(Label* L0, Activity* a){
         }
     }
 
-    L->cost = L0->cost + distance_x(L0->act, a);
+    L->cost = L0->cost + distance_x(L0->act, a);                                 // COST STUFF
     L->previous = L0;
     L->act = a;
 
@@ -475,7 +475,7 @@ Label* label(Label* L0, Activity* a){
 };
 
 L_list* remove_label(L_list* L){
-    /* Removes the label from the provided list node and adjusts the connections of adjacent nodes. */
+    /* Removes the label from the provided list of label and adjusts the connections of adjacent labels. */
     free(L->element);
     L->element=NULL;
     L_list* L_re;

@@ -8,6 +8,13 @@ import pandas as pd
 SCHEDULING_VERSION = 2
 HORIZON = 289
 NUM_ACTIVITIES = 0
+group_to_type = {
+    0: 'home',
+    1: 'education',
+    2: 'work',
+    3: 'leisure',
+    4: 'shop'
+}
 
 ######################################################
 ##### START OF STRUCTURE #############################
@@ -39,6 +46,20 @@ Activity._fields_ = [
     ("des_duration", c_double)
 ]
 
+# Activity._fields_ = [
+#     ("id", c_int),
+#     ("earliest_start", c_int),
+#     ("latest_start", c_int),
+#     ("min_duration", c_int),
+#     ("max_duration", c_int),
+#     ("x", c_int),
+#     ("y", c_int),
+#     ("group", c_int),
+#     ("memory", POINTER(Group_mem)),
+#     ("des_duration", c_int)
+#     ("des_start_time", c_int)
+# ]
+
 class Label(Structure):
     pass
 
@@ -66,11 +87,11 @@ L_list._fields_ = [
 ######################################################
 ##### START OF INITIALIZATION ########################
 
-def initialize_activities(num_activities): # utiliser les data et enlever le none by default
-    # Create an array of Activity
+def initialize_activities_0(num_activities): # utiliser les data et enlever le none by default
+    ''' Initialise les parametres de chaque activite dans l'ancien code '''
+    
     x_values = [84, 29, 1, 44, 71, 45, 70, 48, 3, 70, 1, 8, 79, 38, 14, 7, 75, 19, 75, 86, 46, 5, 53, 95, 22, 22, 4, 73, 20, 69, 46, 77, 29, 73, 31, 40, 91, 40, 23, 50, 90, 68, 81, 30, 68, 8, 86, 78, 85, 34, 88, 27, 57, 99, 2, 32, 19, 36, 10, 66, 41, 83, 90, 38, 99, 29, 85, 56, 15, 47, 30, 76, 17, 9, 6, 95, 80, 91, 12, 79, 51, 3, 23, 17, 43, 28, 49, 69, 51, 73, 64, 90, 29, 22, 91, 22, 66, 35, 60, 81, 92, 16, 26, 19, 6, 48, 15, 27, 28, 78, 95, 84, 29, 9, 87, 50, 12, 74, 44, 76, 49, 61, 59, 69, 21, 55, 41, 67, 55, 63, 9, 26, 4, 98, 91, 18, 79, 51, 6, 35, 81, 57, 52, 66, 51, 61, 82, 74, 74, 37]
     y_values = [84, 37, 84, 71, 59, 90, 92, 40, 53, 2, 88, 13, 32, 68, 9, 30, 5, 68, 20, 21, 5, 25, 69, 89, 20, 48, 41, 92, 5, 93, 74, 40, 29, 3, 27, 12, 72, 98, 64, 53, 66, 14, 17, 28, 34, 82, 46, 95, 54, 78, 40, 37, 20, 42, 83, 70, 67, 22, 64, 71, 3, 85, 53, 70, 15, 53, 99, 87, 50, 35, 6, 39, 45, 73, 8, 48, 18, 1, 6, 11, 99, 45, 12, 97, 42, 66, 78, 86, 4, 99, 83, 81, 74, 99, 71, 37, 66, 61, 67, 7, 44, 48, 69, 74, 68, 33, 35, 89, 17, 2, 66, 12, 78, 43, 61, 14, 19, 73, 4, 10, 94, 84, 99, 62, 95, 61, 80, 83, 8, 25, 29, 48, 31, 85, 6, 12, 36, 62, 53, 14, 87, 11, 59, 88, 52, 40, 14, 64, 20, 40]  
-    # print(f"\n x is length : {len(x_values)} \n ")
 
     activities_array = (Activity * num_activities)()
 
@@ -129,8 +150,8 @@ def initialize_activities(num_activities): # utiliser les data et enlever le non
     return activities_array
 
 
-def initialize_activities_2(df, num_activities): # utiliser les data et enlever le none by default
-
+def initialize_activities(df, num_activities): # utiliser les data et enlever le none by default
+    ''' Cree un vecteur d activite en les initialisant en fonction d'un dataframe en input '''
     activities_array = (Activity * num_activities)()
 
     for index, row in df.iterrows(): # index + 1 to let some place to home first and last
@@ -141,25 +162,29 @@ def initialize_activities_2(df, num_activities): # utiliser les data et enlever 
         activities_array[index+1].t2 = row['t2']
         activities_array[index+1].t3 = row['t3']
         activities_array[index+1].min_duration = row['min_duration']
-        activities_array[index+1].des_duration = row['des_duration']
+        # activities_array[index+1].des_duration = row['des_duration']
         activities_array[index+1].group = row['group']
 
     return activities_array
 
 
-def personalize(activities_array, num_activities, individual):
-        # dusk
+def personalize(activities_array, num_activities, individual, group_to_type):
+    ''' Pour chaque individu, personnalise le vecteur d'activite en fonction 
+        de sa home et de ses preferences '''
+
+        # dawn
         activities_array[0].id = 0
         activities_array[0].x = individual['home_x']
         activities_array[0].y = individual['home_y']
         activities_array[0].t1 = 0  
         activities_array[0].t2 = 0                                      # ? 
         activities_array[0].t3 = 0                                      # ? 
-        activities_array[0].min_duration = 24
-        activities_array[0].des_duration = 30                           # ? 
+        activities_array[0].min_duration = 0
+        activities_array[0].des_duration = 0                           # ? 
+        # activities_array[0].des_start = 0                           # ? 
         activities_array[0].group = 0
 
-        # dawn
+        # dusk
         activities_array[num_activities-1].id = num_activities-1
         activities_array[num_activities-1].x = individual['home_x']
         activities_array[num_activities-1].y = individual['home_y']
@@ -167,13 +192,23 @@ def personalize(activities_array, num_activities, individual):
         activities_array[num_activities-1].t2 = HORIZON
         activities_array[num_activities-1].t3 = 0                       # ?
         activities_array[num_activities-1].min_duration = 0
-        activities_array[num_activities-1].des_duration = 30            # ? 
+        activities_array[num_activities-1].des_duration = 0            # ? 
+        # activities_array[num_activities-1].des_start = 0                           # ? 
         activities_array[num_activities-1].group = 0
+
+        for index, activity in enumerate(activities_array):
+            group = activity.group
+            if group == 0: 
+                continue
+            activity_type = group_to_type[group]
+            activity.des_duration = individual[f'{activity_type}_duration']
+            # activity.des_start = individual[f'{activity_type}_starting']          
 
         return activities_array
 
 
 def initialize_start_utility(num_activities): 
+    ''' Initialise la utility starting matrix dans l'ancien code'''
     time_Ut = [[0.0 for j in range(HORIZON)] for i in range(num_activities)]
 
     time_Ut[3][5] = 70
@@ -191,6 +226,7 @@ def initialize_start_utility(num_activities):
 
 
 def initialize_duration_utility(num_activities): 
+    ''' Initialise la utility duration matrix dans l'ancien code'''
     duration_Ut = [[0.0 for j in range(HORIZON)] for i in range(num_activities)]
 
     # Arbitrary assignments
@@ -205,7 +241,10 @@ def initialize_duration_utility(num_activities):
     return duration_Ut_c
 
 
-def initialize_thetas(): # REVOIR LES SIGNES
+def initialize_thetas(): 
+    ''' Initialise tous les parametres de la utility function'''
+    # REVOIR LES SIGNES + 
+    # sont ils par minutes ?? pcq je travaille en time interval de 1 pour 5m 
     thetas = np.zeros(12)
 
     thetas[0] = 0
@@ -231,6 +270,7 @@ def initialize_thetas(): # REVOIR LES SIGNES
 ##### START OF FUNCTIONS #############################
 
 def compile_code():
+    ''' Compile le code C '''
     compile_command = ["gcc", "-m64", "-O3", "-shared", "-o", 
                    f"scheduling/scheduling_v{SCHEDULING_VERSION}.dll", 
                    f"scheduling/scheduling_v{SCHEDULING_VERSION}.c", "-lm"]
@@ -251,6 +291,10 @@ def recursive_print(label_pointer):
         print(f"(a{label.acity}, g{activity.group}, t{label.time}) ", end="")
 
 def extract_schedule_data(label_pointer):
+    """
+    Tire d'un pointeur vers un label le deroule du schedule 
+    en remontant a sa racine et stockant les donnees importantes
+    """
     # Traverse to the root first
     path_to_root = []
     while label_pointer:
@@ -286,7 +330,7 @@ def main_test():
     lib.get_final_schedule.restype = ctypes.POINTER(Label)
     lib.get_total_time.restype = ctypes.c_double
 
-    activities_array = initialize_activities(NUM_ACTIVITIES)
+    activities_array = initialize_activities_0(NUM_ACTIVITIES)
     pyduration_Ut = initialize_duration_utility(NUM_ACTIVITIES)
     pytime_Ut = initialize_start_utility(NUM_ACTIVITIES)
 
@@ -320,7 +364,7 @@ def main_iterative():
     global NUM_ACTIVITIES 
     NUM_ACTIVITIES = len(activity_csv) + 2 # we will add dusk and dawn
     
-    activities_array = initialize_activities_2(activity_csv, NUM_ACTIVITIES) 
+    activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
     pyduration_Ut = initialize_duration_utility(NUM_ACTIVITIES)
     pytime_Ut = initialize_start_utility(NUM_ACTIVITIES)
     thetas = initialize_thetas() # REVOIR LES SIGNES
@@ -335,7 +379,7 @@ def main_iterative():
     schedules = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
-        perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual)
+        perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
 
         lib.set_activities_pointer(perso_activities_array)
         lib.main()

@@ -168,43 +168,44 @@ def initialize_activities(df, num_activities): # utiliser les data et enlever le
     return activities_array
 
 
+
 def personalize(activities_array, num_activities, individual, group_to_type):
     ''' Pour chaque individu, personnalise le vecteur d'activite en fonction 
         de sa home et de ses preferences '''
 
-        # dawn
-        activities_array[0].id = 0
-        activities_array[0].x = individual['home_x']
-        activities_array[0].y = individual['home_y']
-        activities_array[0].t1 = 0  
-        activities_array[0].t2 = 0                                      # ? 
-        activities_array[0].t3 = 0                                      # ? 
-        activities_array[0].min_duration = 0
-        activities_array[0].des_duration = 0                           # ? 
-        # activities_array[0].des_start = 0                           # ? 
-        activities_array[0].group = 0
+    # dawn
+    activities_array[0].id = 0
+    activities_array[0].x = individual['home_x']
+    activities_array[0].y = individual['home_y']
+    activities_array[0].earliest_start = 0  
+    activities_array[0].latest_start = 0                                      # ? 
+    activities_array[0].max_duration = 0                                      # ? 
+    activities_array[0].min_duration = 0
+    activities_array[0].des_duration = 0    # supprimer ou NULL ?                         # ? 
+    # activities_array[0].des_start_time = 0    # supprimer ou NULL ?                         # ? 
+    activities_array[0].group = 0
 
-        # dusk
-        activities_array[num_activities-1].id = num_activities-1
-        activities_array[num_activities-1].x = individual['home_x']
-        activities_array[num_activities-1].y = individual['home_y']
-        activities_array[num_activities-1].t1 = 0
-        activities_array[num_activities-1].t2 = HORIZON
-        activities_array[num_activities-1].t3 = 0                       # ?
-        activities_array[num_activities-1].min_duration = 0
-        activities_array[num_activities-1].des_duration = 0            # ? 
-        # activities_array[num_activities-1].des_start = 0                           # ? 
-        activities_array[num_activities-1].group = 0
+    # dusk
+    activities_array[num_activities-1].id = num_activities-1
+    activities_array[num_activities-1].x = individual['home_x']
+    activities_array[num_activities-1].y = individual['home_y']
+    activities_array[num_activities-1].earliest_start = 0
+    activities_array[num_activities-1].latest_start = HORIZON
+    activities_array[num_activities-1].max_duration = 0                       # ?
+    activities_array[num_activities-1].min_duration = 0 
+    activities_array[num_activities-1].des_duration = 0   # supprimer ou NULL ?          # ? 
+    # activities_array[num_activities-1].des_start_time = 0   # supprimer ou NULL ?                         # ? 
+    activities_array[num_activities-1].group = 0
 
-        for index, activity in enumerate(activities_array):
-            group = activity.group
-            if group == 0: 
-                continue
-            activity_type = group_to_type[group]
-            activity.des_duration = individual[f'{activity_type}_duration']
-            # activity.des_start = individual[f'{activity_type}_starting']          
+    for index, activity in enumerate(activities_array):
+        group = activity.group
+        if group == 0: 
+            continue
+        activity_type = group_to_type[group]
+        activity.des_duration = individual[f'{activity_type}_duration']
+        activity.des_start_time = individual[f'{activity_type}_starting']          
 
-        return activities_array
+    return activities_array
 
 
 def initialize_start_utility(num_activities): 

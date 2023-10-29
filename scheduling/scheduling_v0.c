@@ -151,7 +151,7 @@ void recursive_print(Label* L){
         if(L->previous!=NULL){                                      
             recursive_print(L->previous);
         }
-        printf(" act(a%d ,g%d , t%d), ", L->acity, L->act->group, L->time);
+        printf(" (act = %d, group = %d, time = %d, dur = %d), ", L->acity, L->act->group, L->time, L->duration);
     }
 };
 
@@ -669,7 +669,7 @@ void DP (){
 };
 
 int main(int argc, char* argv[]){
-    printf("\n LAUNCHING \n");
+    // printf("\n LAUNCHING \n");
     /////// TIME THE FUNCTION ////////
     clock_t start_time, end_time;
     start_time = clock();
@@ -779,17 +779,18 @@ int main(int argc, char* argv[]){
     // This process will continue until no more cycles are detected in the best solution
     // printf("Checkpoint 2 \n");
     int count = 0;
-    while(DSSR(find_best(li,0))){                       // detect cycles in the current best solution
+    while(DSSR(find_best(li,1))){                       // detect cycles in the current best solution
         free_bucket(bucket, horizon, num_activities);
         create_bucket(horizon, num_activities);
         DP();
         count++;
         li = &bucket[horizon-1][num_activities-1];
+        printf("count DSSR = %d \n\n", count);
     };
 
     // printf("Checkpoint 3 \n");
     printf("Total DSSR iterations , %d \n", count);
-    find_best(li,1);                                    //  some final action or determination is made on the best solution
+    find_best(li,0);                                    //  some final action or determination is made on the best solution
     if(li==NULL){
         printf( "%s","the list is null in the end ? " );
     }

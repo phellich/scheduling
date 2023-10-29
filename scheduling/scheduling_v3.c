@@ -162,7 +162,7 @@ int time_x(Activity* a1, Activity* a2){
     return bubu; 
 };
 
-// checks if a given Activity a is present in the group memory of a Label L. 
+/* checks if a given Activity a is present in the group memory of a Label L  */
 int mem_contains(Label* L, Activity* a){ 
     if(a->group == 0){return 0;}
 
@@ -175,7 +175,7 @@ int mem_contains(Label* L, Activity* a){
     return 0;
 };
 
-// determines if every Group_mem in the memory of Label L1 is also contained in the memory of Label L2
+/* determines if every Group_mem in the memory of Label L1 is also contained in the memory of Label L2 */
 int dom_mem_contains(Label* L1, Label* L2){
     // if(a->group == 0){return 0;}
     Group_mem* gg = L1->mem;
@@ -199,7 +199,7 @@ int dom_mem_contains(Label* L1, Label* L2){
     return 1;
 };
 
-// checks if an Activity a is linked to the provided Label L (or its predecessors) based on the group of the activity
+/* checks if an Activity a is linked to the provided Label L (or its predecessors) based on the group of the activity */
 int contains(Label* L, Activity* a){
     if(a->group == 0){return 0;}
     while(L != NULL){
@@ -211,7 +211,7 @@ int contains(Label* L, Activity* a){
     return 0;
 };
 
-// Recursively prints information about the given Label and all of its predecessors dans l'ordre du premier non null au dernier
+/* Recursively prints information about the given Label and all of its predecessors dans l'ordre du premier non null au dernier */
 void recursive_print(Label* L){
     if(L!=NULL){
         if(L->previous!=NULL){                                      
@@ -221,9 +221,9 @@ void recursive_print(Label* L){
     }
 };
 
+/*  Determines if an Activity a can be added to a sequence ending in label L. 
+    It returns 1 if it's feasible and 0 if it's not. */
 int feasible(Label* L, Activity* a){
-    /* Determines if an Activity a can be added to a sequence ending in label L. 
-       It returns 1 if it's feasible and 0 if it's not. */
     
     if(L == NULL){                          // if no Label, 'a' cann't be added
         return 0;
@@ -269,12 +269,15 @@ int feasible(Label* L, Activity* a){
     return 1;                               // si tout va bien
 };
 
-int dominates(Label* L1, Label* L2){                                                      // UTILITY STUFF
-    /* checks if Label L1 dominates Label L2 based on certain criteria. 
-    It can return 0 (no dominance), 1 (L2 is NULL, so L1 dominates by default), or 2 (L1 dominates L2 based on the criteria). */
 
-    if(L2 == NULL){return 1;}
+/*  checks if Label L1 dominates Label L2 based on certain criteria. 
+    0 = no dominance 
+    1 = L1 dominates by default because L2 si NULL
+    2 = L1 dominates L2 based on the criteria */
+int dominates(Label* L1, Label* L2){                                                   
+
     if(L1 == NULL){return 0;}
+    if(L2 == NULL){return 1;}
     if(L1->acity == L2->acity){                                 // comparaisons only if both labels are for the same activity
         if(L1->utility <= L2->utility){
             if(L1->duration == L2->duration){
@@ -303,15 +306,14 @@ int dominates(Label* L1, Label* L2){                                            
     return 0;
 };
 
-// initializes a two-dimensional dynamic array named bucket of size a by b. Each element of this array is of type L_list
+/* initializes a two-dimensional dynamic array named bucket of size a by b. Each element of this array is of type L_list */
 void create_bucket(int a, int b){
     // It allocates memory for a number of pointers to L_list
     // it's allocating memory for pointers, not for the actual L_list objects
     // (L_list**) is a type cast, which tells compiler to treat the returned pointer from malloc() as a pointer to a pointer to L_list
     bucket = (L_list**)malloc(a * sizeof(L_list*));                 
     for (int i = 0; i < a; i++) {
-        // For each of those pointers, it allocates memory for b L_list objects
-        bucket[i] = (L_list*)malloc(b * sizeof(L_list));
+        bucket[i] = (L_list*)malloc(b * sizeof(L_list));        // For each of those pointers, it allocates memory for b L_list objects
         for (int j = 0; j < b; j++){                            // It then initializes the properties of each L_list to NULL.
             bucket[i][j].element = NULL;
             bucket[i][j].previous = NULL;
@@ -320,7 +322,7 @@ void create_bucket(int a, int b){
     } 
 };
 
-// recursively free memory associated with a given Group_mem and all its successors
+/* recursively free memory associated with a given Group_mem and all its successors */ 
 void delete_group(Group_mem* L){
     if(L!=NULL){
         if(L->next!= NULL){
@@ -330,7 +332,7 @@ void delete_group(Group_mem* L){
     }
 };
 
-// frees memory associated with a given L_list and all of its successors
+/* frees memory associated with a given L_list and all of its successors */ 
 void delete_list(L_list* L){
     if(L->next!= NULL){                                         // After reaching the last L_list in the list, it begins freeing memory.
         delete_list(L->next);
@@ -345,8 +347,8 @@ void delete_list(L_list* L){
     }  
 };
 
-// frees up the memory occupied by the bucket
-// d'abord free la memory de chaque L_list componenent, then of the bucket itself
+/*  frees up the memory occupied by the bucket 
+    d'abord free la memory de chaque L_list componenent, then of the bucket itself */ 
 void free_bucket(L_list** bucket, int h, int a){    
     for (int i = 0; i < h; i ++) {
         for(int j = 0; j < a; j ++){
@@ -361,7 +363,7 @@ void free_bucket(L_list** bucket, int h, int a){
     bucket = NULL;
 };
 
-// meme principe qu'au dessus
+/* meme principe qu'au dessus */ 
 void free_activities(){
     for (int i = 0 ; i < num_activities; i++){
         delete_group(activities[i].memory);
@@ -378,7 +380,7 @@ Group_mem* createNode(int data) {
     return newNode;
 };
 
-// Function to copy a linked list
+/* Function to copy a linked list */ 
 Group_mem* copyLinkedList(Group_mem* head) {
     if (head == NULL) {
         return NULL;
@@ -401,9 +403,10 @@ Group_mem* copyLinkedList(Group_mem* head) {
     return newHead;
 };
 
-Group_mem* interLinkedLists(Group_mem* head1, Group_mem* head2, int pipi) {
-    /* Creates a new linked list that contains nodes representing the union of head1 and head2 
+
+/*  Creates a new linked list that contains nodes representing the union of head1 and head2 
     plus an additional node with g as pipi.*/
+Group_mem* interLinkedLists(Group_mem* head1, Group_mem* head2, int pipi) {
     int pp = 0;
     if (head1 == NULL || head2 == NULL) {
         Group_mem* newNode = createNode(pipi);
@@ -444,8 +447,8 @@ Group_mem* interLinkedLists(Group_mem* head1, Group_mem* head2, int pipi) {
     return newHead;
 };
 
+/* Allocates memory for and initializes a new Label with the specified Activity */
 Label* create_label(Activity* aa){
-    /* Allocates memory for and initializes a new Label with the specified Activity */
     Label* L = malloc(sizeof(Label));
     L->acity  = 0;
     L->time = aa->min_duration;
@@ -460,31 +463,30 @@ Label* create_label(Activity* aa){
     return L;
 };
 
+/*  Generates a new label L based on an existing label L0 and an activity a */
 Label* label(Label* L0, Activity* a){
-    /*  Generates a new label L based on an existing label L0 and an activity a */
     Label* L = malloc(sizeof(Label));
     L->acity = a->id;
     L->time = L0->time + time_x(L0->act, a);
-    L->utility = L0->utility  + distance_x(L0->act ,a);                                  // UTILITY STUFF
+    L->utility = L0->utility  + distance_x(L0->act ,a);                             // UTILITY STUFF : n'importe quoi
     L->duration = L0->duration;
     
-    // check whether the state remains in the same activity 
-    if(a->id == L0->acity){ 
-        L->time += 1; 
-        L->duration += 1; 
-        L->mem = copyLinkedList(L0->mem);
+    if(a->id == L0->acity){                                                         // check whether the state remains in the same activity 
+        L->time += 1;      
+        L->duration += 1;                   
+        L->mem = copyLinkedList(L0->mem);                                           // recupere l'historique du label via sa memory
     }
     else{ 
         L->mem = interLinkedLists(L0->mem, a->memory, a->group);
-        L->utility -= (time_Ut[L->acity][L->time]);                                  // UTILITY STUFF
-        L->utility -= (duration_Ut[L0->acity][L0->duration]);                                 // UTILITY STUFF
-        if(a->id == num_activities-1){
-            L->duration = 0;
-            L->time = horizon-1;
+        L->utility -= (time_Ut[L->acity][L->time]);                                  // quelle utility de commencer cette activite a ce time horizon ?
+        L->utility -= (duration_Ut[L0->acity][L0->duration]);                        // Quelle utility d'avoir fait durer l'activite a0 autant de temps ? 
+        if(a->id == num_activities-1){                                               // d'ou le saut chelou a la fin : DUSK
+            L->duration = 0;                                                         // pq pas horizon - L->time ?
+            L->time = horizon-1;                                                     // pq pas le temps actuel (pour uen 3e var de starting time)
         }
         else{
             L->duration = a->min_duration;
-            L->time += L->duration;
+            L->time += L->duration;    
         }
     }
 
@@ -494,8 +496,8 @@ Label* label(Label* L0, Activity* a){
     return L;
 };
 
+/* Removes the label from the provided list of label and adjusts the connections of adjacent labels. */
 L_list* remove_label(L_list* L){
-    /* Removes the label from the provided list of label and adjusts the connections of adjacent labels. */
     free(L->element);
     L->element=NULL;
     L_list* L_re;
@@ -518,7 +520,7 @@ L_list* remove_label(L_list* L){
         L->element = L_re->element;
         L->next = L->next->next;
         free(L_re);
-        return L; //retunr L which has taken the values of L->next.
+        return L;                                                   //return L which has taken the values of L->next.
     }
     if(L->previous == NULL && L->next == NULL){
         return NULL;
@@ -526,9 +528,9 @@ L_list* remove_label(L_list* L){
 };
 
 
-Label* find_best(L_list* B, int o){
-    /* Finds the label with the minimum utility value from the list. 
+/*  Finds the label with the minimum utility value from the list. 
     Returns the label with the minimum utility value. */
+Label* find_best(L_list* B, int o){
     double min = INFINITY;
     Label* bestL = NULL;
     L_list* li = NULL;
@@ -556,15 +558,15 @@ Label* find_best(L_list* B, int o){
     return bestL;
 };
 
+/* Adds memory (a Group_mem node) to an activity in the global activities array */
 void add_memory(int at, int c){
-    /* Adds memory (a Group_mem node) to an activity in the global activities array */
     if(activities[at].memory== NULL){                           // If the specified activity (indexed by at) doesn't already have memory, it initializes its memory with c.
         activities[at].memory = malloc(sizeof(Group_mem));
         activities[at].memory->g = c;
         activities[at].memory->previous = NULL;
         activities[at].memory->next = NULL;
     }
-    else{                                                       // Otherwise, it finds the last node in the existing memory list and adds a new Group_mem node with g set to c at the end of the list.
+    else{                                                       // O/w, finds the last node in the existing memory list and adds a new Group_mem node with g set to c at the end of the list.
         Group_mem* pp = activities[at].memory;
         while(pp->next != NULL){
             pp = pp->next;
@@ -576,78 +578,77 @@ void add_memory(int at, int c){
     }
 };
 
+
+/*  To detect cycles based on the group of activities within a sequence of labels and, 
+    if a cycle is detected, update the memory of some labels in the sequence 
+    "this combination has been done before" */
 int DSSR(Label* L){
-    /* To detect cycles based on the group of activities within a sequence of labels and, if a cycle is detected, update the memory of some labels in the sequence 
-     "this combination has been done before" */
     double min = INFINITY;
-    Label* p = L;
+    Label* p1 = L;
     int cycle = 0;
     int c_activity = 0;
     int group_activity = 0;
 
-    while (p != NULL && cycle == 0){ // iterates through the labels starting from L in the reverse direction until it reaches the beginning or detects a cycle
-        while(p != NULL && p->acity == num_activities-1){ // skips labels that correspond to the last activity
-            p = p->previous;
+    while (p1 != NULL && cycle == 0){                            // iterates through the labels starting from L in the reverse direction until it reaches the beginning or detects a cycle
+        while(p1 != NULL && p1->acity == num_activities-1){       // skips labels that correspond to the last activity
+            p1 = p1->previous;
         }
-        Label* pp = p;
-        while(pp != NULL && pp->acity == p->acity){ //  skips labels that have the same activity as p.
-            pp = pp->previous;
+        Label* p2 = p1;
+        while(p2 != NULL && p2->acity == p1->acity){             //  skips labels that have the same activity as p.
+            p2 = p2->previous;
         }
-        while(pp != NULL && cycle == 0){ //  checks for a cycle by looking for a previous label with the same group as p. If found, records the activity and group,
-            if (pp->act->group == p->act->group){
+        while(p2 != NULL && cycle == 0){                        //  checks for a cycle by looking for a previous label with the same group as p. If found, records the activity and group,
+            if (p2->act->group == p1->act->group){
                 cycle = 1;
-                c_activity = p->acity;
-                group_activity = p->act->group;
+                c_activity = p1->acity;
+                group_activity = p1->act->group;
             }
-            pp = pp->previous;
+            p2 = p2->previous;
         }
-        p = p->previous;
+        p1 = p1->previous;
     }
     if(cycle){
-        Label * pp = p;
-        while(pp != NULL && pp->acity == c_activity){
-            pp = pp->previous;
+        Label * p2 = p1;
+        while(p2 != NULL && p2->acity == c_activity){
+            p2 = p2->previous;
         }
-        //printf(" >> %d \n", c_activity);
-        while(pp != NULL && pp->acity != c_activity){
-            //printf(" >> %d", pp->acity);
-            //printf(" \n");
-            add_memory(pp->acity, group_activity);
-            pp = pp->previous;
+        while(p2 != NULL && p2->acity != c_activity){
+            add_memory(p2->acity, group_activity);
+            p2 = p2->previous;
         }
     }
     return cycle;
 };
 
+/* Dynamic Programming */
 void DP (){
     if(bucket == NULL){
         printf(" BUCKET IS NULL %d", 0); 
     }
 
-    Label * ll = create_label(&activities[0]);                  // starting label 
-    bucket[ll->time][0].element = ll;                       // 2D data structure where the first dimension 
-                                                            // represents time and the second represents activities.
-   
-    int count = 0;
-    // les deux for imbriques vont explorer tous les schedules possibles pour chaque temps et chaque activite
-    // iterates through each time unit from the start time of the initial label (ll->time) up to one unit before the horizon
-    for(int h = ll->time; h < horizon-1; h++){
-        for (int a0 = 0; a0 < num_activities; a0 ++){
+    Label * ll = create_label(&activities[0]);                      // Initialise label avec Dawn comme 1e activite
+    bucket[ll->time][0].element = ll;                               // Stocke ce label comme premier element de la L_list du temps actuel et activite 0
+
+                                                                    // 2D data structure where the first dimension 
+                                                                    // represents time and the second represents activities.
+                                                                    // c'est ici que on re-explore les possibilites a partir du current time ? 
+
+    for(int h = ll->time; h < horizon-1; h++){                      // pour tous les time horizons restant jusqu'a minuit
+        for (int a0 = 0; a0 < num_activities; a0 ++){               // pour toutes les activites
             
-            L_list* list = &bucket[h][a0];
-            //if(list->element==NULL){continue;}
-            while(list!=NULL)
-            {
-                Label* L = list->element;
-                count+=1;
-                for(int a1 = 0; a1 < num_activities; a1 ++){
+            L_list* list = &bucket[h][a0];                          // list = liste de labels au temps h et pour l'activite a0
 
-                    // For the current label L, the function checks all possible next activities (a1). 
-                    // If it's feasible to schedule the activity a1 after L, then further computations are carried out inside the loop
-                    if(feasible(L, &activities[a1])){
+            while(list!=NULL){
 
-                        //printf(" Minimum duration %d, %d, %d, %d \n", L->duration, L->act->min_duration, L->act->group, L->act->id);
-                        Label* L1 = label(L, &activities[a1]);
+                Label* L = list->element;                           // pour un certain label de la liste
+
+                for(int a1 = 0; a1 < num_activities; a1 ++){        // pour toutes les activites
+
+                    if(feasible(L, &activities[a1])){               // si pas feasible, passe directement au prochain a1
+
+                        Label* L1 = label(L, &activities[a1]);      
+
+                        // But : garder le minimum de L_list pour le temps au nouveau label et l'activite a1
                         int dom = 0;
                         L_list* list_1 = &bucket[L1->time][a1];
                         L_list* list_2 = &bucket[L1->time][a1];
@@ -656,41 +657,40 @@ void DP (){
 
                             list_2 = list_1;
 
-                            //if(list_1->element==NULL){break;}
-                            // If a label in the bucket is dominated by L1, it's removed from the list. 
+                            // If a label in the bucket is dominated by L1, this label is removed from the list (bucket) 
                             if(dominates(L1, list_1->element)){
                                 list_1 = remove_label(list_1);
                             }
-                            // Conversely, if L1 is dominated by a label in the bucket, L1 is discarded, 
-                            // and no further comparison is needed for L1.
+                            // If L1 is dominated by a label in the bucket, no further comparaison is needed for L1 and it's discareded  
                             else{
-                                if(dominates(list_1->element, L1)){
+                                if(dominates(list_1->element, L1)){ 
                                     free(L1);
-                                    dom = 1;
-                                    break;
+                                    dom = 1;                        // (dom = 1) => bucket domine L1
+                                    break;                          // exit the while
                                 }
-                                list_1 = list_1->next;
+                                list_1 = list_1->next;              // pour evaluer la prochaine L_list
                             };
                         }
 
-                        if(!dom){
+                        // si L1 n'est domine par aucun des label de la list du bucket, il faut l'y rajouter
+                        if(!dom){                                   
                             if(list_2->element == NULL){
                                 list_2->element = L1;
                             }
-                            else{
+                            else{                                   // juste rajoute un label a la fin d'une Label_list
                                 L_list* Ln = malloc(sizeof(L_list));
                                 Ln->element = L1;
                                 list_2->next = Ln;
                                 Ln->next = NULL;
                                 Ln->previous = list_1;
                             }
-                        }
-                    }
-                }
-                list = list->next;
-            }
-        }
-    }
+                        }                                           // end if not  dominance
+                    }                                               // end if feasible
+                }                                                   // end for a1
+                list = list->next;                                  // passe au prochain label de la liste L_label
+            }                                                       // end while
+        }                                                           // end for a0
+    }                                                               // end for h
 };
 
 int main(int argc, char* argv[]){
@@ -698,42 +698,40 @@ int main(int argc, char* argv[]){
     clock_t start_time, end_time;
     start_time = clock();
     
-    horizon = 289;                                          // # de times horizons possibles en comptant 0
+    horizon = 289;
 
-    // dynamic programming       
     // it's populating or updating the "bucket" with feasible solutions or labels
+    // bucket = pour chaque time horizon et pour chaque activite, voici un schedule ? 
     create_bucket(horizon, num_activities);
     DP();                                            
     
-    // This initializes li to point to the last element of the "bucket." 
     // It's presumably the final set of solutions or labels that the algorithm is interested in 
-    L_list* li = &bucket[horizon-1][num_activities-1];  
+    L_list* li = &bucket[horizon-1][num_activities-1];                      // li points to last element of bucket (pointer of pointer)
+                                                                            // ie la liste de label ou la journee est finie par la derniere activitee DUSK
     
     // This process will continue until no more cycles are detected in the best solution
     DSSR_count = 0;
-    while(DSSR(find_best(li,0))){                       // detect cycles in the current best solution
+    while(DSSR(find_best(li,0))){                                           // detect cycles in the current best solution
         free_bucket(bucket, horizon, num_activities);
         create_bucket(horizon, num_activities);
         DP();
         DSSR_count++;
-        // printf("%d", DSSR_count);
-        li = &bucket[horizon-1][num_activities-1];
+        li = &bucket[horizon-1][num_activities-1];                          
     };
-    // printf("%d", DSSR_count);
-    final_schedule = find_best(li,0); // change to 1 to print result                             //  some final action or determination is made on the best solution
+    final_schedule = find_best(li,0);                                       // change to 1 to print result    
 
     // if(li==NULL){
-    //     printf( "%s","the list is null in the end ? " );
+    //     printf("%s","the list is null in the end ? ");
     // }
     // else if (li->element == NULL){
-    //     printf( "%s","the element in list is null in the end ? " );
+    //     printf("%s","the element in list is null in the end ? " );
     // }
     // else {
-    //     printf("%s, %d ", "The solution of the first element in list ", 9); // pq 9 ?
+    //     printf("%s", "The solution of the first element in list");
     // }
 
     free_bucket(bucket, horizon, num_activities);
-    end_time = clock();  // Capture the ending time
+    end_time = clock();  
     total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
     return 0;
 }

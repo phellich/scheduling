@@ -158,9 +158,9 @@ def initialize_activities(df, num_activities): # utiliser les data et enlever le
         activities_array[index+1].id = index+1
         activities_array[index+1].x = row['x']
         activities_array[index+1].y = row['y']
-        activities_array[index+1].t1 = row['t1']
-        activities_array[index+1].t2 = row['t2']
-        activities_array[index+1].t3 = row['t3']
+        activities_array[index+1].t1 = row['earliest_start']
+        activities_array[index+1].t2 = row['latest_start']
+        activities_array[index+1].t3 = row['max_duration']
         activities_array[index+1].min_duration = row['min_duration']
         # activities_array[index+1].des_duration = row['des_duration']
         activities_array[index+1].group = row['group']

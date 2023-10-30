@@ -1,11 +1,10 @@
 from tqdm import tqdm
 import subprocess
-import ctypes # je pourrai clean un peu ca
 import numpy as np
-from ctypes import Structure, c_int, c_double, POINTER
+from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
 
-SCHEDULING_VERSION = 2
+SCHEDULING_VERSION = 3
 HORIZON = 289
 NUM_ACTIVITIES = 0
 group_to_type = {
@@ -19,7 +18,6 @@ group_to_type = {
 ######################################################
 ##### START OF STRUCTURE #############################
 
-from ctypes import Structure, c_int, c_double, POINTER
 
 class Group_mem(Structure):
     pass
@@ -43,7 +41,7 @@ Activity._fields_ = [
     ("y", c_int),
     ("group", c_int),
     ("memory", POINTER(Group_mem)),
-    ("des_duration", c_int)
+    ("des_duration", c_int),
     ("des_start_time", c_int)
 ]
 
@@ -131,28 +129,46 @@ def personalize(activities_array, num_activities, individual, group_to_type):
 
 
 def initialize_param(): 
-    ''' Initialise tous les parametres de la utility function'''
+    ''' Initialise les parametres de la utility function'''
     # REVOIR LES SIGNES + 
     # sont ils par minutes ?? pcq je travaille en time interval de 1 pour 5m 
-    thetas = np.zeros(12)
+    parameters = np.zeros(17)
 
-    thetas[0] = 0
-    thetas[1] = -0.61
-    thetas[2] = -2.4
+    # flexibility parameters
+    # parameters[0] = 0               # O_start_early_F
+    # parameters[1] = 0.61           # O_start_early_MF
+    # parameters[2] = 2.4            # O_start_early_NF
+    # parameters[3] = 0               # O_start_late_F
+    # parameters[4] = 2.4            # O_start_late_MF
+    # parameters[5] = 9.6            # O_start_late_NF
+    # parameters[6] = 0.61           # O_dur_short_F
+    # parameters[7] = 2.4            # O_dur_short_MF
+    # parameters[8] = 9.6            # O_dur_short_NF
+    # parameters[9] = 0.61           # O_dur_long_F
+    # parameters[10] = 2.4           # O_dur_long_MF
+    # parameters[11] = 9.6           # O_dur_long_NF
 
-    thetas[3] = 0
-    thetas[4] = -2.4
-    thetas[5] = -9.6
+    parameters[0] = 0               # O_start_early_F
+    parameters[1] = 0  # 0.61           # O_start_early_MF
+    parameters[2] =0  #  2.4            # O_start_early_NF
+    parameters[3] =0  #  0               # O_start_late_F
+    parameters[4] = 0  # 2.4            # O_start_late_MF
+    parameters[5] = 0  # 9.6            # O_start_late_NF
+    parameters[6] = 0  # 0.61           # O_dur_short_F
+    parameters[7] = 0  # 2.4            # O_dur_short_MF
+    parameters[8] = 0  # 9.6            # O_dur_short_NF
+    parameters[9] = 0  # 0.61           # O_dur_long_F
+    parameters[10] = 0  # 2.4           # O_dur_long_MF
+    parameters[11] = 0  # 9.6           # O_dur_long_NF
 
-    thetas[6] = -0.61
-    thetas[7] = -2.4
-    thetas[8] = -9.6
+    # others 
+    parameters[12] = 1000           # beta_cost    
+    parameters[13] = 0           # beta_travel_cost
+    parameters[14] = 1           # theta_travel
+    parameters[15] = 1           # c_a
+    parameters[16] = 0           # c_t
 
-    thetas[9] = -0.61
-    thetas[10] = -2.4
-    thetas[11] = -9.6
-
-    return thetas
+    return parameters
 
 ##### END OF INITIALIZATION ##########################
 ######################################################
@@ -176,8 +192,8 @@ def recursive_print(label_pointer):
         if label.previous:
             recursive_print(label.previous)
         
-        activity = label.act.contents
-        print(f"(a{label.acity}, g{activity.group}, t{label.time}) ", end="")
+        activity = label.act.contents # aussi imprimer la des_start/dur pour test ?
+        print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, duration = {label.duration}) ", end="")
 
 def extract_schedule_data(label_pointer):
     """
@@ -196,26 +212,25 @@ def extract_schedule_data(label_pointer):
         label = label_pointer.contents
         data = {
             "acity": label.acity,
-            "group": label.act.contents.group,
-            "time": label.time,
+            "group": group_to_type[label.act.contents.group],
+            "start": label.start_time,
             "duration": label.duration,
         }
         schedule_data.append(data)
 
     return schedule_data
 
-
 ##### END OF FUNCTIONS ###############################
 ######################################################
 ##### START OF EXECUTION #############################
 
-def main_iterative():
+def main():
 
     compile_code()
-    lib = ctypes.CDLL(f"./scheduling/scheduling_v{SCHEDULING_VERSION}.dll") # python is 64 bits and compiler too (check with gcc --version)
-    lib.get_final_schedule.restype = ctypes.POINTER(Label)
-    lib.get_total_time.restype = ctypes.c_double
-    lib.get_count.restype = ctypes.c_int
+    lib = CDLL(f"./scheduling/scheduling_v{SCHEDULING_VERSION}.dll") # python is 64 bits and compiler too (check with gcc --version)
+    lib.get_final_schedule.restype = POINTER(Label)
+    lib.get_total_time.restype = c_double
+    lib.get_count.restype = c_int
 
     activity_csv = pd.read_csv("./data_preprocessed/activity.csv")
     population_csv = pd.read_csv("./data_preprocessed/population.csv")
@@ -224,20 +239,20 @@ def main_iterative():
     NUM_ACTIVITIES = len(activity_csv) + 2 # we will add dusk and dawn
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
-    # pyduration_Ut = initialize_duration_utility(NUM_ACTIVITIES)
-    # pytime_Ut = initialize_start_utility(NUM_ACTIVITIES)
     thetas = initialize_param() # REVOIR LES SIGNES ET AUTRE
 
     lib.set_num_activities(NUM_ACTIVITIES)
-    # lib.set_start_utility(pytime_Ut)
-    # lib.set_duration_utility(pyduration_Ut)
-    lib.set_utility_parameters(thetas.ctypes.data_as(ctypes.POINTER(ctypes.c_double)))
+    lib.set_utility_parameters(thetas.ctypes.data_as(POINTER(c_double)))
 
     DSSR_iterations = []
     execution_times = []
     schedules = []
+    ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
+        if (index < 2 or index > 2): # controle iterations to test
+            continue
+
         perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
 
         lib.set_activities_pointer(perso_activities_array)
@@ -251,10 +266,11 @@ def main_iterative():
         execution_times.append(time)
         schedule_data = extract_schedule_data(schedule_pointer)
         schedules.append(schedule_data) 
+        ids.append(individual['id'])
 
     results = pd.DataFrame({
-        'id': population_csv['id'],
-        'age': population_csv['age'],
+        'id': ids,
+        # 'age': population_csv['age'],
         'execution_time': execution_times,
         'DSSR_iterations': DSSR_iterations,
         'daily_schedule': schedules  
@@ -263,5 +279,6 @@ def main_iterative():
     results.to_csv('./data_output/schedules.csv', index=False)
     results.to_json('./data_output/schedules.json', orient='records', lines=True) 
 
+
 if __name__ == "__main__":
-    main_iterative()
+    main()

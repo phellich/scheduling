@@ -1,14 +1,1 @@
-{"id":6340157,"age":84,"execution_time":0.009,"DSSR_iterations":0,"daily_schedule":[{"acity":-535957984,"group":0,"time":421,"duration":-535960432},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6601560,"age":30,"execution_time":0.008,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6362901,"age":68,"execution_time":0.007,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6621676,"age":79,"execution_time":0.007,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6443794,"age":84,"execution_time":0.009,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6960366,"age":27,"execution_time":0.01,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6715927,"age":6,"execution_time":0.01,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6340512,"age":65,"execution_time":0.009,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":7078956,"age":17,"execution_time":0.007,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6730773,"age":42,"execution_time":0.008,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6363712,"age":85,"execution_time":0.007,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6338220,"age":88,"execution_time":0.008,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6499694,"age":58,"execution_time":0.008,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
-{"id":6649196,"age":84,"execution_time":0.008,"DSSR_iterations":0,"daily_schedule":[{"acity":0,"group":0,"time":0,"duration":0},{"acity":23,"group":0,"time":288,"duration":0}]}
+{"id":7120345,"execution_time":0.003,"DSSR_iterations":0,"daily_schedule":[]}

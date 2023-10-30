@@ -1,15 +1,2 @@
-id,age,execution_time,DSSR_iterations,daily_schedule
-6340157,84,0.009,0,"[{'acity': -535957984, 'group': 0, 'time': 421, 'duration': -535960432}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6601560,30,0.008,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6362901,68,0.007,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6621676,79,0.007,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6443794,84,0.009,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6960366,27,0.01,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6715927,6,0.01,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6340512,65,0.009,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-7078956,17,0.007,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6730773,42,0.008,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6363712,85,0.007,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6338220,88,0.008,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6499694,58,0.008,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
-6649196,84,0.008,0,"[{'acity': 0, 'group': 0, 'time': 0, 'duration': 0}, {'acity': 23, 'group': 0, 'time': 288, 'duration': 0}]"
+id,execution_time,DSSR_iterations,daily_schedule
+7120345,0.003,0,[]

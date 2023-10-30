@@ -70,10 +70,21 @@ double distance_x(Activity* a1, Activity* a2){
     return dist; 
 };
 
+// int time_x(Activity* a1, Activity* a2){
+//     double dist = distance_x(a1, a2);
+//     int bubu = ceil(dist/(time_factor*60));
+//     return bubu; 
+// };
+
 int time_x(Activity* a1, Activity* a2){
     double dist = distance_x(a1, a2);
-    int bubu = ceil(dist/(time_factor*60));
-    return bubu; 
+    int time = (int)(dist/(time_factor*60));
+    // Round to the nearest 5-minute interval
+    time = (int)(round((double)time / 5.0) * 5);
+    // Divide by 5 to fit within the 0-289 time horizon
+    int time_interval = time / 5;
+
+    return time_interval;
 };
 
 // checks if a given Activity a is present in the group memory of a Label L. 

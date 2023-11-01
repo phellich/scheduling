@@ -249,7 +249,8 @@ int feasible(Label* L, Activity* a){
 
 int dominates(Label* L1, Label* L2){                                                      // UTILITY STUFF
     /* checks if Label L1 dominates Label L2 based on certain criteria. 
-    It can return 0 (no dominance), 1 (L2 is NULL, so L1 dominates by default), or 2 (L1 dominates L2 based on the criteria). */
+    It can return 0 (no dominance), 1 (L2 is NULL, so L1 dominates by default), or 2 (L1 dominates L2 based on the criteria). 
+    Chnage it according to slides ? */
 
     if(L2 == NULL){return 1;}
     if(L1 == NULL){return 0;}

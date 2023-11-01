@@ -49,7 +49,7 @@ struct L_list{
 };
 
 /// @global _constants ////////////////////////////////////////////////////////
-int time_factor = 5;                                        // VITESSE EN UNITE ?? 
+double time_factor = 10*16.667;                                        // 1 km/h = 16.667 m/min
 int horizon = 289;
 int num_activities;
 L_list** bucket;
@@ -146,8 +146,8 @@ double distance_x(Activity* a1, Activity* a2){
 
 int travel_time(Activity* a1, Activity* a2){
     double dist = distance_x(a1, a2);
-    int time = (int)(dist/(time_factor*60));
-    time = (int)(round((double)time / 5.0) * 5);            // Round to the nearest 5-minute interval
+    int time = (int)(dist/time_factor);
+    time = (int)(floor((double)time / 5.0) * 5);            // Round down to the nearest 5-minute interval
     int time_interval = time / 5;                           // Divide by 5 to fit within the 0-289 time horizon
     return time_interval;
 };
@@ -163,7 +163,8 @@ int mem_contains(Label* L, Activity* a){
     return 0;
 };
 
-/* determines if every Group_mem in the memory of Label L1 is also contained in the memory of Label L2 */
+/*  Determines if every Group_mem in the memory of Label L1 is also contained in the memory of Label L2 
+    Return 1 if True */
 int dom_mem_contains(Label* L1, Label* L2){
     // if(a->group == 0){return 0;}
     Group_mem* gg = L1->mem;
@@ -225,10 +226,10 @@ int feasible(Label* L, Activity* a){
             return 0;
         }
         // Making sure the new activity starts and ends within its allowed time window : signes changed !
-        if(L->time + travel_time(L->act, a) > a->earliest_start){
+        if(L->time + travel_time(L->act, a) < a->earliest_start){
             return 0;
         }
-        if(L->time + travel_time(L->act, a) < a->latest_start){
+        if(L->time + travel_time(L->act, a) > a->latest_start){
             return 0;
         }
         if(mem_contains(L,a)){              // Checking if memory contains the group of the new activity (comment on trouve des boucles ?!)
@@ -240,7 +241,7 @@ int feasible(Label* L, Activity* a){
             return 0;
         }
     }
-    /*if(contains(L,a)){                    // utile ? OUI JE PENSE
+    /*if(contains(L,a)){                    // utile ? OUI JE PENSE (ask Fabien)
         return 0;
     }*/
     return 1;                               // si tout va bien
@@ -248,37 +249,36 @@ int feasible(Label* L, Activity* a){
 
 
 /*  checks if Label L1 dominates Label L2 based on certain criteria. 
+    Rappel : on minimise la utility function ! 
     0 = no dominance 
     1 = L1 dominates by default because L2 si NULL
     2 = L1 dominates L2 based on the criteria */
 int dominates(Label* L1, Label* L2){             
-    // if(L1 == NULL){return 0;}
-    // if(L2 == NULL){return 1;}
-    // if(L1->acity == L2->acity){                                 // comparaisons only if both labels are for the same activity
-    //     if(L1->utility <= L2->utility){
-    //         if(L1->duration == L2->duration){
-    //             if(dom_mem_contains(L1,L2)){                    // Ensuring memory domination with dom_mem_contains.
-    //                 return 2;
-    //             }
-    //         }
-    //         else{
-    //             if(L2->duration > L2->act->des_duration){       // pq ce if si le else fait exactement la meme chose ??
-    //                 if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
-    //                     if(dom_mem_contains(L1,L2)){
-    //                         return 2;
-    //                     }
-    //                 }
-    //             }
-    //             else{  // difference of the actual label U - U_duration of the current activity ine the label - 
-    //                 if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
-    //                     if(dom_mem_contains(L1,L2)){
-    //                         return 2;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    /* Honnetement j'ai l'impression que la dominance sera jamais vrmt bonne, il faudrait tout garder dans chaque list de label du bucket
+    Pcq si on permet pas a une activite de trop depasse sa desired duration, ca peut etre au detrimen d'un meilleur starting time autre part*/
+    if(L1 == NULL){return 0;}
+    if(L2 == NULL){return 1;}
+    if(L1->acity != L2->acity){return 0;}
+
+    if(L1->utility <= L2->utility){                     // L1 a une meilleure utility que L2
+
+        /*  S'assure que tous les group de L2 sont dans L1, sinon ca veut dire que L2 peut etre moins bien pcq elle nn'a pas encore fait un group.
+            Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
+        if(dom_mem_contains(L2,L1)){
+
+            /*  si L1 et L2 ont depasse la duree desiree, et que la duree de L2 est deja plus longue que L2, alors L1 domine L2
+                si L1 n'a pas atteint la duree desiree mais que L2 si, alors L1 domine L2 
+                si L1 et L2 ont la meme duree, alors L1 domine L2 */
+            if(((L1->duration > L1->act->des_duration) && (L2->duration > L1->act->des_duration) && (L2->duration > L1->duration))
+                || ((L1->duration < L1->act->des_duration) && (L2->duration > L1->act->des_duration))
+                || (L1->duration == L2->duration)){
+                return 2;
+            }
+            /*  si L1 et L2 ont depasse la duree desiree, et que la duree de L1 est deja plus longue que L2, alors rien
+                si L2 n'a pas atteint la duree desiree, rien
+                si aucun des deux, rien non plus */
+        }
+    }
     return 0;
 };
 
@@ -492,7 +492,7 @@ Label* label(Label* L0, Activity* a){
         L->mem = copyLinkedList(L0->mem);                                               // recupere l'historique du label via sa memory
     }
     else{ 
-        L->start_time = L->time;
+        L->start_time = L0->time + travel_time(L0->act, a);
         L->mem = interLinkedLists(L0->mem, a->memory, a->group);
         if(a->id == num_activities-1){                                                  // d'ou le saut chelou a la fin : DUSK (pas de utility pour dusk)
             L->duration = horizon - L->start_time;                                      // set to 0 before 
@@ -542,16 +542,14 @@ L_list* remove_label(L_list* L){
 
 /*  Finds the label with the minimum utility value from the list. 
     Returns the label with the minimum utility value. */
-Label* find_best(L_list* B, int o){
+Label* find_best(L_list* B){
     double min = INFINITY;
     Label* bestL = NULL;
-    L_list* li = NULL;
-    li = B;
+    L_list* li = B;
     while (li != NULL){
         // printf("%s", "\n Hello there");
         if (li->element != NULL){
-            
-            if( li->element->utility < min){
+            if(li->element->utility < min){
                 bestL = li->element;
                 min = bestL->utility;
             }
@@ -608,7 +606,6 @@ int DSSR(Label* L){
                 cycle = 1;
                 c_activity = p1->acity;
                 group_activity = p1->act->group;
-                // ajouter un print de cycle ici ? 
             }
             p2 = p2->previous;
         }
@@ -636,12 +633,8 @@ void DP (){
     Label * ll = create_label(&activities[0]);                      // Initialise label avec Dawn comme 1e activite
     bucket[ll->time][0].element = ll;                               // Stocke ce label comme premier element de la L_list du temps actuel et activite 0
 
-    // int count_time_iter = 0;
     for(int h = ll->time; h < horizon-1; h++){                      // pour tous les time horizons restant jusqu'a minuit
-        // count_time_iter++;
-        // printf("\n Time iter is %d and time is %d", count_time_iter, h);
         for (int a0 = 0; a0 < num_activities; a0++){               // pour toutes les activites
-            // printf("\n Activity number is %d", a0);
             L_list* list = &bucket[h][a0];                          // list = liste de labels au temps h et pour l'activite a0
 
             while(list!=NULL){
@@ -651,7 +644,6 @@ void DP (){
                 Label* L = list->element;                           // pour un certain label de la liste
 
                 for(int a1 = 0; a1 < num_activities; a1 ++){        // pour toutes les activites
-                    // printf("\n Activity number is %d", a1);
 
                     if(feasible(L, &activities[a1])){               // si pas feasible, passe directement au prochain a1
 
@@ -718,16 +710,15 @@ int main(int argc, char* argv[]){
     
     // This process will continue until no more cycles are detected in the best solution
     DSSR_count = 0;
-    while(DSSR(find_best(li,0))){                                           // detect cycles in the current best solution
-    // while(find_best(li,0) != NULL){
-        printf("%s", "\n We entered the while in main !");
+    while(DSSR(find_best(li))){                                           // detect cycles in the current best solution
+        printf("\n We entered the while in main !");
         free_bucket(bucket, horizon, num_activities);
         create_bucket(horizon, num_activities);
         DP();
         DSSR_count++;
         li = &bucket[horizon-1][num_activities-1];                          
     };
-    final_schedule = find_best(li,0);                                       // change to 1 to print result    
+    final_schedule = find_best(li);                                       // change to 1 to print result    
 
     free_bucket(bucket, horizon, num_activities);
     end_time = clock();  

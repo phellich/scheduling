@@ -160,6 +160,13 @@ def initialize_param():
     # parameters[10] = 2.4           # O_dur_long_MF
     # parameters[11] = 9.6           # O_dur_long_NF
 
+    # others 
+    # parameters[12] = 1            # beta_cost    
+    # parameters[13] = 0           # beta_travel_cost
+    # parameters[14] = 0            # theta_travel
+    # parameters[15] = 0            # c_a
+    # parameters[16] = 0           # c_t
+
     parameters[0] = 0               # O_start_early_F
     parameters[1] = 0           # O_start_early_MF
     parameters[2] = 0             # O_start_early_NF
@@ -236,7 +243,7 @@ def extract_schedule_data(label_pointer, activity_df):
             "start": label.start_time,
             "duration": label.duration,
             "time" :label.time,
-            "utility" : label.utility
+            "cum_utility" : label.utility
         }
         schedule_data.append(data)
 

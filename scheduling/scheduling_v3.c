@@ -536,7 +536,7 @@ Label* label(Label* L0, Activity* a){
         L->start_time = L0->time + travel_time(L0->act, a) + 1;
         L->mem = unionLinkedLists(L0->mem, a->memory, a->group);                        // new group memory baed on old one and new activity group
         if(a->id == num_activities-1){                                                  // d'ou le saut chelou a la fin : DUSK (pas de utility pour dusk)
-            L->duration = horizon - L->start_time;                                      // set to 0 before 
+            L->duration = horizon - L->start_time -1;                                      // set to 0 before 
             L->time = horizon-1;                                                        // pq pas le temps actuel (pour uen 3e var de starting time)
         }
         else{   

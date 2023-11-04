@@ -594,10 +594,9 @@ int DSSR(Label* L){
         while(pp != NULL && pp->acity == c_activity){
             pp = pp->previous;
         }
-        //printf(" >> %d \n", c_activity);
+        printf("acity >> %d \n", c_activity);
         while(pp != NULL && pp->acity != c_activity){
-            //printf(" >> %d", pp->acity);
-            //printf(" \n");
+            printf("intermedaire >> %d \n", pp->acity);
             add_memory(pp->acity, group_activity);
             pp = pp->previous;
         }

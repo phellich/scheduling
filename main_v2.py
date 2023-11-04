@@ -100,7 +100,7 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[0].earliest_start = 0  
     activities_array[0].latest_start = 0      
     activities_array[0].max_duration = 0   
-    activities_array[0].min_duration = 0
+    activities_array[0].min_duration = 1
     activities_array[0].des_duration = 0 
     activities_array[0].des_start_time = 0 
     activities_array[0].group = 0
@@ -112,19 +112,19 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-1].earliest_start = 0
     activities_array[num_activities-1].latest_start = HORIZON
     activities_array[num_activities-1].max_duration = 0                      
-    activities_array[num_activities-1].min_duration = 0 
+    activities_array[num_activities-1].min_duration = 1 
     activities_array[num_activities-1].des_duration = 1   
     activities_array[num_activities-1].des_start_time = 287   
     activities_array[num_activities-1].group = 0
 
     # home
-    activities_array[num_activities-2].id = num_activities-1
+    activities_array[num_activities-2].id = num_activities-2
     activities_array[num_activities-2].x = individual['home_x']
     activities_array[num_activities-2].y = individual['home_y']
     activities_array[num_activities-2].earliest_start = 0
     activities_array[num_activities-2].latest_start = HORIZON
     activities_array[num_activities-2].max_duration = 0                      
-    activities_array[num_activities-2].min_duration = 0 
+    activities_array[num_activities-2].min_duration = 1 
     activities_array[num_activities-2].des_duration = 0 
     activities_array[num_activities-2].des_start_time = 0   
     activities_array[num_activities-2].group = 0
@@ -160,24 +160,24 @@ def initialize_param():
     # parameters[10] = 2.4           # O_dur_long_MF
     # parameters[11] = 9.6           # O_dur_long_NF
 
-    parameters[0] = 2               # O_start_early_F
-    parameters[1] = 2           # O_start_early_MF
-    parameters[2] = 2             # O_start_early_NF
-    parameters[3] = 2               # O_start_late_F
-    parameters[4] = 2             # O_start_late_MF
-    parameters[5] = 2             # O_start_late_NF
-    parameters[6] = 2            # O_dur_short_F
-    parameters[7] = 2             # O_dur_short_MF
-    parameters[8] = 2             # O_dur_short_NF
-    parameters[9] = 2            # O_dur_long_F
-    parameters[10] = 2            # O_dur_long_MF
-    parameters[11] = 2            # O_dur_long_NF
+    parameters[0] = 0               # O_start_early_F
+    parameters[1] = 0           # O_start_early_MF
+    parameters[2] = 0             # O_start_early_NF
+    parameters[3] = 0               # O_start_late_F
+    parameters[4] = 0             # O_start_late_MF
+    parameters[5] = 0             # O_start_late_NF
+    parameters[6] = 0            # O_dur_short_F
+    parameters[7] = 0             # O_dur_short_MF
+    parameters[8] = 0             # O_dur_short_NF
+    parameters[9] = 0            # O_dur_long_F
+    parameters[10] = 0            # O_dur_long_MF
+    parameters[11] = 0            # O_dur_long_NF
 
     # others 
-    parameters[12] = 2            # beta_cost    
+    parameters[12] = 0            # beta_cost    
     parameters[13] = 0           # beta_travel_cost
     parameters[14] = 0            # theta_travel
-    parameters[15] = 2            # c_a
+    parameters[15] = 0            # c_a
     parameters[16] = 0           # c_t
 
     return parameters
@@ -278,6 +278,9 @@ def main():
 
         perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
         lib.set_activities_pointer(perso_activities_array)
+        # for activity in perso_activities_array:
+        #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
+
 
         lib.main()
 

@@ -211,8 +211,8 @@ def recursive_print(label_pointer):
         if label.previous:
             recursive_print(label.previous)
         
-        activity = label.act.contents # aussi imprimer la des_start/dur pour test ?
-        print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, duration = {label.duration}) ", end="")
+        activity = label.act.contents 
+        print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration})\n", end="")
 
 def extract_schedule_data(label_pointer, activity_df):
     """
@@ -261,8 +261,10 @@ def main():
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
 
-    activity_csv = pd.read_csv("./data_preprocessed/activity.csv")
-    population_csv = pd.read_csv("./data_preprocessed/population.csv")
+    # activity_csv = pd.read_csv("./data_preprocessed/activity.csv")
+    # population_csv = pd.read_csv("./data_preprocessed/population.csv")
+    activity_csv = pd.read_csv("./data_preprocessed/TEST_activity.csv")
+    population_csv = pd.read_csv("./data_preprocessed/TEST_population.csv")
 
     global NUM_ACTIVITIES 
     NUM_ACTIVITIES = len(activity_csv) + 3                                      # we will add dusk, home and dawn
@@ -280,13 +282,13 @@ def main():
     ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
-        if (index < 2 or index > 2):                                            # controle iterations to test
-            continue
+        # if (index < 2 or index > 2):                                            # controle iterations to test
+        #     continue
 
         perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
         lib.set_activities_pointer(perso_activities_array)
-        # for activity in perso_activities_array:
-        #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
+        # for activity in pertivity.iso_activities_array:
+        #     print(f"ID: {acd}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
 
         lib.main()
@@ -294,6 +296,7 @@ def main():
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
+        lib.free_bucket()
 
         DSSR_iterations.append(iter)
         execution_times.append(time)
@@ -305,17 +308,18 @@ def main():
         else:
             final_utilities.append(0)
 
+        print("\n")
+        recursive_print(schedule_pointer)
+
 
     results = pd.DataFrame({
         'id': ids,
-        # 'age': population_csv['age'],
         'execution_time': execution_times,
         'DSSR_iterations': DSSR_iterations,
         'utility': final_utilities,
         'daily_schedule': schedules  
     })
 
-    results.to_csv('./data_output/schedules.csv', index=False)
     results.to_json('./data_output/schedules.json', orient='records', lines=False, indent = 4) 
 
 

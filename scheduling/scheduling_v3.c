@@ -137,13 +137,6 @@ double distance_x(Activity* a1, Activity* a2){
     return dist; 
 };
 
-/* selon l'unite de time_factor, donne un temps en minute mais pas arrondi a 5m et pas converti en time horizon ! */
-// int travel_time(Activity* a1, Activity* a2){
-//     double dist = distance_x(a1, a2);
-//     int time = ceil(dist/(time_factor*60));
-//     return time; 
-// };
-
 int travel_time(Activity* a1, Activity* a2){
     double dist = distance_x(a1, a2);
     int time = (int)(dist/time_factor);
@@ -183,16 +176,6 @@ int mem_contains(Label* L, Activity* a){
     au final meme pas utilise !
     si on le met en fonction, tout group meme devient inutile ?? 
     modifier la fonction et faire un print de s'ils sont differents seulement !!*/
-// int contains(Label* L, Activity* a){
-//     if(a->group == 0){return 0;}
-//     while(L != NULL){
-//         if( L->act->group == a->group ){
-//             return 1;                                                    // If there's a match, the function returns 1 (true)
-//         }
-//         L= L->previous;
-//     }
-//     return 0;
-// };
 int contains(Label* L, Activity* a){
     if(a->group == 0){return 0;}
     while(L != NULL){
@@ -204,8 +187,6 @@ int contains(Label* L, Activity* a){
     return 0;
 };
 
-
-// modifier pour permettre 2 fois chaque activite ? 
 /*  Determines if every group in the memory of Label L1 is also contained in the memory of Label L2 
     Return 1 if True */
 int dom_mem_contains(Label* L1, Label* L2){
@@ -368,9 +349,9 @@ void delete_list(L_list* L){
 
 /*  frees up the memory occupied by the bucket 
     d'abord free la memory de chaque L_list componenent, then of the bucket itself */ 
-void free_bucket(L_list** bucket, int h, int a){    
-    for (int i = 0; i < h; i ++) {
-        for(int j = 0; j < a; j ++){
+void free_bucket(){    
+    for (int i = 0; i < horizon; i ++) {
+        for(int j = 0; j < num_activities; j ++){
             L_list* L = &bucket[i][j];
             delete_list(L);
             &bucket[i][j] == NULL;
@@ -499,20 +480,21 @@ double update_utility(Label* L){
     L->utility += theta_travel*travel_time(previous_act, act);
 
     // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
+    // -2 correspond aux 'plateaux' de minimisation
     if (previous_group != 0){                                                           // update duration utility
         if ((previous_group == 1) || (previous_group == 2)){                            // mandatory activities : work and education
-            L->utility += O_dur_short_NF * 5 * fmax(0, previous_act->des_duration - L->duration) + O_dur_long_NF * 5 * fmax(0, L->duration - previous_act->des_duration);
+            L->utility += O_dur_short_NF * 5 * fmax(0, previous_act->des_duration - L->duration - 2) + O_dur_long_NF * 5 * fmax(0, L->duration - previous_act->des_duration - 2);
         }
         else{                                                                           // flexible activities : leisure and shopping
-            L->utility += O_dur_short_F * 5 * fmax(0, previous_act->des_duration - L->duration) + O_dur_long_F * 5 * fmax(0, L->duration - previous_act->des_duration);
+            L->utility += O_dur_short_F * 5 * fmax(0, previous_act->des_duration - L->duration - 2) + O_dur_long_F * 5 * fmax(0, L->duration - previous_act->des_duration - 2);
         }
     }
     if (group != 0){                                                                    // update start time utility
         if ((previous_group == 1) || (previous_group == 2)){ 
-            L->utility += O_start_early_NF * 5 * fmax(0, act->des_start_time - L->start_time) + O_start_late_MF * 5 * fmax(0, L->start_time - act->des_start_time);
+            L->utility += O_start_early_NF * 5 * fmax(0, act->des_start_time - L->start_time - 2) + O_start_late_MF * 5 * fmax(0, L->start_time - act->des_start_time - 2);
         }
         else{ 
-            L->utility += O_start_early_F * 5 * fmax(0, act->des_start_time - L->start_time) + O_start_late_MF * 5 * fmax(0, L->start_time - act->des_start_time);
+            L->utility += O_start_early_F * 5 * fmax(0, act->des_start_time - L->start_time - 2) + O_start_late_MF * 5 * fmax(0, L->start_time - act->des_start_time - 2);
         }
     }
     return L->utility;
@@ -778,7 +760,7 @@ int main(int argc, char* argv[]){
     while(DSSR(find_best(li, 0))){  // detect cycles in the current best solution and ensure DSSR_count doesn't exceed 3
     // while(DSSR_count < 10 && DSSR(find_best(li, 1))){    
         // printf("\n While loop");
-        free_bucket(bucket, horizon, num_activities);
+        free_bucket();
         create_bucket(horizon, num_activities);
         DP();
         DSSR_count++;
@@ -789,9 +771,7 @@ int main(int argc, char* argv[]){
         li = &bucket[horizon-1][num_activities-1];
     };
 
-
-    final_schedule = find_best(li, 0);                                   
-    free_bucket(bucket, horizon, num_activities);
+    final_schedule = find_best(li, 1);
     end_time = clock();  
     total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
     return 0;

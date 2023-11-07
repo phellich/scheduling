@@ -59,27 +59,11 @@ double total_time;
 Label* final_schedule;
 
 /// utility_parameters 
-double O_start_early_F;
-double O_start_early_MF;
-double O_start_early_NF;
-
-double O_start_late_F;
-double O_start_late_MF;
-double O_start_late_NF;
-
-double O_dur_short_F;
-double O_dur_short_MF;
-double O_dur_short_NF;
-
-double O_dur_long_F;
-double O_dur_long_MF;
-double O_dur_long_NF;
-
-double beta_cost;
-double beta_travel_cost;
-double theta_travel;
-double c_a; 
-double c_t;
+double asc_parameters[5];
+double early_parameters[5];
+double late_parameters[5];
+double long_parameters[5];
+double short_parameters[5];
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////// INITIALISATION /////////////////////////////////////////////////////////////////////
@@ -105,30 +89,19 @@ void set_activities_pointer(Activity* activities_array) {
     activities = activities_array;
 };
 
-void set_utility_parameters(double* parameters){
-
-    O_start_early_F = parameters[0];
-    O_start_early_MF = parameters[1];
-    O_start_early_NF = parameters[2];
-
-    O_start_late_F = parameters[3];
-    O_start_late_MF = parameters[4];
-    O_start_late_NF = parameters[5];
-
-    O_dur_short_F = parameters[6];
-    O_dur_short_MF = parameters[7];
-    O_dur_short_NF = parameters[8];
-
-    O_dur_long_F = parameters[9];
-    O_dur_long_MF = parameters[10];
-    O_dur_long_NF = parameters[11];
-
-    beta_cost = parameters[12];
-    beta_travel_cost = parameters[13];
-    theta_travel = parameters[14];
-    c_a = parameters[15]; 
-    c_t = parameters[16];
-};
+void set_utility_parameters(double* asc, double* early, double* late, double* longp, double* shortp) {
+    // printf("Setting utility parameters:\n");
+    for(int i = 0; i < 5; i++) {
+        asc_parameters[i] = asc[i];
+        early_parameters[i] = early[i];
+        late_parameters[i] = late[i];
+        long_parameters[i] = longp[i];
+        short_parameters[i] = shortp[i];
+        // printf("asc[%d] = %f, early[%d] = %f, late[%d] = %f, longp[%d] = %f, shortp[%d] = %f\n",
+        //        i, asc_parameters[i], i, early_parameters[i], i, late_parameters[i],
+        //        i, long_parameters[i], i, short_parameters[i]);
+    }
+}
 
 double distance_x(Activity* a1, Activity* a2){
     double dx = (double)(a2->x - a1->x);
@@ -145,7 +118,6 @@ int travel_time(Activity* a1, Activity* a2){
     return time_interval;
 };
 
-// Recursively prints the label
 void recursive_print(Label* L){
     if(L!=NULL){
         if(L->previous!=NULL){                                      
@@ -155,156 +127,6 @@ void recursive_print(Label* L){
     }
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////// FUNCTIONS ////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/* checks if the group of activity a is already in the group memory of label L  */
-int mem_contains(Label* L, Activity* a){ 
-    if(a->group == 0){return 0;}
-    Group_mem* gg = L->mem;                                 // see if the group memory in Label matches the group of a.
-    while(gg!= NULL){
-        if(gg->g == a->group){return 1;}                    // Returns 1 if there is a match
-        gg=gg->next;
-    }
-    return 0;
-};
-
-/* checks if the group of activity a is already done during the label L  
-    peut etre a supprimer pcq un label peut etre creer a partir d'un autre label, mais poursuivre la meme actviite donc ca retournera 1 a cause de la meme activite que l'on check 
-    si on met une difference de acity ca peut revenir au meme
-    au final meme pas utilise !
-    si on le met en fonction, tout group meme devient inutile ?? 
-    modifier la fonction et faire un print de s'ils sont differents seulement !!*/
-int contains(Label* L, Activity* a){
-    if(a->group == 0){return 0;}
-    while(L != NULL){
-        if((L->act->group == a->group) && (L->act->id != a->id)){           // L->act->id = L->acity
-            return 1;                                                       // If there's a match, the function returns 1 (true)
-        }
-        L= L->previous;
-    }
-    return 0;
-};
-
-/*  Determines if every group in the memory of Label L1 is also contained in the memory of Label L2 
-    Return 1 if True */
-int dom_mem_contains(Label* L1, Label* L2){
-    // if(a->group == 0){return 0;}
-    Group_mem* gg = L1->mem;
-
-    while(gg!= NULL){                                                       // For every Group_mem in L1->mem
-        Group_mem* gg2 = L2->mem;
-        int contain = 0; 
-
-        while(gg2 != NULL){                                                 // For every Group_mem in L2->mem
-            if(gg->g == gg2->g){
-                contain = 1;
-            }
-            gg2 = gg2->next;
-        }
-
-        // If a particular Group_mem from L1->mem is not in L2->mem, the function returns 0 (false)
-        if(!contain){return 0;} 
-        gg=gg->next;
-    }
-    // If all Group_mem in L1->mem are found in L2->mem, it returns 1 (true)
-    return 1;
-};
-
-/*  Determines if an Activity a can be added to a sequence ending in label L. 
-    It returns 1 if it's feasible and 0 if it's not. */
-int feasible(Label* L, Activity* a){
-    
-    if(L == NULL){                                                          // if no Label, 'a' cann't be added
-        return 0;
-    }                                            
-    if(L->acity != 0 && a->id == 0){                                        // exclude dawn if it's not the 1st activity of the label
-        return 0;
-    }
-    if(L->acity != a->id){                                                  // If act of L isn't the same as a, do some checks
-        if(L->previous !=NULL && L->previous->acity == a->id ){             // is the previous activity the same as a ? 
-            return 0;
-        }
-        if(L->acity == num_activities -1){                                  // Ensuring the current activity isn't the last one
-            return 0;
-        }
-        if(L->duration <  L->act->min_duration){                            // Verifying the minimum duration of the current activity
-            return 0;
-        }
-        // temps actuel + trajet pour a + duree min de a + trajet de a a home > fin de journee 
-        // Ie enough time left in the horizon to add this activity
-        if(L->time + travel_time(L->act, a) + a->min_duration + travel_time(a, &activities[num_activities-1]) >= horizon -1){
-            return 0;
-        }
-        // Making sure the new activity starts and ends within its allowed time window : signes changed !
-        if(L->time + travel_time(L->act, a) < a->earliest_start){
-            return 0;
-        }
-        if(L->time + travel_time(L->act, a) > a->latest_start){
-            return 0;
-        }
-        if(mem_contains(L,a)){
-            // printf("\n mem_contains = %d", mem_contains(L,a));
-            return 0; 
-        }
-        // if(contains(L,a)){ 
-        //     // printf("\n contains = %d", contains(L, a));
-        //     return 0;
-        // }
-        // if(mem_contains(L,a) || contains(L, a)){
-        //     if(mem_contains(L,a) != contains(L, a)){
-        //         // printf("\n Difference = %d", mem_contains(L,a) - contains(L, a));
-        //     }
-        //     return 0; 
-        // }
-    }
-    else{                                   // If the current activity in L is the same as a, check the duration
-        if(L->duration + 1 > a->max_duration){        // max duration  
-            return 0;
-        }
-    }
-    return 1;                               // si tout va bien
-};
-
-
-/*  checks if Label L1 dominates Label L2 based on certain criteria. 
-    Rappel : on minimise la utility function ! 
-    0 = no dominance 
-    1 = L1 dominates by default because L2 si NULL
-    2 = L1 dominates L2 based on the criteria */
-int dominates(Label* L1, Label* L2){ 
-    if(L1 == NULL){return 0;}
-    if(L2 == NULL){return 1;}
-    if(L1->acity != L2->acity){return 0;}
-
-    if(L1->utility <= L2->utility){                     // L1 a une meilleure utility que L2
-
-        /*  S'assure que tous les group de L2 sont dans L1, sinon ca veut dire que L2 peut etre moins bien pcq elle nn'a pas encore fait un group.
-            Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
-        if(dom_mem_contains(L2,L1)){
-
-            if(L1->time <= L2->time){
-                return 2;
-            }
-
-            // DEPRECATED
-            // /*  si L1 et L2 ont depasse la duree desiree, et que la duree de L2 est deja plus longue que L2, alors L1 domine L2
-            //     si L1 n'a pas atteint la duree desiree mais que L2 si, alors L1 domine L2 
-            //     si L1 et L2 ont la meme duree, alors L1 domine L2 */
-            // if(((L1->duration > L1->act->des_duration) && (L2->duration > L1->act->des_duration) && (L2->duration > L1->duration))
-            //     || ((L1->duration < L1->act->des_duration) && (L2->duration > L1->act->des_duration))
-            //     || (L1->duration == L2->duration)){
-            //     return 2;
-            // }
-            // /*  si L1 et L2 ont depasse la duree desiree, et que la duree de L1 est deja plus longue que L2, alors rien
-            //     si L2 n'a pas atteint la duree desiree, rien
-            //     si aucun des deux, rien non plus */
-        }
-    }
-    return 0;
-    // return 1;                                                // for test only
-};
 
 /* initializes a two-dimensional dynamic array named bucket of size a by b. Each element of this array is of type L_list */
 void create_bucket(int a, int b){
@@ -399,10 +221,8 @@ Group_mem* copyLinkedList(Group_mem* head) {
         newCurr = newCurr->next;
         curr = curr->next;
     }
-
     return newHead;
 };
-
 
 /*  Creates a new linked list that contains nodes representing the union of head1 and head2 
     plus an additional node with g as pipi.*/
@@ -464,6 +284,212 @@ Label* create_label(Activity* aa){
     return L;
 };
 
+/* Removes the label from the provided list of label and adjusts the connections of adjacent labels. */
+L_list* remove_label(L_list* L){
+    free(L->element);
+    L->element=NULL;
+    L_list* L_re;
+    if(L->previous != NULL && L->next != NULL){
+        L->previous->next = L->next;
+        L->next->previous = L->previous;
+        L_re = L->next;
+        free(L);
+        return L_re;
+    }
+    if(L->previous != NULL && L->next == NULL){
+        L->previous->next = NULL;
+        L_re = NULL;
+        free(L);
+        return L_re;
+    }
+    if(L->previous == NULL && L->next != NULL){
+        if(L->next->next != NULL){L->next->next->previous = L;}
+        L_re = L->next;
+        L->element = L_re->element;
+        L->next = L->next->next;
+        free(L_re);
+        return L;                                                   //return L which has taken the values of L->next.
+    }
+    if(L->previous == NULL && L->next == NULL){
+        return NULL;
+    }
+};
+
+/* Adds memory (a Group_mem node) to an activity in the global activities array */
+void add_memory(int at, int c){
+    if(activities[at].memory== NULL){                           // If the specified activity (indexed by at) doesn't already have memory, it initializes its memory with c.
+        activities[at].memory = malloc(sizeof(Group_mem));
+        activities[at].memory->g = c;
+        activities[at].memory->previous = NULL;
+        activities[at].memory->next = NULL;
+    }
+    else{                                                       // O/w, finds the last node in the existing memory list and adds a new Group_mem node with g set to c at the end of the list.
+        Group_mem* pp = activities[at].memory;
+        while(pp->next != NULL){
+            pp = pp->next;
+        }
+        pp->next = malloc(sizeof(Group_mem));
+        pp->next->g = c;
+        pp->next->previous = pp;
+        pp->next->next = NULL;
+    }
+};
+
+/* checks if the group of activity a is already done during the label L  
+    peut etre a supprimer pcq un label peut etre creer a partir d'un autre label, mais poursuivre la meme actviite donc ca retournera 1 a cause de la meme activite que l'on check 
+    si on met une difference de acity ca peut revenir au meme
+    au final meme pas utilise !
+    si on le met en fonction, tout group meme devient inutile ?? 
+    modifier la fonction et faire un print de s'ils sont differents seulement !!*/
+int contains(Label* L, Activity* a){
+    if(a->group == 0){return 0;}
+    while(L != NULL){
+        if((L->act->group == a->group) && (L->act->id != a->id)){           // L->act->id = L->acity
+            return 1;                                                       // If there's a match, the function returns 1 (true)
+        }
+        L= L->previous;
+    }
+    return 0;
+};
+
+/* checks if the group of activity a is already in the group memory of label L  */
+int mem_contains(Label* L, Activity* a){ 
+    if(a->group == 0){return 0;}
+    Group_mem* gg = L->mem;                                 // see if the group memory in Label matches the group of a.
+    while(gg!= NULL){
+        if(gg->g == a->group){return 1;}                    // Returns 1 if there is a match
+        gg=gg->next;
+    }
+    return 0;
+};
+
+/*  Determines if every group in the memory of Label L1 is also contained in the memory of Label L2 
+    Return 1 if True */
+int dom_mem_contains(Label* L1, Label* L2){
+    // if(a->group == 0){return 0;}
+    Group_mem* gg = L1->mem;
+
+    while(gg!= NULL){                                                       // For every Group_mem in L1->mem
+        Group_mem* gg2 = L2->mem;
+        int contain = 0; 
+
+        while(gg2 != NULL){                                                 // For every Group_mem in L2->mem
+            if(gg->g == gg2->g){
+                contain = 1;
+            }
+            gg2 = gg2->next;
+        }
+
+        // If a particular Group_mem from L1->mem is not in L2->mem, the function returns 0 (false)
+        if(!contain){return 0;} 
+        gg=gg->next;
+    }
+    // If all Group_mem in L1->mem are found in L2->mem, it returns 1 (true)
+    return 1;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// BIG FUNCTIONS ////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*  Determines if an Activity a can be added to a sequence ending in label L. 
+    It returns 1 if it's feasible and 0 if it's not. */
+int feasible(Label* L, Activity* a){
+    
+    if(L == NULL){                                                          // if no Label, 'a' cann't be added
+        return 0;
+    }                                            
+    if(L->acity != 0 && a->id == 0){                                        // exclude dawn if it's not the 1st activity of the label
+        return 0;
+    }
+    if(L->acity != a->id){                                                  // If act of L isn't the same as a, do some checks
+        if(L->previous !=NULL && L->previous->acity == a->id ){             // is the previous activity the same as a ? 
+            return 0;
+        }
+        if(L->acity == num_activities -1){                                  // Ensuring the current activity isn't the last one
+            return 0;
+        }
+        if(L->duration <  L->act->min_duration){                            // Verifying the minimum duration of the current activity
+            return 0;
+        }
+        // temps actuel + trajet pour a + duree min de a + trajet de a a home > fin de journee 
+        // Ie enough time left in the horizon to add this activity
+        if(L->time + travel_time(L->act, a) + a->min_duration + travel_time(a, &activities[num_activities-1]) >= horizon -1){
+            return 0;
+        }
+        // Making sure the new activity starts and ends within its allowed time window : signes changed !
+        if(L->time + travel_time(L->act, a) < a->earliest_start){
+            return 0;
+        }
+        if(L->time + travel_time(L->act, a) > a->latest_start){
+            return 0;
+        }
+        if(mem_contains(L,a)){
+            // printf("\n mem_contains = %d", mem_contains(L,a));
+            return 0; 
+        }
+        // if(contains(L,a)){ 
+        //     // printf("\n contains = %d", contains(L, a));
+        //     return 0;
+        // }
+        // if(mem_contains(L,a) || contains(L, a)){
+        //     if(mem_contains(L,a) != contains(L, a)){
+        //         // printf("\n Difference = %d", mem_contains(L,a) - contains(L, a));
+        //     }
+        //     return 0; 
+        // }
+    }
+    else{                                   // If the current activity in L is the same as a, check the duration
+        if(L->duration + 1 > a->max_duration){        // max duration  
+            return 0;
+        }
+    }
+    return 1;                               // si tout va bien
+};
+
+
+/*  checks if Label L1 dominates Label L2 based on certain criteria. 
+    Rappel : on minimise la utility function ! 
+    0 = no dominance 
+    1 = L1 dominates by default because L2 si NULL
+    2 = L1 dominates L2 based on the criteria */
+int dominates(Label* L1, Label* L2){ 
+    if(L1 == NULL){return 0;}
+    if(L2 == NULL){return 1;}
+    if(L1->acity != L2->acity){return 0;}
+
+    if(L1->utility <= L2->utility){                     // L1 a une meilleure utility que L2
+
+        /*  S'assure que tous les group de L2 sont dans L1, sinon ca veut dire que L2 peut etre moins bien pcq elle nn'a pas encore fait un group.
+            Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
+        if(dom_mem_contains(L2,L1)){
+            if(L1->time <= L2->time){
+                return 2;
+            }
+        }
+
+        // if(dom_mem_contains(L1,L2)){
+        //     if(L1->duration == L2->duration){return 2;}
+        //     // if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
+        //     int group = L1->act->group;
+        //     int des_dur = L1->act->des_duration;
+        //     if(
+        //         L1->utility 
+        //         + short_parameters[group] * 5 * fmax(0, des_dur - L1->duration - 2)
+        //         + long_parameters[group] * 5 * fmax(0, L1->duration - des_dur - 2) 
+        //         <= 
+        //         L2->utility 
+        //         + short_parameters[group] * 5 * fmax(0, des_dur - L2->duration - 2)
+        //         + long_parameters[group] * 5 * fmax(0, L2->duration - des_dur - 2) ){
+        //         return 2;
+        //     }
+        // }
+
+    }
+    return 0;
+    // return 1;                                                // for test only
+};
+
 /* Calculate the utility of a label based on it's startung activity and the duration of the one that just finished */
 double update_utility(Label* L){
     
@@ -475,28 +501,20 @@ double update_utility(Label* L){
     int previous_group = previous_act->group;
 
     L->utility = previous_L->utility;
-    L->utility -= beta_cost*c_a;                                                        // a differencier selon les activites ? 
-    L->utility += beta_travel_cost*c_t;
-    L->utility += theta_travel*travel_time(previous_act, act);
 
+    L->utility -= asc_parameters[group];
+    L->utility += travel_time(previous_act, act); // 20m => 4 de penalite ? 
     // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
     // -2 correspond aux 'plateaux' de minimisation
-    if (previous_group != 0){                                                           // update duration utility
-        if ((previous_group == 1) || (previous_group == 2)){                            // mandatory activities : work and education
-            L->utility += O_dur_short_NF * 5 * fmax(0, previous_act->des_duration - L->duration - 2) + O_dur_long_NF * 5 * fmax(0, L->duration - previous_act->des_duration - 2);
-        }
-        else{                                                                           // flexible activities : leisure and shopping
-            L->utility += O_dur_short_F * 5 * fmax(0, previous_act->des_duration - L->duration - 2) + O_dur_long_F * 5 * fmax(0, L->duration - previous_act->des_duration - 2);
-        }
-    }
-    if (group != 0){                                                                    // update start time utility
-        if ((previous_group == 1) || (previous_group == 2)){ 
-            L->utility += O_start_early_NF * 5 * fmax(0, act->des_start_time - L->start_time - 2) + O_start_late_MF * 5 * fmax(0, L->start_time - act->des_start_time - 2);
-        }
-        else{ 
-            L->utility += O_start_early_F * 5 * fmax(0, act->des_start_time - L->start_time - 2) + O_start_late_MF * 5 * fmax(0, L->start_time - act->des_start_time - 2);
-        }
-    }
+    L->utility += short_parameters[group] * 5 * fmax(0, previous_act->des_duration - previous_L->duration - 2)
+                 + long_parameters[group] * 5 * fmax(0, previous_L->duration - previous_act->des_duration - 2);
+    L->utility += early_parameters[group] * 5 * fmax(0, act->des_start_time - L->start_time - 2) 
+                 + late_parameters[group] * 5 * fmax(0, L->start_time - act->des_start_time - 2);
+    // L->utility += short_parameters[group] * fmax(0, previous_act->des_duration - previous_L->duration - 2)
+    //              + long_parameters[group] * fmax(0, previous_L->duration - previous_act->des_duration - 2);
+    // L->utility += early_parameters[group] * fmax(0, act->des_start_time - L->start_time - 2) 
+    //              + late_parameters[group] * fmax(0, L->start_time - act->des_start_time - 2);
+
     return L->utility;
 };
 
@@ -531,38 +549,6 @@ Label* label(Label* L0, Activity* a){
     return L;
 };
 
-/* Removes the label from the provided list of label and adjusts the connections of adjacent labels. */
-L_list* remove_label(L_list* L){
-    free(L->element);
-    L->element=NULL;
-    L_list* L_re;
-    if(L->previous != NULL && L->next != NULL){
-        L->previous->next = L->next;
-        L->next->previous = L->previous;
-        L_re = L->next;
-        free(L);
-        return L_re;
-    }
-    if(L->previous != NULL && L->next == NULL){
-        L->previous->next = NULL;
-        L_re = NULL;
-        free(L);
-        return L_re;
-    }
-    if(L->previous == NULL && L->next != NULL){
-        if(L->next->next != NULL){L->next->next->previous = L;}
-        L_re = L->next;
-        L->element = L_re->element;
-        L->next = L->next->next;
-        free(L_re);
-        return L;                                                   //return L which has taken the values of L->next.
-    }
-    if(L->previous == NULL && L->next == NULL){
-        return NULL;
-    }
-};
-
-
 /*  Finds the label with the minimum utility value from the list. 
     Returns the label with the minimum utility value. */
 Label* find_best(L_list* B, int o){
@@ -592,27 +578,6 @@ Label* find_best(L_list* B, int o){
     }
     return bestL;
 };
-
-/* Adds memory (a Group_mem node) to an activity in the global activities array */
-void add_memory(int at, int c){
-    if(activities[at].memory== NULL){                           // If the specified activity (indexed by at) doesn't already have memory, it initializes its memory with c.
-        activities[at].memory = malloc(sizeof(Group_mem));
-        activities[at].memory->g = c;
-        activities[at].memory->previous = NULL;
-        activities[at].memory->next = NULL;
-    }
-    else{                                                       // O/w, finds the last node in the existing memory list and adds a new Group_mem node with g set to c at the end of the list.
-        Group_mem* pp = activities[at].memory;
-        while(pp->next != NULL){
-            pp = pp->next;
-        }
-        pp->next = malloc(sizeof(Group_mem));
-        pp->next->g = c;
-        pp->next->previous = pp;
-        pp->next->next = NULL;
-    }
-};
-
 
 /*  To detect cycles based on the group of activities within a sequence of labels and, 
     if a cycle is detected, update the memory of some labels in the sequence 
@@ -660,7 +625,6 @@ int DSSR(Label* L){
     }
     return cycle;
 };
-
 
 /* Dynamic Programming */
 void DP (){
@@ -735,8 +699,6 @@ void DP (){
     }                                                               // end for h
 };
 
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// MAIN /////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -755,9 +717,8 @@ int main(int argc, char* argv[]){
     L_list* li = &bucket[horizon-1][num_activities-1];                      // li points to last element of bucket (pointer of pointer)
                                                                             // ie la liste de label ou la journee est finie par la derniere activitee DUSK
     
-    // This process will continue until no more cycles are detected in the best solution
     DSSR_count = 0;
-    while(DSSR(find_best(li, 0))){  // detect cycles in the current best solution and ensure DSSR_count doesn't exceed 3
+    while(DSSR(find_best(li, 0))){                                          // detect cycles in the current best solution 
     // while(DSSR_count < 10 && DSSR(find_best(li, 1))){    
         // printf("\n While loop");
         free_bucket();

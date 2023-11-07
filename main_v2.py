@@ -3,8 +3,9 @@ import subprocess
 import numpy as np
 from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
+from collections import namedtuple
 
-SCHEDULING_VERSION = 3
+SCHEDULING_VERSION = 4
 HORIZON = 289
 NUM_ACTIVITIES = 0
 group_to_type = {
@@ -142,52 +143,26 @@ def personalize(activities_array, num_activities, individual, group_to_type):
 
 def initialize_param(): 
     ''' Initialise les parametres de la utility function'''
-    # REVOIR LES SIGNES + 
-    # sont ils par minutes ?? pcq je travaille en time interval de 1 pour 5m 
-    parameters = np.zeros(17)
 
-    # flexibility parameters
-    # parameters[0] = 0               # O_start_early_F
-    # parameters[1] = 0.61           # O_start_early_MF
-    # parameters[2] = 2.4            # O_start_early_NF
-    # parameters[3] = 0               # O_start_late_F
-    # parameters[4] = 2.4            # O_start_late_MF
-    # parameters[5] = 9.6            # O_start_late_NF
-    # parameters[6] = 0.61           # O_dur_short_F
-    # parameters[7] = 2.4            # O_dur_short_MF
-    # parameters[8] = 9.6            # O_dur_short_NF
-    # parameters[9] = 0.61           # O_dur_long_F
-    # parameters[10] = 2.4           # O_dur_long_MF
-    # parameters[11] = 9.6           # O_dur_long_NF
+    UtilityParams = namedtuple('UtilityParams', 'asc early late long short')
+    # params = UtilityParams(
+    #     # order = [home, education, work, leisure, shop]
+    #     asc=[0, 18.7, 13.1, 8.74, 10.5],
+    #     early=[0, 1.35, 0.619, 0.0996, 1.01],
+    #     late=[0, 1.63, 0.338, 0.239, 0.858],
+    #     long=[0, 1.14, 1.22, 0.08, 0.683],
+    #     short=[0, 1.75, 0.932, 0.101, 1.81]
+    # )
+    params = UtilityParams(
+        # order = [home, education, work, leisure, shop]
+        asc=[0, 1000, -100, -100, -100],
+        early=[0, 100, 0, 0, 0],
+        late=[0, 100, 0, 0, 0],
+        long=[0, 100, 0, 0, 0],
+        short=[0, 100, 0, 0, 0]
+    )
 
-    # others 
-    # parameters[12] = 1            # beta_cost    
-    # parameters[13] = 0           # beta_travel_cost
-    # parameters[14] = 0            # theta_travel
-    # parameters[15] = 0            # c_a
-    # parameters[16] = 0           # c_t
-
-    parameters[0] = 0               # O_start_early_F
-    parameters[1] = 0           # O_start_early_MF
-    parameters[2] = 0             # O_start_early_NF
-    parameters[3] = 0               # O_start_late_F
-    parameters[4] = 0             # O_start_late_MF
-    parameters[5] = 0             # O_start_late_NF
-    parameters[6] = 0            # O_dur_short_F
-    parameters[7] = 0             # O_dur_short_MF
-    parameters[8] = 0             # O_dur_short_NF
-    parameters[9] = 0            # O_dur_long_F
-    parameters[10] = 0            # O_dur_long_MF
-    parameters[11] = 0            # O_dur_long_NF
-
-    # others 
-    parameters[12] = 0            # beta_cost    
-    parameters[13] = 0           # beta_travel_cost
-    parameters[14] = 0            # theta_travel
-    parameters[15] = 0            # c_a
-    parameters[16] = 0           # c_t
-
-    return parameters
+    return params
 
 ##### END OF INITIALIZATION ##########################
 ######################################################
@@ -270,10 +245,23 @@ def main():
     NUM_ACTIVITIES = len(activity_csv) + 3                                      # we will add dusk, home and dawn
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
-    thetas = initialize_param()                                                 # REVOIR LES SIGNES ET AUTRE
+    params = initialize_param()                                                 
 
     lib.set_num_activities(NUM_ACTIVITIES)
-    lib.set_utility_parameters(thetas.ctypes.data_as(POINTER(c_double)))
+    # Convert Python lists to ctypes arrays
+    asc_array = (c_double * len(params.asc))(*params.asc)
+    early_array = (c_double * len(params.early))(*params.early)
+    late_array = (c_double * len(params.late))(*params.late)
+    long_array = (c_double * len(params.long))(*params.long)
+    short_array = (c_double * len(params.short))(*params.short)
+
+    lib.set_utility_parameters(
+        asc_array,  
+        early_array,
+        late_array,
+        long_array,
+        short_array
+    )
 
     DSSR_iterations = []
     execution_times = []
@@ -296,7 +284,6 @@ def main():
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
-        lib.free_bucket()
 
         DSSR_iterations.append(iter)
         execution_times.append(time)
@@ -305,12 +292,13 @@ def main():
         ids.append(individual['id'])
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
+            print(f"\n UTILITY = {schedule_pointer.contents.utility}")
         else:
             final_utilities.append(0)
 
-        print("\n")
-        recursive_print(schedule_pointer)
+        # recursive_print(schedule_pointer)
 
+        lib.free_bucket()
 
     results = pd.DataFrame({
         'id': ids,

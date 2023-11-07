@@ -100,7 +100,7 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[0].y = individual['home_y']
     activities_array[0].earliest_start = 0  
     activities_array[0].latest_start = 0      
-    activities_array[0].max_duration = 0   
+    activities_array[0].max_duration = HORIZON-2   
     activities_array[0].min_duration = 1
     activities_array[0].des_duration = 0 
     activities_array[0].des_start_time = 0 
@@ -111,11 +111,11 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-1].x = individual['home_x']
     activities_array[num_activities-1].y = individual['home_y']
     activities_array[num_activities-1].earliest_start = 0
-    activities_array[num_activities-1].latest_start = HORIZON
-    activities_array[num_activities-1].max_duration = 0                      
+    activities_array[num_activities-1].latest_start = HORIZON-2
+    activities_array[num_activities-1].max_duration = HORIZON-2                       
     activities_array[num_activities-1].min_duration = 1 
-    activities_array[num_activities-1].des_duration = 1   
-    activities_array[num_activities-1].des_start_time = 287   
+    activities_array[num_activities-1].des_duration = 0   
+    activities_array[num_activities-1].des_start_time = 0   
     activities_array[num_activities-1].group = 0
 
     # home
@@ -124,8 +124,8 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-2].y = individual['home_y']
     activities_array[num_activities-2].earliest_start = 0
     activities_array[num_activities-2].latest_start = HORIZON
-    activities_array[num_activities-2].max_duration = 0                      
-    activities_array[num_activities-2].min_duration = 1 
+    activities_array[num_activities-2].max_duration = HORIZON-2                       
+    activities_array[num_activities-2].min_duration = 4 
     activities_array[num_activities-2].des_duration = 0 
     activities_array[num_activities-2].des_start_time = 0   
     activities_array[num_activities-2].group = 0
@@ -145,22 +145,22 @@ def initialize_param():
     ''' Initialise les parametres de la utility function'''
 
     UtilityParams = namedtuple('UtilityParams', 'asc early late long short')
-    # params = UtilityParams(
-    #     # order = [home, education, work, leisure, shop]
-    #     asc=[0, 18.7, 13.1, 8.74, 10.5],
-    #     early=[0, 1.35, 0.619, 0.0996, 1.01],
-    #     late=[0, 1.63, 0.338, 0.239, 0.858],
-    #     long=[0, 1.14, 1.22, 0.08, 0.683],
-    #     short=[0, 1.75, 0.932, 0.101, 1.81]
-    # )
     params = UtilityParams(
         # order = [home, education, work, leisure, shop]
-        asc=[0, 1000, -100, -100, -100],
-        early=[0, 100, 0, 0, 0],
-        late=[0, 100, 0, 0, 0],
-        long=[0, 100, 0, 0, 0],
-        short=[0, 100, 0, 0, 0]
+        asc=[0, 18.7, 13.1, 8.74, 10.5],
+        early=[0, 1.35, 0.619, 0.0996, 1.01],
+        late=[0, 1.63, 0.338, 0.239, 0.858],
+        long=[0, 1.14, 1.22, 0.08, 0.683],
+        short=[0, 1.75, 0.932, 0.101, 1.81]
     )
+    # params = UtilityParams(
+    #     # order = [home, education, work, leisure, shop]
+    #     asc=[0, 10, 0, 0, 0],
+    #     early=[0, 10, 0, 0, 0],
+    #     late=[0, 0, 0, 0, 0],
+    #     long=[0, 0, 87, 0, 0],
+    #     short=[0, 10, 87, 0, 0]
+    # )
 
     return params
 
@@ -187,7 +187,7 @@ def recursive_print(label_pointer):
             recursive_print(label.previous)
         
         activity = label.act.contents 
-        print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration})\n", end="")
+        print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration}, cumulative utility = {label.utility})\n", end="")
 
 def extract_schedule_data(label_pointer, activity_df):
     """
@@ -236,10 +236,10 @@ def main():
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
 
-    # activity_csv = pd.read_csv("./data_preprocessed/activity.csv")
-    # population_csv = pd.read_csv("./data_preprocessed/population.csv")
-    activity_csv = pd.read_csv("./data_preprocessed/TEST_activity.csv")
-    population_csv = pd.read_csv("./data_preprocessed/TEST_population.csv")
+    activity_csv = pd.read_csv("./data_preprocessed/activity.csv")
+    population_csv = pd.read_csv("./data_preprocessed/population.csv")
+    # activity_csv = pd.read_csv("./data_preprocessed/TEST_activity.csv")
+    # population_csv = pd.read_csv("./data_preprocessed/TEST_population.csv")
 
     global NUM_ACTIVITIES 
     NUM_ACTIVITIES = len(activity_csv) + 3                                      # we will add dusk, home and dawn
@@ -292,7 +292,7 @@ def main():
         ids.append(individual['id'])
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
-            print(f"\n UTILITY = {schedule_pointer.contents.utility}")
+            # print(f"\n UTILITY = {schedule_pointer.contents.utility}")
         else:
             final_utilities.append(0)
 

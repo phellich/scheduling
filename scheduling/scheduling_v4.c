@@ -90,7 +90,6 @@ void set_activities_pointer(Activity* activities_array) {
 };
 
 void set_utility_parameters(double* asc, double* early, double* late, double* longp, double* shortp) {
-    // printf("Setting utility parameters:\n");
     for(int i = 0; i < 5; i++) {
         asc_parameters[i] = asc[i];
         early_parameters[i] = early[i];
@@ -506,10 +505,16 @@ double update_utility(Label* L){
     L->utility += travel_time(previous_act, act); // 20m => 4 de penalite ? 
     // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
     // -2 correspond aux 'plateaux' de minimisation
-    L->utility += short_parameters[group] * 5 * fmax(0, previous_act->des_duration - previous_L->duration - 2)
-                 + long_parameters[group] * 5 * fmax(0, previous_L->duration - previous_act->des_duration - 2);
+    L->utility += short_parameters[previous_group] * 5 * fmax(0, previous_act->des_duration - previous_L->duration - 2)
+                 + long_parameters[previous_group] * 5 * fmax(0, previous_L->duration - previous_act->des_duration - 2);
     L->utility += early_parameters[group] * 5 * fmax(0, act->des_start_time - L->start_time - 2) 
                  + late_parameters[group] * 5 * fmax(0, L->start_time - act->des_start_time - 2);
+    // if (previous_group == 2) {
+    //     printf("short_parameter = %lf, long_parameters = %lf \n", short_parameters[previous_group], long_parameters[previous_group]);
+    // }
+    // if (group == 2) {
+    //     printf("early_parameters = %lf, late_parameters = %lf \n", early_parameters[group], late_parameters[group]);
+    // }
     // L->utility += short_parameters[group] * fmax(0, previous_act->des_duration - previous_L->duration - 2)
     //              + long_parameters[group] * fmax(0, previous_L->duration - previous_act->des_duration - 2);
     // L->utility += early_parameters[group] * fmax(0, act->des_start_time - L->start_time - 2) 

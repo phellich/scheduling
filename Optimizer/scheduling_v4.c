@@ -67,6 +67,7 @@ double early_parameters[5];
 double late_parameters[5];
 double long_parameters[5];
 double short_parameters[5];
+double part_penal[5];
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////// INITIALISATION /////////////////////////////////////////////////////////////////////
@@ -103,6 +104,14 @@ void set_utility_parameters(double* asc, double* early, double* late, double* lo
         //        i, asc_parameters[i], i, early_parameters[i], i, late_parameters[i],
         //        i, long_parameters[i], i, short_parameters[i]);
     }
+}
+
+void set_particpation_array(double* pypart){
+    for(int i = 0; i < 5; i++) {
+        part_penal[i] = pypart[i];
+        // printf("part[%d] = %f", i, part_penal[i]);
+    }
+    // printf("\n");
 }
 
 double distance_x(Activity* a1, Activity* a2){
@@ -504,7 +513,7 @@ double update_utility(Label* L){
 
     L->utility = previous_L->utility;
 
-    L->utility -= asc_parameters[group];
+    L->utility -= asc_parameters[group] * part_penal[group];
     L->utility += travel_time(previous_act, act); // 20m => 4 de penalite ? 
     // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
     // -2 correspond aux 'plateaux' de minimisation

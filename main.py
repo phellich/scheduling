@@ -15,6 +15,7 @@ group_to_type = {
     3: 'leisure',
     4: 'shop'
 }
+groups = ['home', 'education', 'work', 'leisure', 'shop']
 
 ######################################################
 ##### START OF STRUCTURE #############################
@@ -164,6 +165,19 @@ def initialize_param():
 
     return params
 
+def participation_vector(individual, groups): 
+    ''' if a people hasn't take part to an activity, its utility to do this activity is reduced '''
+    penalty_part = []
+    for i, group in enumerate(groups):
+        if i == 0: # home
+            penalty_part.append(1) # + terme random centre sur 1 et tres proche en vrai 
+        elif (individual[f"{group}_participation"] == 1): 
+            penalty_part.append(1)
+        else: 
+            penalty_part.append(0.2)
+
+    return penalty_part
+
 ##### END OF INITIALIZATION ##########################
 ######################################################
 ##### START OF FUNCTIONS #############################
@@ -214,13 +228,14 @@ def extract_schedule_data(label_pointer, activity_df):
             "acity": label.acity,
             "facility": facility_id,
             "group": group_to_type[label.act.contents.group],
-            # "group_id": label.act.contents.group,
             "start": label.start_time,
             "duration": label.duration,
             "time" :label.time,
             "cum_utility" : label.utility
         }
-        schedule_data.append(data)
+        
+        if not schedule_data or schedule_data[-1]["start"] != data["start"]:
+            schedule_data.append(data)
 
     return schedule_data
 
@@ -241,11 +256,12 @@ def main():
 
     global NUM_ACTIVITIES 
     NUM_ACTIVITIES = len(activity_csv) + 3                                      # we will add dusk, home and dawn
+    lib.set_num_activities(NUM_ACTIVITIES)
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
     params = initialize_param()                                                 
 
-    lib.set_num_activities(NUM_ACTIVITIES)
+    
     # Convert Python lists to ctypes arrays
     asc_array = (c_double * len(params.asc))(*params.asc)
     early_array = (c_double * len(params.early))(*params.early)
@@ -260,7 +276,7 @@ def main():
         long_array,
         short_array
     )
-
+        
     DSSR_iterations = []
     execution_times = []
     final_utilities = []
@@ -270,6 +286,10 @@ def main():
         
         # if (index < 2 or index > 2):                                            # controle iterations to test
         #     continue
+
+        participation = participation_vector(individual, groups)
+        pyparticipation = (c_double * len(participation))(*participation)
+        lib.set_particpation_array(pyparticipation)
 
         perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
         lib.set_activities_pointer(perso_activities_array)
@@ -286,6 +306,7 @@ def main():
         DSSR_iterations.append(iter)
         execution_times.append(time)
         schedule_data = extract_schedule_data(schedule_pointer, activity_csv)
+        
         schedules.append(schedule_data) 
         ids.append(individual['id'])
         if schedule_pointer and schedule_pointer.contents:

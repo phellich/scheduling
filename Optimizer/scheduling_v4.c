@@ -1,3 +1,6 @@
+/*  Algorythm developped by Fabian Torres & Pierre Hellich 
+    Semester project Fall 2023                              */ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

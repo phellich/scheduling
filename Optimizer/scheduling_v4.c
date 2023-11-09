@@ -197,12 +197,31 @@ void free_bucket(){
 };
 
 /* meme principe qu'au dessus */ 
-void free_activities(){
-    for (int i = 0 ; i < num_activities; i++){
-        delete_group(activities[i].memory);
+// void free_activities(){
+//     for (int i = 0 ; i < num_activities; i++){
+//         delete_group(activities[i].memory);
+//     }
+//     free(activities);
+// };
+void free_activities() {
+    printf("Freeing activities...\n");
+    if (activities != NULL) {
+        for (int i = 0; i < num_activities; i++) {
+            printf("Activity %d, memory: %p\n", i, (void*)activities[i].memory);
+            // Make sure i is within the bounds of the allocated array
+            if (i < num_activities && activities[i].memory != NULL) {
+                delete_group(activities[i].memory);
+                activities[i].memory = NULL;
+            }
+        }
+        free(activities);
+        activities = NULL;
+        printf("Activities freed.\n"); // Should print if everything goes right
     }
-    free(activities);
-};
+}
+
+
+
 
 Group_mem* createNode(int data) {
     /* Purpose: Allocates memory for and initializes a new Group_mem node with provided data */

@@ -174,7 +174,7 @@ def participation_vector(individual, groups):
         elif (individual[f"{group}_participation"] == 1): 
             penalty_part.append(1)
         else: 
-            penalty_part.append(0.2)
+            penalty_part.append(0.5)
 
     return penalty_part
 
@@ -205,22 +205,23 @@ def recursive_print(label_pointer):
 
 def extract_schedule_data(label_pointer, activity_df):
     """
-    Tire d'un pointeur vers un label le deroule du schedule 
-    en remontant a sa racine et stockant les donnees importantes
+    Extrait les données de planning à partir d'un pointeur de label, 
+    en remontant à la racine et en stockant les données importantes.
     """
     path_to_root = []
     while label_pointer:
         path_to_root.append(label_pointer)
         label_pointer = label_pointer.contents.previous
 
-    schedule_data = []
+    # Utiliser un dictionnaire pour conserver la durée maximale pour chaque identifiant (activity, start)
+    schedule_data_dict = {}
     for label_pointer in reversed(path_to_root):
         label = label_pointer.contents
 
-        acity = label.acity 
+        acity = label.acity
         if (acity > 0) and (acity < NUM_ACTIVITIES-2):
-            activity_row_froim_csv = activity_df.iloc[acity-1]
-            facility_id = activity_row_froim_csv['facility']
+            activity_row_from_csv = activity_df.iloc[acity-1]
+            facility_id = activity_row_from_csv['facility']
         else:
             facility_id = 0
 
@@ -230,12 +231,22 @@ def extract_schedule_data(label_pointer, activity_df):
             "group": group_to_type[label.act.contents.group],
             "start": label.start_time,
             "duration": label.duration,
-            "time" :label.time,
-            "cum_utility" : label.utility
+            "time": label.time,
+            "cum_utility": label.utility
         }
-        
-        if not schedule_data or schedule_data[-1]["start"] != data["start"]:
-            schedule_data.append(data)
+
+        # Clé unique pour identifier chaque activité avec son heure de début
+        unique_key = (data["acity"], data["start"])
+
+        # Vérifier si la durée est plus grande que celle déjà stockée pour cette clé
+        if unique_key not in schedule_data_dict or schedule_data_dict[unique_key]["duration"] < data["duration"]:
+            schedule_data_dict[unique_key] = data
+
+    # Convertir le dictionnaire en liste pour les données de sortie
+    schedule_data = list(schedule_data_dict.values())
+    
+    return schedule_data
+
 
     return schedule_data
 
@@ -283,7 +294,7 @@ def main():
     schedules = []
     ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
-        
+        # print(f"{index} \n")
         # if (index < 2 or index > 2):                                            # controle iterations to test
         #     continue
 
@@ -296,17 +307,15 @@ def main():
         # for activity in pertivity.iso_activities_array:
         #     print(f"ID: {acd}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
-
         lib.main()
 
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
+        schedule_data = extract_schedule_data(schedule_pointer, activity_csv)
 
         DSSR_iterations.append(iter)
         execution_times.append(time)
-        schedule_data = extract_schedule_data(schedule_pointer, activity_csv)
-        
         schedules.append(schedule_data) 
         ids.append(individual['id'])
         if schedule_pointer and schedule_pointer.contents:
@@ -316,8 +325,8 @@ def main():
             final_utilities.append(0)
 
         # recursive_print(schedule_pointer)
-
         lib.free_bucket()
+        # lib.free_activities()
 
     results = pd.DataFrame({
         'id': ids,

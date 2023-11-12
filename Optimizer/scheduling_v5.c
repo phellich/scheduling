@@ -52,7 +52,7 @@ struct L_list{
 };
 
 /// global _constants 
-double time_factor = 10*16.667;                                        // 1 km/h = 16.667 m/min
+double time_factor = 30*16.667;                                        // 1 km/h = 16.667 m/min
 int horizon = 289;
 int num_activities;
 L_list** bucket;

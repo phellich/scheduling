@@ -5,7 +5,7 @@ from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
 from collections import namedtuple
 
-SCHEDULING_VERSION = 5
+SCHEDULING_VERSION = 4
 HORIZON = 289
 NUM_ACTIVITIES = 0
 group_to_type = {
@@ -131,23 +131,9 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-2].des_start_time = 0   
     activities_array[num_activities-2].group = 0
 
-    # work
-    activities_array[num_activities-3].id = num_activities-3
-    activities_array[num_activities-3].x = individual['work_x']
-    activities_array[num_activities-3].y = individual['work_y']
-    activities_array[num_activities-3].earliest_start = 72 # 6h
-    activities_array[num_activities-3].latest_start = 276 # 23h
-    activities_array[num_activities-3].max_duration = 192 # (de 7h a 23h)                       
-    activities_array[num_activities-3].min_duration = 6 # 30m
-    ##################################################### TO CHANGE
-    activities_array[num_activities-2].des_duration = 60
-    activities_array[num_activities-2].des_start_time = 110 
-    #####################################################
-    activities_array[num_activities-3].group = 2
-
-    for activity in activities_array:
+    for index, activity in enumerate(activities_array):
         group = activity.group
-        if ((group == 0) or (group == 2)): #################### will change again TO CHANGE
+        if group == 0: 
             continue
         activity_type = group_to_type[group]
         activity.des_duration = individual[f'{activity_type}_duration']
@@ -183,7 +169,7 @@ def participation_vector(individual, groups):
     ''' if a people hasn't take part to an activity, its utility to do this activity is reduced '''
     penalty_part = []
     for i, group in enumerate(groups):
-        if ((i == 0) or (i == 2)): # home or work
+        if i == 0: # home
             penalty_part.append(1) # + terme random centre sur 1 et tres proche en vrai 
         elif (individual[f"{group}_participation"] == 1): 
             penalty_part.append(1)
@@ -217,7 +203,7 @@ def recursive_print(label_pointer):
         activity = label.act.contents 
         print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration}, cumulative utility = {label.utility})\n", end="")
 
-def extract_schedule_data(label_pointer, activity_df, individual):
+def extract_schedule_data(label_pointer, activity_df):
     """
     Extrait les données de planning à partir d'un pointeur de label, 
     en remontant à la racine et en stockant les données importantes.
@@ -233,11 +219,9 @@ def extract_schedule_data(label_pointer, activity_df, individual):
         label = label_pointer.contents
 
         acity = label.acity
-        if (acity > 0) and (acity < NUM_ACTIVITIES-3):
+        if (acity > 0) and (acity < NUM_ACTIVITIES-2):
             activity_row_from_csv = activity_df.iloc[acity-1]
             facility_id = activity_row_from_csv['facility']
-        elif (acity == NUM_ACTIVITIES-3):
-            facility_id = individual['work_id']
         else:
             facility_id = 0
 
@@ -282,7 +266,7 @@ def main():
     population_csv = pd.read_csv("Data/PreProcessed/population.csv")
 
     global NUM_ACTIVITIES 
-    NUM_ACTIVITIES = len(activity_csv) + 4                                      # we will add dusk, home, dawn and work
+    NUM_ACTIVITIES = len(activity_csv) + 3                                      # we will add dusk, home and dawn
     lib.set_num_activities(NUM_ACTIVITIES)
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
@@ -311,7 +295,7 @@ def main():
     ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         # print(f"{index} \n")
-        # if (index < 2 or index > 2): 
+        # if (index < 2 or index > 2):                                            # controle iterations to test
         #     continue
 
         participation = participation_vector(individual, groups)
@@ -328,7 +312,7 @@ def main():
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
-        schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual)
+        schedule_data = extract_schedule_data(schedule_pointer, activity_csv)
 
         DSSR_iterations.append(iter)
         execution_times.append(time)

@@ -52,7 +52,8 @@ struct L_list{
 };
 
 /// global _constants 
-double time_factor = 30*16.667;                                        // 1 km/h = 16.667 m/min
+double time_factor; // = 15*16.667;                 // 1 km/h = 16.667 m/min
+double travel_time_penalty;                       
 int horizon = 289;
 int num_activities;
 L_list** bucket;
@@ -89,8 +90,11 @@ void set_num_activities(int pynum_activities) {
     num_activities = pynum_activities;
 };
 
-void set_activities_pointer(Activity* activities_array) {
+void set_activities_variables(Activity* activities_array, int pynum_activities, double pyspeed, double pytravel_time_penalty) {
     activities = activities_array;
+    num_activities = pynum_activities;
+    time_factor = pyspeed;
+    travel_time_penalty = pytravel_time_penalty;
 };
 
 void set_utility_parameters(double* asc, double* early, double* late, double* longp, double* shortp) {
@@ -220,9 +224,6 @@ void free_activities() {
         printf("Activities freed.\n"); // Should print if everything goes right
     }
 }
-
-
-
 
 Group_mem* createNode(int data) {
     /* Purpose: Allocates memory for and initializes a new Group_mem node with provided data */
@@ -501,29 +502,30 @@ int dominates(Label* L1, Label* L2){
 
         /*  S'assure que tous les group de L2 sont dans L1, sinon ca veut dire que L2 peut etre moins bien pcq elle nn'a pas encore fait un group.
             Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
-        if(dom_mem_contains(L2,L1)){
-            if(L1->time <= L2->time){
+        if(dom_mem_contains(L2,L1)){ // be sure of order
+
+            // HEURISTIC ? 
+            // if(L1->time <= L2->time){
+            //     return 2;
+            // }
+            
+            // EXACT METHOD ? 
+            if(L1->duration == L2->duration){return 2;}
+            // if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
+            int group = L1->act->group;
+            int des_dur = L1->act->des_duration;
+            if(
+                L1->utility 
+                + short_parameters[group] * 5 * fmax(0, des_dur - L1->duration - 2)
+                + long_parameters[group] * 5 * fmax(0, L1->duration - des_dur - 2) 
+                <= 
+                L2->utility 
+                + short_parameters[group] * 5 * fmax(0, des_dur - L2->duration - 2)
+                + long_parameters[group] * 5 * fmax(0, L2->duration - des_dur - 2) ){
                 return 2;
             }
+
         }
-
-        // if(dom_mem_contains(L1,L2)){
-        //     if(L1->duration == L2->duration){return 2;}
-        //     // if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
-        //     int group = L1->act->group;
-        //     int des_dur = L1->act->des_duration;
-        //     if(
-        //         L1->utility 
-        //         + short_parameters[group] * 5 * fmax(0, des_dur - L1->duration - 2)
-        //         + long_parameters[group] * 5 * fmax(0, L1->duration - des_dur - 2) 
-        //         <= 
-        //         L2->utility 
-        //         + short_parameters[group] * 5 * fmax(0, des_dur - L2->duration - 2)
-        //         + long_parameters[group] * 5 * fmax(0, L2->duration - des_dur - 2) ){
-        //         return 2;
-        //     }
-        // }
-
     }
     return 0;
     // return 1;                                                // for test only
@@ -542,7 +544,7 @@ double update_utility(Label* L){
     L->utility = previous_L->utility;
 
     L->utility -= asc_parameters[group] * part_penal[group];
-    L->utility += travel_time(previous_act, act); // 20m => 4 de penalite ? 
+    L->utility += travel_time_penalty*travel_time(previous_act, act); // 20m => 4 de penalite ? 
     // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
     // -2 correspond aux 'plateaux' de minimisation
     L->utility += short_parameters[previous_group] * 5 * fmax(0, previous_act->des_duration - previous_L->duration - 2)
@@ -776,7 +778,7 @@ int main(int argc, char* argv[]){
         // }
         li = &bucket[horizon-1][num_activities-1];
     };
-
+    
     final_schedule = find_best(li, 0);
     end_time = clock();  
     total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;

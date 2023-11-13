@@ -5,7 +5,7 @@ from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
 from collections import namedtuple
 
-SCHEDULING_VERSION = 4
+SCHEDULING_VERSION = 5
 HORIZON = 289
 NUM_ACTIVITIES = 0
 group_to_type = {
@@ -131,9 +131,19 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-2].des_start_time = 0   
     activities_array[num_activities-2].group = 0
 
-    for index, activity in enumerate(activities_array):
+    # work
+    activities_array[num_activities-3].id = num_activities-3
+    activities_array[num_activities-3].x = individual['work_x']
+    activities_array[num_activities-3].y = individual['work_y']
+    activities_array[num_activities-3].earliest_start = 72 # 6h
+    activities_array[num_activities-3].latest_start = 276 # 23h
+    activities_array[num_activities-3].max_duration = 192 # (de 7h a 23h)                       
+    activities_array[num_activities-3].min_duration = 6 # 30m
+    activities_array[num_activities-3].group = 2
+
+    for activity in activities_array:
         group = activity.group
-        if group == 0: 
+        if (group == 0): #################### will change again TO CHANGE
             continue
         activity_type = group_to_type[group]
         activity.des_duration = individual[f'{activity_type}_duration']
@@ -146,22 +156,22 @@ def initialize_param():
     ''' Initialise les parametres de la utility function'''
 
     UtilityParams = namedtuple('UtilityParams', 'asc early late long short')
+    # params = UtilityParams( # TRUE PARAMETERS
+    #     # order = [home, education, work, leisure, shop]
+    #     asc=[0, 18.7, 13.1, 8.74, 10.5],
+    #     early=[0, 1.35, 0.619, 0.0996, 1.01],
+    #     late=[0, 1.63, 0.338, 0.239, 0.858],
+    #     long=[0, 1.14, 1.22, 0.08, 0.683],
+    #     short=[0, 1.75, 0.932, 0.101, 1.81]
+    # )
     params = UtilityParams(
         # order = [home, education, work, leisure, shop]
-        asc=[0, 18.7, 13.1, 8.74, 10.5],
+        asc=[0, 9.7, 20.1, 8.74, 10.5],
         early=[0, 1.35, 0.619, 0.0996, 1.01],
         late=[0, 1.63, 0.338, 0.239, 0.858],
         long=[0, 1.14, 1.22, 0.08, 0.683],
         short=[0, 1.75, 0.932, 0.101, 1.81]
     )
-    # params = UtilityParams(
-    #     # order = [home, education, work, leisure, shop]
-    #     asc=[0, 10, 0, 0, 0],
-    #     early=[0, 10, 0, 0, 0],
-    #     late=[0, 0, 0, 0, 0],
-    #     long=[0, 0, 87, 0, 0],
-    #     short=[0, 10, 87, 0, 0]
-    # )
 
     return params
 
@@ -169,7 +179,7 @@ def participation_vector(individual, groups):
     ''' if a people hasn't take part to an activity, its utility to do this activity is reduced '''
     penalty_part = []
     for i, group in enumerate(groups):
-        if i == 0: # home
+        if (i == 0): # home 
             penalty_part.append(1) # + terme random centre sur 1 et tres proche en vrai 
         elif (individual[f"{group}_participation"] == 1): 
             penalty_part.append(1)
@@ -203,7 +213,7 @@ def recursive_print(label_pointer):
         activity = label.act.contents 
         print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration}, cumulative utility = {label.utility})\n", end="")
 
-def extract_schedule_data(label_pointer, activity_df):
+def extract_schedule_data(label_pointer, activity_df, individual):
     """
     Extrait les données de planning à partir d'un pointeur de label, 
     en remontant à la racine et en stockant les données importantes.
@@ -219,9 +229,11 @@ def extract_schedule_data(label_pointer, activity_df):
         label = label_pointer.contents
 
         acity = label.acity
-        if (acity > 0) and (acity < NUM_ACTIVITIES-2):
+        if (acity > 0) and (acity < NUM_ACTIVITIES-3):
             activity_row_from_csv = activity_df.iloc[acity-1]
             facility_id = activity_row_from_csv['facility']
+        elif (acity == NUM_ACTIVITIES-3):
+            facility_id = individual['work_id']
         else:
             facility_id = 0
 
@@ -247,9 +259,6 @@ def extract_schedule_data(label_pointer, activity_df):
     
     return schedule_data
 
-
-    return schedule_data
-
 ##### END OF FUNCTIONS ###############################
 ######################################################
 ##### START OF EXECUTION #############################
@@ -266,8 +275,9 @@ def main():
     population_csv = pd.read_csv("Data/PreProcessed/population.csv")
 
     global NUM_ACTIVITIES 
-    NUM_ACTIVITIES = len(activity_csv) + 3                                      # we will add dusk, home and dawn
-    lib.set_num_activities(NUM_ACTIVITIES)
+    NUM_ACTIVITIES = len(activity_csv) + 4 
+    SPEED = 10*16.667 # 1km/h = 16.667 m/min
+    TRAVEL_TIME_PENALTY = 0.1                                    # we will add dusk, home, dawn and work
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
     params = initialize_param()                                                 
@@ -295,7 +305,7 @@ def main():
     ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         # print(f"{index} \n")
-        # if (index < 2 or index > 2):                                            # controle iterations to test
+        # if (index < 2 or index > 2): 
         #     continue
 
         participation = participation_vector(individual, groups)
@@ -303,16 +313,16 @@ def main():
         lib.set_particpation_array(pyparticipation)
 
         perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
-        lib.set_activities_pointer(perso_activities_array)
-        # for activity in pertivity.iso_activities_array:
-        #     print(f"ID: {acd}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
+        lib.set_activities_variables(perso_activities_array, NUM_ACTIVITIES, c_double(SPEED), c_double(TRAVEL_TIME_PENALTY))
+        # for activity in perso_activities_array:
+        #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
         lib.main()
 
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
-        schedule_data = extract_schedule_data(schedule_pointer, activity_csv)
+        schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual)
 
         DSSR_iterations.append(iter)
         execution_times.append(time)

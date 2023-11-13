@@ -277,7 +277,7 @@ def main():
     global NUM_ACTIVITIES 
     NUM_ACTIVITIES = len(activity_csv) + 4 
     SPEED = 10*16.667 # 1km/h = 16.667 m/min
-    TRAVEL_TIME_PENALTY = 0.1                                    # we will add dusk, home, dawn and work
+    TRAVEL_TIME_PENALTY = 0.01                                    # we will add dusk, home, dawn and work
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
     params = initialize_param()                                                 

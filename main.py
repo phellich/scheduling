@@ -135,19 +135,19 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-3].id = num_activities-3
     activities_array[num_activities-3].x = individual['work_x']
     activities_array[num_activities-3].y = individual['work_y']
-    activities_array[num_activities-3].earliest_start = 72 # 6h
+    activities_array[num_activities-3].earliest_start = 60 # 5h
     activities_array[num_activities-3].latest_start = 276 # 23h
     activities_array[num_activities-3].max_duration = 192 # (de 7h a 23h)                       
-    activities_array[num_activities-3].min_duration = 6 # 30m
+    activities_array[num_activities-3].min_duration = 0 # 30m
     activities_array[num_activities-3].group = 2
 
     for activity in activities_array:
         group = activity.group
-        if (group == 0): #################### will change again TO CHANGE
+        if (group == 0): 
             continue
         activity_type = group_to_type[group]
-        activity.des_duration = individual[f'{activity_type}_duration']
-        activity.des_start_time = individual[f'{activity_type}_starting']          
+        activity.des_duration = individual[f'{activity_type}_dur']
+        activity.des_start_time = individual[f'{activity_type}_start']          
 
     return activities_array
 
@@ -165,7 +165,7 @@ def initialize_param():
     #     short=[0, 1.75, 0.932, 0.101, 1.81]
     # )
     params = UtilityParams(
-        # order = [home, education, work, leisure, shop]
+        # order = [home, education, work, leisure, shop] # vrmt 0 pour la participation a la maison ?...
         asc=[0, 9.7, 20.1, 8.74, 10.5],
         early=[0, 1.35, 0.619, 0.0996, 1.01],
         late=[0, 1.63, 0.338, 0.239, 0.858],
@@ -176,15 +176,15 @@ def initialize_param():
     return params
 
 def participation_vector(individual, groups): 
-    ''' if a people hasn't take part to an activity, its utility to do this activity is reduced '''
+    ''' If a people hasn't take part to an activity, its utility to do this activity is reduced '''
     penalty_part = []
     for i, group in enumerate(groups):
         if (i == 0): # home 
             penalty_part.append(1) # + terme random centre sur 1 et tres proche en vrai 
-        elif (individual[f"{group}_participation"] == 1): 
+        elif (individual[f"{group}_part"] == 1): 
             penalty_part.append(1)
         else: 
-            penalty_part.append(0.5)
+            penalty_part.append(1)
 
     return penalty_part
 
@@ -350,4 +350,6 @@ def main():
 
 
 if __name__ == "__main__":
+    ### ici definir les differents 
+    # main(nom_scenario_csv, vecteurs de contraintes activees)
     main()

@@ -70,6 +70,22 @@ double long_parameters[5];
 double short_parameters[5];
 double part_penal[5];
 
+// scenario constraints
+double leisure_close;
+double shop_close;
+double education_close;
+double work_close;
+double curfew;
+double peak_hours;
+double outside_time;
+double travel_time_limit;
+
+int curfew_time;
+int max_outside_time;
+int max_travel_time;
+int peak_hour_time1;
+int peak_hour_time2;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////// INITIALISATION /////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,18 +102,21 @@ Label* get_final_schedule() {
     return final_schedule;
 }
 
-void set_num_activities(int pynum_activities) {
-    num_activities = pynum_activities;
-};
-
-void set_activities_variables(Activity* activities_array, int pynum_activities, double pyspeed, double pytravel_time_penalty) {
-    activities = activities_array;
+void set_general_parameters(int pynum_activities, double pyspeed, double pytravel_time_penalty, 
+                            int pycurfew_time, int pymax_outside_time, int pymax_travel_time,
+                            int pypeak_hour_time1, int pypeak_hour_time2){
     num_activities = pynum_activities;
     time_factor = pyspeed;
     travel_time_penalty = pytravel_time_penalty;
+    curfew_time = pycurfew_time;
+    max_outside_time = pymax_outside_time;
+    max_travel_time = pymax_travel_time;
+    peak_hour_time1 = pypeak_hour_time1;
+    peak_hour_time2 = pypeak_hour_time2;
 };
 
-void set_utility_parameters(double* asc, double* early, double* late, double* longp, double* shortp) {
+void set_utility_and_scenario(double* asc, double* early, double* late, double* longp, double* shortp, double* scenario_const) {
+    
     for(int i = 0; i < 5; i++) {
         asc_parameters[i] = asc[i];
         early_parameters[i] = early[i];
@@ -108,18 +127,28 @@ void set_utility_parameters(double* asc, double* early, double* late, double* lo
         //        i, asc_parameters[i], i, early_parameters[i], i, late_parameters[i],
         //        i, long_parameters[i], i, short_parameters[i]);
     }
+
+    leisure_close = scenario_const[0];
+    shop_close = scenario_const[1];
+    education_close = scenario_const[2];
+    work_close = scenario_const[3];
+    curfew = scenario_const[4];
+    peak_hours = scenario_const[5];
+    outside_time = scenario_const[6];
+    travel_time_limit = scenario_const[7];
 }
 
-void set_particpation_array(double* pypart){
+void set_activities_and_particip(Activity* activities_array, double* pypart){
+    activities = activities_array;
     for(int i = 0; i < 5; i++) {
         part_penal[i] = pypart[i];
         // printf("part[%d] = %f", i, part_penal[i]);
     }
     // printf("\n");
-}
+};
 
-// Distance en metres
 double distance_x(Activity* a1, Activity* a2){
+    // Distance en metres
     double dx = (double)(a2->x - a1->x);
     double dy = (double)(a2->y - a1->y);
     double dist = sqrt(dx * dx + dy * dy);
@@ -128,8 +157,8 @@ double distance_x(Activity* a1, Activity* a2){
 
 int travel_time(Activity* a1, Activity* a2){
     double dist = distance_x(a1, a2);
-    int time = (int)(dist/time_factor); // 127,7 = 128
-    time = (int)(ceil((double)time / 5.0) * 5);            // Round down to the nearest 5-minute interval
+    int time = (int)(dist/time_factor);       
+    time = (int)(ceil((double)time / 5.0) * 5);             // Round down to the nearest 5-minute interval
     int time_interval = time / 5;                           // Divide by 5 to fit within the 0-289 time horizon
     return time_interval;
 };
@@ -142,7 +171,6 @@ void recursive_print(Label* L){
         printf("(act = %d, group = %d, start = %d, duration = %d, time = %d), ", L->acity, L->act->group, L->start_time, L->duration, L->time);
     }
 };
-
 
 /* initializes a two-dimensional dynamic array named bucket of size a by b. Each element of this array is of type L_list */
 void create_bucket(int a, int b){
@@ -424,9 +452,40 @@ int dom_mem_contains(Label* L1, Label* L2){
 /////////////////////// BIG FUNCTIONS ////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/*  Determines if an Activity a can be added to a sequence ending in label L 
+    in the current scenario simulated */
+int is_constrained_by_scenario(Label* L, Activity* a){
+    if(education_close && a->group==1){                                                         
+        return 1;
+    }          
+    if(work_close && a->group==2){                                                         
+        return 1;
+    }            
+    if(leisure_close && a->group==3){                                                         
+        return 1;
+    }          
+    if(shop_close && a->group==4){                                                         
+        return 1;
+    }
+    int time = L->time;
+    if(curfew && time >= curfew_time){                                               
+        return 1;
+    }          
+    if(peak_hours && time >= peak_hour_time1 && time <= peak_hour_time2){                                               
+        return 1;
+    }        
+    if(travel_time_limit && travel_time(L->act, a) > max_travel_time){                                               
+        return 1;
+    }          
+    if(outside_time && L->duration + 1 > max_outside_time){
+        return 1;
+    }
+    return 0;
+}
+
 /*  Determines if an Activity a can be added to a sequence ending in label L. 
     It returns 1 if it's feasible and 0 if it's not. */
-int feasible(Label* L, Activity* a){
+int is_feasible(Label* L, Activity* a){
     
     if(L == NULL){                                                          // if no Label, 'a' cann't be added
         return 0;
@@ -434,12 +493,15 @@ int feasible(Label* L, Activity* a){
     if(L->acity != 0 && a->id == 0){                                        // exclude dawn if it's not the 1st activity of the label
         return 0;
     }
+    if(is_constrained_by_scenario(L, a)){           
+        return 0;
+    }
+
     if(L->acity != a->id){                                                  // If act of L isn't the same as a, do some checks
-        if(L->previous !=NULL && L->previous->acity == a->id ){             // is the previous activity the same as a ? 
+        if(L->previous !=NULL && L->previous->acity == a->id ){             // is the previous activity the same as a ? pas sur de l'interet
             return 0;
         }
-        if(distance_x(a, &activities[0]) > 3000){
-        // if((distance_x(a, &activities[0]) > 3000) && (distance_x(a, &activities[num_activities-3]) > 3000)){  
+        if((distance_x(a, &activities[0]) > 3000) && (distance_x(a, &activities[num_activities-3]) > 3000)){  
             return 0; 
         }
         if(distance_x(a, &activities[0]) > 3000){
@@ -551,16 +613,6 @@ double update_utility(Label* L){
                  + long_parameters[previous_group] * 5 * fmax(0, previous_L->duration - previous_act->des_duration - 2);
     L->utility += early_parameters[group] * 5 * fmax(0, act->des_start_time - L->start_time - 2) 
                  + late_parameters[group] * 5 * fmax(0, L->start_time - act->des_start_time - 2);
-    // if (previous_group == 2) {
-    //     printf("short_parameter = %lf, long_parameters = %lf \n", short_parameters[previous_group], long_parameters[previous_group]);
-    // }
-    // if (group == 2) {
-    //     printf("early_parameters = %lf, late_parameters = %lf \n", early_parameters[group], late_parameters[group]);
-    // }
-    // L->utility += short_parameters[group] * fmax(0, previous_act->des_duration - previous_L->duration - 2)
-    //              + long_parameters[group] * fmax(0, previous_L->duration - previous_act->des_duration - 2);
-    // L->utility += early_parameters[group] * fmax(0, act->des_start_time - L->start_time - 2) 
-    //              + late_parameters[group] * fmax(0, L->start_time - act->des_start_time - 2);
 
     return L->utility;
 };
@@ -636,10 +688,6 @@ int DSSR(Label* L){
     int c_activity = 0;
     int group_activity = 0;
 
-    if(p1 == NULL){
-        printf("p1 == NULL");
-    }
-
     while (p1 != NULL && cycle == 0){                            // iterates through the labels starting from L in the reverse direction until it reaches the beginning 
         while(p1 != NULL && (p1->acity == num_activities-1 || p1->acity == num_activities-2)){       // skips labels that correspond to the last activity // group == 0 ? 
             p1 = p1->previous;
@@ -695,7 +743,7 @@ void DP (){
 
                 for(int a1 = 0; a1 < num_activities; a1 ++){        // pour toutes les activites
 
-                    if(feasible(L, &activities[a1])){               // si pas feasible, passe directement au prochain a1
+                    if(is_feasible(L, &activities[a1])){               // si pas feasible, passe directement au prochain a1
 
                         Label* L1 = label(L, &activities[a1]);      
 

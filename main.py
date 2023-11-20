@@ -263,10 +263,9 @@ def extract_schedule_data(label_pointer, activity_df, individual):
 ######################################################
 ##### START OF EXECUTION #############################
 
-def main():
+def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0]):
 
-    compile_code()
-    lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
+    print(f"Running scenario: {scenario}")
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
@@ -276,28 +275,36 @@ def main():
 
     global NUM_ACTIVITIES 
     NUM_ACTIVITIES = len(activity_csv) + 4 
-    SPEED = 10*16.667 # 1km/h = 16.667 m/min
-    TRAVEL_TIME_PENALTY = 0.01                                    # we will add dusk, home, dawn and work
+    SPEED = 10*16.667                                                       # 1km/h = 16.667 m/min
+    TRAVEL_TIME_PENALTY = 0.01                                              # we will add dusk, home, dawn and work
+    CURFEW_TIME = 228                                                       # 228 = 19h
+    MAX_OUTSIDE_TIME = 48                                                   # 48 = 4h
+    MAX_TRAVEL_TIME = 3                                                     # 3 = 15m
+    PEAK_HOUR_TIME1 = 144                                                   # 144 = 12h
+    PEAK_HOUR_TIME2 = 168                                                   # 180 = 14h
+    lib.set_general_parameters(NUM_ACTIVITIES, c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
+                               c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
+                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2))
     
     activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
     params = initialize_param()                                                 
 
-    
     # Convert Python lists to ctypes arrays
+    constraints_array = (c_double * len(constraints))(*constraints)
     asc_array = (c_double * len(params.asc))(*params.asc)
     early_array = (c_double * len(params.early))(*params.early)
     late_array = (c_double * len(params.late))(*params.late)
     long_array = (c_double * len(params.long))(*params.long)
-    short_array = (c_double * len(params.short))(*params.short)
-
-    lib.set_utility_parameters(
+    short_array = (c_double * len(params.short))(*params.short) 
+    lib.set_utility_and_scenario(
         asc_array,  
         early_array,
         late_array,
         long_array,
-        short_array
+        short_array,
+        constraints_array
     )
-        
+
     DSSR_iterations = []
     execution_times = []
     final_utilities = []
@@ -310,10 +317,8 @@ def main():
 
         participation = participation_vector(individual, groups)
         pyparticipation = (c_double * len(participation))(*participation)
-        lib.set_particpation_array(pyparticipation)
-
         perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
-        lib.set_activities_variables(perso_activities_array, NUM_ACTIVITIES, c_double(SPEED), c_double(TRAVEL_TIME_PENALTY))
+        lib.set_activities_and_particip(perso_activities_array, pyparticipation)
         # for activity in perso_activities_array:
         #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
@@ -346,10 +351,42 @@ def main():
         'daily_schedule': schedules  
     })
 
-    results.to_json('Data/Generated/schedules.json', orient='records', lines=False, indent = 4) 
+    results.to_json(f"Data/Generated/{scenario}.json", orient='records', lines=False, indent = 4) 
 
 
 if __name__ == "__main__":
-    ### ici definir les differents 
-    # main(nom_scenario_csv, vecteurs de contraintes activees)
-    main()
+        
+    compile_code()
+    lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
+
+    # constraints = [
+    #     leisure closure,
+    #     shop closure,
+    #     education closure,
+    #     work closure,
+    #     curfew constraint,
+    #     peak hours,
+    #     outside-time limit,
+    #     travel-time restriction]
+
+    constraints = {
+        'normal_life' :               [0, 0, 0, 0, 0, 0, 0, 0],
+        'shutdown' :                  [1, 1, 1, 1, 0, 0, 0, 0],
+        'economy' :                   [1, 1, 1, 0, 0, 0, 0, 0],
+        'school_restriction' :        [0, 0, 1, 0, 0, 0, 0, 0],
+        'essential_needs' :           [1, 0, 1, 1, 0, 0, 1, 0],
+        'outings_limitation' :        [1, 0, 1, 0, 0, 0, 1, 0],
+        'return_to_baseline' :        [0, 0, 1, 0, 0, 0, 1, 0],
+        'peak_hours' :                [0, 0, 0, 0, 0, 1, 0, 0],
+        'curfew' :                    [0, 0, 0, 0, 1, 0, 0, 0],
+        'outside_time_limit' :        [0, 0, 0, 0, 0, 0, 1, 0],
+        'travel_time_limit' :         [0, 0, 0, 0, 0, 0, 0, 1]
+    }
+
+    scenari = ['normal_life', 'shutdown', 'economy', 'school_restriction', 'essential_needs', 'outings_limitation', 
+               'return_to_baseline', 'peak_hours', 'curfew', 'outside_time_limit', 'travel_time_limit']
+
+    # main('normal_life', constraints['normal_life'])
+
+    for scenario_name in scenari:
+        main(scenario_name, constraints[scenario_name])

@@ -4,10 +4,20 @@ import numpy as np
 from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
 from collections import namedtuple
+import math
+import time
 
 SCHEDULING_VERSION = 5
-HORIZON = 289
-NUM_ACTIVITIES = 0
+TIME_INTERVAL = 5
+HORIZON = round(24*60/TIME_INTERVAL) + 1
+SPEED = 10*16.667                                                       # 1km/h = 16.667 m/min
+TRAVEL_TIME_PENALTY = 0.01                                              # we will add dusk, home, dawn and work
+CURFEW_TIME = round(19*60/TIME_INTERVAL) + 1                                                       # 19h
+MAX_OUTSIDE_TIME = round(4*60/TIME_INTERVAL) + 1                                                   # 4h
+MAX_TRAVEL_TIME = round(20/TIME_INTERVAL) + 1                                                     # 20m
+PEAK_HOUR_TIME1 = round(12*60/TIME_INTERVAL) + 1                                                   # 12h
+PEAK_HOUR_TIME2 = round(14*60/TIME_INTERVAL) + 1                                                   # 14h
+PERIMETER = 200                                                        # en metres
 group_to_type = {
     0: 'home',
     1: 'education',
@@ -78,7 +88,7 @@ def initialize_activities(df, num_activities): # utiliser les data et enlever le
     ''' Cree un vecteur d activite en les initialisant en fonction d'un dataframe en input '''
     activities_array = (Activity * num_activities)()
 
-    for index, row in df.iterrows(): # index + 1 to let some place to home first and last
+    for index, row in df.iterrows(): # index + 1 to let some place to home dawn
         activities_array[index+1].id = index+1
         activities_array[index+1].x = row['x']
         activities_array[index+1].y = row['y']
@@ -213,7 +223,7 @@ def recursive_print(label_pointer):
         activity = label.act.contents 
         print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration}, cumulative utility = {label.utility})\n", end="")
 
-def extract_schedule_data(label_pointer, activity_df, individual):
+def extract_schedule_data(label_pointer, activity_df, individual, num_activities):
     """
     Extrait les données de planning à partir d'un pointeur de label, 
     en remontant à la racine et en stockant les données importantes.
@@ -229,10 +239,10 @@ def extract_schedule_data(label_pointer, activity_df, individual):
         label = label_pointer.contents
 
         acity = label.acity
-        if (acity > 0) and (acity < NUM_ACTIVITIES-3):
+        if (acity > 0) and (acity < num_activities-3):
             activity_row_from_csv = activity_df.iloc[acity-1]
             facility_id = activity_row_from_csv['facility']
-        elif (acity == NUM_ACTIVITIES-3):
+        elif (acity == num_activities-3):
             facility_id = individual['work_id']
         else:
             facility_id = 0
@@ -259,13 +269,36 @@ def extract_schedule_data(label_pointer, activity_df, individual):
     
     return schedule_data
 
+def filter_closest(all_activities, individual, n_closest=100):
+    home = (individual['home_x'], individual['home_y'])
+    work = (individual['work_x'], individual['work_y'])
+
+    # Convert activity locations and individual locations to numpy arrays for vectorized operations
+    activities_locations = all_activities[['x', 'y']].to_numpy()
+    home = np.array(home)
+    work = np.array(work)
+
+    # Calculate distances using numpy for better performance
+    distances_home = np.linalg.norm(activities_locations - home, axis=1)
+    distances_work = np.linalg.norm(activities_locations - work, axis=1)
+    min_distances = np.minimum(distances_home, distances_work)
+
+    # Add the distances to the DataFrame (creates a copy to avoid modifying the original DataFrame)
+    closest_activities = all_activities.copy()
+    closest_activities['distance'] = min_distances
+
+    # Sort by distance and get the top n_closest activities
+    closest_act = closest_activities.sort_values('distance', ascending=True).head(n_closest)
+    return closest_act.reset_index(drop=True)
+
 ##### END OF FUNCTIONS ###############################
 ######################################################
 ##### START OF EXECUTION #############################
 
-def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0]):
+def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0], num_act_to_select = 100):
 
     print(f"Running scenario: {scenario}")
+    num_activities = num_act_to_select+4
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
@@ -273,23 +306,11 @@ def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0]):
     activity_csv = pd.read_csv("Data/PreProcessed/activity.csv")
     population_csv = pd.read_csv("Data/PreProcessed/population.csv")
 
-    global NUM_ACTIVITIES 
-    NUM_ACTIVITIES = len(activity_csv) + 4 
-    SPEED = 10*16.667                                                       # 1km/h = 16.667 m/min
-    TRAVEL_TIME_PENALTY = 0.01                                              # we will add dusk, home, dawn and work
-    CURFEW_TIME = 228                                                       # 228 = 19h
-    MAX_OUTSIDE_TIME = 48                                                   # 48 = 4h
-    MAX_TRAVEL_TIME = 3                                                     # 3 = 15m
-    PEAK_HOUR_TIME1 = 144                                                   # 144 = 12h
-    PEAK_HOUR_TIME2 = 168                                                   # 180 = 14h
-    lib.set_general_parameters(NUM_ACTIVITIES, c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
+    lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
                                c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
-                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2))
-    
-    activities_array = initialize_activities(activity_csv, NUM_ACTIVITIES) 
-    params = initialize_param()                                                 
-
-    # Convert Python lists to ctypes arrays
+                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL))
+                                                    
+    params = initialize_param() 
     constraints_array = (c_double * len(constraints))(*constraints)
     asc_array = (c_double * len(params.asc))(*params.asc)
     early_array = (c_double * len(params.early))(*params.early)
@@ -311,14 +332,17 @@ def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0]):
     schedules = []
     ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
-        # print(f"{index} \n")
-        # if (index < 2 or index > 2): 
+
+        # if (index >= 3): 
         #     continue
+        
+        act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
+        activities_array = initialize_activities(act_in_peri, num_activities) 
 
         participation = participation_vector(individual, groups)
         pyparticipation = (c_double * len(participation))(*participation)
-        perso_activities_array = personalize(activities_array, NUM_ACTIVITIES, individual, group_to_type)
-        lib.set_activities_and_particip(perso_activities_array, pyparticipation)
+        perso_activities_array = personalize(activities_array, num_activities, individual, group_to_type)
+        lib.set_activities_and_particip(perso_activities_array, pyparticipation, num_activities)
         # for activity in perso_activities_array:
         #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
@@ -327,7 +351,7 @@ def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0]):
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
-        schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual)
+        schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual, num_activities)
 
         DSSR_iterations.append(iter)
         execution_times.append(time)
@@ -388,5 +412,13 @@ if __name__ == "__main__":
 
     # main('normal_life', constraints['normal_life'])
 
-    for scenario_name in scenari:
-        main(scenario_name, constraints[scenario_name])
+    n_closest = range(20, 221, 25)
+    for n in n_closest:
+        start_time = time.time()
+        main('normal_life', constraints['normal_life'], n)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"For 100 individuals and {n} closest activities around their home/work, the execution time is {elapsed_time:.1f}\n")
+
+    # for scenario_name in scenari:
+    #     main(scenario_name, constraints[scenario_name])

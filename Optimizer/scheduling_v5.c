@@ -52,9 +52,10 @@ struct L_list{
 };
 
 /// global _constants 
-double time_factor; // = 15*16.667;                 // 1 km/h = 16.667 m/min
+int time_interval;
+double time_factor;
 double travel_time_penalty;                       
-int horizon = 289;
+int horizon;
 int num_activities;
 L_list** bucket;
 Activity* activities = NULL;
@@ -102,10 +103,9 @@ Label* get_final_schedule() {
     return final_schedule;
 }
 
-void set_general_parameters(int pynum_activities, double pyspeed, double pytravel_time_penalty, 
+void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_penalty, 
                             int pycurfew_time, int pymax_outside_time, int pymax_travel_time,
-                            int pypeak_hour_time1, int pypeak_hour_time2){
-    num_activities = pynum_activities;
+                            int pypeak_hour_time1, int pypeak_hour_time2, int pytime_interval){
     time_factor = pyspeed;
     travel_time_penalty = pytravel_time_penalty;
     curfew_time = pycurfew_time;
@@ -113,6 +113,8 @@ void set_general_parameters(int pynum_activities, double pyspeed, double pytrave
     max_travel_time = pymax_travel_time;
     peak_hour_time1 = pypeak_hour_time1;
     peak_hour_time2 = pypeak_hour_time2;
+    horizon = pyhorizon;
+    time_interval = pytime_interval;
 };
 
 void set_utility_and_scenario(double* asc, double* early, double* late, double* longp, double* shortp, double* scenario_const) {
@@ -138,7 +140,8 @@ void set_utility_and_scenario(double* asc, double* early, double* late, double* 
     travel_time_limit = scenario_const[7];
 }
 
-void set_activities_and_particip(Activity* activities_array, double* pypart){
+void set_activities_and_particip(Activity* activities_array, double* pypart, int pynum_activities){
+    num_activities = pynum_activities;
     activities = activities_array;
     for(int i = 0; i < 5; i++) {
         part_penal[i] = pypart[i];
@@ -158,9 +161,9 @@ double distance_x(Activity* a1, Activity* a2){
 int travel_time(Activity* a1, Activity* a2){
     double dist = distance_x(a1, a2);
     int time = (int)(dist/time_factor);       
-    time = (int)(ceil((double)time / 5.0) * 5);             // Round down to the nearest 5-minute interval
-    int time_interval = time / 5;                           // Divide by 5 to fit within the 0-289 time horizon
-    return time_interval;
+    time = (int)(ceil((double)time / time_interval) * time_interval);             // Round down to the nearest 5-minute interval
+    int travel_time_horizon = time / time_interval;                           // Divide by 5 to fit within the 0-289 time horizon
+    return travel_time_horizon;
 };
 
 void recursive_print(Label* L){
@@ -471,7 +474,7 @@ int is_constrained_by_scenario(Label* L, Activity* a){
     if(curfew && time >= curfew_time){                                               
         return 1;
     }          
-    if(peak_hours && time >= peak_hour_time1 && time <= peak_hour_time2){                                               
+    if(peak_hours && ((time >= peak_hour_time1) && (time <= peak_hour_time2))){                                               
         return 1;
     }        
     if(travel_time_limit && travel_time(L->act, a) > max_travel_time){                                               
@@ -578,12 +581,12 @@ int dominates(Label* L1, Label* L2){
             int des_dur = L1->act->des_duration;
             if(
                 L1->utility 
-                + short_parameters[group] * 5 * fmax(0, des_dur - L1->duration - 2)
-                + long_parameters[group] * 5 * fmax(0, L1->duration - des_dur - 2) 
+                + short_parameters[group] * time_interval * fmax(0, des_dur - L1->duration - 2)
+                + long_parameters[group] * time_interval * fmax(0, L1->duration - des_dur - 2) 
                 <= 
                 L2->utility 
-                + short_parameters[group] * 5 * fmax(0, des_dur - L2->duration - 2)
-                + long_parameters[group] * 5 * fmax(0, L2->duration - des_dur - 2) ){
+                + short_parameters[group] * time_interval * fmax(0, des_dur - L2->duration - 2)
+                + long_parameters[group] * time_interval * fmax(0, L2->duration - des_dur - 2) ){
                 return 2;
             }
 
@@ -609,10 +612,10 @@ double update_utility(Label* L){
     L->utility += travel_time_penalty*travel_time(previous_act, act); // 20m => 4 de penalite ? 
     // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
     // -2 correspond aux 'plateaux' de minimisation
-    L->utility += short_parameters[previous_group] * 5 * fmax(0, previous_act->des_duration - previous_L->duration - 2)
-                 + long_parameters[previous_group] * 5 * fmax(0, previous_L->duration - previous_act->des_duration - 2);
-    L->utility += early_parameters[group] * 5 * fmax(0, act->des_start_time - L->start_time - 2) 
-                 + late_parameters[group] * 5 * fmax(0, L->start_time - act->des_start_time - 2);
+    L->utility += short_parameters[previous_group] * time_interval * fmax(0, previous_act->des_duration - previous_L->duration - 2)
+                 + long_parameters[previous_group] * time_interval * fmax(0, previous_L->duration - previous_act->des_duration - 2);
+    L->utility += early_parameters[group] * time_interval * fmax(0, act->des_start_time - L->start_time - 2) 
+                 + late_parameters[group] * time_interval * fmax(0, L->start_time - act->des_start_time - 2);
 
     return L->utility;
 };

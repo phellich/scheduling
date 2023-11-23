@@ -53,7 +53,7 @@ struct L_list{
 
 /// global _constants 
 int time_interval;
-double time_factor;
+double speed;
 double travel_time_penalty;                       
 int horizon;
 int num_activities;
@@ -106,7 +106,7 @@ Label* get_final_schedule() {
 void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_penalty, 
                             int pycurfew_time, int pymax_outside_time, int pymax_travel_time,
                             int pypeak_hour_time1, int pypeak_hour_time2, int pytime_interval){
-    time_factor = pyspeed;
+    speed = pyspeed;
     travel_time_penalty = pytravel_time_penalty;
     curfew_time = pycurfew_time;
     max_outside_time = pymax_outside_time;
@@ -115,6 +115,9 @@ void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_
     peak_hour_time2 = pypeak_hour_time2;
     horizon = pyhorizon;
     time_interval = pytime_interval;
+    // printf("speed = %f, travel_time_penalty = %f, curfew_time = %d, max_outside_time = %d, max_travel_time = %d, peak_hour_time1 = %d, peak_hour_time2 = %d, time_interval = %d\n",
+    //         speed, travel_time_penalty, curfew_time, max_outside_time, max_travel_time, peak_hour_time1,
+    //         peak_hour_time2, horizon, time_interval);
 };
 
 void set_utility_and_scenario(double* asc, double* early, double* late, double* longp, double* shortp, double* scenario_const) {
@@ -138,6 +141,8 @@ void set_utility_and_scenario(double* asc, double* early, double* late, double* 
     peak_hours = scenario_const[5];
     outside_time = scenario_const[6];
     travel_time_limit = scenario_const[7];
+    // printf("leisure_close = %d, shop_close = %d, education_close = %d, work_close = %d, curfew = %d, peak_hours = %d, outside_time = %d, travel_time_limit = %d \n",
+    //         leisure_close, shop_close, education_close, work_close, curfew, peak_hours, outside_time, travel_time_limit);
 }
 
 void set_activities_and_particip(Activity* activities_array, double* pypart, int pynum_activities){
@@ -160,7 +165,7 @@ double distance_x(Activity* a1, Activity* a2){
 
 int travel_time(Activity* a1, Activity* a2){
     double dist = distance_x(a1, a2);
-    int time = (int)(dist/time_factor);       
+    int time = (int)(dist/speed);       
     time = (int)(ceil((double)time / time_interval) * time_interval);             // Round down to the nearest 5-minute interval
     int travel_time_horizon = time / time_interval;                           // Divide by 5 to fit within the 0-289 time horizon
     return travel_time_horizon;
@@ -480,7 +485,7 @@ int is_constrained_by_scenario(Label* L, Activity* a){
     if(travel_time_limit && travel_time(L->act, a) > max_travel_time){                                               
         return 1;
     }          
-    if(outside_time && L->duration + 1 > max_outside_time){
+    if(outside_time && (L->duration + 1 > max_outside_time)){
         return 1;
     }
     return 0;
@@ -503,9 +508,6 @@ int is_feasible(Label* L, Activity* a){
     if(L->acity != a->id){                                                  // If act of L isn't the same as a, do some checks
         if(L->previous !=NULL && L->previous->acity == a->id ){             // is the previous activity the same as a ? pas sur de l'interet
             return 0;
-        }
-        if((distance_x(a, &activities[0]) > 3000) && (distance_x(a, &activities[num_activities-3]) > 3000)){  
-            return 0; 
         }
         if(distance_x(a, &activities[0]) > 3000){
             // printf("Act x= %d, y= %d / home x= %d, y= %d \n distance = %f and time = %d \n \n", a->x, a->y, activities[0].x, activities[0].y, distance_x(a, &activities[0]), travel_time(a, &activities[0]));
@@ -569,7 +571,7 @@ int dominates(Label* L1, Label* L2){
             Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
         if(dom_mem_contains(L2,L1)){ // be sure of order
 
-            // HEURISTIC ? 
+            // // HEURISTIC ? 
             // if(L1->time <= L2->time){
             //     return 2;
             // }

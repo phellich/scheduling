@@ -4,20 +4,18 @@ import numpy as np
 from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
 from collections import namedtuple
-import math
 import time
 
 SCHEDULING_VERSION = 5
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
 SPEED = 10*16.667                                                       # 1km/h = 16.667 m/min
-TRAVEL_TIME_PENALTY = 0.01                                              # we will add dusk, home, dawn and work
+TRAVEL_TIME_PENALTY = 0.1                                              # we will add dusk, home, dawn and work
 CURFEW_TIME = round(19*60/TIME_INTERVAL) + 1                                                       # 19h
 MAX_OUTSIDE_TIME = round(4*60/TIME_INTERVAL) + 1                                                   # 4h
 MAX_TRAVEL_TIME = round(20/TIME_INTERVAL) + 1                                                     # 20m
 PEAK_HOUR_TIME1 = round(12*60/TIME_INTERVAL) + 1                                                   # 12h
 PEAK_HOUR_TIME2 = round(14*60/TIME_INTERVAL) + 1                                                   # 14h
-PERIMETER = 200                                                        # en metres
 group_to_type = {
     0: 'home',
     1: 'education',
@@ -26,10 +24,11 @@ group_to_type = {
     4: 'shop'
 }
 groups = ['home', 'education', 'work', 'leisure', 'shop']
+# https://www.swisstopo.admin.ch/en/maps-data-online/calculation-services/navref.html # Check the facility location
 
-######################################################
-##### START OF STRUCTURE #############################
-
+############################################################################################################
+##### START OF STRUCTURE ###################################################################################
+############################################################################################################
 
 class Group_mem(Structure):
     pass
@@ -80,9 +79,9 @@ L_list._fields_ = [
     ("next", POINTER(L_list))
 ]
 
-##### END OF STRUCTURE ###############################
-######################################################
-##### START OF INITIALIZATION ########################
+##### END OF STRUCTURE #####################################################################################
+############################################################################################################
+##### START OF INITIALIZATION ##############################################################################
 
 def initialize_activities(df, num_activities): # utiliser les data et enlever le none by default
     ''' Cree un vecteur d activite en les initialisant en fonction d'un dataframe en input '''
@@ -136,7 +135,7 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-2].earliest_start = 0
     activities_array[num_activities-2].latest_start = HORIZON
     activities_array[num_activities-2].max_duration = HORIZON-2                       
-    activities_array[num_activities-2].min_duration = 4 
+    activities_array[num_activities-2].min_duration = 1 
     activities_array[num_activities-2].des_duration = 0 
     activities_array[num_activities-2].des_start_time = 0   
     activities_array[num_activities-2].group = 0
@@ -145,10 +144,10 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-3].id = num_activities-3
     activities_array[num_activities-3].x = individual['work_x']
     activities_array[num_activities-3].y = individual['work_y']
-    activities_array[num_activities-3].earliest_start = 60 # 5h
-    activities_array[num_activities-3].latest_start = 276 # 23h
-    activities_array[num_activities-3].max_duration = 192 # (de 7h a 23h)                       
-    activities_array[num_activities-3].min_duration = 0 # 30m
+    activities_array[num_activities-3].earliest_start = round(5*60/TIME_INTERVAL) # 5h
+    activities_array[num_activities-3].latest_start = round(23*60/TIME_INTERVAL) # 23h
+    activities_array[num_activities-3].max_duration = round(12*60/TIME_INTERVAL) # 12h
+    activities_array[num_activities-3].min_duration = round(10/TIME_INTERVAL) # 10m
     activities_array[num_activities-3].group = 2
 
     for activity in activities_array:
@@ -174,9 +173,9 @@ def initialize_param():
     #     long=[0, 1.14, 1.22, 0.08, 0.683],
     #     short=[0, 1.75, 0.932, 0.101, 1.81]
     # )
-    params = UtilityParams(
-        # order = [home, education, work, leisure, shop] # vrmt 0 pour la participation a la maison ?...
-        asc=[0, 9.7, 20.1, 8.74, 10.5],
+    params = UtilityParams( # TRUE PARAMETERS
+        # order = [home, education, work, leisure, shop]
+        asc=[0, 18.7, 13.1, 8.74, 10.5],
         early=[0, 1.35, 0.619, 0.0996, 1.01],
         late=[0, 1.63, 0.338, 0.239, 0.858],
         long=[0, 1.14, 1.22, 0.08, 0.683],
@@ -198,9 +197,9 @@ def participation_vector(individual, groups):
 
     return penalty_part
 
-##### END OF INITIALIZATION ##########################
-######################################################
-##### START OF FUNCTIONS #############################
+##### END OF INITIALIZATION ################################################################################
+############################################################################################################
+##### START OF FUNCTIONS ###################################################################################
 
 def compile_code():
     ''' Compile le code C '''
@@ -269,36 +268,39 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
     
     return schedule_data
 
-def filter_closest(all_activities, individual, n_closest=100):
-    home = (individual['home_x'], individual['home_y'])
-    work = (individual['work_x'], individual['work_y'])
-
-    # Convert activity locations and individual locations to numpy arrays for vectorized operations
-    activities_locations = all_activities[['x', 'y']].to_numpy()
-    home = np.array(home)
-    work = np.array(work)
+def filter_closest(all_activities, individual, num_act_to_select):
+    home = np.array((individual['home_x'], individual['home_y']))
+    work = np.array((individual['work_x'], individual['work_y']))
 
     # Calculate distances using numpy for better performance
+    activities_locations = all_activities[['x', 'y']].to_numpy()
     distances_home = np.linalg.norm(activities_locations - home, axis=1)
     distances_work = np.linalg.norm(activities_locations - work, axis=1)
     min_distances = np.minimum(distances_home, distances_work)
 
-    # Add the distances to the DataFrame (creates a copy to avoid modifying the original DataFrame)
+    # Add distances to DataFrame
     closest_activities = all_activities.copy()
     closest_activities['distance'] = min_distances
 
-    # Sort by distance and get the top n_closest activities
-    closest_act = closest_activities.sort_values('distance', ascending=True).head(n_closest)
-    return closest_act.reset_index(drop=True)
+    # Calculate fraction of each facility type in the original DataFrame
+    type_fractions = all_activities['type'].value_counts(normalize=True)
 
-##### END OF FUNCTIONS ###############################
-######################################################
-##### START OF EXECUTION #############################
+    # Select closest facilities for each type based on the fraction
+    selected_activities = pd.DataFrame()
+    for facility_type, fraction in type_fractions.items():
+        type_activities = closest_activities[closest_activities['type'] == facility_type]
+        n_closest = int(num_act_to_select * fraction)
+        selected_activities = pd.concat([selected_activities, type_activities.sort_values('distance').head(n_closest)])
+        
+    return selected_activities.reset_index(drop=True)
+
+##### END OF FUNCTIONS #####################################################################################
+############################################################################################################
+##### START OF EXECUTION ###################################################################################
 
 def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0], num_act_to_select = 100):
 
     print(f"Running scenario: {scenario}")
-    num_activities = num_act_to_select+4
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
@@ -332,11 +334,15 @@ def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0], num_a
     schedules = []
     ids = []
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
-
-        # if (index >= 3): 
-        #     continue
         
+        # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
+        if (index >= 20): 
+            break
+                
         act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
+        # print(f"\nIndividual : {individual['id']} || home : ({individual['home_x']}, {individual['home_y']}) || home : ({individual['work_x']}, {individual['work_y']})")
+        # print(act_in_peri.sample(20))
+        num_activities = len(act_in_peri)+4
         activities_array = initialize_activities(act_in_peri, num_activities) 
 
         participation = participation_vector(individual, groups)
@@ -412,13 +418,13 @@ if __name__ == "__main__":
 
     # main('normal_life', constraints['normal_life'])
 
-    n_closest = range(20, 221, 25)
+    n_closest = [70]
     for n in n_closest:
         start_time = time.time()
         main('normal_life', constraints['normal_life'], n)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(f"For 100 individuals and {n} closest activities around their home/work, the execution time is {elapsed_time:.1f}\n")
+        print(f"For 41 individuals and {n} closest activities around their home/work, the execution time is {elapsed_time:.1f}\n")
 
     # for scenario_name in scenari:
     #     main(scenario_name, constraints[scenario_name])

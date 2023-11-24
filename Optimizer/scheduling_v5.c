@@ -145,9 +145,18 @@ void set_utility_and_scenario(double* asc, double* early, double* late, double* 
     //         leisure_close, shop_close, education_close, work_close, curfew, peak_hours, outside_time, travel_time_limit);
 }
 
-void set_activities_and_particip(Activity* activities_array, double* pypart, int pynum_activities){
+void set_activities_and_particip(Activity* activities_data, double* pypart, int pynum_activities){
     num_activities = pynum_activities;
-    activities = activities_array;
+    activities = (Activity*)malloc(num_activities * sizeof(Activity));
+    if (activities == NULL) {
+        fprintf(stderr, "Failed to allocate memory for activities\n");
+        exit(EXIT_FAILURE);
+    }
+    // Copy data from activities_data to activities
+    for (int i = 0; i < num_activities; i++) {
+        activities[i] = activities_data[i];
+    }
+
     for(int i = 0; i < 5; i++) {
         part_penal[i] = pypart[i];
         // printf("part[%d] = %f", i, part_penal[i]);
@@ -237,18 +246,11 @@ void free_bucket(){
     bucket = NULL;
 };
 
-/* meme principe qu'au dessus */ 
-// void free_activities(){
-//     for (int i = 0 ; i < num_activities; i++){
-//         delete_group(activities[i].memory);
-//     }
-//     free(activities);
-// };
 void free_activities() {
-    printf("Freeing activities...\n");
+    // printf("\nFreeing activities...\n");
     if (activities != NULL) {
         for (int i = 0; i < num_activities; i++) {
-            printf("Activity %d, memory: %p\n", i, (void*)activities[i].memory);
+            // printf("Activity %d, memory: %p\n", i, (void*)activities[i].memory);
             // Make sure i is within the bounds of the allocated array
             if (i < num_activities && activities[i].memory != NULL) {
                 delete_group(activities[i].memory);
@@ -257,7 +259,7 @@ void free_activities() {
         }
         free(activities);
         activities = NULL;
-        printf("Activities freed.\n"); // Should print if everything goes right
+        // printf("Activities freed.\n"); // Should print if everything goes right
     }
 }
 
@@ -571,26 +573,26 @@ int dominates(Label* L1, Label* L2){
             Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
         if(dom_mem_contains(L2,L1)){ // be sure of order
 
-            // // HEURISTIC ? 
-            // if(L1->time <= L2->time){
-            //     return 2;
-            // }
-            
-            // EXACT METHOD ? 
-            if(L1->duration == L2->duration){return 2;}
-            // if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
-            int group = L1->act->group;
-            int des_dur = L1->act->des_duration;
-            if(
-                L1->utility 
-                + short_parameters[group] * time_interval * fmax(0, des_dur - L1->duration - 2)
-                + long_parameters[group] * time_interval * fmax(0, L1->duration - des_dur - 2) 
-                <= 
-                L2->utility 
-                + short_parameters[group] * time_interval * fmax(0, des_dur - L2->duration - 2)
-                + long_parameters[group] * time_interval * fmax(0, L2->duration - des_dur - 2) ){
+            // HEURISTIC ? 
+            if(L1->time <= L2->time){
                 return 2;
             }
+            
+            // // EXACT METHOD ? 
+            // if(L1->duration == L2->duration){return 2;}
+            // // if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
+            // int group = L1->act->group;
+            // int des_dur = L1->act->des_duration;
+            // if(
+            //     L1->utility 
+            //     + short_parameters[group] * time_interval * fmax(0, des_dur - L1->duration - 2)
+            //     + long_parameters[group] * time_interval * fmax(0, L1->duration - des_dur - 2) 
+            //     <= 
+            //     L2->utility 
+            //     + short_parameters[group] * time_interval * fmax(0, des_dur - L2->duration - 2)
+            //     + long_parameters[group] * time_interval * fmax(0, L2->duration - des_dur - 2) ){
+            //     return 2;
+            // }
 
         }
     }
@@ -670,7 +672,7 @@ Label* find_best(L_list* B, int o){
         li = li->next;
     }
     if(bestL == NULL){
-        printf("%s", "\n Solution is not feasible, check parameters.");
+        printf("%s", "\n Solution is not feasible, chactivitieseck parameters.");
     }
     else{
         if(o){

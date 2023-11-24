@@ -1,9 +1,9 @@
 [
     {
         "id":6936111,
-        "execution_time":0.778,
-        "DSSR_iterations":1,
-        "utility":-30.57,
+        "execution_time":0.005,
+        "DSSR_iterations":0,
+        "utility":-30.726,
         "daily_schedule":[
             {
                 "acity":0,
@@ -15,73 +15,73 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":121,
-                "time":122,
+                "duration":63,
+                "time":64,
                 "cum_utility":0.0
             },
             {
-                "acity":95,
-                "facility":377255,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":122,
-                "duration":3,
-                "time":125,
+                "start":64,
+                "duration":2,
+                "time":66,
                 "cum_utility":-10.5
             },
             {
-                "acity":150,
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":66,
+                "duration":46,
+                "time":112,
+                "cum_utility":-10.5
+            },
+            {
+                "acity":7,
+                "facility":375697,
+                "group":"leisure",
+                "start":112,
+                "duration":1,
+                "time":113,
+                "cum_utility":-15.256
+            },
+            {
+                "acity":13,
+                "facility":382576,
+                "group":"education",
+                "start":114,
+                "duration":10,
+                "time":124,
+                "cum_utility":-30.826
+            },
+            {
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":125,
-                "duration":96,
-                "time":221,
-                "cum_utility":-10.5
+                "duration":17,
+                "time":142,
+                "cum_utility":-30.726
             },
             {
-                "acity":148,
-                "facility":382576,
-                "group":"education",
-                "start":222,
-                "duration":22,
-                "time":244,
-                "cum_utility":-29.1
-            },
-            {
-                "acity":57,
-                "facility":375697,
-                "group":"leisure",
-                "start":245,
-                "duration":10,
-                "time":255,
-                "cum_utility":-30.57
-            },
-            {
-                "acity":150,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":255,
-                "duration":31,
-                "time":286,
-                "cum_utility":-30.57
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-30.57
+                "time":144,
+                "cum_utility":-30.726
             }
         ]
     },
     {
         "id":7083440,
-        "execution_time":0.408,
+        "execution_time":0.005,
         "DSSR_iterations":0,
         "utility":-28.8,
         "daily_schedule":[
@@ -95,66 +95,66 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":94,
-                "time":95,
+                "duration":45,
+                "time":46,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":96,
-                "duration":46,
-                "time":142,
+                "start":47,
+                "duration":22,
+                "time":69,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":143,
-                "duration":78,
-                "time":221,
+                "start":70,
+                "duration":39,
+                "time":109,
                 "cum_utility":-18.5
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":222,
-                "duration":13,
-                "time":235,
+                "start":110,
+                "duration":6,
+                "time":116,
                 "cum_utility":-28.9
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":236,
-                "duration":50,
-                "time":286,
+                "start":117,
+                "duration":25,
+                "time":142,
                 "cum_utility":-28.8
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-28.8
             }
         ]
     },
     {
         "id":6682420,
-        "execution_time":0.411,
+        "execution_time":0.005,
         "DSSR_iterations":0,
-        "utility":-31.4,
+        "utility":-41.9,
         "daily_schedule":[
             {
                 "acity":0,
@@ -166,64 +166,73 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":77,
-                "time":78,
+                "duration":36,
+                "time":37,
                 "cum_utility":0.0
             },
             {
-                "acity":149,
+                "acity":14,
                 "facility":382537,
                 "group":"work",
-                "start":79,
-                "duration":61,
-                "time":140,
+                "start":38,
+                "duration":30,
+                "time":68,
                 "cum_utility":-13.0
             },
             {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":141,
-                "duration":91,
-                "time":232,
-                "cum_utility":-12.9
+                "acity":11,
+                "facility":380332,
+                "group":"shop",
+                "start":68,
+                "duration":8,
+                "time":76,
+                "cum_utility":-23.5
             },
             {
-                "acity":148,
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":77,
+                "duration":38,
+                "time":115,
+                "cum_utility":-23.4
+            },
+            {
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":233,
-                "duration":22,
-                "time":255,
-                "cum_utility":-31.5
+                "start":116,
+                "duration":10,
+                "time":126,
+                "cum_utility":-42.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":256,
-                "duration":30,
-                "time":286,
-                "cum_utility":-31.4
+                "start":127,
+                "duration":15,
+                "time":142,
+                "cum_utility":-41.9
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-31.4
+                "time":144,
+                "cum_utility":-41.9
             }
         ]
     },
     {
         "id":6624667,
-        "execution_time":1.21,
+        "execution_time":0.013,
         "DSSR_iterations":2,
         "utility":-37.54,
         "daily_schedule":[
@@ -237,82 +246,82 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":128,
-                "time":129,
+                "duration":62,
+                "time":63,
                 "cum_utility":0.0
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":130,
-                "duration":3,
-                "time":133,
+                "start":64,
+                "duration":2,
+                "time":66,
                 "cum_utility":-10.4
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":134,
-                "duration":70,
-                "time":204,
+                "start":67,
+                "duration":34,
+                "time":101,
                 "cum_utility":-10.3
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":205,
-                "duration":12,
-                "time":217,
+                "start":102,
+                "duration":5,
+                "time":107,
                 "cum_utility":-28.9
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":218,
-                "duration":21,
-                "time":239,
+                "start":108,
+                "duration":14,
+                "time":122,
                 "cum_utility":-28.8
             },
             {
-                "acity":40,
-                "facility":376646,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":239,
-                "duration":6,
-                "time":245,
-                "cum_utility":-37.54
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":245,
-                "duration":41,
-                "time":286,
-                "cum_utility":-37.54
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":122,
                 "duration":2,
-                "time":288,
+                "time":124,
+                "cum_utility":-37.54
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":124,
+                "duration":18,
+                "time":142,
+                "cum_utility":-37.54
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
                 "cum_utility":-37.54
             }
         ]
     },
     {
         "id":6948690,
-        "execution_time":0.411,
+        "execution_time":0.006,
         "DSSR_iterations":0,
         "utility":-27.24,
         "daily_schedule":[
@@ -326,66 +335,66 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":97,
-                "time":98,
+                "duration":46,
+                "time":47,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":99,
-                "duration":102,
-                "time":201,
+                "start":48,
+                "duration":50,
+                "time":98,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":202,
-                "duration":2,
-                "time":204,
+                "start":99,
+                "duration":6,
+                "time":105,
                 "cum_utility":-18.5
             },
             {
-                "acity":55,
-                "facility":379776,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":204,
+                "start":105,
+                "duration":12,
+                "time":117,
+                "cum_utility":-27.24
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":117,
                 "duration":25,
-                "time":229,
+                "time":142,
                 "cum_utility":-27.24
             },
             {
-                "acity":150,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":229,
-                "duration":57,
-                "time":286,
-                "cum_utility":-27.24
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-27.24
             }
         ]
     },
     {
         "id":6326386,
-        "execution_time":1.295,
-        "DSSR_iterations":2,
-        "utility":-41.7,
+        "execution_time":0.011,
+        "DSSR_iterations":1,
+        "utility":-41.9,
         "daily_schedule":[
             {
                 "acity":0,
@@ -397,75 +406,75 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":164,
-                "time":165,
+                "duration":80,
+                "time":81,
                 "cum_utility":0.0
             },
             {
-                "acity":149,
+                "acity":14,
                 "facility":36826,
                 "group":"work",
-                "start":168,
-                "duration":13,
-                "time":181,
-                "cum_utility":-12.8
+                "start":83,
+                "duration":6,
+                "time":89,
+                "cum_utility":-12.9
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":184,
-                "duration":4,
-                "time":188,
-                "cum_utility":-31.2
+                "start":91,
+                "duration":1,
+                "time":92,
+                "cum_utility":-31.4
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":188,
-                "duration":16,
-                "time":204,
-                "cum_utility":-31.2
+                "start":92,
+                "duration":13,
+                "time":105,
+                "cum_utility":-31.4
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":204,
-                "duration":3,
-                "time":207,
-                "cum_utility":-41.7
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":207,
-                "duration":79,
-                "time":286,
-                "cum_utility":-41.7
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":105,
                 "duration":2,
-                "time":288,
-                "cum_utility":-41.7
+                "time":107,
+                "cum_utility":-41.9
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":107,
+                "duration":35,
+                "time":142,
+                "cum_utility":-41.9
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
+                "cum_utility":-41.9
             }
         ]
     },
     {
         "id":7041424,
-        "execution_time":0.412,
+        "execution_time":0.005,
         "DSSR_iterations":0,
-        "utility":-21.64,
+        "utility":-21.44,
         "daily_schedule":[
             {
                 "acity":0,
@@ -477,66 +486,66 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":81,
-                "time":82,
+                "duration":38,
+                "time":39,
                 "cum_utility":0.0
             },
             {
-                "acity":149,
+                "acity":14,
                 "facility":93125,
                 "group":"work",
-                "start":83,
-                "duration":110,
-                "time":193,
+                "start":40,
+                "duration":54,
+                "time":94,
                 "cum_utility":-13.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":194,
-                "duration":32,
-                "time":226,
+                "start":95,
+                "duration":16,
+                "time":111,
                 "cum_utility":-12.9
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":226,
-                "duration":24,
-                "time":250,
-                "cum_utility":-21.64
+                "start":112,
+                "duration":11,
+                "time":123,
+                "cum_utility":-21.54
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":250,
-                "duration":36,
-                "time":286,
-                "cum_utility":-21.64
+                "start":124,
+                "duration":18,
+                "time":142,
+                "cum_utility":-21.44
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-21.64
+                "time":144,
+                "cum_utility":-21.44
             }
         ]
     },
     {
         "id":6921079,
-        "execution_time":0.866,
+        "execution_time":0.009,
         "DSSR_iterations":1,
-        "utility":-33.16,
+        "utility":-37.94,
         "daily_schedule":[
             {
                 "acity":0,
@@ -548,74 +557,74 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":90,
-                "time":91,
+                "duration":44,
+                "time":45,
                 "cum_utility":0.0
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":91,
-                "duration":3,
-                "time":94,
-                "cum_utility":-10.5
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":94,
+                "start":45,
                 "duration":1,
-                "time":95,
+                "time":46,
                 "cum_utility":-10.5
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":95,
-                "duration":100,
-                "time":195,
+                "start":46,
+                "duration":49,
+                "time":95,
                 "cum_utility":-29.2
             },
             {
-                "acity":31,
-                "facility":381921,
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":95,
+                "duration":1,
+                "time":96,
+                "cum_utility":-29.2
+            },
+            {
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":195,
-                "duration":15,
-                "time":210,
-                "cum_utility":-33.16
+                "start":96,
+                "duration":6,
+                "time":102,
+                "cum_utility":-37.94
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":210,
-                "duration":76,
-                "time":286,
-                "cum_utility":-33.16
+                "start":102,
+                "duration":40,
+                "time":142,
+                "cum_utility":-37.94
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-33.16
+                "time":144,
+                "cum_utility":-37.94
             }
         ]
     },
     {
         "id":6681670,
-        "execution_time":14.907,
-        "DSSR_iterations":31,
+        "execution_time":0.056,
+        "DSSR_iterations":10,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -628,74 +637,83 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":96,
-                "time":97,
+                "duration":46,
+                "time":47,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":98,
-                "duration":43,
-                "time":141,
+                "start":48,
+                "duration":20,
+                "time":68,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":142,
-                "duration":30,
-                "time":172,
+                "start":69,
+                "duration":17,
+                "time":86,
                 "cum_utility":-18.5
             },
             {
-                "acity":109,
-                "facility":376646,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":172,
+                "start":86,
                 "duration":2,
-                "time":174,
+                "time":88,
                 "cum_utility":-29.0
             },
             {
-                "acity":56,
-                "facility":377155,
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":88,
+                "duration":1,
+                "time":89,
+                "cum_utility":-29.0
+            },
+            {
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":174,
-                "duration":24,
-                "time":198,
+                "start":89,
+                "duration":11,
+                "time":100,
                 "cum_utility":-37.74
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":198,
-                "duration":88,
-                "time":286,
+                "start":100,
+                "duration":42,
+                "time":142,
                 "cum_utility":-37.74
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-37.74
             }
         ]
     },
     {
         "id":6635707,
-        "execution_time":1.263,
-        "DSSR_iterations":2,
+        "execution_time":0.003,
+        "DSSR_iterations":0,
         "utility":-27.24,
         "daily_schedule":[
             {
@@ -708,64 +726,135 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":147,
-                "time":148,
+                "duration":72,
+                "time":73,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":149,
-                "duration":53,
-                "time":202,
+                "start":74,
+                "duration":26,
+                "time":100,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":203,
-                "duration":32,
-                "time":235,
+                "start":101,
+                "duration":19,
+                "time":120,
                 "cum_utility":-18.5
             },
             {
-                "acity":65,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":235,
-                "duration":12,
-                "time":247,
+                "start":120,
+                "duration":5,
+                "time":125,
                 "cum_utility":-27.24
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":247,
-                "duration":39,
-                "time":286,
+                "start":125,
+                "duration":17,
+                "time":142,
                 "cum_utility":-27.24
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-27.24
             }
         ]
     },
     {
         "id":6682558,
-        "execution_time":0.819,
+        "execution_time":0.006,
+        "DSSR_iterations":1,
+        "utility":-36.73,
+        "daily_schedule":[
+            {
+                "acity":0,
+                "facility":0,
+                "group":"home",
+                "start":0,
+                "duration":1,
+                "time":1,
+                "cum_utility":0.0
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":1,
+                "duration":63,
+                "time":64,
+                "cum_utility":0.0
+            },
+            {
+                "acity":7,
+                "facility":375697,
+                "group":"leisure",
+                "start":64,
+                "duration":17,
+                "time":81,
+                "cum_utility":-8.74
+            },
+            {
+                "acity":13,
+                "facility":382576,
+                "group":"education",
+                "start":82,
+                "duration":23,
+                "time":105,
+                "cum_utility":-26.33
+            },
+            {
+                "acity":11,
+                "facility":380332,
+                "group":"shop",
+                "start":106,
+                "duration":1,
+                "time":107,
+                "cum_utility":-36.73
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":107,
+                "duration":35,
+                "time":142,
+                "cum_utility":-36.73
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
+                "cum_utility":-36.73
+            }
+        ]
+    },
+    {
+        "id":6458971,
+        "execution_time":0.006,
         "DSSR_iterations":1,
         "utility":-37.74,
         "daily_schedule":[
@@ -779,164 +868,84 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":120,
-                "time":121,
+                "duration":55,
+                "time":56,
                 "cum_utility":0.0
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":122,
-                "duration":38,
-                "time":160,
-                "cum_utility":-8.64
-            },
-            {
-                "acity":148,
-                "facility":382576,
-                "group":"education",
-                "start":160,
-                "duration":42,
-                "time":202,
-                "cum_utility":-27.34
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":203,
-                "duration":11,
-                "time":214,
-                "cum_utility":-27.24
-            },
-            {
-                "acity":108,
-                "facility":380849,
-                "group":"shop",
-                "start":214,
-                "duration":3,
-                "time":217,
-                "cum_utility":-37.74
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":217,
-                "duration":69,
-                "time":286,
-                "cum_utility":-37.74
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":56,
                 "duration":2,
-                "time":288,
-                "cum_utility":-37.74
-            }
-        ]
-    },
-    {
-        "id":6458971,
-        "execution_time":1.246,
-        "DSSR_iterations":2,
-        "utility":-37.74,
-        "daily_schedule":[
-            {
-                "acity":0,
-                "facility":0,
-                "group":"home",
-                "start":0,
-                "duration":1,
-                "time":1,
-                "cum_utility":0.0
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":1,
-                "duration":105,
-                "time":106,
-                "cum_utility":0.0
-            },
-            {
-                "acity":26,
-                "facility":381921,
-                "group":"leisure",
-                "start":106,
-                "duration":5,
-                "time":111,
+                "time":58,
                 "cum_utility":-8.74
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":111,
-                "duration":75,
-                "time":186,
+                "start":58,
+                "duration":38,
+                "time":96,
                 "cum_utility":-8.74
             },
             {
-                "acity":95,
-                "facility":377255,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":186,
-                "duration":3,
-                "time":189,
+                "start":96,
+                "duration":2,
+                "time":98,
                 "cum_utility":-19.24
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":189,
-                "duration":32,
-                "time":221,
+                "start":98,
+                "duration":11,
+                "time":109,
                 "cum_utility":-19.24
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":222,
-                "duration":13,
-                "time":235,
+                "start":110,
+                "duration":6,
+                "time":116,
                 "cum_utility":-37.84
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":236,
-                "duration":50,
-                "time":286,
+                "start":117,
+                "duration":25,
+                "time":142,
                 "cum_utility":-37.74
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-37.74
             }
         ]
     },
     {
         "id":7128622,
-        "execution_time":15.739,
-        "DSSR_iterations":31,
-        "utility":-31.762,
+        "execution_time":0.019,
+        "DSSR_iterations":4,
+        "utility":-34.552,
         "daily_schedule":[
             {
                 "acity":0,
@@ -948,73 +957,73 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":96,
-                "time":97,
+                "duration":46,
+                "time":47,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":98,
-                "duration":42,
-                "time":140,
+                "start":48,
+                "duration":20,
+                "time":68,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":141,
-                "duration":62,
-                "time":203,
+                "start":69,
+                "duration":33,
+                "time":102,
                 "cum_utility":-18.5
             },
             {
-                "acity":109,
-                "facility":376646,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":203,
-                "duration":6,
-                "time":209,
+                "start":102,
+                "duration":4,
+                "time":106,
                 "cum_utility":-29.0
             },
             {
-                "acity":70,
-                "facility":376646,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":212,
-                "duration":20,
-                "time":232,
-                "cum_utility":-31.962
+                "start":107,
+                "duration":9,
+                "time":116,
+                "cum_utility":-34.652
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":234,
-                "duration":52,
-                "time":286,
-                "cum_utility":-31.762
+                "start":117,
+                "duration":25,
+                "time":142,
+                "cum_utility":-34.552
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-31.762
+                "time":144,
+                "cum_utility":-34.552
             }
         ]
     },
     {
         "id":6682790,
-        "execution_time":0.445,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-19.24,
         "daily_schedule":[
@@ -1028,66 +1037,66 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":207,
-                "time":208,
+                "duration":106,
+                "time":107,
                 "cum_utility":0.0
             },
             {
-                "acity":117,
-                "facility":375697,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":208,
-                "duration":40,
-                "time":248,
+                "start":107,
+                "duration":19,
+                "time":126,
                 "cum_utility":-10.5
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":248,
-                "duration":1,
-                "time":249,
+                "start":126,
+                "duration":2,
+                "time":128,
                 "cum_utility":-10.5
             },
             {
-                "acity":57,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":249,
-                "duration":26,
-                "time":275,
+                "start":128,
+                "duration":12,
+                "time":140,
                 "cum_utility":-19.24
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":275,
-                "duration":11,
-                "time":286,
-                "cum_utility":-19.24
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":140,
                 "duration":2,
-                "time":288,
+                "time":142,
+                "cum_utility":-19.24
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
                 "cum_utility":-19.24
             }
         ]
     },
     {
         "id":7053828,
-        "execution_time":11.121,
-        "DSSR_iterations":21,
-        "utility":-34.646,
+        "execution_time":0.004,
+        "DSSR_iterations":0,
+        "utility":-41.4,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1099,84 +1108,75 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":130,
-                "time":131,
+                "duration":63,
+                "time":64,
                 "cum_utility":0.0
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":134,
-                "duration":3,
-                "time":137,
-                "cum_utility":-10.2
+                "start":66,
+                "duration":2,
+                "time":68,
+                "cum_utility":-10.3
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":140,
-                "duration":3,
-                "time":143,
-                "cum_utility":-9.9
+                "start":70,
+                "duration":4,
+                "time":74,
+                "cum_utility":-10.1
             },
             {
-                "acity":78,
-                "facility":375697,
-                "group":"leisure",
-                "start":146,
-                "duration":22,
-                "time":168,
-                "cum_utility":-16.846
+                "acity":14,
+                "facility":36826,
+                "group":"work",
+                "start":76,
+                "duration":29,
+                "time":105,
+                "cum_utility":-23.0
             },
             {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":171,
-                "duration":32,
-                "time":203,
-                "cum_utility":-16.546
-            },
-            {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":206,
-                "duration":22,
-                "time":228,
-                "cum_utility":-34.946
+                "start":106,
+                "duration":10,
+                "time":116,
+                "cum_utility":-41.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":231,
-                "duration":55,
-                "time":286,
-                "cum_utility":-34.646
+                "start":118,
+                "duration":24,
+                "time":142,
+                "cum_utility":-41.4
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-34.646
+                "time":144,
+                "cum_utility":-41.4
             }
         ]
     },
     {
         "id":6326717,
-        "execution_time":0.85,
+        "execution_time":0.006,
         "DSSR_iterations":1,
-        "utility":-32.995,
+        "utility":-30.47,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1188,74 +1188,74 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":126,
-                "time":127,
+                "duration":61,
+                "time":62,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":128,
-                "duration":14,
-                "time":142,
+                "start":63,
+                "duration":6,
+                "time":69,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":143,
-                "duration":42,
-                "time":185,
+                "start":70,
+                "duration":21,
+                "time":91,
                 "cum_utility":-18.5
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":186,
-                "duration":3,
-                "time":189,
+                "start":92,
+                "duration":2,
+                "time":94,
                 "cum_utility":-28.9
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":190,
-                "duration":29,
-                "time":219,
+                "start":95,
+                "duration":17,
+                "time":112,
                 "cum_utility":-28.8
             },
             {
-                "acity":36,
-                "facility":376648,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":219,
-                "duration":67,
-                "time":286,
+                "start":112,
+                "duration":30,
+                "time":142,
                 "cum_utility":-37.54
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-32.995
+                "time":144,
+                "cum_utility":-30.47
             }
         ]
     },
     {
         "id":6682894,
-        "execution_time":1.319,
-        "DSSR_iterations":2,
+        "execution_time":0.019,
+        "DSSR_iterations":3,
         "utility":-37.54,
         "daily_schedule":[
             {
@@ -1268,84 +1268,84 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":137,
-                "time":138,
+                "duration":71,
+                "time":72,
                 "cum_utility":0.0
             },
             {
-                "acity":59,
-                "facility":382537,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":138,
-                "duration":5,
-                "time":143,
+                "start":72,
+                "duration":2,
+                "time":74,
                 "cum_utility":-8.74
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":143,
-                "duration":29,
-                "time":172,
+                "start":74,
+                "duration":11,
+                "time":85,
                 "cum_utility":-8.74
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":173,
-                "duration":3,
-                "time":176,
+                "start":86,
+                "duration":2,
+                "time":88,
                 "cum_utility":-19.14
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":177,
-                "duration":26,
-                "time":203,
+                "start":89,
+                "duration":11,
+                "time":100,
                 "cum_utility":-19.04
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":204,
-                "duration":4,
-                "time":208,
+                "start":101,
+                "duration":2,
+                "time":103,
                 "cum_utility":-37.64
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":209,
-                "duration":77,
-                "time":286,
+                "start":104,
+                "duration":38,
+                "time":142,
                 "cum_utility":-37.54
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-37.54
             }
         ]
     },
     {
         "id":6326440,
-        "execution_time":0.425,
+        "execution_time":0.003,
         "DSSR_iterations":0,
-        "utility":-23.36,
+        "utility":-32.14,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1357,75 +1357,75 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":82,
-                "time":83,
+                "duration":41,
+                "time":42,
                 "cum_utility":0.0
             },
             {
-                "acity":120,
-                "facility":375697,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":84,
-                "duration":4,
-                "time":88,
-                "cum_utility":-1.82
+                "start":42,
+                "duration":1,
+                "time":43,
+                "cum_utility":-10.5
             },
             {
-                "acity":149,
+                "acity":14,
                 "facility":105296,
                 "group":"work",
-                "start":89,
-                "duration":10,
-                "time":99,
-                "cum_utility":-14.82
+                "start":44,
+                "duration":4,
+                "time":48,
+                "cum_utility":-23.5
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":101,
-                "duration":110,
-                "time":211,
-                "cum_utility":-14.62
+                "start":49,
+                "duration":59,
+                "time":108,
+                "cum_utility":-23.4
             },
             {
-                "acity":59,
-                "facility":382537,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":211,
-                "duration":45,
-                "time":256,
-                "cum_utility":-23.36
+                "start":108,
+                "duration":22,
+                "time":130,
+                "cum_utility":-32.14
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":256,
-                "duration":30,
-                "time":286,
-                "cum_utility":-23.36
+                "start":130,
+                "duration":12,
+                "time":142,
+                "cum_utility":-32.14
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-23.36
+                "time":144,
+                "cum_utility":-32.14
             }
         ]
     },
     {
         "id":6458838,
-        "execution_time":0.669,
+        "execution_time":0.002,
         "DSSR_iterations":1,
-        "utility":-12.366,
+        "utility":-8.54,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1437,56 +1437,47 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":101,
-                "time":102,
+                "duration":56,
+                "time":57,
                 "cum_utility":0.0
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":104,
+                "start":58,
                 "duration":2,
-                "time":106,
-                "cum_utility":-2.066
+                "time":60,
+                "cum_utility":-8.64
             },
             {
-                "acity":123,
-                "facility":380849,
-                "group":"shop",
-                "start":107,
-                "duration":40,
-                "time":147,
-                "cum_utility":-12.466
-            },
-            {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":148,
-                "duration":138,
-                "time":286,
-                "cum_utility":-12.366
+                "start":61,
+                "duration":81,
+                "time":142,
+                "cum_utility":-8.54
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-12.366
+                "time":144,
+                "cum_utility":-8.54
             }
         ]
     },
     {
         "id":6682000,
-        "execution_time":0.164,
-        "DSSR_iterations":0,
+        "execution_time":0.001,
+        "DSSR_iterations":1,
         "utility":-18.84,
         "daily_schedule":[
             {
@@ -1499,65 +1490,65 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":141,
-                "time":142,
+                "duration":68,
+                "time":69,
                 "cum_utility":0.0
             },
             {
-                "acity":65,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":143,
-                "duration":29,
-                "time":172,
+                "start":70,
+                "duration":14,
+                "time":84,
                 "cum_utility":-8.64
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":173,
-                "duration":52,
-                "time":225,
+                "start":85,
+                "duration":26,
+                "time":111,
                 "cum_utility":-8.54
             },
             {
-                "acity":118,
-                "facility":377153,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":226,
-                "duration":4,
-                "time":230,
+                "start":112,
+                "duration":2,
+                "time":114,
                 "cum_utility":-18.94
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":231,
-                "duration":55,
-                "time":286,
+                "start":115,
+                "duration":27,
+                "time":142,
                 "cum_utility":-18.84
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-18.84
             }
         ]
     },
     {
         "id":6326641,
-        "execution_time":1.289,
-        "DSSR_iterations":2,
+        "execution_time":0.032,
+        "DSSR_iterations":7,
         "utility":-37.54,
         "daily_schedule":[
             {
@@ -1570,84 +1561,84 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":98,
-                "time":99,
+                "duration":51,
+                "time":52,
                 "cum_utility":0.0
             },
             {
-                "acity":35,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":99,
-                "duration":10,
-                "time":109,
+                "start":52,
+                "duration":4,
+                "time":56,
                 "cum_utility":-8.74
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":109,
-                "duration":7,
-                "time":116,
+                "start":56,
+                "duration":1,
+                "time":57,
                 "cum_utility":-8.74
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":117,
-                "duration":4,
-                "time":121,
+                "start":58,
+                "duration":2,
+                "time":60,
                 "cum_utility":-27.34
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":122,
-                "duration":13,
-                "time":135,
+                "start":61,
+                "duration":5,
+                "time":66,
                 "cum_utility":-27.24
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":136,
-                "duration":3,
-                "time":139,
+                "start":67,
+                "duration":2,
+                "time":69,
                 "cum_utility":-37.64
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":140,
-                "duration":146,
-                "time":286,
+                "start":70,
+                "duration":51,
+                "time":121,
                 "cum_utility":-37.54
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
-                "duration":2,
-                "time":288,
+                "start":121,
+                "duration":23,
+                "time":144,
                 "cum_utility":-37.54
             }
         ]
     },
     {
         "id":6326568,
-        "execution_time":0.441,
+        "execution_time":0.004,
         "DSSR_iterations":0,
-        "utility":-33.6,
+        "utility":-36.63,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1659,74 +1650,74 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":116,
-                "time":117,
+                "duration":61,
+                "time":62,
                 "cum_utility":0.0
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":117,
-                "duration":6,
-                "time":123,
+                "start":62,
+                "duration":2,
+                "time":64,
                 "cum_utility":-10.5
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":123,
-                "duration":55,
-                "time":178,
+                "start":64,
+                "duration":23,
+                "time":87,
                 "cum_utility":-10.5
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":179,
-                "duration":8,
-                "time":187,
+                "start":88,
+                "duration":6,
+                "time":94,
                 "cum_utility":-19.14
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":188,
-                "duration":7,
-                "time":195,
-                "cum_utility":-33.7
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":196,
-                "duration":90,
-                "time":286,
-                "cum_utility":-33.6
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":95,
                 "duration":2,
-                "time":288,
-                "cum_utility":-33.6
+                "time":97,
+                "cum_utility":-36.73
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":98,
+                "duration":44,
+                "time":142,
+                "cum_utility":-36.63
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
+                "cum_utility":-36.63
             }
         ]
     },
     {
         "id":7090608,
-        "execution_time":1.321,
-        "DSSR_iterations":2,
+        "execution_time":0.008,
+        "DSSR_iterations":1,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -1739,82 +1730,82 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":151,
-                "time":152,
+                "duration":78,
+                "time":79,
                 "cum_utility":0.0
             },
             {
-                "acity":122,
-                "facility":375697,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":152,
-                "duration":3,
-                "time":155,
+                "start":79,
+                "duration":2,
+                "time":81,
                 "cum_utility":-10.5
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":155,
-                "duration":13,
-                "time":168,
+                "start":81,
+                "duration":2,
+                "time":83,
                 "cum_utility":-10.5
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":169,
-                "duration":23,
-                "time":192,
+                "start":84,
+                "duration":10,
+                "time":94,
                 "cum_utility":-29.1
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":193,
-                "duration":65,
-                "time":258,
+                "start":95,
+                "duration":37,
+                "time":132,
                 "cum_utility":-29.0
             },
             {
-                "acity":58,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":258,
-                "duration":3,
-                "time":261,
-                "cum_utility":-37.74
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":261,
-                "duration":25,
-                "time":286,
-                "cum_utility":-37.74
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":132,
                 "duration":2,
-                "time":288,
+                "time":134,
+                "cum_utility":-37.74
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":134,
+                "duration":8,
+                "time":142,
+                "cum_utility":-37.74
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
                 "cum_utility":-37.74
             }
         ]
     },
     {
         "id":6919136,
-        "execution_time":0.851,
+        "execution_time":0.008,
         "DSSR_iterations":1,
         "utility":-27.04,
         "daily_schedule":[
@@ -1828,66 +1819,66 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":82,
-                "time":83,
+                "duration":40,
+                "time":41,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":84,
-                "duration":45,
-                "time":129,
+                "start":42,
+                "duration":22,
+                "time":64,
                 "cum_utility":-18.6
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":130,
-                "duration":86,
-                "time":216,
+                "start":65,
+                "duration":42,
+                "time":107,
                 "cum_utility":-18.5
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":217,
-                "duration":3,
-                "time":220,
+                "start":108,
+                "duration":2,
+                "time":110,
                 "cum_utility":-27.14
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":221,
-                "duration":65,
-                "time":286,
+                "start":111,
+                "duration":31,
+                "time":142,
                 "cum_utility":-27.04
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-27.04
             }
         ]
     },
     {
         "id":6458972,
-        "execution_time":0.454,
+        "execution_time":0.003,
         "DSSR_iterations":0,
-        "utility":-21.08,
+        "utility":-24.11,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1899,314 +1890,56 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":113,
-                "time":114,
+                "duration":54,
+                "time":55,
                 "cum_utility":0.0
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":115,
+                "start":56,
                 "duration":3,
-                "time":118,
+                "time":59,
                 "cum_utility":-8.64
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":119,
-                "duration":94,
-                "time":213,
-                "cum_utility":-21.18
+                "start":60,
+                "duration":46,
+                "time":106,
+                "cum_utility":-24.21
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":214,
-                "duration":72,
-                "time":286,
-                "cum_utility":-21.08
+                "start":107,
+                "duration":35,
+                "time":142,
+                "cum_utility":-24.11
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-21.08
+                "time":144,
+                "cum_utility":-24.11
             }
         ]
     },
     {
         "id":6681916,
-        "execution_time":1.44,
+        "execution_time":0.019,
         "DSSR_iterations":2,
-        "utility":-37.14,
-        "daily_schedule":[
-            {
-                "acity":0,
-                "facility":0,
-                "group":"home",
-                "start":0,
-                "duration":1,
-                "time":1,
-                "cum_utility":0.0
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":1,
-                "duration":88,
-                "time":89,
-                "cum_utility":0.0
-            },
-            {
-                "acity":148,
-                "facility":382576,
-                "group":"education",
-                "start":91,
-                "duration":44,
-                "time":135,
-                "cum_utility":-18.5
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":137,
-                "duration":15,
-                "time":152,
-                "cum_utility":-18.3
-            },
-            {
-                "acity":123,
-                "facility":380849,
-                "group":"shop",
-                "start":153,
-                "duration":3,
-                "time":156,
-                "cum_utility":-28.7
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":157,
-                "duration":56,
-                "time":213,
-                "cum_utility":-28.6
-            },
-            {
-                "acity":78,
-                "facility":375697,
-                "group":"leisure",
-                "start":214,
-                "duration":6,
-                "time":220,
-                "cum_utility":-37.24
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":221,
-                "duration":65,
-                "time":286,
-                "cum_utility":-37.14
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
-                "duration":2,
-                "time":288,
-                "cum_utility":-37.14
-            }
-        ]
-    },
-    {
-        "id":6682610,
-        "execution_time":0.477,
-        "DSSR_iterations":0,
-        "utility":-34.125,
-        "daily_schedule":[
-            {
-                "acity":0,
-                "facility":0,
-                "group":"home",
-                "start":0,
-                "duration":1,
-                "time":1,
-                "cum_utility":0.0
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":1,
-                "duration":127,
-                "time":128,
-                "cum_utility":0.0
-            },
-            {
-                "acity":123,
-                "facility":380849,
-                "group":"shop",
-                "start":129,
-                "duration":3,
-                "time":132,
-                "cum_utility":-10.4
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":133,
-                "duration":23,
-                "time":156,
-                "cum_utility":-6.885
-            },
-            {
-                "acity":64,
-                "facility":379776,
-                "group":"leisure",
-                "start":156,
-                "duration":45,
-                "time":201,
-                "cum_utility":-15.625
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":201,
-                "duration":31,
-                "time":232,
-                "cum_utility":-15.625
-            },
-            {
-                "acity":148,
-                "facility":382576,
-                "group":"education",
-                "start":233,
-                "duration":18,
-                "time":251,
-                "cum_utility":-34.225
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":252,
-                "duration":34,
-                "time":286,
-                "cum_utility":-34.125
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
-                "duration":2,
-                "time":288,
-                "cum_utility":-34.125
-            }
-        ]
-    },
-    {
-        "id":7094407,
-        "execution_time":0.292,
-        "DSSR_iterations":0,
-        "utility":-30.95,
-        "daily_schedule":[
-            {
-                "acity":0,
-                "facility":0,
-                "group":"home",
-                "start":0,
-                "duration":1,
-                "time":1,
-                "cum_utility":0.0
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":1,
-                "duration":180,
-                "time":181,
-                "cum_utility":0.0
-            },
-            {
-                "acity":121,
-                "facility":375697,
-                "group":"shop",
-                "start":183,
-                "duration":3,
-                "time":186,
-                "cum_utility":-10.3
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":188,
-                "duration":26,
-                "time":214,
-                "cum_utility":-10.1
-            },
-            {
-                "acity":78,
-                "facility":375697,
-                "group":"leisure",
-                "start":216,
-                "duration":2,
-                "time":218,
-                "cum_utility":-13.66
-            },
-            {
-                "acity":148,
-                "facility":382576,
-                "group":"education",
-                "start":219,
-                "duration":22,
-                "time":241,
-                "cum_utility":-31.25
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":244,
-                "duration":42,
-                "time":286,
-                "cum_utility":-30.95
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
-                "duration":2,
-                "time":288,
-                "cum_utility":-30.95
-            }
-        ]
-    },
-    {
-        "id":6459201,
-        "execution_time":0.821,
-        "DSSR_iterations":1,
         "utility":-37.34,
         "daily_schedule":[
             {
@@ -2219,84 +1952,324 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":162,
-                "time":163,
+                "duration":42,
+                "time":43,
                 "cum_utility":0.0
             },
             {
-                "acity":59,
-                "facility":382537,
+                "acity":13,
+                "facility":382576,
+                "group":"education",
+                "start":44,
+                "duration":21,
+                "time":65,
+                "cum_utility":-18.6
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":66,
+                "duration":9,
+                "time":75,
+                "cum_utility":-18.5
+            },
+            {
+                "acity":11,
+                "facility":380332,
+                "group":"shop",
+                "start":76,
+                "duration":2,
+                "time":78,
+                "cum_utility":-28.9
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":79,
+                "duration":26,
+                "time":105,
+                "cum_utility":-28.8
+            },
+            {
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":164,
+                "start":106,
+                "duration":2,
+                "time":108,
+                "cum_utility":-37.44
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":109,
+                "duration":33,
+                "time":142,
+                "cum_utility":-37.34
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
+                "cum_utility":-37.34
+            }
+        ]
+    },
+    {
+        "id":6682610,
+        "execution_time":0.007,
+        "DSSR_iterations":1,
+        "utility":-37.54,
+        "daily_schedule":[
+            {
+                "acity":0,
+                "facility":0,
+                "group":"home",
+                "start":0,
+                "duration":1,
+                "time":1,
+                "cum_utility":0.0
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":1,
+                "duration":62,
+                "time":63,
+                "cum_utility":0.0
+            },
+            {
+                "acity":11,
+                "facility":380332,
+                "group":"shop",
+                "start":64,
+                "duration":2,
+                "time":66,
+                "cum_utility":-10.4
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":67,
+                "duration":14,
+                "time":81,
+                "cum_utility":-10.3
+            },
+            {
+                "acity":7,
+                "facility":375697,
+                "group":"leisure",
+                "start":81,
+                "duration":22,
+                "time":103,
+                "cum_utility":-19.04
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":103,
+                "duration":12,
+                "time":115,
+                "cum_utility":-19.04
+            },
+            {
+                "acity":13,
+                "facility":382576,
+                "group":"education",
+                "start":116,
                 "duration":8,
-                "time":172,
+                "time":124,
+                "cum_utility":-37.64
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":125,
+                "duration":17,
+                "time":142,
+                "cum_utility":-37.54
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
+                "cum_utility":-37.54
+            }
+        ]
+    },
+    {
+        "id":7094407,
+        "execution_time":0.002,
+        "DSSR_iterations":0,
+        "utility":-21.96,
+        "daily_schedule":[
+            {
+                "acity":0,
+                "facility":0,
+                "group":"home",
+                "start":0,
+                "duration":1,
+                "time":1,
+                "cum_utility":0.0
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":1,
+                "duration":105,
+                "time":106,
+                "cum_utility":0.0
+            },
+            {
+                "acity":7,
+                "facility":375697,
+                "group":"leisure",
+                "start":107,
+                "duration":1,
+                "time":108,
+                "cum_utility":-3.66
+            },
+            {
+                "acity":13,
+                "facility":382576,
+                "group":"education",
+                "start":110,
+                "duration":10,
+                "time":120,
+                "cum_utility":-22.16
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":122,
+                "duration":20,
+                "time":142,
+                "cum_utility":-21.96
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
+                "duration":2,
+                "time":144,
+                "cum_utility":-21.96
+            }
+        ]
+    },
+    {
+        "id":6459201,
+        "execution_time":0.007,
+        "DSSR_iterations":2,
+        "utility":-37.54,
+        "daily_schedule":[
+            {
+                "acity":0,
+                "facility":0,
+                "group":"home",
+                "start":0,
+                "duration":1,
+                "time":1,
+                "cum_utility":0.0
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":1,
+                "duration":79,
+                "time":80,
+                "cum_utility":0.0
+            },
+            {
+                "acity":7,
+                "facility":375697,
+                "group":"leisure",
+                "start":81,
+                "duration":3,
+                "time":84,
                 "cum_utility":-8.64
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":173,
-                "duration":14,
-                "time":187,
+                "start":85,
+                "duration":8,
+                "time":93,
                 "cum_utility":-8.54
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":189,
-                "duration":3,
-                "time":192,
+                "start":94,
+                "duration":2,
+                "time":96,
+                "cum_utility":-18.94
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":97,
+                "duration":24,
+                "time":121,
                 "cum_utility":-18.84
             },
             {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":194,
-                "duration":42,
-                "time":236,
-                "cum_utility":-18.64
-            },
-            {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":236,
-                "duration":43,
-                "time":279,
-                "cum_utility":-37.34
+                "start":121,
+                "duration":20,
+                "time":141,
+                "cum_utility":-37.54
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":279,
-                "duration":7,
-                "time":286,
-                "cum_utility":-37.34
+                "start":141,
+                "duration":1,
+                "time":142,
+                "cum_utility":-37.54
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-37.34
+                "time":144,
+                "cum_utility":-37.54
             }
         ]
     },
     {
         "id":6682867,
-        "execution_time":11.07,
-        "DSSR_iterations":24,
-        "utility":-18.23,
+        "execution_time":0.022,
+        "DSSR_iterations":4,
+        "utility":-19.24,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2308,57 +2281,57 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":115,
-                "time":116,
+                "duration":56,
+                "time":57,
                 "cum_utility":0.0
             },
             {
-                "acity":57,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":116,
-                "duration":4,
-                "time":120,
+                "start":57,
+                "duration":2,
+                "time":59,
                 "cum_utility":-8.74
             },
             {
-                "acity":114,
-                "facility":377255,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":120,
-                "duration":2,
-                "time":122,
-                "cum_utility":-18.23
+                "start":59,
+                "duration":1,
+                "time":60,
+                "cum_utility":-19.24
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":122,
-                "duration":164,
-                "time":286,
-                "cum_utility":-18.23
+                "start":60,
+                "duration":82,
+                "time":142,
+                "cum_utility":-19.24
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-18.23
+                "time":144,
+                "cum_utility":-19.24
             }
         ]
     },
     {
         "id":6681580,
-        "execution_time":66.438,
-        "DSSR_iterations":124,
-        "utility":-50.44,
+        "execution_time":0.048,
+        "DSSR_iterations":7,
+        "utility":-47.252,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2370,100 +2343,100 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":89,
-                "time":90,
+                "duration":42,
+                "time":43,
                 "cum_utility":0.0
             },
             {
-                "acity":149,
+                "acity":14,
                 "facility":128373,
                 "group":"work",
-                "start":91,
-                "duration":10,
-                "time":101,
+                "start":44,
+                "duration":4,
+                "time":48,
                 "cum_utility":-13.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":102,
-                "duration":23,
-                "time":125,
+                "start":49,
+                "duration":12,
+                "time":61,
                 "cum_utility":-12.9
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":125,
-                "duration":3,
-                "time":128,
-                "cum_utility":-23.4
+                "start":62,
+                "duration":2,
+                "time":64,
+                "cum_utility":-23.3
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":128,
-                "duration":14,
-                "time":142,
-                "cum_utility":-23.4
+                "start":65,
+                "duration":1,
+                "time":66,
+                "cum_utility":-23.2
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":143,
-                "duration":8,
-                "time":151,
-                "cum_utility":-32.04
+                "start":67,
+                "duration":3,
+                "time":70,
+                "cum_utility":-28.852
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":152,
-                "duration":53,
-                "time":205,
-                "cum_utility":-31.94
+                "start":71,
+                "duration":30,
+                "time":101,
+                "cum_utility":-28.752
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":206,
-                "duration":21,
-                "time":227,
-                "cum_utility":-50.54
+                "start":102,
+                "duration":10,
+                "time":112,
+                "cum_utility":-47.352
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":228,
-                "duration":58,
-                "time":286,
-                "cum_utility":-50.44
+                "start":113,
+                "duration":29,
+                "time":142,
+                "cum_utility":-47.252
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-50.44
+                "time":144,
+                "cum_utility":-47.252
             }
         ]
     },
     {
         "id":6459326,
-        "execution_time":0.477,
+        "execution_time":0.004,
         "DSSR_iterations":0,
         "utility":-10.5,
         "daily_schedule":[
@@ -2477,48 +2450,48 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":109,
-                "time":110,
+                "duration":57,
+                "time":58,
                 "cum_utility":0.0
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":110,
-                "duration":30,
-                "time":140,
+                "start":58,
+                "duration":14,
+                "time":72,
                 "cum_utility":-10.5
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":140,
-                "duration":146,
-                "time":286,
+                "start":72,
+                "duration":70,
+                "time":142,
                 "cum_utility":-10.5
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-10.5
             }
         ]
     },
     {
         "id":6940193,
-        "execution_time":0.487,
+        "execution_time":0.002,
         "DSSR_iterations":0,
-        "utility":-18.7,
+        "utility":-18.94,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2530,48 +2503,57 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":159,
-                "time":160,
+                "duration":88,
+                "time":89,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
-                "facility":382576,
-                "group":"education",
-                "start":160,
-                "duration":90,
-                "time":250,
-                "cum_utility":-18.7
+                "acity":11,
+                "facility":380332,
+                "group":"shop",
+                "start":90,
+                "duration":1,
+                "time":91,
+                "cum_utility":-10.4
             },
             {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":250,
-                "duration":36,
-                "time":286,
-                "cum_utility":-18.7
+                "acity":7,
+                "facility":375697,
+                "group":"leisure",
+                "start":92,
+                "duration":16,
+                "time":108,
+                "cum_utility":-19.04
             },
             {
-                "acity":151,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":109,
+                "duration":33,
+                "time":142,
+                "cum_utility":-18.94
+            },
+            {
+                "acity":16,
+                "facility":0,
+                "group":"home",
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-18.7
+                "time":144,
+                "cum_utility":-18.94
             }
         ]
     },
     {
         "id":6326625,
-        "execution_time":0.484,
-        "DSSR_iterations":0,
-        "utility":-10.1,
+        "execution_time":0.008,
+        "DSSR_iterations":1,
+        "utility":-10.3,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2583,48 +2565,48 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":117,
-                "time":118,
+                "duration":57,
+                "time":58,
                 "cum_utility":0.0
             },
             {
-                "acity":113,
-                "facility":375697,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":120,
-                "duration":6,
-                "time":126,
+                "start":59,
+                "duration":2,
+                "time":61,
+                "cum_utility":-10.4
+            },
+            {
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":62,
+                "duration":80,
+                "time":142,
                 "cum_utility":-10.3
             },
             {
-                "acity":150,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":128,
-                "duration":158,
-                "time":286,
-                "cum_utility":-10.1
-            },
-            {
-                "acity":151,
-                "facility":0,
-                "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-10.1
+                "time":144,
+                "cum_utility":-10.3
             }
         ]
     },
     {
         "id":6682329,
-        "execution_time":26.239,
-        "DSSR_iterations":46,
-        "utility":-48.115,
+        "execution_time":0.075,
+        "DSSR_iterations":10,
+        "utility":-46.6,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2636,93 +2618,93 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":60,
-                "time":61,
+                "duration":33,
+                "time":34,
                 "cum_utility":0.0
             },
             {
-                "acity":149,
+                "acity":14,
                 "facility":129329,
                 "group":"work",
-                "start":61,
-                "duration":19,
-                "time":80,
+                "start":34,
+                "duration":8,
+                "time":42,
                 "cum_utility":-13.1
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":80,
-                "duration":71,
-                "time":151,
+                "start":42,
+                "duration":32,
+                "time":74,
                 "cum_utility":-13.1
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":152,
-                "duration":20,
-                "time":172,
+                "start":75,
+                "duration":9,
+                "time":84,
                 "cum_utility":-31.7
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":173,
-                "duration":43,
-                "time":216,
+                "start":85,
+                "duration":26,
+                "time":111,
                 "cum_utility":-31.6
             },
             {
-                "acity":36,
-                "facility":376648,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":216,
-                "duration":8,
-                "time":224,
+                "start":111,
+                "duration":2,
+                "time":113,
                 "cum_utility":-40.34
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":225,
-                "duration":2,
-                "time":227,
-                "cum_utility":-48.215
+                "start":114,
+                "duration":1,
+                "time":115,
+                "cum_utility":-46.7
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":228,
-                "duration":58,
-                "time":286,
-                "cum_utility":-48.115
+                "start":116,
+                "duration":26,
+                "time":142,
+                "cum_utility":-46.6
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-48.115
+                "time":144,
+                "cum_utility":-46.6
             }
         ]
     },
     {
         "id":6646547,
-        "execution_time":0.921,
-        "DSSR_iterations":1,
-        "utility":-15.228,
+        "execution_time":0.003,
+        "DSSR_iterations":0,
+        "utility":-17.234,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2734,57 +2716,57 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":136,
-                "time":137,
+                "duration":68,
+                "time":69,
                 "cum_utility":0.0
             },
             {
-                "acity":16,
-                "facility":380835,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":137,
-                "duration":2,
-                "time":139,
-                "cum_utility":-6.748
+                "start":69,
+                "duration":1,
+                "time":70,
+                "cum_utility":-7.744
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":139,
-                "duration":21,
-                "time":160,
-                "cum_utility":-15.228
+                "start":70,
+                "duration":10,
+                "time":80,
+                "cum_utility":-17.234
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":160,
-                "duration":126,
-                "time":286,
-                "cum_utility":-15.228
+                "start":80,
+                "duration":62,
+                "time":142,
+                "cum_utility":-17.234
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-15.228
+                "time":144,
+                "cum_utility":-17.234
             }
         ]
     },
     {
         "id":6459265,
-        "execution_time":23.293,
-        "DSSR_iterations":56,
-        "utility":-36.54,
+        "execution_time":0.018,
+        "DSSR_iterations":7,
+        "utility":-37.34,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2796,84 +2778,75 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":95,
-                "time":96,
+                "duration":47,
+                "time":48,
                 "cum_utility":0.0
             },
             {
-                "acity":42,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":96,
-                "duration":3,
-                "time":99,
+                "start":48,
+                "duration":1,
+                "time":49,
                 "cum_utility":-8.74
             },
             {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":99,
-                "duration":1,
-                "time":100,
-                "cum_utility":-8.34
-            },
-            {
-                "acity":115,
-                "facility":379243,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":102,
-                "duration":3,
-                "time":105,
-                "cum_utility":-18.64
+                "start":50,
+                "duration":1,
+                "time":51,
+                "cum_utility":-19.14
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":107,
-                "duration":6,
-                "time":113,
-                "cum_utility":-18.44
+                "start":52,
+                "duration":3,
+                "time":55,
+                "cum_utility":-19.04
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":116,
-                "duration":13,
-                "time":129,
-                "cum_utility":-36.84
+                "start":57,
+                "duration":6,
+                "time":63,
+                "cum_utility":-37.54
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":132,
-                "duration":154,
-                "time":286,
-                "cum_utility":-36.54
+                "start":65,
+                "duration":77,
+                "time":142,
+                "cum_utility":-37.34
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-36.54
+                "time":144,
+                "cum_utility":-37.34
             }
         ]
     },
     {
         "id":6944234,
-        "execution_time":1.375,
+        "execution_time":0.011,
         "DSSR_iterations":2,
-        "utility":-37.042,
+        "utility":-37.54,
         "daily_schedule":[
             {
                 "acity":0,
@@ -2885,73 +2858,73 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":135,
-                "time":136,
+                "duration":66,
+                "time":67,
                 "cum_utility":0.0
             },
             {
-                "acity":123,
-                "facility":380849,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":137,
-                "duration":3,
-                "time":140,
+                "start":68,
+                "duration":2,
+                "time":70,
                 "cum_utility":-10.4
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":141,
-                "duration":10,
-                "time":151,
+                "start":71,
+                "duration":3,
+                "time":74,
                 "cum_utility":-10.3
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":152,
-                "duration":43,
-                "time":195,
+                "start":75,
+                "duration":22,
+                "time":97,
                 "cum_utility":-28.9
             },
             {
-                "acity":36,
-                "facility":376648,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":196,
-                "duration":2,
-                "time":198,
-                "cum_utility":-37.042
+                "start":98,
+                "duration":1,
+                "time":99,
+                "cum_utility":-37.54
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":198,
-                "duration":88,
-                "time":286,
-                "cum_utility":-37.042
+                "start":99,
+                "duration":43,
+                "time":142,
+                "cum_utility":-37.54
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-37.042
+                "time":144,
+                "cum_utility":-37.54
             }
         ]
     },
     {
         "id":6458822,
-        "execution_time":0.899,
+        "execution_time":0.006,
         "DSSR_iterations":1,
         "utility":-27.24,
         "daily_schedule":[
@@ -2965,66 +2938,57 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":115,
-                "time":116,
+                "duration":60,
+                "time":61,
                 "cum_utility":0.0
             },
             {
-                "acity":20,
-                "facility":382537,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":116,
-                "duration":3,
-                "time":119,
+                "start":61,
+                "duration":1,
+                "time":62,
                 "cum_utility":-8.74
             },
             {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":119,
-                "duration":8,
-                "time":127,
-                "cum_utility":-8.74
-            },
-            {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":128,
-                "duration":94,
-                "time":222,
+                "start":63,
+                "duration":46,
+                "time":109,
                 "cum_utility":-27.34
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":223,
-                "duration":63,
-                "time":286,
+                "start":110,
+                "duration":32,
+                "time":142,
                 "cum_utility":-27.24
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
+                "time":144,
                 "cum_utility":-27.24
             }
         ]
     },
     {
         "id":7054089,
-        "execution_time":0.825,
+        "execution_time":0.003,
         "DSSR_iterations":1,
-        "utility":-30.228,
+        "utility":-25.248,
         "daily_schedule":[
             {
                 "acity":0,
@@ -3036,66 +3000,57 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":85,
-                "time":86,
+                "duration":40,
+                "time":41,
                 "cum_utility":0.0
             },
             {
-                "acity":148,
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":87,
-                "duration":108,
-                "time":195,
+                "start":42,
+                "duration":57,
+                "time":99,
                 "cum_utility":-18.6
             },
             {
-                "acity":78,
+                "acity":7,
                 "facility":375697,
                 "group":"leisure",
-                "start":196,
-                "duration":2,
-                "time":198,
-                "cum_utility":-22.758
+                "start":100,
+                "duration":3,
+                "time":103,
+                "cum_utility":-25.248
             },
             {
-                "acity":114,
-                "facility":377255,
-                "group":"shop",
-                "start":198,
-                "duration":28,
-                "time":226,
-                "cum_utility":-30.228
-            },
-            {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":226,
-                "duration":60,
-                "time":286,
-                "cum_utility":-30.228
+                "start":103,
+                "duration":39,
+                "time":142,
+                "cum_utility":-25.248
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-30.228
+                "time":144,
+                "cum_utility":-25.248
             }
         ]
     },
     {
         "id":6681764,
-        "execution_time":1.07,
-        "DSSR_iterations":2,
-        "utility":-36.94,
+        "execution_time":0.003,
+        "DSSR_iterations":0,
+        "utility":-37.14,
         "daily_schedule":[
             {
                 "acity":0,
@@ -3107,76 +3062,76 @@
                 "cum_utility":0.0
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
                 "start":1,
-                "duration":97,
-                "time":98,
+                "duration":51,
+                "time":52,
                 "cum_utility":0.0
             },
             {
-                "acity":105,
-                "facility":381922,
+                "acity":11,
+                "facility":380332,
                 "group":"shop",
-                "start":98,
-                "duration":3,
-                "time":101,
+                "start":52,
+                "duration":2,
+                "time":54,
                 "cum_utility":-10.5
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":101,
-                "duration":90,
-                "time":191,
+                "start":54,
+                "duration":39,
+                "time":93,
                 "cum_utility":-10.5
             },
             {
-                "acity":70,
-                "facility":376646,
+                "acity":7,
+                "facility":375697,
                 "group":"leisure",
-                "start":192,
-                "duration":9,
-                "time":201,
-                "cum_utility":-19.14
-            },
-            {
-                "acity":150,
-                "facility":0,
-                "group":"home",
-                "start":202,
-                "duration":11,
-                "time":213,
+                "start":95,
+                "duration":4,
+                "time":99,
                 "cum_utility":-19.04
             },
             {
-                "acity":148,
+                "acity":15,
+                "facility":0,
+                "group":"home",
+                "start":101,
+                "duration":5,
+                "time":106,
+                "cum_utility":-18.84
+            },
+            {
+                "acity":13,
                 "facility":382576,
                 "group":"education",
-                "start":217,
-                "duration":21,
-                "time":238,
+                "start":108,
+                "duration":10,
+                "time":118,
                 "cum_utility":-37.34
             },
             {
-                "acity":150,
+                "acity":15,
                 "facility":0,
                 "group":"home",
-                "start":242,
-                "duration":44,
-                "time":286,
-                "cum_utility":-36.94
+                "start":120,
+                "duration":22,
+                "time":142,
+                "cum_utility":-37.14
             },
             {
-                "acity":151,
+                "acity":16,
                 "facility":0,
                 "group":"home",
-                "start":286,
+                "start":142,
                 "duration":2,
-                "time":288,
-                "cum_utility":-36.94
+                "time":144,
+                "cum_utility":-37.14
             }
         ]
     }

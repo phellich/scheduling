@@ -298,21 +298,10 @@ def filter_closest(all_activities, individual, num_act_to_select):
 ############################################################################################################
 ##### START OF EXECUTION ###################################################################################
 
-def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0], num_act_to_select = 100):
+def main(activity_csv, population_csv, params, scenario, constraints, num_act_to_select = 30):
 
     print(f"Running scenario: {scenario}")
-    lib.get_final_schedule.restype = POINTER(Label)
-    lib.get_total_time.restype = c_double
-    lib.get_count.restype = c_int
 
-    activity_csv = pd.read_csv("Data/PreProcessed/activity.csv")
-    population_csv = pd.read_csv("Data/PreProcessed/population.csv")
-
-    lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
-                               c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
-                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL))
-                                                    
-    params = initialize_param() 
     constraints_array = (c_double * len(constraints))(*constraints)
     asc_array = (c_double * len(params.asc))(*params.asc)
     early_array = (c_double * len(params.early))(*params.early)
@@ -336,15 +325,15 @@ def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0], num_a
     for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
         # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-        if (index >= 20): 
-            break
+        # if (index >= 2): 
+        #     break
                 
         act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
         # print(f"\nIndividual : {individual['id']} || home : ({individual['home_x']}, {individual['home_y']}) || home : ({individual['work_x']}, {individual['work_y']})")
         # print(act_in_peri.sample(20))
         num_activities = len(act_in_peri)+4
+        perso_activities_array = (Activity * num_activities)()
         activities_array = initialize_activities(act_in_peri, num_activities) 
-
         participation = participation_vector(individual, groups)
         pyparticipation = (c_double * len(participation))(*participation)
         perso_activities_array = personalize(activities_array, num_activities, individual, group_to_type)
@@ -371,7 +360,7 @@ def main(scenario = 'normal_life', constraints = [0, 0, 0, 0, 0, 0, 0, 0], num_a
 
         # recursive_print(schedule_pointer)
         lib.free_bucket()
-        # lib.free_activities()
+        lib.free_activities()
 
     results = pd.DataFrame({
         'id': ids,
@@ -388,6 +377,19 @@ if __name__ == "__main__":
         
     compile_code()
     lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
+
+    activity_csv = pd.read_csv(f"Data/PreProcessed/activity_{TIME_INTERVAL}m.csv")
+    population_csv = pd.read_csv(f"Data/PreProcessed/population_{TIME_INTERVAL}m.csv")
+     
+    lib.get_final_schedule.restype = POINTER(Label)
+    lib.get_total_time.restype = c_double
+    lib.get_count.restype = c_int
+
+    lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
+                               c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
+                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL))
+                                                    
+    params = initialize_param() 
 
     # constraints = [
     #     leisure closure,
@@ -418,13 +420,17 @@ if __name__ == "__main__":
 
     # main('normal_life', constraints['normal_life'])
 
-    n_closest = [70]
+    n_closest = [150]
+    exec_times = []
     for n in n_closest:
         start_time = time.time()
-        main('normal_life', constraints['normal_life'], n)
+        main(activity_csv, population_csv, params, 'normal_life', constraints['normal_life'], n)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(f"For 41 individuals and {n} closest activities around their home/work, the execution time is {elapsed_time:.1f}\n")
+        exec_times.append(elapsed_time)
+        # print(f"For 41 individuals and {n} closest activities around their home/work, the execution time is {elapsed_time:.1f}\n")
 
+    # print(n_closest)
+    # print(exec_times)
     # for scenario_name in scenari:
     #     main(scenario_name, constraints[scenario_name])

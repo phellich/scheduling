@@ -10,12 +10,12 @@ SCHEDULING_VERSION = 5
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
 SPEED = 10*16.667                                                       # 1km/h = 16.667 m/min
-TRAVEL_TIME_PENALTY = 0.1                                              # we will add dusk, home, dawn and work
+TRAVEL_TIME_PENALTY = 1                                              # we will add dusk, home, dawn and work
 CURFEW_TIME = round(19*60/TIME_INTERVAL) + 1                                                       # 19h
 MAX_OUTSIDE_TIME = round(4*60/TIME_INTERVAL) + 1                                                   # 4h
 MAX_TRAVEL_TIME = round(20/TIME_INTERVAL) + 1                                                     # 20m
-PEAK_HOUR_TIME1 = round(12*60/TIME_INTERVAL) + 1                                                   # 12h
-PEAK_HOUR_TIME2 = round(14*60/TIME_INTERVAL) + 1                                                   # 14h
+PEAK_HOUR_TIME1 = round(13*60/TIME_INTERVAL) + 1                                                   # 12h
+PEAK_HOUR_TIME2 = round(15*60/TIME_INTERVAL) + 1                                                   # 14h
 group_to_type = {
     0: 'home',
     1: 'education',
@@ -161,7 +161,7 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     return activities_array
 
 
-def initialize_param(): 
+def initialize_utility(): 
     ''' Initialise les parametres de la utility function'''
 
     UtilityParams = namedtuple('UtilityParams', 'asc early late long short')
@@ -173,7 +173,7 @@ def initialize_param():
     #     long=[0, 1.14, 1.22, 0.08, 0.683],
     #     short=[0, 1.75, 0.932, 0.101, 1.81]
     # )
-    params = UtilityParams( # TRUE PARAMETERS
+    params = UtilityParams( 
         # order = [home, education, work, leisure, shop]
         asc=[0, 18.7, 13.1, 8.74, 10.5],
         early=[0, 1.35, 0.619, 0.0996, 1.01],
@@ -298,34 +298,49 @@ def filter_closest(all_activities, individual, num_act_to_select):
 ############################################################################################################
 ##### START OF EXECUTION ###################################################################################
 
-def main(activity_csv, population_csv, params, scenario, constraints, num_act_to_select = 30):
+
+def compile_and_initialize(): 
+    
+    compile_code()
+    lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
+
+    activity_csv = pd.read_csv(f"Data/PreProcessed/activity_{TIME_INTERVAL}m.csv")
+    population_csv = pd.read_csv(f"Data/PreProcessed/population_{TIME_INTERVAL}m.csv")
+     
+    lib.get_final_schedule.restype = POINTER(Label)
+    lib.get_total_time.restype = c_double
+    lib.get_count.restype = c_int
+                                                    
+    util_params = initialize_utility() 
+    asc_array = (c_double * len(util_params.asc))(*util_params.asc)
+    early_array = (c_double * len(util_params.early))(*util_params.early)
+    late_array = (c_double * len(util_params.late))(*util_params.late)
+    long_array = (c_double * len(util_params.long))(*util_params.long)
+    short_array = (c_double * len(util_params.short))(*util_params.short) 
+
+    lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
+                               c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
+                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL),
+                               asc_array, early_array, late_array, long_array, short_array)
+
+    return activity_csv, population_csv, lib
+
+
+def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_act_to_select = 30):
 
     print(f"Running scenario: {scenario}")
-
     constraints_array = (c_double * len(constraints))(*constraints)
-    asc_array = (c_double * len(params.asc))(*params.asc)
-    early_array = (c_double * len(params.early))(*params.early)
-    late_array = (c_double * len(params.late))(*params.late)
-    long_array = (c_double * len(params.long))(*params.long)
-    short_array = (c_double * len(params.short))(*params.short) 
-    lib.set_utility_and_scenario(
-        asc_array,  
-        early_array,
-        late_array,
-        long_array,
-        short_array,
-        constraints_array
-    )
+    lib.set_scenario_constraints(constraints_array)
 
     DSSR_iterations = []
     execution_times = []
     final_utilities = []
     schedules = []
     ids = []
-    for index, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
+    for i, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
         # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-        # if (index >= 2): 
+        # if (i >= 2): 
         #     break
                 
         act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
@@ -375,21 +390,7 @@ def main(activity_csv, population_csv, params, scenario, constraints, num_act_to
 
 if __name__ == "__main__":
         
-    compile_code()
-    lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
-
-    activity_csv = pd.read_csv(f"Data/PreProcessed/activity_{TIME_INTERVAL}m.csv")
-    population_csv = pd.read_csv(f"Data/PreProcessed/population_{TIME_INTERVAL}m.csv")
-     
-    lib.get_final_schedule.restype = POINTER(Label)
-    lib.get_total_time.restype = c_double
-    lib.get_count.restype = c_int
-
-    lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
-                               c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
-                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL))
-                                                    
-    params = initialize_param() 
+    activity_csv, population_csv, lib = compile_and_initialize()    
 
     # constraints = [
     #     leisure closure,
@@ -402,35 +403,27 @@ if __name__ == "__main__":
     #     travel-time restriction]
 
     constraints = {
-        'normal_life' :               [0, 0, 0, 0, 0, 0, 0, 0],
-        'shutdown' :                  [1, 1, 1, 1, 0, 0, 0, 0],
-        'economy' :                   [1, 1, 1, 0, 0, 0, 0, 0],
-        'school_restriction' :        [0, 0, 1, 0, 0, 0, 0, 0],
-        'essential_needs' :           [1, 0, 1, 1, 0, 0, 1, 0],
-        'outings_limitation' :        [1, 0, 1, 0, 0, 0, 1, 0],
-        'return_to_baseline' :        [0, 0, 1, 0, 0, 0, 1, 0],
-        'peak_hours' :                [0, 0, 0, 0, 0, 1, 0, 0],
-        'curfew' :                    [0, 0, 0, 0, 1, 0, 0, 0],
-        'outside_time_limit' :        [0, 0, 0, 0, 0, 0, 1, 0],
-        'travel_time_limit' :         [0, 0, 0, 0, 0, 0, 0, 1]
+        'Normal_life' :               [0, 0, 0, 0, 0, 0, 0, 0],
+        'Shutdown' :                  [1, 1, 1, 1, 0, 0, 0, 0],
+        'Economy' :                   [1, 1, 1, 0, 0, 0, 0, 0],
+        'School_restriction' :        [0, 0, 1, 0, 0, 0, 0, 0],
+        'Essential_needs' :           [1, 0, 1, 1, 0, 0, 1, 0],
+        'Outings_limitation' :        [1, 0, 1, 0, 0, 0, 1, 0],
+        'Return_to_baseline' :        [0, 0, 1, 0, 0, 0, 1, 0],
+        'Peak_hours' :                [0, 0, 0, 0, 0, 1, 0, 0],
+        'Curfew' :                    [0, 0, 0, 0, 1, 0, 0, 0],
+        'Outside_time_limit' :        [0, 0, 0, 0, 0, 0, 1, 0],
+        'Travel_time_limit' :         [0, 0, 0, 0, 0, 0, 0, 1]
     }
 
-    scenari = ['normal_life', 'shutdown', 'economy', 'school_restriction', 'essential_needs', 'outings_limitation', 
-               'return_to_baseline', 'peak_hours', 'curfew', 'outside_time_limit', 'travel_time_limit']
+    scenari = ['Normal_life', 'Shutdown', 'Economy', 'School_restriction', 'Essential_needs', 'Outings_limitation', 
+               'Return_to_baseline', 'Peak_hours', 'Curfew', 'Outside_time_limit', 'Travel_time_limit']
+    # scenari = ['Peak_hours']    
 
-    # main('normal_life', constraints['normal_life'])
-
-    n_closest = [150]
-    exec_times = []
-    for n in n_closest:
+    n = 15
+    for scenario_name in scenari:
         start_time = time.time()
-        main(activity_csv, population_csv, params, 'normal_life', constraints['normal_life'], n)
+        call_to_optimizer(activity_csv, population_csv, scenario_name, constraints[scenario_name], n)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        exec_times.append(elapsed_time)
-        # print(f"For 41 individuals and {n} closest activities around their home/work, the execution time is {elapsed_time:.1f}\n")
-
-    # print(n_closest)
-    # print(exec_times)
-    # for scenario_name in scenari:
-    #     main(scenario_name, constraints[scenario_name])
+        print(f"For {len(population_csv)} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")

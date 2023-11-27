@@ -105,7 +105,8 @@ Label* get_final_schedule() {
 
 void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_penalty, 
                             int pycurfew_time, int pymax_outside_time, int pymax_travel_time,
-                            int pypeak_hour_time1, int pypeak_hour_time2, int pytime_interval){
+                            int pypeak_hour_time1, int pypeak_hour_time2, int pytime_interval,
+                            double* asc, double* early, double* late, double* longp, double* shortp){
     speed = pyspeed;
     travel_time_penalty = pytravel_time_penalty;
     curfew_time = pycurfew_time;
@@ -118,11 +119,8 @@ void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_
     // printf("speed = %f, travel_time_penalty = %f, curfew_time = %d, max_outside_time = %d, max_travel_time = %d, peak_hour_time1 = %d, peak_hour_time2 = %d, time_interval = %d\n",
     //         speed, travel_time_penalty, curfew_time, max_outside_time, max_travel_time, peak_hour_time1,
     //         peak_hour_time2, horizon, time_interval);
-};
 
-void set_utility_and_scenario(double* asc, double* early, double* late, double* longp, double* shortp, double* scenario_const) {
-    
-    for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++) {
         asc_parameters[i] = asc[i];
         early_parameters[i] = early[i];
         late_parameters[i] = late[i];
@@ -132,7 +130,9 @@ void set_utility_and_scenario(double* asc, double* early, double* late, double* 
         //        i, asc_parameters[i], i, early_parameters[i], i, late_parameters[i],
         //        i, long_parameters[i], i, short_parameters[i]);
     }
+};
 
+void set_scenario_constraints(double* scenario_const) {
     leisure_close = scenario_const[0];
     shop_close = scenario_const[1];
     education_close = scenario_const[2];
@@ -573,12 +573,12 @@ int dominates(Label* L1, Label* L2){
             Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
         if(dom_mem_contains(L2,L1)){ // be sure of order
 
-            // HEURISTIC ? 
+            // Exact method v2
             if(L1->time <= L2->time){
                 return 2;
             }
             
-            // // EXACT METHOD ? 
+            // // Exact method v1
             // if(L1->duration == L2->duration){return 2;}
             // // if(L1->utility - duration_Ut[L1->acity][L1->duration] <= L2->utility - duration_Ut[L2->acity][L2->duration]){
             // int group = L1->act->group;
@@ -597,7 +597,6 @@ int dominates(Label* L1, Label* L2){
         }
     }
     return 0;
-    // return 1;                                                // for test only
 };
 
 /* Calculate the utility of a label based on it's startung activity and the duration of the one that just finished */
@@ -613,13 +612,17 @@ double update_utility(Label* L){
     L->utility = previous_L->utility;
 
     L->utility -= asc_parameters[group] * part_penal[group];
-    L->utility += travel_time_penalty*travel_time(previous_act, act); // 20m => 4 de penalite ? 
-    // time horizons differences are multiplied by 5 to be expressed in minutes for the parameters
-    // -2 correspond aux 'plateaux' de minimisation
-    L->utility += short_parameters[previous_group] * time_interval * fmax(0, previous_act->des_duration - previous_L->duration - 2)
-                 + long_parameters[previous_group] * time_interval * fmax(0, previous_L->duration - previous_act->des_duration - 2);
-    L->utility += early_parameters[group] * time_interval * fmax(0, act->des_start_time - L->start_time - 2) 
-                 + late_parameters[group] * time_interval * fmax(0, L->start_time - act->des_start_time - 2);
+    L->utility += travel_time_penalty*travel_time(previous_act, act); 
+    // if (group != 2){ // NO TRAVEL TIME PENALTY TO GO TO WORK
+    //     L->utility += travel_time_penalty*travel_time(previous_act, act); 
+    // }
+    
+    // time horizons differences are multiplied to be expressed in minutes from the parameters
+    // -1 correspond aux 'plateaux' de preferences
+    L->utility += short_parameters[previous_group] * time_interval * fmax(0, previous_act->des_duration - previous_L->duration - 1)
+                 + long_parameters[previous_group] * time_interval * fmax(0, previous_L->duration - previous_act->des_duration - 1);
+    L->utility += early_parameters[group] * time_interval * fmax(0, act->des_start_time - L->start_time - 1) 
+                 + late_parameters[group] * time_interval * fmax(0, L->start_time - act->des_start_time - 1);
 
     return L->utility;
 };

@@ -9,13 +9,16 @@ import time
 SCHEDULING_VERSION = 5
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
-SPEED = 10*16.667                                                       # 1km/h = 16.667 m/min
+SPEED = 19*16.667                                                       # 1km/h = 16.667 m/min
 TRAVEL_TIME_PENALTY = 1                                              # we will add dusk, home, dawn and work
 CURFEW_TIME = round(19*60/TIME_INTERVAL) + 1                                                       # 19h
 MAX_OUTSIDE_TIME = round(4*60/TIME_INTERVAL) + 1                                                   # 4h
 MAX_TRAVEL_TIME = round(20/TIME_INTERVAL) + 1                                                     # 20m
 PEAK_HOUR_TIME1 = round(13*60/TIME_INTERVAL) + 1                                                   # 12h
-PEAK_HOUR_TIME2 = round(15*60/TIME_INTERVAL) + 1                                                   # 14h
+PEAK_HOUR_TIME2 = round(15*60/TIME_INTERVAL) + 1
+FLEXIBLE = round(60/TIME_INTERVAL)
+MIDDLE_FLEXIBLE = round(30/TIME_INTERVAL)
+NOT_FLEXIBLE = round(10/TIME_INTERVAL)
 group_to_type = {
     0: 'home',
     1: 'education',
@@ -321,7 +324,8 @@ def compile_and_initialize():
     lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
                                c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
                                c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL),
-                               asc_array, early_array, late_array, long_array, short_array)
+                               asc_array, early_array, late_array, long_array, short_array,
+                               c_int(FLEXIBLE), c_int(MIDDLE_FLEXIBLE), c_int(NOT_FLEXIBLE))
 
     return activity_csv, population_csv, lib
 
@@ -340,8 +344,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
     for i, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
         # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-        # if (i >= 2): 
-        #     break
+        if (i >= 1000): 
+            break
                 
         act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
         # print(f"\nIndividual : {individual['id']} || home : ({individual['home_x']}, {individual['home_y']}) || home : ({individual['work_x']}, {individual['work_y']})")
@@ -418,12 +422,12 @@ if __name__ == "__main__":
 
     scenari = ['Normal_life', 'Shutdown', 'Economy', 'School_restriction', 'Essential_needs', 'Outings_limitation', 
                'Return_to_baseline', 'Peak_hours', 'Curfew', 'Outside_time_limit', 'Travel_time_limit']
-    # scenari = ['Peak_hours']    
+    # scenari = ['Normal_life']    
 
-    n = 15
+    n = 20
     for scenario_name in scenari:
         start_time = time.time()
-        call_to_optimizer(activity_csv, population_csv, scenario_name, constraints[scenario_name], n)
+        call_to_optimizer(activity_csv, po,pulation_csv, scenario_name, constraints[scenario_name], n)
         end_time = time.time()
         elapsed_time = end_time - start_time
         print(f"For {len(population_csv)} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")

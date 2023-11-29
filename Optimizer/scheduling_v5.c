@@ -70,6 +70,9 @@ double late_parameters[5];
 double long_parameters[5];
 double short_parameters[5];
 double part_penal[5];
+int flex;
+int mid_flex;
+int not_flex;
 
 // scenario constraints
 double leisure_close;
@@ -106,7 +109,8 @@ Label* get_final_schedule() {
 void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_penalty, 
                             int pycurfew_time, int pymax_outside_time, int pymax_travel_time,
                             int pypeak_hour_time1, int pypeak_hour_time2, int pytime_interval,
-                            double* asc, double* early, double* late, double* longp, double* shortp){
+                            double* asc, double* early, double* late, double* longp, double* shortp,
+                            int pyflexible, int pymid_flex, int pynot_flex){
     speed = pyspeed;
     travel_time_penalty = pytravel_time_penalty;
     curfew_time = pycurfew_time;
@@ -116,6 +120,9 @@ void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_
     peak_hour_time2 = pypeak_hour_time2;
     horizon = pyhorizon;
     time_interval = pytime_interval;
+    flex = pyflexible; 
+    mid_flex = pymid_flex;
+    not_flex = pynot_flex;
     // printf("speed = %f, travel_time_penalty = %f, curfew_time = %d, max_outside_time = %d, max_travel_time = %d, peak_hour_time1 = %d, peak_hour_time2 = %d, time_interval = %d\n",
     //         speed, travel_time_penalty, curfew_time, max_outside_time, max_travel_time, peak_hour_time1,
     //         peak_hour_time2, horizon, time_interval);
@@ -618,12 +625,24 @@ double update_utility(Label* L){
     // }
     
     // time horizons differences are multiplied to be expressed in minutes from the parameters
-    // -1 correspond aux 'plateaux' de preferences
-    L->utility += short_parameters[previous_group] * time_interval * fmax(0, previous_act->des_duration - previous_L->duration - 1)
-                 + long_parameters[previous_group] * time_interval * fmax(0, previous_L->duration - previous_act->des_duration - 1);
-    L->utility += early_parameters[group] * time_interval * fmax(0, act->des_start_time - L->start_time - 1) 
-                 + late_parameters[group] * time_interval * fmax(0, L->start_time - act->des_start_time - 1);
-
+    // DURATION UTILITY OF FINISHED ACTIVITY
+    if((previous_group == 1) || (previous_group == 2)){ // work and education
+        L->utility += short_parameters[previous_group] * time_interval * fmax(0, previous_act->des_duration - previous_L->duration - not_flex)
+                    + long_parameters[previous_group] * time_interval * fmax(0, previous_L->duration - previous_act->des_duration - not_flex);
+    }
+    if((previous_group == 3) || (previous_group == 4)){ // shop and leisure
+        L->utility += short_parameters[previous_group] * time_interval * fmax(0, previous_act->des_duration - previous_L->duration - flex)
+                    + long_parameters[previous_group] * time_interval * fmax(0, previous_L->duration - previous_act->des_duration - flex);
+    }
+    // START UTILITY OF NEW ACTIVITY
+    if((group == 1) || (group == 2)){ // work and education
+        L->utility += early_parameters[group] * time_interval * fmax(0, act->des_start_time - L->start_time - not_flex) 
+                    + late_parameters[group] * time_interval * fmax(0, L->start_time - act->des_start_time - mid_flex);
+    }
+    if((group == 3) || (group == 4)){ // shop and leisure
+        L->utility += early_parameters[group] * time_interval * fmax(0, act->des_start_time - L->start_time - flex) 
+                    + late_parameters[group] * time_interval * fmax(0, L->start_time - act->des_start_time - mid_flex);
+    }
     return L->utility;
 };
 

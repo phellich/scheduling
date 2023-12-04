@@ -70,59 +70,37 @@ double late_parameters[5];
 double long_parameters[5];
 double short_parameters[5];
 double part_penal[5];
-int flex;
-int mid_flex;
-int not_flex;
+int flex, mid_flex, not_flex;
+int h8, h12, h13, h17, h20;
 
 // scenario constraints
-double leisure_close;
-double shop_close;
-double education_close;
-double work_close;
-double curfew;
-double peak_hours;
-double outside_time;
-double travel_time_limit;
-
-int curfew_time;
-int max_outside_time;
-int max_travel_time;
-int peak_hour_time1;
-int peak_hour_time2;
+int leisure_close, shop_close, education_close, work_close, outings_limitation, early_curfew, finding_balance;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////// INITIALISATION /////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int get_count() {
-    return DSSR_count;
-}
-
-double get_total_time() {
-    return total_time;
-}
-
-Label* get_final_schedule() {
-    return final_schedule;
-}
+int get_count() {return DSSR_count;}
+double get_total_time() {return total_time;}
+Label* get_final_schedule() {return final_schedule;}
 
 void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_penalty, 
-                            int pycurfew_time, int pymax_outside_time, int pymax_travel_time,
-                            int pypeak_hour_time1, int pypeak_hour_time2, int pytime_interval,
+                            int H8, int H12, int H13, int H17, int H20, int pytime_interval,
                             double* asc, double* early, double* late, double* longp, double* shortp,
                             int pyflexible, int pymid_flex, int pynot_flex){
     speed = pyspeed;
     travel_time_penalty = pytravel_time_penalty;
-    curfew_time = pycurfew_time;
-    max_outside_time = pymax_outside_time;
-    max_travel_time = pymax_travel_time;
-    peak_hour_time1 = pypeak_hour_time1;
-    peak_hour_time2 = pypeak_hour_time2;
     horizon = pyhorizon;
     time_interval = pytime_interval;
+    h8 = H8; 
+    h12 = H12; 
+    h13 = H13; 
+    h17 = H17; 
+    h20 = H20; 
     flex = pyflexible; 
     mid_flex = pymid_flex;
     not_flex = pynot_flex;
+
     // printf("speed = %f, travel_time_penalty = %f, curfew_time = %d, max_outside_time = %d, max_travel_time = %d, peak_hour_time1 = %d, peak_hour_time2 = %d, time_interval = %d\n",
     //         speed, travel_time_penalty, curfew_time, max_outside_time, max_travel_time, peak_hour_time1,
     //         peak_hour_time2, horizon, time_interval);
@@ -139,17 +117,16 @@ void set_general_parameters(int pyhorizon, double pyspeed, double pytravel_time_
     }
 };
 
-void set_scenario_constraints(double* scenario_const) {
+void set_scenario_constraints(int* scenario_const) {
     leisure_close = scenario_const[0];
     shop_close = scenario_const[1];
     education_close = scenario_const[2];
     work_close = scenario_const[3];
-    curfew = scenario_const[4];
-    peak_hours = scenario_const[5];
-    outside_time = scenario_const[6];
-    travel_time_limit = scenario_const[7];
-    // printf("leisure_close = %d, shop_close = %d, education_close = %d, work_close = %d, curfew = %d, peak_hours = %d, outside_time = %d, travel_time_limit = %d \n",
-    //         leisure_close, shop_close, education_close, work_close, curfew, peak_hours, outside_time, travel_time_limit);
+    outings_limitation = scenario_const[4];
+    early_curfew = scenario_const[5];
+    finding_balance = scenario_const[6];
+    // printf("leisure_close = %d, shop_close = %d, education_close = %d, work_close = %d, outings_limitation = %d, early_curfew = %d, finding_balance = %d \n",
+            // leisure_close, shop_close, education_close, work_close, outings_limitation, early_curfew, finding_balance);
 }
 
 void set_activities_and_particip(Activity* activities_data, double* pypart, int pynum_activities){
@@ -477,33 +454,44 @@ int is_constrained_by_scenario(Label* L, Activity* a){
     }          
     if(work_close && a->group==2){                                                         
         return 1;
-    }            
+    }  
     if(leisure_close && a->group==3){                                                         
         return 1;
     }          
-    if(shop_close && a->group==4){                                                         
+    if(shop_close && a->group==4){                                  
         return 1;
     }
     int time = L->time;
-    if(curfew && time >= curfew_time){                                               
+    // outings_limitation, early_curfew, finding_balance;
+    if((outings_limitation && a->group==4) 
+        && (time < h8 || time >= h12)){             
+        // printf("outings_limitation %d",outings_limitation);                                 
         return 1;
     }          
-    if(peak_hours && ((time >= peak_hour_time1) && (time <= peak_hour_time2))){                                               
-        return 1;
-    }        
-    if(travel_time_limit && travel_time(L->act, a) > max_travel_time){                                               
+    if(early_curfew && (time >= h17)){       
+        // printf("early_curfew %d",early_curfew);                                      
         return 1;
     }          
-    if(outside_time && (L->duration + 1 > max_outside_time)){
+    if((finding_balance && a->group==1) 
+        && (time < h13 || time >= h17)){      
+        // printf("time = %d, group = %d \n", L->time, a->group);                                         
         return 1;
-    }
+    }    
+    if((finding_balance && a->group==2) 
+        && (time < h8 || time >= h12)){    
+        // printf("time = %d, group = %d \n", L->time, a->group);                                               
+        return 1;
+    }    
+    if(finding_balance && (time >=  h20)){ 
+        // printf("time = %d, group = %d \n", L->time, a->group);                                                  
+        return 1;
+    }    
     return 0;
 }
 
 /*  Determines if an Activity a can be added to a sequence ending in label L. 
     It returns 1 if it's feasible and 0 if it's not. */
 int is_feasible(Label* L, Activity* a){
-    
     if(L == NULL){                                                          // if no Label, 'a' cann't be added
         return 0;
     }                                            
@@ -517,10 +505,6 @@ int is_feasible(Label* L, Activity* a){
     if(L->acity != a->id){                                                  // If act of L isn't the same as a, do some checks
         if(L->previous !=NULL && L->previous->acity == a->id ){             // is the previous activity the same as a ? pas sur de l'interet
             return 0;
-        }
-        if(distance_x(a, &activities[0]) > 3000){
-            // printf("Act x= %d, y= %d / home x= %d, y= %d \n distance = %f and time = %d \n \n", a->x, a->y, activities[0].x, activities[0].y, distance_x(a, &activities[0]), travel_time(a, &activities[0]));
-            return 0; 
         }
         if(L->acity == num_activities -1){                                  // Ensuring the current activity isn't the last one
             return 0;
@@ -647,7 +631,7 @@ double update_utility(Label* L){
 };
 
 /*  Generates a new label L based on an existing label L0 and an activity a */
-Label* label(Label* L0, Activity* a){
+Label* label_from_label_and_activity(Label* L0, Activity* a){
     Label* L = malloc(sizeof(Label));
     L->previous = L0;
     L->act = a;
@@ -774,7 +758,7 @@ void DP (){
 
                     if(is_feasible(L, &activities[a1])){               // si pas feasible, passe directement au prochain a1
 
-                        Label* L1 = label(L, &activities[a1]);      
+                        Label* L1 = label_from_label_and_activity(L, &activities[a1]);       
 
                         // But : garder le minimum de L_list pour le temps au nouveau label et l'activite a1
                         int dom = 0;

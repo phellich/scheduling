@@ -13,14 +13,14 @@ SCHEDULING_VERSION = 5
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
 SPEED = 19*16.667                                                       # 1km/h = 16.667 m/min
-TRAVEL_TIME_PENALTY = 1                                              # we will add dusk, home, dawn and work
-CURFEW_TIME = round(19*60/TIME_INTERVAL) + 1                                                       # 19h
-MAX_OUTSIDE_TIME = round(4*60/TIME_INTERVAL) + 1                                                   # 4h
-MAX_TRAVEL_TIME = round(20/TIME_INTERVAL) + 1                                                     # 20m
-PEAK_HOUR_TIME1 = round(13*60/TIME_INTERVAL) + 1                                                   # 12h
-PEAK_HOUR_TIME2 = round(15*60/TIME_INTERVAL) + 1
-FLEXIBLE = round(120/TIME_INTERVAL)
-MIDDLE_FLEXIBLE = round(50/TIME_INTERVAL)
+TRAVEL_TIME_PENALTY = 0.1                                              # we will add dusk, home, dawn and work
+H8 = round(8*60/TIME_INTERVAL) + 1                
+H12 = round(12*60/TIME_INTERVAL) + 1  
+H13 = round(13*60/TIME_INTERVAL) + 1  
+H17 = round(17*60/TIME_INTERVAL) + 1  
+H20 = round(20*60/TIME_INTERVAL) + 1  
+FLEXIBLE = round(60/TIME_INTERVAL)
+MIDDLE_FLEXIBLE = round(30/TIME_INTERVAL)
 NOT_FLEXIBLE = round(10/TIME_INTERVAL)
 # FLEXIBLE = round(10/TIME_INTERVAL)
 # MIDDLE_FLEXIBLE = round(10/TIME_INTERVAL)
@@ -331,18 +331,16 @@ def compile_and_initialize():
     short_array = (c_double * len(util_params.short))(*util_params.short) 
 
     lib.set_general_parameters(c_int(HORIZON), c_double(SPEED), c_double(TRAVEL_TIME_PENALTY), 
-                               c_int(CURFEW_TIME), c_int(MAX_OUTSIDE_TIME), c_int(MAX_TRAVEL_TIME),
-                               c_int(PEAK_HOUR_TIME1), c_int(PEAK_HOUR_TIME2), c_int(TIME_INTERVAL),
+                               c_int(H8), c_int(H12), c_int(H13), c_int(H17), c_int(H20), c_int(TIME_INTERVAL),
                                asc_array, early_array, late_array, long_array, short_array,
                                c_int(FLEXIBLE), c_int(MIDDLE_FLEXIBLE), c_int(NOT_FLEXIBLE))
 
     return activity_csv, population_csv, lib
 
-
 def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_act_to_select = 30, i_break= None):
 
     print(f"Running scenario: {scenario}")
-    constraints_array = (c_double * len(constraints))(*constraints)
+    constraints_array = (c_int * len(constraints))(*constraints)
     lib.set_scenario_constraints(constraints_array)
 
     DSSR_iterations = []
@@ -411,26 +409,25 @@ if __name__ == "__main__":
     #     shop closure,
     #     education closure,
     #     work closure,
-    #     curfew constraint,
-    #     peak hours,
-    #     outside-time limit,
-    #     travel-time restriction]
+    #     Outings limitation,
+    #     Early curfew,
+    #     Finding balance]
 
     constraints = {
-        'Normal_life' :          [0, 0, 0, 0, 0, 0, 0, 0],
-        'Outings_limitation' :   [1, 1, 1, 1, 0, 0, 0, 0],
-        'Only_economy' :         [1, 1, 1, 0, 0, 0, 0, 0],
-        'Early_curfew' :         [0, 0, 1, 0, 0, 0, 0, 0],
-        'Essential_needs' :      [1, 0, 1, 1, 0, 0, 1, 0],
-        'Finding_balance' :      [1, 0, 1, 0, 0, 0, 1, 0],
-        'Impact_of_leisure' :    [0, 0, 1, 0, 0, 0, 1, 0]
+        'Normal_life' :          [0, 0, 0, 0, 0, 0, 0],
+        'Outings_limitation' :   [1, 0, 0, 0, 1, 0, 0], # partial shop close
+        'Only_economy' :         [1, 1, 1, 0, 0, 0, 0],
+        'Early_curfew' :         [0, 0, 0, 0, 0, 1, 0],
+        'Essential_needs' :      [0, 1, 0, 1, 0, 0, 0],
+        'Finding_balance' :      [0, 0, 0, 0, 0, 0, 1],
+        'Impact_of_leisure' :    [1, 0, 0, 0, 0, 0, 0]
     }
 
     scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
                 'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    scenari = ['Normal_life']    
+    # scenari = ['Finding_balance']    
 
-    i = 2
+    i = 10000
     n = 15
     for scenario_name in scenari:
         start_time = time.time()

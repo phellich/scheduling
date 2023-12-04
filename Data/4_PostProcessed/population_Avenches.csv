@@ -1,0 +1,3 @@
+id,age,bikeAvailability,carAvail,employed,hasLicense,home_x,home_y,householdIncome,isCarPassenger,municipalityType,ptHasGA,ptHasHalbtax,ptHasStrecke,ptHasVerbund,sex,spRegion,postcode,canton,local,municipality,muni_index,wgs84_e,wgs84_n,agent_index
+6458988,81,FOR_NONE,always,False,yes,2569815.0,1191950.0,,False,,False,False,False,False,m,2,1580,VD,Avenches,Avenches,5451,7.040606869945081,46.88024835092666,153427
+6682685,68,FOR_SOME,never,False,yes,2570103.0,1192497.0,,False,,False,True,False,False,f,2,1580,VD,Avenches,Avenches,5451,7.040606869945081,46.88024835092666,376037

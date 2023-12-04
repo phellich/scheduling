@@ -5,7 +5,10 @@ from ctypes import Structure, c_int, c_double, POINTER, CDLL
 import pandas as pd
 from collections import namedtuple
 import time
+import Post_processing
 
+# LOCAL = 'Lausanne'
+LOCAL = 'Avenches'
 SCHEDULING_VERSION = 5
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
@@ -16,9 +19,12 @@ MAX_OUTSIDE_TIME = round(4*60/TIME_INTERVAL) + 1                                
 MAX_TRAVEL_TIME = round(20/TIME_INTERVAL) + 1                                                     # 20m
 PEAK_HOUR_TIME1 = round(13*60/TIME_INTERVAL) + 1                                                   # 12h
 PEAK_HOUR_TIME2 = round(15*60/TIME_INTERVAL) + 1
-FLEXIBLE = round(60/TIME_INTERVAL)
-MIDDLE_FLEXIBLE = round(30/TIME_INTERVAL)
+FLEXIBLE = round(120/TIME_INTERVAL)
+MIDDLE_FLEXIBLE = round(50/TIME_INTERVAL)
 NOT_FLEXIBLE = round(10/TIME_INTERVAL)
+# FLEXIBLE = round(10/TIME_INTERVAL)
+# MIDDLE_FLEXIBLE = round(10/TIME_INTERVAL)
+# NOT_FLEXIBLE = round(10/TIME_INTERVAL)
 group_to_type = {
     0: 'home',
     1: 'education',
@@ -235,19 +241,24 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
         path_to_root.append(label_pointer)
         label_pointer = label_pointer.contents.previous
 
-    # Utiliser un dictionnaire pour conserver la durée maximale pour chaque identifiant (activity, start)
     schedule_data_dict = {}
     for label_pointer in reversed(path_to_root):
         label = label_pointer.contents
 
         acity = label.acity
-        if (acity > 0) and (acity < num_activities-3):
+        if (acity > 0) and (acity < num_activities-3):              # general activity
             activity_row_from_csv = activity_df.iloc[acity-1]
             facility_id = activity_row_from_csv['facility']
-        elif (acity == num_activities-3):
+            x = activity_row_from_csv['x']
+            y = activity_row_from_csv['y']        
+        elif (acity == num_activities-3):                           # work
             facility_id = individual['work_id']
-        else:
-            facility_id = 0
+            x = individual['work_x']
+            y = individual['work_y']
+        else:                                                       # home
+            facility_id = individual['homeid']
+            x = individual['home_x']
+            y = individual['home_y']
 
         data = {
             "acity": label.acity,
@@ -256,19 +267,17 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
             "start": label.start_time,
             "duration": label.duration,
             "time": label.time,
-            "cum_utility": label.utility
+            "cum_utility": label.utility,
+            "x": x,
+            "y": y
         }
 
-        # Clé unique pour identifier chaque activité avec son heure de début
         unique_key = (data["acity"], data["start"])
-
         # Vérifier si la durée est plus grande que celle déjà stockée pour cette clé
         if unique_key not in schedule_data_dict or schedule_data_dict[unique_key]["duration"] < data["duration"]:
             schedule_data_dict[unique_key] = data
 
-    # Convertir le dictionnaire en liste pour les données de sortie
     schedule_data = list(schedule_data_dict.values())
-    
     return schedule_data
 
 def filter_closest(all_activities, individual, num_act_to_select):
@@ -307,8 +316,8 @@ def compile_and_initialize():
     compile_code()
     lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
 
-    activity_csv = pd.read_csv(f"Data/PreProcessed/activity_{TIME_INTERVAL}m.csv")
-    population_csv = pd.read_csv(f"Data/PreProcessed/population_{TIME_INTERVAL}m.csv")
+    activity_csv = pd.read_csv(f"Data/2_PreProcessed/activities_{LOCAL}.csv")
+    population_csv = pd.read_csv(f"Data/2_PreProcessed/population_{LOCAL}.csv")
      
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
@@ -330,7 +339,7 @@ def compile_and_initialize():
     return activity_csv, population_csv, lib
 
 
-def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_act_to_select = 30):
+def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_act_to_select = 30, i_break= None):
 
     print(f"Running scenario: {scenario}")
     constraints_array = (c_double * len(constraints))(*constraints)
@@ -344,7 +353,7 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
     for i, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
         # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-        if (i >= 1000): 
+        if (i >= i_break): 
             break
                 
         act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
@@ -371,6 +380,7 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         execution_times.append(time)
         schedules.append(schedule_data) 
         ids.append(individual['id'])
+
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
             # print(f"\n UTILITY = {schedule_pointer.contents.utility}")
@@ -389,7 +399,7 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         'daily_schedule': schedules  
     })
 
-    results.to_json(f"Data/Generated/{scenario}.json", orient='records', lines=False, indent = 4) 
+    results.to_json(f"Data/3_Generated/{scenario}.json", orient='records', lines=False, indent = 4) 
 
 
 if __name__ == "__main__":
@@ -407,27 +417,27 @@ if __name__ == "__main__":
     #     travel-time restriction]
 
     constraints = {
-        'Normal_life' :               [0, 0, 0, 0, 0, 0, 0, 0],
-        'Shutdown' :                  [1, 1, 1, 1, 0, 0, 0, 0],
-        'Economy' :                   [1, 1, 1, 0, 0, 0, 0, 0],
-        'School_restriction' :        [0, 0, 1, 0, 0, 0, 0, 0],
-        'Essential_needs' :           [1, 0, 1, 1, 0, 0, 1, 0],
-        'Outings_limitation' :        [1, 0, 1, 0, 0, 0, 1, 0],
-        'Return_to_baseline' :        [0, 0, 1, 0, 0, 0, 1, 0],
-        'Peak_hours' :                [0, 0, 0, 0, 0, 1, 0, 0],
-        'Curfew' :                    [0, 0, 0, 0, 1, 0, 0, 0],
-        'Outside_time_limit' :        [0, 0, 0, 0, 0, 0, 1, 0],
-        'Travel_time_limit' :         [0, 0, 0, 0, 0, 0, 0, 1]
+        'Normal_life' :          [0, 0, 0, 0, 0, 0, 0, 0],
+        'Outings_limitation' :   [1, 1, 1, 1, 0, 0, 0, 0],
+        'Only_economy' :         [1, 1, 1, 0, 0, 0, 0, 0],
+        'Early_curfew' :         [0, 0, 1, 0, 0, 0, 0, 0],
+        'Essential_needs' :      [1, 0, 1, 1, 0, 0, 1, 0],
+        'Finding_balance' :      [1, 0, 1, 0, 0, 0, 1, 0],
+        'Impact_of_leisure' :    [0, 0, 1, 0, 0, 0, 1, 0]
     }
 
-    scenari = ['Normal_life', 'Shutdown', 'Economy', 'School_restriction', 'Essential_needs', 'Outings_limitation', 
-               'Return_to_baseline', 'Peak_hours', 'Curfew', 'Outside_time_limit', 'Travel_time_limit']
-    # scenari = ['Normal_life']    
+    scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
+                'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
+    scenari = ['Normal_life']    
 
-    n = 20
+    i = 2
+    n = 15
     for scenario_name in scenari:
         start_time = time.time()
-        call_to_optimizer(activity_csv, po,pulation_csv, scenario_name, constraints[scenario_name], n)
+        call_to_optimizer(activity_csv, population_csv, scenario_name, constraints[scenario_name], num_act_to_select=n, i_break=i)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(f"For {len(population_csv)} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
+        print(f"For {len(population_csv) if i == None else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
+
+    print("Create the Post-processed files")
+    Post_processing.create_postprocess_files(LOCAL, TIME_INTERVAL, scenari, i)

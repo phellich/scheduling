@@ -560,6 +560,10 @@ int dominates(Label* L1, Label* L2){
 
     if(L1->utility <= L2->utility){                     // L1 a une meilleure utility que L2
 
+        // if(L1->time <= L2->time){
+        //     return 2;
+        // }
+
         /*  S'assure que tous les group de L2 sont dans L1, sinon ca veut dire que L2 peut etre moins bien pcq elle nn'a pas encore fait un group.
             Au contraire si L1 est meilleur alors que il n'a meme pas fait tous les groupes de L2, ca veut dire que son choice set est tjrs plus grand */
         if(dom_mem_contains(L2,L1)){ // be sure of order

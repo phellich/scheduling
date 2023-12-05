@@ -22,9 +22,6 @@ H20 = round(20*60/TIME_INTERVAL) + 1
 FLEXIBLE = round(60/TIME_INTERVAL)
 MIDDLE_FLEXIBLE = round(30/TIME_INTERVAL)
 NOT_FLEXIBLE = round(10/TIME_INTERVAL)
-# FLEXIBLE = round(10/TIME_INTERVAL)
-# MIDDLE_FLEXIBLE = round(10/TIME_INTERVAL)
-# NOT_FLEXIBLE = round(10/TIME_INTERVAL)
 group_to_type = {
     0: 'home',
     1: 'education',
@@ -397,7 +394,7 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         'daily_schedule': schedules  
     })
 
-    results.to_json(f"Data/3_Generated/{scenario}.json", orient='records', lines=False, indent = 4) 
+    results.to_json(f"Data/3_Generated/{scenario}_HEUR.json", orient='records', lines=False, indent = 4) 
 
 
 if __name__ == "__main__":
@@ -429,12 +426,15 @@ if __name__ == "__main__":
 
     i = 10000
     n = 15
+    elapsed_times = []
     for scenario_name in scenari:
         start_time = time.time()
         call_to_optimizer(activity_csv, population_csv, scenario_name, constraints[scenario_name], num_act_to_select=n, i_break=i)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(f"For {len(population_csv) if i == None else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
+        elapsed_times.append(round(elapsed_time, 2))
+        print(f"For {len(population_csv) if i > 5000 else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
 
-    print("Create the Post-processed files")
+    print(elapsed_times)
+    print("Creating the Post-processed files...")
     Post_processing.create_postprocess_files(LOCAL, TIME_INTERVAL, scenari, i)

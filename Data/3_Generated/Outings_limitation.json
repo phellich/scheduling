@@ -64,7 +64,7 @@
     },
     {
         "id":6458764,
-        "execution_time":0.008,
+        "execution_time":0.005,
         "DSSR_iterations":2,
         "utility":-41.3,
         "daily_schedule":[
@@ -160,7 +160,7 @@
     },
     {
         "id":6326513,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-11.7,
         "daily_schedule":[
@@ -223,7 +223,7 @@
     },
     {
         "id":6326735,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-23.4,
         "daily_schedule":[
@@ -818,7 +818,7 @@
     },
     {
         "id":7042973,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -944,7 +944,7 @@
     },
     {
         "id":6459115,
-        "execution_time":0.009,
+        "execution_time":0.01,
         "DSSR_iterations":4,
         "utility":-36.25,
         "daily_schedule":[
@@ -1040,7 +1040,7 @@
     },
     {
         "id":6458800,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-12.1,
         "daily_schedule":[
@@ -1440,7 +1440,7 @@
     },
     {
         "id":6459359,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-41.0,
         "daily_schedule":[
@@ -1536,7 +1536,7 @@
     },
     {
         "id":6927922,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-42.1,
         "daily_schedule":[
@@ -1632,7 +1632,7 @@
     },
     {
         "id":6970945,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-12.9,
         "daily_schedule":[
@@ -1695,7 +1695,7 @@
     },
     {
         "id":6326724,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-30.2,
         "daily_schedule":[
@@ -1780,7 +1780,7 @@
     },
     {
         "id":6982635,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -2002,7 +2002,7 @@
     },
     {
         "id":6681977,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-11.7,
         "daily_schedule":[
@@ -2065,7 +2065,7 @@
     },
     {
         "id":6459026,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -2128,7 +2128,7 @@
     },
     {
         "id":7050522,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-11.5,
         "daily_schedule":[
@@ -2191,7 +2191,7 @@
     },
     {
         "id":6681901,
-        "execution_time":0.006,
+        "execution_time":0.007,
         "DSSR_iterations":2,
         "utility":-28.8,
         "daily_schedule":[
@@ -2265,7 +2265,7 @@
     },
     {
         "id":6326521,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -2413,7 +2413,7 @@
     },
     {
         "id":6459094,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-13.1,
         "daily_schedule":[
@@ -2476,7 +2476,7 @@
     },
     {
         "id":6959508,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-22.4,
         "daily_schedule":[
@@ -2561,7 +2561,7 @@
     },
     {
         "id":6681967,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -2624,7 +2624,7 @@
     },
     {
         "id":6431356,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-41.1,
         "daily_schedule":[
@@ -2731,7 +2731,7 @@
     },
     {
         "id":6622411,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -2794,7 +2794,7 @@
     },
     {
         "id":6682112,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-41.8,
         "daily_schedule":[
@@ -2890,7 +2890,7 @@
     },
     {
         "id":6988533,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-31.4,
         "daily_schedule":[
@@ -2964,7 +2964,7 @@
     },
     {
         "id":7054089,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -3112,7 +3112,7 @@
     },
     {
         "id":6990167,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-30.0,
         "daily_schedule":[
@@ -3197,7 +3197,7 @@
     },
     {
         "id":6682697,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-28.0,
         "daily_schedule":[
@@ -3397,7 +3397,7 @@
     },
     {
         "id":6954104,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -3460,7 +3460,7 @@
     },
     {
         "id":7090891,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -3545,7 +3545,7 @@
     },
     {
         "id":7059325,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-17.3,
         "daily_schedule":[
@@ -3608,7 +3608,7 @@
     },
     {
         "id":6459242,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-18.7,
         "daily_schedule":[
@@ -3948,7 +3948,7 @@
     },
     {
         "id":6682444,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-23.4,
         "daily_schedule":[
@@ -4033,7 +4033,7 @@
     },
     {
         "id":7131843,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-29.0,
         "daily_schedule":[
@@ -4118,7 +4118,7 @@
     },
     {
         "id":6681774,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -4244,7 +4244,7 @@
     },
     {
         "id":6682908,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-22.0,
         "daily_schedule":[
@@ -4381,7 +4381,7 @@
     },
     {
         "id":7055206,
-        "execution_time":0.003,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-12.9,
         "daily_schedule":[
@@ -4518,7 +4518,7 @@
     },
     {
         "id":6923723,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -4666,7 +4666,7 @@
     },
     {
         "id":6458867,
-        "execution_time":0.005,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-17.42,
         "daily_schedule":[
@@ -4751,7 +4751,7 @@
     },
     {
         "id":6986414,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-19.21,
         "daily_schedule":[
@@ -4888,7 +4888,7 @@
     },
     {
         "id":6681940,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-29.2,
         "daily_schedule":[
@@ -5036,7 +5036,7 @@
     },
     {
         "id":6933425,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-30.8,
         "daily_schedule":[
@@ -5121,7 +5121,7 @@
     },
     {
         "id":6459119,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-30.9,
         "daily_schedule":[
@@ -5195,7 +5195,7 @@
     },
     {
         "id":6682812,
-        "execution_time":0.003,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -5258,7 +5258,7 @@
     },
     {
         "id":7123996,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -5469,7 +5469,7 @@
     },
     {
         "id":6681965,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-28.8,
         "daily_schedule":[
@@ -5628,7 +5628,7 @@
     },
     {
         "id":6681925,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-29.8,
         "daily_schedule":[
@@ -5713,7 +5713,7 @@
     },
     {
         "id":6681923,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -5776,7 +5776,7 @@
     },
     {
         "id":6682179,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-42.1,
         "daily_schedule":[
@@ -5872,7 +5872,7 @@
     },
     {
         "id":6681662,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-31.0,
         "daily_schedule":[
@@ -5957,7 +5957,7 @@
     },
     {
         "id":6458987,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-18.5,
         "daily_schedule":[
@@ -6020,7 +6020,7 @@
     },
     {
         "id":6459321,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-21.2,
         "daily_schedule":[
@@ -6105,7 +6105,7 @@
     },
     {
         "id":6681988,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -6179,7 +6179,7 @@
     },
     {
         "id":6326325,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-41.5,
         "daily_schedule":[
@@ -6286,7 +6286,7 @@
     },
     {
         "id":6682032,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -6538,7 +6538,7 @@
     },
     {
         "id":6681758,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-31.4,
         "daily_schedule":[
@@ -6612,7 +6612,7 @@
     },
     {
         "id":6326711,
-        "execution_time":0.005,
+        "execution_time":0.007,
         "DSSR_iterations":2,
         "utility":-38.1,
         "daily_schedule":[
@@ -6719,7 +6719,7 @@
     },
     {
         "id":6459213,
-        "execution_time":0.006,
+        "execution_time":0.008,
         "DSSR_iterations":2,
         "utility":-18.5,
         "daily_schedule":[
@@ -6782,7 +6782,7 @@
     },
     {
         "id":6459320,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -6908,7 +6908,7 @@
     },
     {
         "id":6682903,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-30.0,
         "daily_schedule":[
@@ -6993,7 +6993,7 @@
     },
     {
         "id":6682635,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-31.2,
         "daily_schedule":[
@@ -7226,7 +7226,7 @@
     },
     {
         "id":6681805,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -7374,7 +7374,7 @@
     },
     {
         "id":6623556,
-        "execution_time":0.001,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -7437,7 +7437,7 @@
     },
     {
         "id":6962862,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-28.4,
         "daily_schedule":[
@@ -7585,7 +7585,7 @@
     },
     {
         "id":7055756,
-        "execution_time":0.018,
+        "execution_time":0.02,
         "DSSR_iterations":7,
         "utility":-35.6,
         "daily_schedule":[
@@ -7692,7 +7692,7 @@
     },
     {
         "id":7041426,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.1,
         "daily_schedule":[
@@ -7766,7 +7766,7 @@
     },
     {
         "id":6434085,
-        "execution_time":0.005,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -7829,7 +7829,7 @@
     },
     {
         "id":6682604,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-31.2,
         "daily_schedule":[
@@ -7977,7 +7977,7 @@
     },
     {
         "id":7030806,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-31.0,
         "daily_schedule":[
@@ -8062,7 +8062,7 @@
     },
     {
         "id":6650688,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-42.3,
         "daily_schedule":[
@@ -8254,7 +8254,7 @@
     },
     {
         "id":6459131,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.6,
         "daily_schedule":[
@@ -8402,7 +8402,7 @@
     },
     {
         "id":7119791,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -8487,7 +8487,7 @@
     },
     {
         "id":6984076,
-        "execution_time":0.005,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-31.4,
         "daily_schedule":[
@@ -8572,7 +8572,7 @@
     },
     {
         "id":6682739,
-        "execution_time":0.005,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-34.34,
         "daily_schedule":[
@@ -8668,7 +8668,7 @@
     },
     {
         "id":6936923,
-        "execution_time":0.003,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-27.8,
         "daily_schedule":[
@@ -8753,7 +8753,7 @@
     },
     {
         "id":6459315,
-        "execution_time":0.013,
+        "execution_time":0.011,
         "DSSR_iterations":3,
         "utility":-41.9,
         "daily_schedule":[
@@ -9008,7 +9008,7 @@
     },
     {
         "id":6970264,
-        "execution_time":0.007,
+        "execution_time":0.005,
         "DSSR_iterations":2,
         "utility":-35.0,
         "daily_schedule":[
@@ -9115,7 +9115,7 @@
     },
     {
         "id":6646547,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":0.0,
         "daily_schedule":[
@@ -9156,7 +9156,7 @@
     },
     {
         "id":6681676,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -9219,7 +9219,7 @@
     },
     {
         "id":6682808,
-        "execution_time":0.005,
+        "execution_time":0.006,
         "DSSR_iterations":2,
         "utility":-18.5,
         "daily_schedule":[
@@ -9504,7 +9504,7 @@
     },
     {
         "id":6459243,
-        "execution_time":0.001,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -9567,7 +9567,7 @@
     },
     {
         "id":6430248,
-        "execution_time":0.004,
+        "execution_time":0.006,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -9737,7 +9737,7 @@
     },
     {
         "id":6681909,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -9822,7 +9822,7 @@
     },
     {
         "id":6920424,
-        "execution_time":0.005,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -10118,7 +10118,7 @@
     },
     {
         "id":6681927,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-21.1,
         "daily_schedule":[
@@ -10288,7 +10288,7 @@
     },
     {
         "id":7087593,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -10351,7 +10351,7 @@
     },
     {
         "id":6934158,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-31.4,
         "daily_schedule":[
@@ -10436,7 +10436,7 @@
     },
     {
         "id":6973321,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -10617,7 +10617,7 @@
     },
     {
         "id":6326717,
-        "execution_time":0.006,
+        "execution_time":0.007,
         "DSSR_iterations":2,
         "utility":-23.2,
         "daily_schedule":[
@@ -10776,7 +10776,7 @@
     },
     {
         "id":6934004,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-22.9,
         "daily_schedule":[
@@ -10850,7 +10850,7 @@
     },
     {
         "id":7122180,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -10935,7 +10935,7 @@
     },
     {
         "id":6681653,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -11094,7 +11094,7 @@
     },
     {
         "id":6681689,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.1,
         "daily_schedule":[
@@ -11253,7 +11253,7 @@
     },
     {
         "id":6681579,
-        "execution_time":0.006,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-37.9,
         "daily_schedule":[
@@ -11360,7 +11360,7 @@
     },
     {
         "id":6681736,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":1,
         "utility":-30.8,
         "daily_schedule":[
@@ -11508,7 +11508,7 @@
     },
     {
         "id":6326560,
-        "execution_time":0.005,
+        "execution_time":0.006,
         "DSSR_iterations":2,
         "utility":-41.1,
         "daily_schedule":[
@@ -11604,7 +11604,7 @@
     },
     {
         "id":6933422,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -11667,7 +11667,7 @@
     },
     {
         "id":7026956,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-25.0,
         "daily_schedule":[
@@ -11996,7 +11996,7 @@
     },
     {
         "id":6681661,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-42.1,
         "daily_schedule":[
@@ -12251,7 +12251,7 @@
     },
     {
         "id":6326443,
-        "execution_time":0.005,
+        "execution_time":0.006,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -12399,7 +12399,7 @@
     },
     {
         "id":6656484,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -12484,7 +12484,7 @@
     },
     {
         "id":7082597,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-28.6,
         "daily_schedule":[
@@ -12676,7 +12676,7 @@
     },
     {
         "id":7121079,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -12739,7 +12739,7 @@
     },
     {
         "id":7133032,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -12972,7 +12972,7 @@
     },
     {
         "id":6923721,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-29.0,
         "daily_schedule":[
@@ -13057,7 +13057,7 @@
     },
     {
         "id":7089835,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -13120,7 +13120,7 @@
     },
     {
         "id":6459173,
-        "execution_time":0.003,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.3,
         "daily_schedule":[
@@ -13183,7 +13183,7 @@
     },
     {
         "id":1069770,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
@@ -13394,7 +13394,7 @@
     },
     {
         "id":6655623,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -13531,7 +13531,7 @@
     },
     {
         "id":6326771,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-30.4,
         "daily_schedule":[
@@ -13786,7 +13786,7 @@
     },
     {
         "id":7054091,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-31.4,
         "daily_schedule":[
@@ -13934,7 +13934,7 @@
     },
     {
         "id":6682031,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -13997,7 +13997,7 @@
     },
     {
         "id":6326552,
-        "execution_time":0.006,
+        "execution_time":0.005,
         "DSSR_iterations":2,
         "utility":-40.3,
         "daily_schedule":[
@@ -14082,7 +14082,7 @@
     },
     {
         "id":6458851,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -14145,7 +14145,7 @@
     },
     {
         "id":6682201,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-30.0,
         "daily_schedule":[
@@ -14230,7 +14230,7 @@
     },
     {
         "id":6636531,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -14504,7 +14504,7 @@
     },
     {
         "id":6459004,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-36.4,
         "daily_schedule":[
@@ -14589,7 +14589,7 @@
     },
     {
         "id":6458692,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-38.7,
         "daily_schedule":[
@@ -14759,7 +14759,7 @@
     },
     {
         "id":6459036,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -14929,7 +14929,7 @@
     },
     {
         "id":6681760,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-20.85,
         "daily_schedule":[
@@ -15003,7 +15003,7 @@
     },
     {
         "id":6655637,
-        "execution_time":0.008,
+        "execution_time":0.007,
         "DSSR_iterations":3,
         "utility":-38.2,
         "daily_schedule":[
@@ -15088,7 +15088,7 @@
     },
     {
         "id":6682069,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -15151,7 +15151,7 @@
     },
     {
         "id":7040066,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -15299,7 +15299,7 @@
     },
     {
         "id":6682536,
-        "execution_time":0.003,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-31.4,
         "daily_schedule":[
@@ -15447,7 +15447,7 @@
     },
     {
         "id":6459261,
-        "execution_time":0.003,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-41.9,
         "daily_schedule":[
@@ -15713,7 +15713,7 @@
     },
     {
         "id":6638530,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-11.1,
         "daily_schedule":[
@@ -15850,7 +15850,7 @@
     },
     {
         "id":6681910,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -15913,7 +15913,7 @@
     },
     {
         "id":6459114,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-40.8,
         "daily_schedule":[
@@ -16009,7 +16009,7 @@
     },
     {
         "id":7123307,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -16083,7 +16083,7 @@
     },
     {
         "id":6326518,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-29.6,
         "daily_schedule":[
@@ -16168,7 +16168,7 @@
     },
     {
         "id":6682625,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -16231,7 +16231,7 @@
     },
     {
         "id":7034711,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -16294,7 +16294,7 @@
     },
     {
         "id":6682469,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -16357,7 +16357,7 @@
     },
     {
         "id":7068172,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-31.0,
         "daily_schedule":[
@@ -16442,7 +16442,7 @@
     },
     {
         "id":6682062,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-30.3,
         "daily_schedule":[
@@ -16516,7 +16516,7 @@
     },
     {
         "id":6458718,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-31.2,
         "daily_schedule":[
@@ -16760,7 +16760,7 @@
     },
     {
         "id":6682051,
-        "execution_time":0.006,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -16845,7 +16845,7 @@
     },
     {
         "id":6326494,
-        "execution_time":0.007,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -16908,7 +16908,7 @@
     },
     {
         "id":6962864,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.3,
         "daily_schedule":[
@@ -16971,7 +16971,7 @@
     },
     {
         "id":6623881,
-        "execution_time":0.006,
+        "execution_time":0.005,
         "DSSR_iterations":2,
         "utility":-41.1,
         "daily_schedule":[
@@ -17078,7 +17078,7 @@
     },
     {
         "id":6458736,
-        "execution_time":0.004,
+        "execution_time":0.006,
         "DSSR_iterations":1,
         "utility":-30.0,
         "daily_schedule":[
@@ -17248,7 +17248,7 @@
     },
     {
         "id":7132614,
-        "execution_time":0.003,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-18.7,
         "daily_schedule":[
@@ -17311,7 +17311,7 @@
     },
     {
         "id":6326396,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-30.6,
         "daily_schedule":[
@@ -17396,7 +17396,7 @@
     },
     {
         "id":6459073,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-31.6,
         "daily_schedule":[
@@ -17470,7 +17470,7 @@
     },
     {
         "id":7079475,
-        "execution_time":0.005,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-38.4,
         "daily_schedule":[
@@ -17725,7 +17725,7 @@
     },
     {
         "id":6326411,
-        "execution_time":0.018,
+        "execution_time":0.017,
         "DSSR_iterations":7,
         "utility":-41.6,
         "daily_schedule":[
@@ -17810,7 +17810,7 @@
     },
     {
         "id":6984509,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -18106,7 +18106,7 @@
     },
     {
         "id":6682081,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-11.9,
         "daily_schedule":[
@@ -18169,7 +18169,7 @@
     },
     {
         "id":7041835,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -18232,7 +18232,7 @@
     },
     {
         "id":6326679,
-        "execution_time":0.005,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-23.3,
         "daily_schedule":[
@@ -18380,7 +18380,7 @@
     },
     {
         "id":6459059,
-        "execution_time":0.007,
+        "execution_time":0.008,
         "DSSR_iterations":3,
         "utility":-42.1,
         "daily_schedule":[
@@ -18487,7 +18487,7 @@
     },
     {
         "id":6610428,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-29.8,
         "daily_schedule":[
@@ -18572,7 +18572,7 @@
     },
     {
         "id":6682963,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-11.7,
         "daily_schedule":[
@@ -18635,7 +18635,7 @@
     },
     {
         "id":6682868,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-11.7,
         "daily_schedule":[
@@ -18698,7 +18698,7 @@
     },
     {
         "id":6681637,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-31.2,
         "daily_schedule":[
@@ -18931,7 +18931,7 @@
     },
     {
         "id":6326447,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-41.3,
         "daily_schedule":[
@@ -19090,7 +19090,7 @@
     },
     {
         "id":6326415,
-        "execution_time":0.01,
+        "execution_time":0.011,
         "DSSR_iterations":4,
         "utility":-33.23,
         "daily_schedule":[
@@ -19186,7 +19186,7 @@
     },
     {
         "id":6682667,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-27.4,
         "daily_schedule":[
@@ -19271,7 +19271,7 @@
     },
     {
         "id":6682222,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -19356,7 +19356,7 @@
     },
     {
         "id":7102963,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -19567,7 +19567,7 @@
     },
     {
         "id":6617892,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-11.7,
         "daily_schedule":[
@@ -19715,7 +19715,7 @@
     },
     {
         "id":6682960,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-40.3,
         "daily_schedule":[
@@ -19822,7 +19822,7 @@
     },
     {
         "id":6682673,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-24.71,
         "daily_schedule":[
@@ -19959,7 +19959,7 @@
     },
     {
         "id":6682288,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-40.7,
         "daily_schedule":[
@@ -20055,7 +20055,7 @@
     },
     {
         "id":6681581,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -20118,7 +20118,7 @@
     },
     {
         "id":7020201,
-        "execution_time":0.001,
+        "execution_time":0.0,
         "DSSR_iterations":0,
         "utility":-30.0,
         "daily_schedule":[
@@ -20425,7 +20425,7 @@
     },
     {
         "id":6623688,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-12.9,
         "daily_schedule":[
@@ -20488,7 +20488,7 @@
     },
     {
         "id":6681975,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-18.5,
         "daily_schedule":[
@@ -20762,7 +20762,7 @@
     },
     {
         "id":6996685,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -20932,7 +20932,7 @@
     },
     {
         "id":6987214,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -21187,7 +21187,7 @@
     },
     {
         "id":7128731,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-12.7,
         "daily_schedule":[
@@ -21250,7 +21250,7 @@
     },
     {
         "id":6681821,
-        "execution_time":0.005,
+        "execution_time":0.006,
         "DSSR_iterations":2,
         "utility":-29.0,
         "daily_schedule":[
@@ -21335,7 +21335,7 @@
     },
     {
         "id":6600091,
-        "execution_time":0.01,
+        "execution_time":0.009,
         "DSSR_iterations":4,
         "utility":-30.07,
         "daily_schedule":[
@@ -21420,7 +21420,7 @@
     },
     {
         "id":6459323,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-23.9,
         "daily_schedule":[
@@ -21590,7 +21590,7 @@
     },
     {
         "id":6631661,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-37.05,
         "daily_schedule":[
@@ -21845,7 +21845,7 @@
     },
     {
         "id":6326330,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-40.9,
         "daily_schedule":[
@@ -21941,7 +21941,7 @@
     },
     {
         "id":6922346,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -22004,7 +22004,7 @@
     },
     {
         "id":6459348,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-29.9,
         "daily_schedule":[
@@ -22078,7 +22078,7 @@
     },
     {
         "id":6326630,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-29.8,
         "daily_schedule":[
@@ -22163,7 +22163,7 @@
     },
     {
         "id":6682840,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-40.4,
         "daily_schedule":[
@@ -22248,7 +22248,7 @@
     },
     {
         "id":6681652,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-28.8,
         "daily_schedule":[
@@ -22407,7 +22407,7 @@
     },
     {
         "id":6988258,
-        "execution_time":0.004,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -22544,7 +22544,7 @@
     },
     {
         "id":6682303,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-27.6,
         "daily_schedule":[
@@ -22692,7 +22692,7 @@
     },
     {
         "id":6431926,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -22755,7 +22755,7 @@
     },
     {
         "id":7060388,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-41.5,
         "daily_schedule":[
@@ -22977,7 +22977,7 @@
     },
     {
         "id":6682674,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -23147,7 +23147,7 @@
     },
     {
         "id":6953096,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -23443,7 +23443,7 @@
     },
     {
         "id":6681771,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.3,
         "daily_schedule":[
@@ -23506,7 +23506,7 @@
     },
     {
         "id":6326681,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-30.6,
         "daily_schedule":[
@@ -23750,7 +23750,7 @@
     },
     {
         "id":7061459,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -23909,7 +23909,7 @@
     },
     {
         "id":6682899,
-        "execution_time":0.001,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -24183,7 +24183,7 @@
     },
     {
         "id":6458714,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-12.5,
         "daily_schedule":[
@@ -24331,7 +24331,7 @@
     },
     {
         "id":6626539,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -24394,7 +24394,7 @@
     },
     {
         "id":7129885,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-30.4,
         "daily_schedule":[
@@ -24479,7 +24479,7 @@
     },
     {
         "id":6681625,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-30.6,
         "daily_schedule":[
@@ -24671,7 +24671,7 @@
     },
     {
         "id":6682116,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -24734,7 +24734,7 @@
     },
     {
         "id":6326519,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-40.9,
         "daily_schedule":[
@@ -24830,7 +24830,7 @@
     },
     {
         "id":6459014,
-        "execution_time":0.01,
+        "execution_time":0.008,
         "DSSR_iterations":3,
         "utility":-41.5,
         "daily_schedule":[
@@ -25222,7 +25222,7 @@
     },
     {
         "id":7133194,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -25285,7 +25285,7 @@
     },
     {
         "id":6682387,
-        "execution_time":0.003,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -25433,7 +25433,7 @@
     },
     {
         "id":6682549,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-38.1,
         "daily_schedule":[
@@ -25625,7 +25625,7 @@
     },
     {
         "id":7129886,
-        "execution_time":0.005,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-40.9,
         "daily_schedule":[
@@ -25828,7 +25828,7 @@
     },
     {
         "id":6942440,
-        "execution_time":0.003,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -25976,7 +25976,7 @@
     },
     {
         "id":6682225,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-31.4,
         "daily_schedule":[
@@ -26146,7 +26146,7 @@
     },
     {
         "id":6681984,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -26231,7 +26231,7 @@
     },
     {
         "id":6940194,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
@@ -26316,7 +26316,7 @@
     },
     {
         "id":7023678,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -26390,7 +26390,7 @@
     },
     {
         "id":6458801,
-        "execution_time":0.003,
+        "execution_time":0.005,
         "DSSR_iterations":1,
         "utility":-11.1,
         "daily_schedule":[
@@ -26453,7 +26453,7 @@
     },
     {
         "id":6458746,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
@@ -26590,7 +26590,7 @@
     },
     {
         "id":6459207,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-25.4,
         "daily_schedule":[
@@ -26675,7 +26675,7 @@
     },
     {
         "id":6682202,
-        "execution_time":0.006,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -26760,7 +26760,7 @@
     },
     {
         "id":6961832,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -26823,7 +26823,7 @@
     },
     {
         "id":6682176,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -26886,7 +26886,7 @@
     },
     {
         "id":7058040,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-30.6,
         "daily_schedule":[
@@ -26971,7 +26971,7 @@
     },
     {
         "id":6682844,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -27245,7 +27245,7 @@
     },
     {
         "id":7074631,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -27308,7 +27308,7 @@
     },
     {
         "id":6682419,
-        "execution_time":0.005,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-23.4,
         "daily_schedule":[
@@ -27456,7 +27456,7 @@
     },
     {
         "id":7043047,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-31.2,
         "daily_schedule":[
@@ -27541,7 +27541,7 @@
     },
     {
         "id":6682650,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -27774,7 +27774,7 @@
     },
     {
         "id":6459197,
-        "execution_time":0.007,
+        "execution_time":0.005,
         "DSSR_iterations":2,
         "utility":-31.4,
         "daily_schedule":[
@@ -27922,7 +27922,7 @@
     },
     {
         "id":6682968,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -28007,7 +28007,7 @@
     },
     {
         "id":6964371,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -28344,7 +28344,7 @@
     },
     {
         "id":6627495,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-21.6,
         "daily_schedule":[
@@ -28577,7 +28577,7 @@
     },
     {
         "id":7026958,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -28640,7 +28640,7 @@
     },
     {
         "id":6681866,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -28703,7 +28703,7 @@
     },
     {
         "id":6682943,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-31.2,
         "daily_schedule":[
@@ -29073,7 +29073,7 @@
     },
     {
         "id":6682159,
-        "execution_time":0.003,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-29.4,
         "daily_schedule":[
@@ -29221,7 +29221,7 @@
     },
     {
         "id":7037610,
-        "execution_time":0.006,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-30.0,
         "daily_schedule":[
@@ -29306,7 +29306,7 @@
     },
     {
         "id":6459141,
-        "execution_time":0.016,
+        "execution_time":0.015,
         "DSSR_iterations":6,
         "utility":-29.1,
         "daily_schedule":[
@@ -29465,7 +29465,7 @@
     },
     {
         "id":6682554,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -29920,7 +29920,7 @@
     },
     {
         "id":6459230,
-        "execution_time":0.004,
+        "execution_time":0.003,
         "DSSR_iterations":1,
         "utility":-40.5,
         "daily_schedule":[
@@ -30027,7 +30027,7 @@
     },
     {
         "id":6326449,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -30260,7 +30260,7 @@
     },
     {
         "id":6681766,
-        "execution_time":0.002,
+        "execution_time":0.001,
         "DSSR_iterations":0,
         "utility":-18.3,
         "daily_schedule":[
@@ -30323,7 +30323,7 @@
     },
     {
         "id":6458913,
-        "execution_time":0.003,
+        "execution_time":0.006,
         "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
@@ -30408,7 +30408,7 @@
     },
     {
         "id":6600179,
-        "execution_time":0.005,
+        "execution_time":0.009,
         "DSSR_iterations":2,
         "utility":-41.5,
         "daily_schedule":[
@@ -30504,7 +30504,7 @@
     },
     {
         "id":6682279,
-        "execution_time":0.002,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-40.3,
         "daily_schedule":[
@@ -30589,7 +30589,7 @@
     },
     {
         "id":6682064,
-        "execution_time":0.001,
+        "execution_time":0.002,
         "DSSR_iterations":0,
         "utility":-30.6,
         "daily_schedule":[
@@ -30781,7 +30781,7 @@
     },
     {
         "id":6326747,
-        "execution_time":0.001,
+        "execution_time":0.003,
         "DSSR_iterations":0,
         "utility":-11.5,
         "daily_schedule":[
@@ -31247,7 +31247,7 @@
     },
     {
         "id":7079472,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -31469,7 +31469,7 @@
     },
     {
         "id":6458924,
-        "execution_time":0.003,
+        "execution_time":0.004,
         "DSSR_iterations":1,
         "utility":-40.5,
         "daily_schedule":[

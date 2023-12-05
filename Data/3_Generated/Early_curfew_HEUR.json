@@ -1,8 +1,8 @@
 [
     {
         "id":6920425,
-        "execution_time":0.05,
-        "DSSR_iterations":6,
+        "execution_time":0.023,
+        "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
             {
@@ -86,7 +86,7 @@
     },
     {
         "id":6458764,
-        "execution_time":0.011,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-22.6,
         "daily_schedule":[
@@ -171,7 +171,7 @@
     },
     {
         "id":6326513,
-        "execution_time":0.015,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-30.94,
         "daily_schedule":[
@@ -278,7 +278,7 @@
     },
     {
         "id":6326735,
-        "execution_time":0.009,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-23.4,
         "daily_schedule":[
@@ -363,8 +363,8 @@
     },
     {
         "id":6997283,
-        "execution_time":0.042,
-        "DSSR_iterations":5,
+        "execution_time":0.018,
+        "DSSR_iterations":1,
         "utility":-28.154,
         "daily_schedule":[
             {
@@ -448,7 +448,7 @@
     },
     {
         "id":6326604,
-        "execution_time":0.01,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-29.94,
         "daily_schedule":[
@@ -555,8 +555,8 @@
     },
     {
         "id":6681763,
-        "execution_time":0.08,
-        "DSSR_iterations":11,
+        "execution_time":0.091,
+        "DSSR_iterations":10,
         "utility":-29.348,
         "daily_schedule":[
             {
@@ -651,8 +651,8 @@
     },
     {
         "id":6326440,
-        "execution_time":0.077,
-        "DSSR_iterations":12,
+        "execution_time":0.107,
+        "DSSR_iterations":10,
         "utility":-17.248,
         "daily_schedule":[
             {
@@ -725,8 +725,8 @@
     },
     {
         "id":6681674,
-        "execution_time":0.02,
-        "DSSR_iterations":3,
+        "execution_time":0.055,
+        "DSSR_iterations":5,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -810,7 +810,7 @@
     },
     {
         "id":6326400,
-        "execution_time":0.016,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-42.1,
         "daily_schedule":[
@@ -917,7 +917,7 @@
     },
     {
         "id":7042973,
-        "execution_time":0.009,
+        "execution_time":0.02,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -980,7 +980,7 @@
     },
     {
         "id":6999831,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-20.8,
         "daily_schedule":[
@@ -1054,9 +1054,9 @@
     },
     {
         "id":6459115,
-        "execution_time":0.1,
-        "DSSR_iterations":14,
-        "utility":-44.99,
+        "execution_time":0.072,
+        "DSSR_iterations":8,
+        "utility":-40.906,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1107,31 +1107,31 @@
                 "facility":"home2907942",
                 "group":"home",
                 "start":140,
-                "duration":15,
-                "time":155,
+                "duration":6,
+                "time":146,
                 "cum_utility":-23.55,
                 "x":2569401,
                 "y":1189256
             },
             {
-                "acity":7,
-                "facility":377155,
+                "acity":4,
+                "facility":377159,
                 "group":"leisure",
-                "start":157,
-                "duration":12,
-                "time":169,
-                "cum_utility":-32.09,
-                "x":2577784,
-                "y":1183910
+                "start":149,
+                "duration":14,
+                "time":163,
+                "cum_utility":-28.006,
+                "x":2577930,
+                "y":1184036
             },
             {
                 "acity":15,
                 "facility":41396,
                 "group":"work",
-                "start":169,
+                "start":163,
                 "duration":2,
-                "time":171,
-                "cum_utility":-45.19,
+                "time":165,
+                "cum_utility":-41.106,
                 "x":2569742,
                 "y":1192685
             },
@@ -1139,10 +1139,10 @@
                 "acity":16,
                 "facility":"home2907942",
                 "group":"home",
-                "start":173,
-                "duration":31,
+                "start":167,
+                "duration":37,
                 "time":204,
-                "cum_utility":-44.99,
+                "cum_utility":-40.906,
                 "x":2569401,
                 "y":1189256
             },
@@ -1153,7 +1153,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-44.99,
+                "cum_utility":-40.906,
                 "x":2569401,
                 "y":1189256
             }
@@ -1161,9 +1161,9 @@
     },
     {
         "id":6458800,
-        "execution_time":0.075,
-        "DSSR_iterations":11,
-        "utility":-26.29,
+        "execution_time":0.025,
+        "DSSR_iterations":2,
+        "utility":-26.26,
         "daily_schedule":[
             {
                 "acity":0,
@@ -1210,37 +1210,26 @@
                 "y":1192610
             },
             {
-                "acity":9,
-                "facility":381921,
+                "acity":8,
+                "facility":380332,
                 "group":"shop",
                 "start":167,
-                "duration":3,
-                "time":170,
+                "duration":15,
+                "time":182,
                 "cum_utility":-22.6,
-                "x":2567684,
-                "y":1190696
+                "x":2576304,
+                "y":1185284
             },
             {
-                "acity":16,
-                "facility":"home2907785",
-                "group":"home",
-                "start":170,
-                "duration":23,
-                "time":193,
-                "cum_utility":-22.6,
-                "x":2569878,
-                "y":1192610
-            },
-            {
-                "acity":5,
-                "facility":370107,
+                "acity":2,
+                "facility":377153,
                 "group":"leisure",
-                "start":193,
-                "duration":11,
+                "start":183,
+                "duration":21,
                 "time":204,
-                "cum_utility":-31.34,
-                "x":2575916,
-                "y":1191020
+                "cum_utility":-26.26,
+                "x":2567840,
+                "y":1190762
             },
             {
                 "acity":17,
@@ -1249,7 +1238,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-26.29,
+                "cum_utility":-26.26,
                 "x":2569878,
                 "y":1192610
             }
@@ -1257,7 +1246,7 @@
     },
     {
         "id":7121080,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-37.54,
         "daily_schedule":[
@@ -1342,7 +1331,7 @@
     },
     {
         "id":6682373,
-        "execution_time":0.005,
+        "execution_time":0.01,
         "DSSR_iterations":0,
         "utility":-18.7,
         "daily_schedule":[
@@ -1405,7 +1394,7 @@
     },
     {
         "id":6986380,
-        "execution_time":0.01,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-35.548,
         "daily_schedule":[
@@ -1490,8 +1479,8 @@
     },
     {
         "id":6681745,
-        "execution_time":0.066,
-        "DSSR_iterations":8,
+        "execution_time":0.018,
+        "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
             {
@@ -1575,7 +1564,7 @@
     },
     {
         "id":6922704,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -1638,7 +1627,7 @@
     },
     {
         "id":6459359,
-        "execution_time":0.014,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-25.758,
         "daily_schedule":[
@@ -1723,7 +1712,7 @@
     },
     {
         "id":6927922,
-        "execution_time":0.052,
+        "execution_time":0.077,
         "DSSR_iterations":9,
         "utility":-42.374,
         "daily_schedule":[
@@ -1830,8 +1819,8 @@
     },
     {
         "id":6970945,
-        "execution_time":0.054,
-        "DSSR_iterations":9,
+        "execution_time":0.035,
+        "DSSR_iterations":3,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -1915,7 +1904,7 @@
     },
     {
         "id":6326724,
-        "execution_time":0.03,
+        "execution_time":0.049,
         "DSSR_iterations":5,
         "utility":-40.6,
         "daily_schedule":[
@@ -2011,7 +2000,7 @@
     },
     {
         "id":6982635,
-        "execution_time":0.017,
+        "execution_time":0.027,
         "DSSR_iterations":2,
         "utility":-30.27,
         "daily_schedule":[
@@ -2107,8 +2096,8 @@
     },
     {
         "id":7057871,
-        "execution_time":0.064,
-        "DSSR_iterations":8,
+        "execution_time":0.02,
+        "DSSR_iterations":1,
         "utility":-17.0,
         "daily_schedule":[
             {
@@ -2192,7 +2181,7 @@
     },
     {
         "id":6682000,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-29.048,
         "daily_schedule":[
@@ -2277,7 +2266,7 @@
     },
     {
         "id":6681977,
-        "execution_time":0.01,
+        "execution_time":0.019,
         "DSSR_iterations":1,
         "utility":-11.7,
         "daily_schedule":[
@@ -2340,7 +2329,7 @@
     },
     {
         "id":6459026,
-        "execution_time":0.013,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-14.95,
         "daily_schedule":[
@@ -2425,7 +2414,7 @@
     },
     {
         "id":7050522,
-        "execution_time":0.011,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-8.74,
         "daily_schedule":[
@@ -2488,7 +2477,7 @@
     },
     {
         "id":6681901,
-        "execution_time":0.064,
+        "execution_time":0.088,
         "DSSR_iterations":10,
         "utility":-37.54,
         "daily_schedule":[
@@ -2584,8 +2573,8 @@
     },
     {
         "id":6326521,
-        "execution_time":0.02,
-        "DSSR_iterations":3,
+        "execution_time":0.059,
+        "DSSR_iterations":6,
         "utility":-19.04,
         "daily_schedule":[
             {
@@ -2658,7 +2647,7 @@
     },
     {
         "id":6927533,
-        "execution_time":0.017,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-30.74,
         "daily_schedule":[
@@ -2754,8 +2743,8 @@
     },
     {
         "id":6459094,
-        "execution_time":0.05,
-        "DSSR_iterations":9,
+        "execution_time":0.058,
+        "DSSR_iterations":6,
         "utility":-32.34,
         "daily_schedule":[
             {
@@ -2829,8 +2818,8 @@
                 "facility":"home2907932",
                 "group":"home",
                 "start":114,
-                "duration":42,
-                "time":156,
+                "duration":90,
+                "time":204,
                 "cum_utility":-32.34,
                 "x":2569663,
                 "y":1192113
@@ -2839,8 +2828,8 @@
                 "acity":17,
                 "facility":"home2907932",
                 "group":"home",
-                "start":156,
-                "duration":132,
+                "start":204,
+                "duration":84,
                 "time":288,
                 "cum_utility":-32.34,
                 "x":2569663,
@@ -2850,7 +2839,7 @@
     },
     {
         "id":6959508,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-11.37,
         "daily_schedule":[
@@ -2924,8 +2913,8 @@
     },
     {
         "id":6681967,
-        "execution_time":0.034,
-        "DSSR_iterations":5,
+        "execution_time":0.087,
+        "DSSR_iterations":8,
         "utility":-10.5,
         "daily_schedule":[
             {
@@ -2987,8 +2976,8 @@
     },
     {
         "id":6431356,
-        "execution_time":0.062,
-        "DSSR_iterations":11,
+        "execution_time":0.028,
+        "DSSR_iterations":3,
         "utility":-49.84,
         "daily_schedule":[
             {
@@ -3014,26 +3003,26 @@
                 "y":1192185
             },
             {
-                "acity":11,
-                "facility":377155,
+                "acity":10,
+                "facility":377159,
                 "group":"shop",
                 "start":93,
                 "duration":16,
                 "time":109,
                 "cum_utility":-10.5,
-                "x":2577784,
-                "y":1183910
+                "x":2577930,
+                "y":1184036
             },
             {
-                "acity":7,
-                "facility":377155,
+                "acity":3,
+                "facility":380332,
                 "group":"leisure",
                 "start":109,
                 "duration":24,
                 "time":133,
                 "cum_utility":-19.24,
-                "x":2577784,
-                "y":1183910
+                "x":2576304,
+                "y":1185284
             },
             {
                 "acity":14,
@@ -3094,7 +3083,7 @@
     },
     {
         "id":6622411,
-        "execution_time":0.008,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-8.74,
         "daily_schedule":[
@@ -3157,7 +3146,7 @@
     },
     {
         "id":6682112,
-        "execution_time":0.014,
+        "execution_time":0.026,
         "DSSR_iterations":2,
         "utility":-41.9,
         "daily_schedule":[
@@ -3264,7 +3253,7 @@
     },
     {
         "id":6988533,
-        "execution_time":0.01,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-8.74,
         "daily_schedule":[
@@ -3327,7 +3316,7 @@
     },
     {
         "id":7054089,
-        "execution_time":0.049,
+        "execution_time":0.078,
         "DSSR_iterations":8,
         "utility":-30.67,
         "daily_schedule":[
@@ -3412,8 +3401,8 @@
     },
     {
         "id":6458909,
-        "execution_time":0.018,
-        "DSSR_iterations":3,
+        "execution_time":0.045,
+        "DSSR_iterations":5,
         "utility":-30.94,
         "daily_schedule":[
             {
@@ -3508,8 +3497,8 @@
     },
     {
         "id":6990167,
-        "execution_time":0.009,
-        "DSSR_iterations":1,
+        "execution_time":0.01,
+        "DSSR_iterations":0,
         "utility":-11.5,
         "daily_schedule":[
             {
@@ -3571,7 +3560,7 @@
     },
     {
         "id":6682697,
-        "execution_time":0.01,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-29.242,
         "daily_schedule":[
@@ -3656,8 +3645,8 @@
     },
     {
         "id":6681914,
-        "execution_time":0.027,
-        "DSSR_iterations":4,
+        "execution_time":0.046,
+        "DSSR_iterations":5,
         "utility":-37.54,
         "daily_schedule":[
             {
@@ -3730,7 +3719,7 @@
     },
     {
         "id":6681669,
-        "execution_time":0.004,
+        "execution_time":0.01,
         "DSSR_iterations":0,
         "utility":-29.2,
         "daily_schedule":[
@@ -3804,7 +3793,7 @@
     },
     {
         "id":6954104,
-        "execution_time":0.005,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-16.2,
         "daily_schedule":[
@@ -3867,7 +3856,7 @@
     },
     {
         "id":7090891,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-12.17,
         "daily_schedule":[
@@ -3941,7 +3930,7 @@
     },
     {
         "id":7059325,
-        "execution_time":0.011,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-21.956,
         "daily_schedule":[
@@ -4015,8 +4004,8 @@
     },
     {
         "id":6459242,
-        "execution_time":0.036,
-        "DSSR_iterations":6,
+        "execution_time":0.03,
+        "DSSR_iterations":3,
         "utility":-32.89,
         "daily_schedule":[
             {
@@ -4100,8 +4089,8 @@
     },
     {
         "id":6458991,
-        "execution_time":0.025,
-        "DSSR_iterations":4,
+        "execution_time":0.092,
+        "DSSR_iterations":12,
         "utility":-49.74,
         "daily_schedule":[
             {
@@ -4207,7 +4196,7 @@
     },
     {
         "id":6681768,
-        "execution_time":0.008,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-28.6,
         "daily_schedule":[
@@ -4292,8 +4281,8 @@
     },
     {
         "id":6682562,
-        "execution_time":0.052,
-        "DSSR_iterations":8,
+        "execution_time":0.055,
+        "DSSR_iterations":6,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -4366,7 +4355,7 @@
     },
     {
         "id":6682444,
-        "execution_time":0.064,
+        "execution_time":0.076,
         "DSSR_iterations":9,
         "utility":-32.14,
         "daily_schedule":[
@@ -4462,7 +4451,7 @@
     },
     {
         "id":7131843,
-        "execution_time":0.004,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-24.266,
         "daily_schedule":[
@@ -4547,8 +4536,8 @@
     },
     {
         "id":6681774,
-        "execution_time":0.086,
-        "DSSR_iterations":10,
+        "execution_time":0.114,
+        "DSSR_iterations":11,
         "utility":-23.17,
         "daily_schedule":[
             {
@@ -4643,7 +4632,7 @@
     },
     {
         "id":6681875,
-        "execution_time":0.009,
+        "execution_time":0.019,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -4706,7 +4695,7 @@
     },
     {
         "id":6682908,
-        "execution_time":0.01,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-22.0,
         "daily_schedule":[
@@ -4780,8 +4769,8 @@
     },
     {
         "id":6682195,
-        "execution_time":0.067,
-        "DSSR_iterations":11,
+        "execution_time":0.08,
+        "DSSR_iterations":8,
         "utility":-37.64,
         "daily_schedule":[
             {
@@ -4876,7 +4865,7 @@
     },
     {
         "id":7055206,
-        "execution_time":0.009,
+        "execution_time":0.019,
         "DSSR_iterations":1,
         "utility":-23.4,
         "daily_schedule":[
@@ -4950,7 +4939,7 @@
     },
     {
         "id":6682356,
-        "execution_time":0.014,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-27.6,
         "daily_schedule":[
@@ -5024,7 +5013,7 @@
     },
     {
         "id":6923723,
-        "execution_time":0.005,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -5087,7 +5076,7 @@
     },
     {
         "id":6948468,
-        "execution_time":0.015,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-19.04,
         "daily_schedule":[
@@ -5172,7 +5161,7 @@
     },
     {
         "id":6458867,
-        "execution_time":0.009,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-16.42,
         "daily_schedule":[
@@ -5246,7 +5235,7 @@
     },
     {
         "id":6986414,
-        "execution_time":0.014,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-25.56,
         "daily_schedule":[
@@ -5331,8 +5320,8 @@
     },
     {
         "id":7047682,
-        "execution_time":0.05,
-        "DSSR_iterations":7,
+        "execution_time":0.034,
+        "DSSR_iterations":3,
         "utility":-22.2,
         "daily_schedule":[
             {
@@ -5405,8 +5394,8 @@
     },
     {
         "id":6681940,
-        "execution_time":0.044,
-        "DSSR_iterations":6,
+        "execution_time":0.036,
+        "DSSR_iterations":3,
         "utility":-21.2,
         "daily_schedule":[
             {
@@ -5490,8 +5479,8 @@
     },
     {
         "id":6682806,
-        "execution_time":0.014,
-        "DSSR_iterations":2,
+        "execution_time":0.017,
+        "DSSR_iterations":1,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -5575,8 +5564,8 @@
     },
     {
         "id":6933425,
-        "execution_time":0.092,
-        "DSSR_iterations":12,
+        "execution_time":0.059,
+        "DSSR_iterations":6,
         "utility":-24.568,
         "daily_schedule":[
             {
@@ -5671,7 +5660,7 @@
     },
     {
         "id":6459119,
-        "execution_time":0.009,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-41.4,
         "daily_schedule":[
@@ -5767,7 +5756,7 @@
     },
     {
         "id":6682812,
-        "execution_time":0.015,
+        "execution_time":0.025,
         "DSSR_iterations":2,
         "utility":-37.74,
         "daily_schedule":[
@@ -5863,9 +5852,9 @@
     },
     {
         "id":7123996,
-        "execution_time":0.035,
-        "DSSR_iterations":6,
-        "utility":-13.562,
+        "execution_time":0.034,
+        "DSSR_iterations":3,
+        "utility":-16.65,
         "daily_schedule":[
             {
                 "acity":0,
@@ -5890,46 +5879,35 @@
                 "y":1191871
             },
             {
-                "acity":11,
-                "facility":377155,
+                "acity":10,
+                "facility":377159,
                 "group":"shop",
                 "start":144,
-                "duration":4,
-                "time":148,
+                "duration":28,
+                "time":172,
                 "cum_utility":-10.5,
-                "x":2577784,
-                "y":1183910
+                "x":2577930,
+                "y":1184036
             },
             {
-                "acity":16,
-                "facility":"home3125955",
-                "group":"home",
-                "start":148,
-                "duration":18,
-                "time":166,
-                "cum_utility":-10.5,
-                "x":2569913,
-                "y":1191871
-            },
-            {
-                "acity":7,
-                "facility":377155,
+                "acity":2,
+                "facility":377153,
                 "group":"leisure",
-                "start":167,
+                "start":173,
                 "duration":18,
-                "time":185,
-                "cum_utility":-13.662,
-                "x":2577784,
-                "y":1183910
+                "time":191,
+                "cum_utility":-16.65,
+                "x":2567840,
+                "y":1190762
             },
             {
                 "acity":16,
                 "facility":"home3125955",
                 "group":"home",
-                "start":186,
-                "duration":18,
+                "start":191,
+                "duration":13,
                 "time":204,
-                "cum_utility":-13.562,
+                "cum_utility":-16.65,
                 "x":2569913,
                 "y":1191871
             },
@@ -5940,7 +5918,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-13.562,
+                "cum_utility":-16.65,
                 "x":2569913,
                 "y":1191871
             }
@@ -5948,7 +5926,7 @@
     },
     {
         "id":6682579,
-        "execution_time":0.042,
+        "execution_time":0.061,
         "DSSR_iterations":6,
         "utility":-29.0,
         "daily_schedule":[
@@ -6033,7 +6011,7 @@
     },
     {
         "id":7079474,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-21.6,
         "daily_schedule":[
@@ -6118,8 +6096,8 @@
     },
     {
         "id":6681965,
-        "execution_time":0.078,
-        "DSSR_iterations":10,
+        "execution_time":0.104,
+        "DSSR_iterations":13,
         "utility":-32.658,
         "daily_schedule":[
             {
@@ -6214,8 +6192,8 @@
     },
     {
         "id":6990168,
-        "execution_time":0.049,
-        "DSSR_iterations":9,
+        "execution_time":0.023,
+        "DSSR_iterations":2,
         "utility":-28.94,
         "daily_schedule":[
             {
@@ -6310,7 +6288,7 @@
     },
     {
         "id":6681925,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-29.33,
         "daily_schedule":[
@@ -6395,7 +6373,7 @@
     },
     {
         "id":6681923,
-        "execution_time":0.009,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -6480,7 +6458,7 @@
     },
     {
         "id":6682179,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-48.82,
         "daily_schedule":[
@@ -6576,7 +6554,7 @@
     },
     {
         "id":6681662,
-        "execution_time":0.016,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-31.54,
         "daily_schedule":[
@@ -6661,8 +6639,8 @@
     },
     {
         "id":6458987,
-        "execution_time":0.07,
-        "DSSR_iterations":12,
+        "execution_time":0.063,
+        "DSSR_iterations":7,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -6768,9 +6746,9 @@
     },
     {
         "id":6459321,
-        "execution_time":0.071,
-        "DSSR_iterations":11,
-        "utility":-27.415,
+        "execution_time":0.09,
+        "DSSR_iterations":10,
+        "utility":-25.856,
         "daily_schedule":[
             {
                 "acity":0,
@@ -6810,31 +6788,31 @@
                 "facility":"home2908045",
                 "group":"home",
                 "start":128,
-                "duration":27,
-                "time":155,
+                "duration":18,
+                "time":146,
                 "cum_utility":-10.5,
                 "x":2570010,
                 "y":1192646
             },
             {
-                "acity":4,
-                "facility":377159,
+                "acity":5,
+                "facility":370107,
                 "group":"leisure",
-                "start":155,
-                "duration":4,
-                "time":159,
-                "cum_utility":-19.24,
-                "x":2577930,
-                "y":1184036
+                "start":147,
+                "duration":9,
+                "time":156,
+                "cum_utility":-15.156,
+                "x":2575916,
+                "y":1191020
             },
             {
                 "acity":15,
                 "facility":22392,
                 "group":"work",
-                "start":171,
+                "start":168,
                 "duration":11,
-                "time":182,
-                "cum_utility":-28.615,
+                "time":179,
+                "cum_utility":-27.056,
                 "x":2563330,
                 "y":1174816
             },
@@ -6842,10 +6820,10 @@
                 "acity":16,
                 "facility":"home2908045",
                 "group":"home",
-                "start":194,
-                "duration":10,
+                "start":191,
+                "duration":13,
                 "time":204,
-                "cum_utility":-27.415,
+                "cum_utility":-25.856,
                 "x":2570010,
                 "y":1192646
             },
@@ -6856,7 +6834,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-27.415,
+                "cum_utility":-25.856,
                 "x":2570010,
                 "y":1192646
             }
@@ -6864,7 +6842,7 @@
     },
     {
         "id":6681988,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-37.94,
         "daily_schedule":[
@@ -6949,7 +6927,7 @@
     },
     {
         "id":6326325,
-        "execution_time":0.008,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-22.8,
         "daily_schedule":[
@@ -7034,7 +7012,7 @@
     },
     {
         "id":6682032,
-        "execution_time":0.015,
+        "execution_time":0.026,
         "DSSR_iterations":2,
         "utility":-35.25,
         "daily_schedule":[
@@ -7119,8 +7097,8 @@
     },
     {
         "id":6681560,
-        "execution_time":0.009,
-        "DSSR_iterations":1,
+        "execution_time":0.008,
+        "DSSR_iterations":0,
         "utility":-18.84,
         "daily_schedule":[
             {
@@ -7193,8 +7171,8 @@
     },
     {
         "id":6681660,
-        "execution_time":0.067,
-        "DSSR_iterations":11,
+        "execution_time":0.087,
+        "DSSR_iterations":9,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -7278,7 +7256,7 @@
     },
     {
         "id":6326368,
-        "execution_time":0.009,
+        "execution_time":0.019,
         "DSSR_iterations":1,
         "utility":-23.256,
         "daily_schedule":[
@@ -7352,8 +7330,8 @@
     },
     {
         "id":6681758,
-        "execution_time":0.06,
-        "DSSR_iterations":11,
+        "execution_time":0.088,
+        "DSSR_iterations":10,
         "utility":-19.14,
         "daily_schedule":[
             {
@@ -7426,8 +7404,8 @@
     },
     {
         "id":6326711,
-        "execution_time":0.097,
-        "DSSR_iterations":14,
+        "execution_time":0.106,
+        "DSSR_iterations":12,
         "utility":-41.462,
         "daily_schedule":[
             {
@@ -7533,7 +7511,7 @@
     },
     {
         "id":6459213,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-18.742,
         "daily_schedule":[
@@ -7607,7 +7585,7 @@
     },
     {
         "id":6459320,
-        "execution_time":0.009,
+        "execution_time":0.019,
         "DSSR_iterations":1,
         "utility":-12.17,
         "daily_schedule":[
@@ -7681,7 +7659,7 @@
     },
     {
         "id":7030808,
-        "execution_time":0.015,
+        "execution_time":0.025,
         "DSSR_iterations":2,
         "utility":-23.4,
         "daily_schedule":[
@@ -7755,7 +7733,7 @@
     },
     {
         "id":6682903,
-        "execution_time":0.013,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-17.24,
         "daily_schedule":[
@@ -7840,8 +7818,8 @@
     },
     {
         "id":6682635,
-        "execution_time":0.099,
-        "DSSR_iterations":12,
+        "execution_time":0.027,
+        "DSSR_iterations":3,
         "utility":-46.454,
         "daily_schedule":[
             {
@@ -7958,7 +7936,7 @@
     },
     {
         "id":6609805,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-27.6,
         "daily_schedule":[
@@ -8032,8 +8010,8 @@
     },
     {
         "id":6458805,
-        "execution_time":0.01,
-        "DSSR_iterations":1,
+        "execution_time":0.007,
+        "DSSR_iterations":0,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -8117,8 +8095,8 @@
     },
     {
         "id":6681805,
-        "execution_time":0.085,
-        "DSSR_iterations":10,
+        "execution_time":0.127,
+        "DSSR_iterations":11,
         "utility":-19.466,
         "daily_schedule":[
             {
@@ -8213,7 +8191,7 @@
     },
     {
         "id":6326457,
-        "execution_time":0.045,
+        "execution_time":0.073,
         "DSSR_iterations":8,
         "utility":-23.67,
         "daily_schedule":[
@@ -8298,7 +8276,7 @@
     },
     {
         "id":6623556,
-        "execution_time":0.004,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -8361,8 +8339,8 @@
     },
     {
         "id":6962862,
-        "execution_time":0.033,
-        "DSSR_iterations":5,
+        "execution_time":0.018,
+        "DSSR_iterations":2,
         "utility":-18.84,
         "daily_schedule":[
             {
@@ -8446,7 +8424,7 @@
     },
     {
         "id":6682320,
-        "execution_time":0.052,
+        "execution_time":0.066,
         "DSSR_iterations":9,
         "utility":-19.04,
         "daily_schedule":[
@@ -8520,8 +8498,8 @@
     },
     {
         "id":7055756,
-        "execution_time":0.085,
-        "DSSR_iterations":12,
+        "execution_time":0.109,
+        "DSSR_iterations":17,
         "utility":-48.944,
         "daily_schedule":[
             {
@@ -8627,7 +8605,7 @@
     },
     {
         "id":7041426,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-37.84,
         "daily_schedule":[
@@ -8723,7 +8701,7 @@
     },
     {
         "id":6434085,
-        "execution_time":0.015,
+        "execution_time":0.025,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -8808,7 +8786,7 @@
     },
     {
         "id":6682604,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-23.2,
         "daily_schedule":[
@@ -8882,9 +8860,9 @@
     },
     {
         "id":6681735,
-        "execution_time":0.087,
-        "DSSR_iterations":11,
-        "utility":-37.74,
+        "execution_time":0.075,
+        "DSSR_iterations":9,
+        "utility":-31.564,
         "daily_schedule":[
             {
                 "acity":0,
@@ -8935,31 +8913,31 @@
                 "facility":"home3013995",
                 "group":"home",
                 "start":147,
-                "duration":32,
-                "time":179,
+                "duration":19,
+                "time":166,
                 "cum_utility":-29.0,
                 "x":2569933,
                 "y":1192690
             },
             {
-                "acity":5,
-                "facility":370107,
+                "acity":7,
+                "facility":377155,
                 "group":"leisure",
-                "start":179,
+                "start":167,
                 "duration":3,
-                "time":182,
-                "cum_utility":-37.74,
-                "x":2575916,
-                "y":1191020
+                "time":170,
+                "cum_utility":-31.664,
+                "x":2577784,
+                "y":1183910
             },
             {
                 "acity":16,
                 "facility":"home3013995",
                 "group":"home",
-                "start":182,
-                "duration":22,
+                "start":171,
+                "duration":33,
                 "time":204,
-                "cum_utility":-37.74,
+                "cum_utility":-31.564,
                 "x":2569933,
                 "y":1192690
             },
@@ -8970,7 +8948,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-37.74,
+                "cum_utility":-31.564,
                 "x":2569933,
                 "y":1192690
             }
@@ -8978,7 +8956,7 @@
     },
     {
         "id":7030806,
-        "execution_time":0.081,
+        "execution_time":0.088,
         "DSSR_iterations":10,
         "utility":-25.564,
         "daily_schedule":[
@@ -9074,7 +9052,7 @@
     },
     {
         "id":6650688,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-32.34,
         "daily_schedule":[
@@ -9181,8 +9159,8 @@
     },
     {
         "id":6631660,
-        "execution_time":0.093,
-        "DSSR_iterations":10,
+        "execution_time":0.045,
+        "DSSR_iterations":5,
         "utility":-49.844,
         "daily_schedule":[
             {
@@ -9299,7 +9277,7 @@
     },
     {
         "id":6459131,
-        "execution_time":0.016,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-21.6,
         "daily_schedule":[
@@ -9384,8 +9362,8 @@
     },
     {
         "id":6682863,
-        "execution_time":0.056,
-        "DSSR_iterations":10,
+        "execution_time":0.067,
+        "DSSR_iterations":7,
         "utility":-19.14,
         "daily_schedule":[
             {
@@ -9458,7 +9436,7 @@
     },
     {
         "id":7119791,
-        "execution_time":0.008,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -9521,7 +9499,7 @@
     },
     {
         "id":6984076,
-        "execution_time":0.019,
+        "execution_time":0.03,
         "DSSR_iterations":3,
         "utility":-31.94,
         "daily_schedule":[
@@ -9628,8 +9606,8 @@
     },
     {
         "id":6682739,
-        "execution_time":0.027,
-        "DSSR_iterations":4,
+        "execution_time":0.02,
+        "DSSR_iterations":2,
         "utility":-43.18,
         "daily_schedule":[
             {
@@ -9735,7 +9713,7 @@
     },
     {
         "id":6936923,
-        "execution_time":0.005,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-38.3,
         "daily_schedule":[
@@ -9842,8 +9820,8 @@
     },
     {
         "id":6459315,
-        "execution_time":0.222,
-        "DSSR_iterations":16,
+        "execution_time":0.121,
+        "DSSR_iterations":17,
         "utility":-50.64,
         "daily_schedule":[
             {
@@ -9971,7 +9949,7 @@
     },
     {
         "id":7098229,
-        "execution_time":0.015,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -10035,8 +10013,8 @@
                 "facility":"home3119124",
                 "group":"home",
                 "start":167,
-                "duration":21,
-                "time":188,
+                "duration":37,
+                "time":204,
                 "cum_utility":-19.24,
                 "x":2569628,
                 "y":1192209
@@ -10045,8 +10023,8 @@
                 "acity":17,
                 "facility":"home3119124",
                 "group":"home",
-                "start":188,
-                "duration":100,
+                "start":204,
+                "duration":84,
                 "time":288,
                 "cum_utility":-19.24,
                 "x":2569628,
@@ -10056,8 +10034,8 @@
     },
     {
         "id":6940249,
-        "execution_time":0.042,
-        "DSSR_iterations":6,
+        "execution_time":0.069,
+        "DSSR_iterations":8,
         "utility":-36.989,
         "daily_schedule":[
             {
@@ -10163,7 +10141,7 @@
     },
     {
         "id":6970264,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-35.0,
         "daily_schedule":[
@@ -10270,7 +10248,7 @@
     },
     {
         "id":6646547,
-        "execution_time":0.01,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-19.24,
         "daily_schedule":[
@@ -10355,9 +10333,9 @@
     },
     {
         "id":6681676,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
-        "utility":-14.695,
+        "utility":-15.2,
         "daily_schedule":[
             {
                 "acity":0,
@@ -10382,26 +10360,15 @@
                 "y":1192664
             },
             {
-                "acity":6,
-                "facility":381922,
+                "acity":2,
+                "facility":377153,
                 "group":"leisure",
                 "start":180,
-                "duration":21,
-                "time":201,
-                "cum_utility":-8.74,
-                "x":2567712,
-                "y":1190524
-            },
-            {
-                "acity":16,
-                "facility":"home3013981",
-                "group":"home",
-                "start":201,
-                "duration":1,
+                "duration":22,
                 "time":202,
-                "cum_utility":-4.195,
-                "x":2569878,
-                "y":1192664
+                "cum_utility":-8.74,
+                "x":2567840,
+                "y":1190762
             },
             {
                 "acity":11,
@@ -10410,7 +10377,7 @@
                 "start":202,
                 "duration":2,
                 "time":204,
-                "cum_utility":-14.695,
+                "cum_utility":-15.2,
                 "x":2577784,
                 "y":1183910
             },
@@ -10421,7 +10388,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-14.695,
+                "cum_utility":-15.2,
                 "x":2569878,
                 "y":1192664
             }
@@ -10429,8 +10396,8 @@
     },
     {
         "id":6682808,
-        "execution_time":0.059,
-        "DSSR_iterations":9,
+        "execution_time":0.084,
+        "DSSR_iterations":12,
         "utility":-30.74,
         "daily_schedule":[
             {
@@ -10525,7 +10492,7 @@
     },
     {
         "id":6615440,
-        "execution_time":0.013,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -10610,7 +10577,7 @@
     },
     {
         "id":6682019,
-        "execution_time":0.009,
+        "execution_time":0.017,
         "DSSR_iterations":1,
         "utility":-8.74,
         "daily_schedule":[
@@ -10673,7 +10640,7 @@
     },
     {
         "id":7112271,
-        "execution_time":0.014,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -10758,7 +10725,7 @@
     },
     {
         "id":6459243,
-        "execution_time":0.006,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-0.4,
         "daily_schedule":[
@@ -10810,7 +10777,7 @@
     },
     {
         "id":6430248,
-        "execution_time":0.011,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-37.235,
         "daily_schedule":[
@@ -10895,8 +10862,8 @@
     },
     {
         "id":6681845,
-        "execution_time":0.017,
-        "DSSR_iterations":2,
+        "execution_time":0.014,
+        "DSSR_iterations":1,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -11002,7 +10969,7 @@
     },
     {
         "id":6681909,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -11087,7 +11054,7 @@
     },
     {
         "id":6920424,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-17.645,
         "daily_schedule":[
@@ -11172,7 +11139,7 @@
     },
     {
         "id":6682409,
-        "execution_time":0.004,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-8.74,
         "daily_schedule":[
@@ -11235,9 +11202,9 @@
     },
     {
         "id":6682552,
-        "execution_time":0.058,
+        "execution_time":0.068,
         "DSSR_iterations":8,
-        "utility":-23.365,
+        "utility":-23.372,
         "daily_schedule":[
             {
                 "acity":0,
@@ -11299,8 +11266,8 @@
                 "facility":"home3014193",
                 "group":"home",
                 "start":184,
-                "duration":18,
-                "time":202,
+                "duration":17,
+                "time":201,
                 "cum_utility":-22.2,
                 "x":2569845,
                 "y":1192690
@@ -11309,10 +11276,10 @@
                 "acity":2,
                 "facility":377153,
                 "group":"leisure",
-                "start":202,
-                "duration":2,
+                "start":201,
+                "duration":3,
                 "time":204,
-                "cum_utility":-30.94,
+                "cum_utility":-30.442,
                 "x":2567840,
                 "y":1190762
             },
@@ -11323,7 +11290,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-23.365,
+                "cum_utility":-23.372,
                 "x":2569845,
                 "y":1192690
             }
@@ -11331,8 +11298,8 @@
     },
     {
         "id":6459018,
-        "execution_time":0.058,
-        "DSSR_iterations":10,
+        "execution_time":0.039,
+        "DSSR_iterations":4,
         "utility":-20.54,
         "daily_schedule":[
             {
@@ -11394,7 +11361,7 @@
     },
     {
         "id":6681927,
-        "execution_time":0.052,
+        "execution_time":0.065,
         "DSSR_iterations":8,
         "utility":-35.66,
         "daily_schedule":[
@@ -11490,8 +11457,8 @@
     },
     {
         "id":6428941,
-        "execution_time":0.167,
-        "DSSR_iterations":15,
+        "execution_time":0.086,
+        "DSSR_iterations":12,
         "utility":-49.73,
         "daily_schedule":[
             {
@@ -11597,7 +11564,7 @@
     },
     {
         "id":7087593,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-28.9,
         "daily_schedule":[
@@ -11671,7 +11638,7 @@
     },
     {
         "id":6934158,
-        "execution_time":0.014,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-19.04,
         "daily_schedule":[
@@ -11756,7 +11723,7 @@
     },
     {
         "id":6973321,
-        "execution_time":0.014,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -11841,8 +11808,8 @@
     },
     {
         "id":6445993,
-        "execution_time":0.015,
-        "DSSR_iterations":2,
+        "execution_time":0.014,
+        "DSSR_iterations":1,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -11926,7 +11893,7 @@
     },
     {
         "id":6326717,
-        "execution_time":0.018,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-23.2,
         "daily_schedule":[
@@ -11990,8 +11957,8 @@
                 "facility":"home2781326",
                 "group":"home",
                 "start":169,
-                "duration":5,
-                "time":174,
+                "duration":35,
+                "time":204,
                 "cum_utility":-23.2,
                 "x":2569551,
                 "y":1191842
@@ -12000,8 +11967,8 @@
                 "acity":17,
                 "facility":"home2781326",
                 "group":"home",
-                "start":174,
-                "duration":114,
+                "start":204,
+                "duration":84,
                 "time":288,
                 "cum_utility":-23.2,
                 "x":2569551,
@@ -12011,8 +11978,8 @@
     },
     {
         "id":6434104,
-        "execution_time":0.082,
-        "DSSR_iterations":11,
+        "execution_time":0.08,
+        "DSSR_iterations":10,
         "utility":-37.14,
         "daily_schedule":[
             {
@@ -12118,7 +12085,7 @@
     },
     {
         "id":6934004,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-24.093,
         "daily_schedule":[
@@ -12203,9 +12170,9 @@
     },
     {
         "id":7122180,
-        "execution_time":0.026,
-        "DSSR_iterations":4,
-        "utility":-17.54,
+        "execution_time":0.02,
+        "DSSR_iterations":2,
+        "utility":-19.04,
         "daily_schedule":[
             {
                 "acity":0,
@@ -12223,22 +12190,33 @@
                 "facility":"home3125474",
                 "group":"home",
                 "start":1,
-                "duration":70,
-                "time":71,
+                "duration":83,
+                "time":84,
                 "cum_utility":0.0,
                 "x":2569192,
                 "y":1192184
             },
             {
-                "acity":15,
-                "facility":362818,
-                "group":"work",
-                "start":92,
-                "duration":5,
-                "time":97,
-                "cum_utility":-11.0,
-                "x":2601016,
-                "y":1199703
+                "acity":11,
+                "facility":377155,
+                "group":"shop",
+                "start":84,
+                "duration":3,
+                "time":87,
+                "cum_utility":-10.5,
+                "x":2577784,
+                "y":1183910
+            },
+            {
+                "acity":16,
+                "facility":"home3125474",
+                "group":"home",
+                "start":87,
+                "duration":30,
+                "time":117,
+                "cum_utility":-10.5,
+                "x":2569192,
+                "y":1192184
             },
             {
                 "acity":7,
@@ -12247,7 +12225,7 @@
                 "start":118,
                 "duration":19,
                 "time":137,
-                "cum_utility":-17.64,
+                "cum_utility":-19.14,
                 "x":2577784,
                 "y":1183910
             },
@@ -12258,7 +12236,7 @@
                 "start":138,
                 "duration":66,
                 "time":204,
-                "cum_utility":-17.54,
+                "cum_utility":-19.04,
                 "x":2569192,
                 "y":1192184
             },
@@ -12269,7 +12247,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-17.54,
+                "cum_utility":-19.04,
                 "x":2569192,
                 "y":1192184
             }
@@ -12277,7 +12255,7 @@
     },
     {
         "id":6681653,
-        "execution_time":0.015,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-36.644,
         "daily_schedule":[
@@ -12362,8 +12340,8 @@
     },
     {
         "id":6326556,
-        "execution_time":0.017,
-        "DSSR_iterations":2,
+        "execution_time":0.015,
+        "DSSR_iterations":1,
         "utility":-37.94,
         "daily_schedule":[
             {
@@ -12469,8 +12447,8 @@
     },
     {
         "id":6681689,
-        "execution_time":0.016,
-        "DSSR_iterations":2,
+        "execution_time":0.015,
+        "DSSR_iterations":1,
         "utility":-36.83,
         "daily_schedule":[
             {
@@ -12554,7 +12532,7 @@
     },
     {
         "id":6681986,
-        "execution_time":0.016,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-23.2,
         "daily_schedule":[
@@ -12639,7 +12617,7 @@
     },
     {
         "id":6681579,
-        "execution_time":0.09,
+        "execution_time":0.096,
         "DSSR_iterations":13,
         "utility":-41.262,
         "daily_schedule":[
@@ -12757,7 +12735,7 @@
     },
     {
         "id":6681736,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-21.04,
         "daily_schedule":[
@@ -12831,7 +12809,7 @@
     },
     {
         "id":6326629,
-        "execution_time":0.04,
+        "execution_time":0.056,
         "DSSR_iterations":6,
         "utility":-23.4,
         "daily_schedule":[
@@ -12905,7 +12883,7 @@
     },
     {
         "id":6326560,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-22.4,
         "daily_schedule":[
@@ -12979,8 +12957,8 @@
     },
     {
         "id":6933422,
-        "execution_time":0.025,
-        "DSSR_iterations":4,
+        "execution_time":0.047,
+        "DSSR_iterations":5,
         "utility":-27.24,
         "daily_schedule":[
             {
@@ -13053,7 +13031,7 @@
     },
     {
         "id":7026956,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-10.3,
         "daily_schedule":[
@@ -13116,7 +13094,7 @@
     },
     {
         "id":6682641,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-10.9,
         "daily_schedule":[
@@ -13168,7 +13146,7 @@
     },
     {
         "id":6459001,
-        "execution_time":0.015,
+        "execution_time":0.019,
         "DSSR_iterations":2,
         "utility":-31.44,
         "daily_schedule":[
@@ -13253,7 +13231,7 @@
     },
     {
         "id":6682924,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-4.756,
         "daily_schedule":[
@@ -13305,8 +13283,8 @@
     },
     {
         "id":6681661,
-        "execution_time":0.076,
-        "DSSR_iterations":15,
+        "execution_time":0.096,
+        "DSSR_iterations":14,
         "utility":-37.94,
         "daily_schedule":[
             {
@@ -13412,7 +13390,7 @@
     },
     {
         "id":7052357,
-        "execution_time":0.004,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-12.974,
         "daily_schedule":[
@@ -13486,7 +13464,7 @@
     },
     {
         "id":6682909,
-        "execution_time":0.003,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-31.266,
         "daily_schedule":[
@@ -13582,7 +13560,7 @@
     },
     {
         "id":6326443,
-        "execution_time":0.017,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-32.362,
         "daily_schedule":[
@@ -13678,8 +13656,8 @@
     },
     {
         "id":6681895,
-        "execution_time":0.042,
-        "DSSR_iterations":7,
+        "execution_time":0.054,
+        "DSSR_iterations":6,
         "utility":-10.5,
         "daily_schedule":[
             {
@@ -13741,7 +13719,7 @@
     },
     {
         "id":6656484,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -13804,7 +13782,7 @@
     },
     {
         "id":7082597,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-23.1,
         "daily_schedule":[
@@ -13889,8 +13867,8 @@
     },
     {
         "id":7022420,
-        "execution_time":0.033,
-        "DSSR_iterations":6,
+        "execution_time":0.057,
+        "DSSR_iterations":8,
         "utility":-28.546,
         "daily_schedule":[
             {
@@ -13985,8 +13963,8 @@
     },
     {
         "id":7121079,
-        "execution_time":0.034,
-        "DSSR_iterations":5,
+        "execution_time":0.032,
+        "DSSR_iterations":3,
         "utility":-30.368,
         "daily_schedule":[
             {
@@ -14081,8 +14059,8 @@
     },
     {
         "id":7133032,
-        "execution_time":0.073,
-        "DSSR_iterations":12,
+        "execution_time":0.056,
+        "DSSR_iterations":7,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -14155,8 +14133,8 @@
     },
     {
         "id":6682640,
-        "execution_time":0.055,
-        "DSSR_iterations":9,
+        "execution_time":0.058,
+        "DSSR_iterations":7,
         "utility":-34.552,
         "daily_schedule":[
             {
@@ -14251,7 +14229,7 @@
     },
     {
         "id":6682435,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-34.96,
         "daily_schedule":[
@@ -14358,7 +14336,7 @@
     },
     {
         "id":6923721,
-        "execution_time":0.004,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-21.0,
         "daily_schedule":[
@@ -14432,7 +14410,7 @@
     },
     {
         "id":7089835,
-        "execution_time":0.005,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":0.0,
         "daily_schedule":[
@@ -14473,8 +14451,8 @@
     },
     {
         "id":6459173,
-        "execution_time":0.062,
-        "DSSR_iterations":9,
+        "execution_time":0.057,
+        "DSSR_iterations":7,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -14558,7 +14536,7 @@
     },
     {
         "id":1069770,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-18.84,
         "daily_schedule":[
@@ -14643,8 +14621,8 @@
     },
     {
         "id":7004301,
-        "execution_time":0.077,
-        "DSSR_iterations":11,
+        "execution_time":0.093,
+        "DSSR_iterations":10,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -14717,7 +14695,7 @@
     },
     {
         "id":7055754,
-        "execution_time":0.004,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-24.452,
         "daily_schedule":[
@@ -14791,8 +14769,8 @@
     },
     {
         "id":6655623,
-        "execution_time":0.036,
-        "DSSR_iterations":6,
+        "execution_time":0.071,
+        "DSSR_iterations":8,
         "utility":-35.05,
         "daily_schedule":[
             {
@@ -14887,7 +14865,7 @@
     },
     {
         "id":6459079,
-        "execution_time":0.014,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-27.36,
         "daily_schedule":[
@@ -14972,7 +14950,7 @@
     },
     {
         "id":6326771,
-        "execution_time":0.015,
+        "execution_time":0.019,
         "DSSR_iterations":2,
         "utility":-31.54,
         "daily_schedule":[
@@ -15079,8 +15057,8 @@
     },
     {
         "id":6458681,
-        "execution_time":0.045,
-        "DSSR_iterations":8,
+        "execution_time":0.049,
+        "DSSR_iterations":7,
         "utility":-30.84,
         "daily_schedule":[
             {
@@ -15175,7 +15153,7 @@
     },
     {
         "id":6681934,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-31.985,
         "daily_schedule":[
@@ -15271,8 +15249,8 @@
     },
     {
         "id":7054091,
-        "execution_time":0.009,
-        "DSSR_iterations":1,
+        "execution_time":0.007,
+        "DSSR_iterations":0,
         "utility":-32.14,
         "daily_schedule":[
             {
@@ -15378,7 +15356,7 @@
     },
     {
         "id":7042367,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -15441,8 +15419,8 @@
     },
     {
         "id":6682031,
-        "execution_time":0.067,
-        "DSSR_iterations":9,
+        "execution_time":0.038,
+        "DSSR_iterations":4,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -15537,7 +15515,7 @@
     },
     {
         "id":6326552,
-        "execution_time":0.009,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-30.34,
         "daily_schedule":[
@@ -15633,8 +15611,8 @@
     },
     {
         "id":6458851,
-        "execution_time":0.05,
-        "DSSR_iterations":6,
+        "execution_time":0.008,
+        "DSSR_iterations":0,
         "utility":-29.2,
         "daily_schedule":[
             {
@@ -15718,7 +15696,7 @@
     },
     {
         "id":6682201,
-        "execution_time":0.011,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-11.5,
         "daily_schedule":[
@@ -15781,8 +15759,8 @@
     },
     {
         "id":6636531,
-        "execution_time":0.015,
-        "DSSR_iterations":2,
+        "execution_time":0.014,
+        "DSSR_iterations":1,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -15866,7 +15844,7 @@
     },
     {
         "id":6653534,
-        "execution_time":0.015,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-37.54,
         "daily_schedule":[
@@ -15973,7 +15951,7 @@
     },
     {
         "id":6682364,
-        "execution_time":0.014,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-27.44,
         "daily_schedule":[
@@ -16047,8 +16025,8 @@
     },
     {
         "id":7059326,
-        "execution_time":0.077,
-        "DSSR_iterations":11,
+        "execution_time":0.096,
+        "DSSR_iterations":12,
         "utility":-18.044,
         "daily_schedule":[
             {
@@ -16121,8 +16099,8 @@
     },
     {
         "id":6459004,
-        "execution_time":0.026,
-        "DSSR_iterations":4,
+        "execution_time":0.029,
+        "DSSR_iterations":3,
         "utility":-36.4,
         "daily_schedule":[
             {
@@ -16195,8 +16173,8 @@
     },
     {
         "id":6458692,
-        "execution_time":0.047,
-        "DSSR_iterations":8,
+        "execution_time":0.075,
+        "DSSR_iterations":10,
         "utility":-47.44,
         "daily_schedule":[
             {
@@ -16291,8 +16269,8 @@
     },
     {
         "id":6998360,
-        "execution_time":0.01,
-        "DSSR_iterations":1,
+        "execution_time":0.008,
+        "DSSR_iterations":0,
         "utility":-36.54,
         "daily_schedule":[
             {
@@ -16365,8 +16343,8 @@
     },
     {
         "id":6459036,
-        "execution_time":0.07,
-        "DSSR_iterations":10,
+        "execution_time":0.096,
+        "DSSR_iterations":13,
         "utility":-31.366,
         "daily_schedule":[
             {
@@ -16461,7 +16439,7 @@
     },
     {
         "id":7045746,
-        "execution_time":0.005,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-19.4,
         "daily_schedule":[
@@ -16546,8 +16524,8 @@
     },
     {
         "id":6681760,
-        "execution_time":0.06,
-        "DSSR_iterations":9,
+        "execution_time":0.049,
+        "DSSR_iterations":5,
         "utility":-27.7,
         "daily_schedule":[
             {
@@ -16620,8 +16598,8 @@
     },
     {
         "id":6655637,
-        "execution_time":0.025,
-        "DSSR_iterations":4,
+        "execution_time":0.02,
+        "DSSR_iterations":2,
         "utility":-46.94,
         "daily_schedule":[
             {
@@ -16705,7 +16683,7 @@
     },
     {
         "id":6682069,
-        "execution_time":0.01,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-26.644,
         "daily_schedule":[
@@ -16790,7 +16768,7 @@
     },
     {
         "id":7040066,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-37.74,
         "daily_schedule":[
@@ -16887,7 +16865,7 @@
     {
         "id":6681727,
         "execution_time":0.017,
-        "DSSR_iterations":2,
+        "DSSR_iterations":1,
         "utility":-27.24,
         "daily_schedule":[
             {
@@ -16971,9 +16949,9 @@
     },
     {
         "id":6682536,
-        "execution_time":0.062,
-        "DSSR_iterations":11,
-        "utility":-19.24,
+        "execution_time":0.026,
+        "DSSR_iterations":3,
+        "utility":-19.14,
         "daily_schedule":[
             {
                 "acity":0,
@@ -16991,33 +16969,22 @@
                 "facility":"home3014189",
                 "group":"home",
                 "start":1,
-                "duration":111,
-                "time":112,
+                "duration":110,
+                "time":111,
                 "cum_utility":0.0,
                 "x":2569962,
                 "y":1192723
             },
             {
-                "acity":8,
-                "facility":380332,
+                "acity":11,
+                "facility":377155,
                 "group":"shop",
                 "start":112,
-                "duration":3,
-                "time":115,
-                "cum_utility":-10.5,
-                "x":2576304,
-                "y":1185284
-            },
-            {
-                "acity":16,
-                "facility":"home3014189",
-                "group":"home",
-                "start":115,
-                "duration":13,
+                "duration":16,
                 "time":128,
-                "cum_utility":-10.5,
-                "x":2569962,
-                "y":1192723
+                "cum_utility":-10.4,
+                "x":2577784,
+                "y":1183910
             },
             {
                 "acity":1,
@@ -17026,7 +16993,7 @@
                 "start":128,
                 "duration":22,
                 "time":150,
-                "cum_utility":-19.24,
+                "cum_utility":-19.14,
                 "x":2569734,
                 "y":1192310
             },
@@ -17037,7 +17004,7 @@
                 "start":150,
                 "duration":54,
                 "time":204,
-                "cum_utility":-19.24,
+                "cum_utility":-19.14,
                 "x":2569962,
                 "y":1192723
             },
@@ -17048,7 +17015,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-19.24,
+                "cum_utility":-19.14,
                 "x":2569962,
                 "y":1192723
             }
@@ -17056,8 +17023,8 @@
     },
     {
         "id":6326435,
-        "execution_time":0.065,
-        "DSSR_iterations":11,
+        "execution_time":0.077,
+        "DSSR_iterations":9,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -17141,8 +17108,8 @@
     },
     {
         "id":6459261,
-        "execution_time":0.067,
-        "DSSR_iterations":10,
+        "execution_time":0.126,
+        "DSSR_iterations":8,
         "utility":-31.94,
         "daily_schedule":[
             {
@@ -17237,7 +17204,7 @@
     },
     {
         "id":6459120,
-        "execution_time":0.011,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-42.97,
         "daily_schedule":[
@@ -17344,7 +17311,7 @@
     },
     {
         "id":6682290,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-11.16,
         "daily_schedule":[
@@ -17418,7 +17385,7 @@
     },
     {
         "id":6638530,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -17503,8 +17470,8 @@
     },
     {
         "id":7057872,
-        "execution_time":0.011,
-        "DSSR_iterations":1,
+        "execution_time":0.008,
+        "DSSR_iterations":0,
         "utility":-27.658,
         "daily_schedule":[
             {
@@ -17577,8 +17544,8 @@
     },
     {
         "id":6681910,
-        "execution_time":0.068,
-        "DSSR_iterations":10,
+        "execution_time":0.022,
+        "DSSR_iterations":2,
         "utility":-12.366,
         "daily_schedule":[
             {
@@ -17662,7 +17629,7 @@
     },
     {
         "id":6459114,
-        "execution_time":0.014,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-48.54,
         "daily_schedule":[
@@ -17780,7 +17747,7 @@
     },
     {
         "id":7123307,
-        "execution_time":0.067,
+        "execution_time":0.085,
         "DSSR_iterations":11,
         "utility":-13.064,
         "daily_schedule":[
@@ -17854,7 +17821,7 @@
     },
     {
         "id":6326518,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-12.868,
         "daily_schedule":[
@@ -17928,7 +17895,7 @@
     },
     {
         "id":6682625,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-28.69,
         "daily_schedule":[
@@ -18013,7 +17980,7 @@
     },
     {
         "id":7034711,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-37.74,
         "daily_schedule":[
@@ -18098,7 +18065,7 @@
     },
     {
         "id":6682469,
-        "execution_time":0.015,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-19.04,
         "daily_schedule":[
@@ -18183,8 +18150,8 @@
     },
     {
         "id":7068172,
-        "execution_time":0.03,
-        "DSSR_iterations":5,
+        "execution_time":0.048,
+        "DSSR_iterations":6,
         "utility":-32.16,
         "daily_schedule":[
             {
@@ -18279,7 +18246,7 @@
     },
     {
         "id":6682062,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-40.6,
         "daily_schedule":[
@@ -18375,7 +18342,7 @@
     },
     {
         "id":6458718,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-31.64,
         "daily_schedule":[
@@ -18460,7 +18427,7 @@
     },
     {
         "id":7129748,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-19.24,
         "daily_schedule":[
@@ -18534,7 +18501,7 @@
     },
     {
         "id":7005154,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-28.8,
         "daily_schedule":[
@@ -18619,7 +18586,7 @@
     },
     {
         "id":6682051,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -18682,7 +18649,7 @@
     },
     {
         "id":6326494,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-10.5,
         "daily_schedule":[
@@ -18745,8 +18712,8 @@
     },
     {
         "id":6962864,
-        "execution_time":0.016,
-        "DSSR_iterations":2,
+        "execution_time":0.014,
+        "DSSR_iterations":1,
         "utility":-19.04,
         "daily_schedule":[
             {
@@ -18830,8 +18797,8 @@
     },
     {
         "id":6623881,
-        "execution_time":0.057,
-        "DSSR_iterations":10,
+        "execution_time":0.059,
+        "DSSR_iterations":8,
         "utility":-49.84,
         "daily_schedule":[
             {
@@ -18948,7 +18915,7 @@
     },
     {
         "id":6458736,
-        "execution_time":0.015,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-38.74,
         "daily_schedule":[
@@ -19044,8 +19011,8 @@
     },
     {
         "id":6326356,
-        "execution_time":0.05,
-        "DSSR_iterations":8,
+        "execution_time":0.083,
+        "DSSR_iterations":12,
         "utility":-30.365,
         "daily_schedule":[
             {
@@ -19140,8 +19107,8 @@
     },
     {
         "id":7132614,
-        "execution_time":0.036,
-        "DSSR_iterations":6,
+        "execution_time":0.072,
+        "DSSR_iterations":8,
         "utility":-10.5,
         "daily_schedule":[
             {
@@ -19203,8 +19170,8 @@
     },
     {
         "id":6326396,
-        "execution_time":0.025,
-        "DSSR_iterations":4,
+        "execution_time":0.048,
+        "DSSR_iterations":6,
         "utility":-46.254,
         "daily_schedule":[
             {
@@ -19310,8 +19277,8 @@
     },
     {
         "id":6459073,
-        "execution_time":0.085,
-        "DSSR_iterations":9,
+        "execution_time":0.09,
+        "DSSR_iterations":12,
         "utility":-50.64,
         "daily_schedule":[
             {
@@ -19417,8 +19384,8 @@
     },
     {
         "id":7079475,
-        "execution_time":0.062,
-        "DSSR_iterations":11,
+        "execution_time":0.074,
+        "DSSR_iterations":10,
         "utility":-37.84,
         "daily_schedule":[
             {
@@ -19513,8 +19480,8 @@
     },
     {
         "id":7124366,
-        "execution_time":0.058,
-        "DSSR_iterations":10,
+        "execution_time":0.054,
+        "DSSR_iterations":7,
         "utility":-17.048,
         "daily_schedule":[
             {
@@ -19587,7 +19554,7 @@
     },
     {
         "id":6681695,
-        "execution_time":0.005,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-41.5,
         "daily_schedule":[
@@ -19672,8 +19639,8 @@
     },
     {
         "id":6326411,
-        "execution_time":0.078,
-        "DSSR_iterations":13,
+        "execution_time":0.087,
+        "DSSR_iterations":12,
         "utility":-50.34,
         "daily_schedule":[
             {
@@ -19779,7 +19746,7 @@
     },
     {
         "id":6984509,
-        "execution_time":0.008,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -19864,7 +19831,7 @@
     },
     {
         "id":7010016,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -19927,7 +19894,7 @@
     },
     {
         "id":7084469,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-12.475,
         "daily_schedule":[
@@ -20001,7 +19968,7 @@
     },
     {
         "id":7055753,
-        "execution_time":0.015,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-32.14,
         "daily_schedule":[
@@ -20097,8 +20064,8 @@
     },
     {
         "id":6682081,
-        "execution_time":0.016,
-        "DSSR_iterations":2,
+        "execution_time":0.015,
+        "DSSR_iterations":1,
         "utility":-19.644,
         "daily_schedule":[
             {
@@ -20160,7 +20127,7 @@
     },
     {
         "id":7041835,
-        "execution_time":0.015,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-37.74,
         "daily_schedule":[
@@ -20256,7 +20223,7 @@
     },
     {
         "id":6326679,
-        "execution_time":0.008,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-23.3,
         "daily_schedule":[
@@ -20330,8 +20297,8 @@
     },
     {
         "id":7057795,
-        "execution_time":0.015,
-        "DSSR_iterations":2,
+        "execution_time":0.014,
+        "DSSR_iterations":1,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -20415,8 +20382,8 @@
     },
     {
         "id":6459059,
-        "execution_time":0.029,
-        "DSSR_iterations":4,
+        "execution_time":0.04,
+        "DSSR_iterations":5,
         "utility":-50.84,
         "daily_schedule":[
             {
@@ -20533,8 +20500,8 @@
     },
     {
         "id":6610428,
-        "execution_time":0.032,
-        "DSSR_iterations":5,
+        "execution_time":0.07,
+        "DSSR_iterations":8,
         "utility":-21.6,
         "daily_schedule":[
             {
@@ -20618,8 +20585,8 @@
     },
     {
         "id":6682963,
-        "execution_time":0.063,
-        "DSSR_iterations":11,
+        "execution_time":0.047,
+        "DSSR_iterations":5,
         "utility":-19.04,
         "daily_schedule":[
             {
@@ -20703,9 +20670,9 @@
     },
     {
         "id":6682868,
-        "execution_time":0.016,
-        "DSSR_iterations":2,
-        "utility":-18.82,
+        "execution_time":0.015,
+        "DSSR_iterations":1,
+        "utility":-19.24,
         "daily_schedule":[
             {
                 "acity":0,
@@ -20734,31 +20701,53 @@
                 "facility":377155,
                 "group":"shop",
                 "start":84,
-                "duration":2,
-                "time":86,
+                "duration":3,
+                "time":87,
                 "cum_utility":-10.5,
                 "x":2577784,
                 "y":1183910
             },
             {
-                "acity":15,
-                "facility":32034,
-                "group":"work",
-                "start":93,
-                "duration":111,
+                "acity":16,
+                "facility":"home3014278",
+                "group":"home",
+                "start":87,
+                "duration":105,
+                "time":192,
+                "cum_utility":-10.5,
+                "x":2569749,
+                "y":1192269
+            },
+            {
+                "acity":7,
+                "facility":377155,
+                "group":"leisure",
+                "start":192,
+                "duration":10,
+                "time":202,
+                "cum_utility":-19.24,
+                "x":2577784,
+                "y":1183910
+            },
+            {
+                "acity":16,
+                "facility":"home3014278",
+                "group":"home",
+                "start":202,
+                "duration":2,
                 "time":204,
-                "cum_utility":-19.52,
-                "x":2562538,
-                "y":1185453
+                "cum_utility":-19.24,
+                "x":2569749,
+                "y":1192269
             },
             {
                 "acity":17,
                 "facility":"home3014278",
                 "group":"home",
-                "start":211,
-                "duration":77,
+                "start":204,
+                "duration":84,
                 "time":288,
-                "cum_utility":-18.82,
+                "cum_utility":-19.24,
                 "x":2569749,
                 "y":1192269
             }
@@ -20766,7 +20755,7 @@
     },
     {
         "id":6681637,
-        "execution_time":0.015,
+        "execution_time":0.023,
         "DSSR_iterations":2,
         "utility":-20.566,
         "daily_schedule":[
@@ -20851,8 +20840,8 @@
     },
     {
         "id":7003188,
-        "execution_time":0.069,
-        "DSSR_iterations":11,
+        "execution_time":0.079,
+        "DSSR_iterations":9,
         "utility":-37.54,
         "daily_schedule":[
             {
@@ -20947,7 +20936,7 @@
     },
     {
         "id":6458765,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-23.4,
         "daily_schedule":[
@@ -21032,7 +21021,7 @@
     },
     {
         "id":6326447,
-        "execution_time":0.014,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-50.04,
         "daily_schedule":[
@@ -21139,7 +21128,7 @@
     },
     {
         "id":6682692,
-        "execution_time":0.014,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -21224,8 +21213,8 @@
     },
     {
         "id":6326415,
-        "execution_time":0.027,
-        "DSSR_iterations":4,
+        "execution_time":0.032,
+        "DSSR_iterations":3,
         "utility":-33.23,
         "daily_schedule":[
             {
@@ -21320,8 +21309,8 @@
     },
     {
         "id":6682667,
-        "execution_time":0.061,
-        "DSSR_iterations":9,
+        "execution_time":0.045,
+        "DSSR_iterations":6,
         "utility":-46.64,
         "daily_schedule":[
             {
@@ -21438,7 +21427,7 @@
     },
     {
         "id":6682222,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-19.04,
         "daily_schedule":[
@@ -21523,7 +21512,7 @@
     },
     {
         "id":7102963,
-        "execution_time":0.009,
+        "execution_time":0.02,
         "DSSR_iterations":1,
         "utility":-29.1,
         "daily_schedule":[
@@ -21597,7 +21586,7 @@
     },
     {
         "id":7080570,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-22.8,
         "daily_schedule":[
@@ -21682,7 +21671,7 @@
     },
     {
         "id":6458839,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-10.3,
         "daily_schedule":[
@@ -21745,7 +21734,7 @@
     },
     {
         "id":6617892,
-        "execution_time":0.01,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-19.14,
         "daily_schedule":[
@@ -21819,7 +21808,7 @@
     },
     {
         "id":6657462,
-        "execution_time":0.016,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -21904,7 +21893,7 @@
     },
     {
         "id":6682960,
-        "execution_time":0.01,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-40.3,
         "daily_schedule":[
@@ -22000,7 +21989,7 @@
     },
     {
         "id":6682673,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-24.71,
         "daily_schedule":[
@@ -22074,7 +22063,7 @@
     },
     {
         "id":6627311,
-        "execution_time":0.014,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -22159,7 +22148,7 @@
     },
     {
         "id":6682288,
-        "execution_time":0.016,
+        "execution_time":0.019,
         "DSSR_iterations":2,
         "utility":-30.94,
         "daily_schedule":[
@@ -22255,7 +22244,7 @@
     },
     {
         "id":6681581,
-        "execution_time":0.062,
+        "execution_time":0.085,
         "DSSR_iterations":10,
         "utility":-37.135,
         "daily_schedule":[
@@ -22329,7 +22318,7 @@
     },
     {
         "id":7020201,
-        "execution_time":0.014,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-20.24,
         "daily_schedule":[
@@ -22403,7 +22392,7 @@
     },
     {
         "id":6458725,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-24.494,
         "daily_schedule":[
@@ -22488,8 +22477,8 @@
     },
     {
         "id":6682479,
-        "execution_time":0.063,
-        "DSSR_iterations":9,
+        "execution_time":0.086,
+        "DSSR_iterations":11,
         "utility":-37.54,
         "daily_schedule":[
             {
@@ -22595,8 +22584,8 @@
     },
     {
         "id":6682742,
-        "execution_time":0.059,
-        "DSSR_iterations":10,
+        "execution_time":0.063,
+        "DSSR_iterations":7,
         "utility":-16.848,
         "daily_schedule":[
             {
@@ -22669,7 +22658,7 @@
     },
     {
         "id":6623688,
-        "execution_time":0.015,
+        "execution_time":0.026,
         "DSSR_iterations":2,
         "utility":-23.4,
         "daily_schedule":[
@@ -22743,7 +22732,7 @@
     },
     {
         "id":6681975,
-        "execution_time":0.015,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-27.34,
         "daily_schedule":[
@@ -22806,7 +22795,7 @@
     },
     {
         "id":6953484,
-        "execution_time":0.005,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-40.14,
         "daily_schedule":[
@@ -22902,7 +22891,7 @@
     },
     {
         "id":6682489,
-        "execution_time":0.075,
+        "execution_time":0.095,
         "DSSR_iterations":10,
         "utility":-35.05,
         "daily_schedule":[
@@ -22998,7 +22987,7 @@
     },
     {
         "id":6459180,
-        "execution_time":0.013,
+        "execution_time":0.026,
         "DSSR_iterations":2,
         "utility":-37.34,
         "daily_schedule":[
@@ -23094,7 +23083,7 @@
     },
     {
         "id":6996685,
-        "execution_time":0.016,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-19.04,
         "daily_schedule":[
@@ -23179,9 +23168,9 @@
     },
     {
         "id":6458926,
-        "execution_time":0.086,
-        "DSSR_iterations":14,
-        "utility":-48.027,
+        "execution_time":0.118,
+        "DSSR_iterations":17,
+        "utility":-47.948,
         "daily_schedule":[
             {
                 "acity":0,
@@ -23221,22 +23210,22 @@
                 "facility":"home2907848",
                 "group":"home",
                 "start":95,
-                "duration":27,
-                "time":122,
+                "duration":23,
+                "time":118,
                 "cum_utility":-10.5,
                 "x":2569570,
                 "y":1192136
             },
             {
-                "acity":3,
-                "facility":380332,
+                "acity":7,
+                "facility":377155,
                 "group":"leisure",
-                "start":122,
-                "duration":2,
+                "start":119,
+                "duration":5,
                 "time":124,
-                "cum_utility":-18.742,
-                "x":2576304,
-                "y":1185284
+                "cum_utility":-17.148,
+                "x":2577784,
+                "y":1183910
             },
             {
                 "acity":14,
@@ -23245,7 +23234,7 @@
                 "start":124,
                 "duration":4,
                 "time":128,
-                "cum_utility":-35.927,
+                "cum_utility":-35.848,
                 "x":2577388,
                 "y":1184855
             },
@@ -23256,7 +23245,7 @@
                 "start":133,
                 "duration":2,
                 "time":135,
-                "cum_utility":-48.527,
+                "cum_utility":-48.448,
                 "x":2571944,
                 "y":1200014
             },
@@ -23267,7 +23256,7 @@
                 "start":140,
                 "duration":64,
                 "time":204,
-                "cum_utility":-48.027,
+                "cum_utility":-47.948,
                 "x":2569570,
                 "y":1192136
             },
@@ -23278,7 +23267,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-48.027,
+                "cum_utility":-47.948,
                 "x":2569570,
                 "y":1192136
             }
@@ -23286,7 +23275,7 @@
     },
     {
         "id":6987214,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -23360,8 +23349,8 @@
     },
     {
         "id":6326776,
-        "execution_time":0.186,
-        "DSSR_iterations":22,
+        "execution_time":0.107,
+        "DSSR_iterations":15,
         "utility":-50.24,
         "daily_schedule":[
             {
@@ -23489,7 +23478,7 @@
     },
     {
         "id":6458818,
-        "execution_time":0.009,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-28.24,
         "daily_schedule":[
@@ -23574,8 +23563,8 @@
     },
     {
         "id":7128731,
-        "execution_time":0.073,
-        "DSSR_iterations":11,
+        "execution_time":0.094,
+        "DSSR_iterations":12,
         "utility":-13.86,
         "daily_schedule":[
             {
@@ -23659,7 +23648,7 @@
     },
     {
         "id":6681821,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-13.229,
         "daily_schedule":[
@@ -23733,7 +23722,7 @@
     },
     {
         "id":6600091,
-        "execution_time":0.024,
+        "execution_time":0.038,
         "DSSR_iterations":4,
         "utility":-30.07,
         "daily_schedule":[
@@ -23818,7 +23807,7 @@
     },
     {
         "id":6459323,
-        "execution_time":0.011,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-34.4,
         "daily_schedule":[
@@ -23925,8 +23914,8 @@
     },
     {
         "id":6601068,
-        "execution_time":0.037,
-        "DSSR_iterations":6,
+        "execution_time":0.07,
+        "DSSR_iterations":8,
         "utility":-22.26,
         "daily_schedule":[
             {
@@ -24021,7 +24010,7 @@
     },
     {
         "id":6631661,
-        "execution_time":0.015,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-50.335,
         "daily_schedule":[
@@ -24128,7 +24117,7 @@
     },
     {
         "id":6681756,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -24213,7 +24202,7 @@
     },
     {
         "id":7048904,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-37.94,
         "daily_schedule":[
@@ -24320,7 +24309,7 @@
     },
     {
         "id":6326330,
-        "execution_time":0.016,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-22.2,
         "daily_schedule":[
@@ -24394,7 +24383,7 @@
     },
     {
         "id":6922346,
-        "execution_time":0.015,
+        "execution_time":0.019,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -24479,8 +24468,8 @@
     },
     {
         "id":6459348,
-        "execution_time":0.08,
-        "DSSR_iterations":10,
+        "execution_time":0.073,
+        "DSSR_iterations":9,
         "utility":-43.96,
         "daily_schedule":[
             {
@@ -24586,7 +24575,7 @@
     },
     {
         "id":6326630,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-30.54,
         "daily_schedule":[
@@ -24671,7 +24660,7 @@
     },
     {
         "id":6682840,
-        "execution_time":0.01,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-40.4,
         "daily_schedule":[
@@ -24756,9 +24745,9 @@
     },
     {
         "id":6681652,
-        "execution_time":0.005,
+        "execution_time":0.007,
         "DSSR_iterations":0,
-        "utility":-33.5,
+        "utility":-34.51,
         "daily_schedule":[
             {
                 "acity":0,
@@ -24805,24 +24794,24 @@
                 "y":1184855
             },
             {
-                "acity":2,
-                "facility":377153,
+                "acity":5,
+                "facility":370107,
                 "group":"leisure",
-                "start":192,
-                "duration":12,
+                "start":190,
+                "duration":14,
                 "time":204,
-                "cum_utility":-37.54,
-                "x":2567840,
-                "y":1190762
+                "cum_utility":-37.74,
+                "x":2575916,
+                "y":1191020
             },
             {
                 "acity":17,
                 "facility":"home3013975",
                 "group":"home",
-                "start":204,
-                "duration":84,
+                "start":206,
+                "duration":82,
                 "time":288,
-                "cum_utility":-33.5,
+                "cum_utility":-34.51,
                 "x":2569464,
                 "y":1189181
             }
@@ -24830,7 +24819,7 @@
     },
     {
         "id":6459032,
-        "execution_time":0.012,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-31.54,
         "daily_schedule":[
@@ -24937,8 +24926,8 @@
     },
     {
         "id":6988258,
-        "execution_time":0.067,
-        "DSSR_iterations":11,
+        "execution_time":0.093,
+        "DSSR_iterations":13,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -25033,7 +25022,7 @@
     },
     {
         "id":6458793,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-23.0,
         "daily_schedule":[
@@ -25225,7 +25214,7 @@
     },
     {
         "id":7061460,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -25288,8 +25277,8 @@
     },
     {
         "id":6431926,
-        "execution_time":0.068,
-        "DSSR_iterations":10,
+        "execution_time":0.065,
+        "DSSR_iterations":8,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -25395,8 +25384,8 @@
     },
     {
         "id":7060388,
-        "execution_time":0.033,
-        "DSSR_iterations":6,
+        "execution_time":0.025,
+        "DSSR_iterations":3,
         "utility":-47.11,
         "daily_schedule":[
             {
@@ -25502,7 +25491,7 @@
     },
     {
         "id":6458843,
-        "execution_time":0.01,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-19.435,
         "daily_schedule":[
@@ -25576,7 +25565,7 @@
     },
     {
         "id":6682041,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":0.0,
         "daily_schedule":[
@@ -25618,7 +25607,7 @@
     {
         "id":6682674,
         "execution_time":0.015,
-        "DSSR_iterations":2,
+        "DSSR_iterations":1,
         "utility":-39.5,
         "daily_schedule":[
             {
@@ -25702,7 +25691,7 @@
     },
     {
         "id":6681863,
-        "execution_time":0.011,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -25787,7 +25776,7 @@
     },
     {
         "id":6953096,
-        "execution_time":0.009,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-23.654,
         "daily_schedule":[
@@ -25861,7 +25850,7 @@
     },
     {
         "id":6682487,
-        "execution_time":0.028,
+        "execution_time":0.045,
         "DSSR_iterations":5,
         "utility":-19.24,
         "daily_schedule":[
@@ -25935,8 +25924,8 @@
     },
     {
         "id":6440144,
-        "execution_time":0.093,
-        "DSSR_iterations":13,
+        "execution_time":0.084,
+        "DSSR_iterations":10,
         "utility":-32.14,
         "daily_schedule":[
             {
@@ -26031,7 +26020,7 @@
     },
     {
         "id":7043046,
-        "execution_time":0.009,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -26116,9 +26105,9 @@
     },
     {
         "id":6681771,
-        "execution_time":0.083,
-        "DSSR_iterations":10,
-        "utility":-31.82,
+        "execution_time":0.066,
+        "DSSR_iterations":8,
+        "utility":-30.466,
         "daily_schedule":[
             {
                 "acity":0,
@@ -26180,31 +26169,31 @@
                 "facility":"home3014003",
                 "group":"home",
                 "start":174,
-                "duration":28,
-                "time":202,
+                "duration":18,
+                "time":192,
                 "cum_utility":-28.6,
                 "x":2569377,
                 "y":1189379
             },
             {
-                "acity":2,
-                "facility":377153,
+                "acity":7,
+                "facility":377155,
                 "group":"leisure",
-                "start":202,
-                "duration":2,
+                "start":194,
+                "duration":10,
                 "time":204,
-                "cum_utility":-34.85,
-                "x":2567840,
-                "y":1190762
+                "cum_utility":-30.666,
+                "x":2577784,
+                "y":1183910
             },
             {
                 "acity":17,
                 "facility":"home3014003",
                 "group":"home",
-                "start":204,
-                "duration":84,
+                "start":206,
+                "duration":82,
                 "time":288,
-                "cum_utility":-31.82,
+                "cum_utility":-30.466,
                 "x":2569377,
                 "y":1189379
             }
@@ -26212,8 +26201,8 @@
     },
     {
         "id":6326681,
-        "execution_time":0.066,
-        "DSSR_iterations":8,
+        "execution_time":0.045,
+        "DSSR_iterations":5,
         "utility":-25.862,
         "daily_schedule":[
             {
@@ -26308,7 +26297,7 @@
     },
     {
         "id":6681848,
-        "execution_time":0.014,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -26393,7 +26382,7 @@
     },
     {
         "id":6682646,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -26467,7 +26456,7 @@
     },
     {
         "id":7061459,
-        "execution_time":0.01,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-37.84,
         "daily_schedule":[
@@ -26552,8 +26541,8 @@
     },
     {
         "id":6434687,
-        "execution_time":0.102,
-        "DSSR_iterations":14,
+        "execution_time":0.034,
+        "DSSR_iterations":4,
         "utility":-44.115,
         "daily_schedule":[
             {
@@ -26659,7 +26648,7 @@
     },
     {
         "id":6682899,
-        "execution_time":0.004,
+        "execution_time":0.009,
         "DSSR_iterations":0,
         "utility":-29.2,
         "daily_schedule":[
@@ -26733,8 +26722,8 @@
     },
     {
         "id":6326436,
-        "execution_time":0.058,
-        "DSSR_iterations":8,
+        "execution_time":0.039,
+        "DSSR_iterations":4,
         "utility":-30.568,
         "daily_schedule":[
             {
@@ -26840,7 +26829,7 @@
     },
     {
         "id":6326635,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-10.5,
         "daily_schedule":[
@@ -26903,8 +26892,8 @@
     },
     {
         "id":6326737,
-        "execution_time":0.069,
-        "DSSR_iterations":11,
+        "execution_time":0.053,
+        "DSSR_iterations":6,
         "utility":-41.566,
         "daily_schedule":[
             {
@@ -27032,8 +27021,8 @@
     },
     {
         "id":6458714,
-        "execution_time":0.021,
-        "DSSR_iterations":3,
+        "execution_time":0.025,
+        "DSSR_iterations":2,
         "utility":-13.272,
         "daily_schedule":[
             {
@@ -27106,8 +27095,8 @@
     },
     {
         "id":6458958,
-        "execution_time":0.07,
-        "DSSR_iterations":10,
+        "execution_time":0.058,
+        "DSSR_iterations":6,
         "utility":-25.368,
         "daily_schedule":[
             {
@@ -27202,7 +27191,7 @@
     },
     {
         "id":6626539,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":0.0,
         "daily_schedule":[
@@ -27243,7 +27232,7 @@
     },
     {
         "id":7129885,
-        "execution_time":0.016,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -27328,7 +27317,7 @@
     },
     {
         "id":6681625,
-        "execution_time":0.01,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-8.74,
         "daily_schedule":[
@@ -27391,7 +27380,7 @@
     },
     {
         "id":6326603,
-        "execution_time":0.015,
+        "execution_time":0.024,
         "DSSR_iterations":2,
         "utility":-28.45,
         "daily_schedule":[
@@ -27487,7 +27476,7 @@
     },
     {
         "id":6682116,
-        "execution_time":0.008,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -27561,7 +27550,7 @@
     },
     {
         "id":6326519,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-30.94,
         "daily_schedule":[
@@ -27657,8 +27646,8 @@
     },
     {
         "id":6459014,
-        "execution_time":0.094,
-        "DSSR_iterations":14,
+        "execution_time":0.06,
+        "DSSR_iterations":9,
         "utility":-46.256,
         "daily_schedule":[
             {
@@ -27764,7 +27753,7 @@
     },
     {
         "id":6459352,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-22.0,
         "daily_schedule":[
@@ -27849,8 +27838,8 @@
     },
     {
         "id":6682184,
-        "execution_time":0.068,
-        "DSSR_iterations":11,
+        "execution_time":0.095,
+        "DSSR_iterations":13,
         "utility":-19.04,
         "daily_schedule":[
             {
@@ -27923,7 +27912,7 @@
     },
     {
         "id":6458747,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-21.44,
         "daily_schedule":[
@@ -28008,7 +27997,7 @@
     },
     {
         "id":6682008,
-        "execution_time":0.008,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-21.355,
         "daily_schedule":[
@@ -28104,7 +28093,7 @@
     },
     {
         "id":7133194,
-        "execution_time":0.01,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-8.74,
         "daily_schedule":[
@@ -28167,8 +28156,8 @@
     },
     {
         "id":6682387,
-        "execution_time":0.041,
-        "DSSR_iterations":5,
+        "execution_time":0.029,
+        "DSSR_iterations":3,
         "utility":-37.74,
         "daily_schedule":[
             {
@@ -28274,8 +28263,8 @@
     },
     {
         "id":6681612,
-        "execution_time":0.079,
-        "DSSR_iterations":11,
+        "execution_time":0.054,
+        "DSSR_iterations":7,
         "utility":-23.77,
         "daily_schedule":[
             {
@@ -28359,7 +28348,7 @@
     },
     {
         "id":6682549,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-19.6,
         "daily_schedule":[
@@ -28444,8 +28433,8 @@
     },
     {
         "id":6459287,
-        "execution_time":0.068,
-        "DSSR_iterations":10,
+        "execution_time":0.055,
+        "DSSR_iterations":6,
         "utility":-13.91,
         "daily_schedule":[
             {
@@ -28507,7 +28496,7 @@
     },
     {
         "id":7129886,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-49.64,
         "daily_schedule":[
@@ -28625,7 +28614,7 @@
     },
     {
         "id":7022891,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-41.5,
         "daily_schedule":[
@@ -28710,7 +28699,7 @@
     },
     {
         "id":6942440,
-        "execution_time":0.01,
+        "execution_time":0.018,
         "DSSR_iterations":1,
         "utility":-37.94,
         "daily_schedule":[
@@ -28806,7 +28795,7 @@
     },
     {
         "id":6682877,
-        "execution_time":0.011,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-12.3,
         "daily_schedule":[
@@ -28869,8 +28858,8 @@
     },
     {
         "id":6682225,
-        "execution_time":0.039,
-        "DSSR_iterations":5,
+        "execution_time":0.018,
+        "DSSR_iterations":1,
         "utility":-41.9,
         "daily_schedule":[
             {
@@ -28965,7 +28954,7 @@
     },
     {
         "id":6938111,
-        "execution_time":0.055,
+        "execution_time":0.073,
         "DSSR_iterations":10,
         "utility":-17.346,
         "daily_schedule":[
@@ -29039,7 +29028,7 @@
     },
     {
         "id":6681984,
-        "execution_time":0.064,
+        "execution_time":0.081,
         "DSSR_iterations":11,
         "utility":-13.064,
         "daily_schedule":[
@@ -29124,8 +29113,8 @@
     },
     {
         "id":6940194,
-        "execution_time":0.065,
-        "DSSR_iterations":11,
+        "execution_time":0.089,
+        "DSSR_iterations":13,
         "utility":-13.958,
         "daily_schedule":[
             {
@@ -29198,7 +29187,7 @@
     },
     {
         "id":7023678,
-        "execution_time":0.014,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-37.74,
         "daily_schedule":[
@@ -29294,8 +29283,8 @@
     },
     {
         "id":6458801,
-        "execution_time":0.061,
-        "DSSR_iterations":10,
+        "execution_time":0.069,
+        "DSSR_iterations":8,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -29379,7 +29368,7 @@
     },
     {
         "id":6458746,
-        "execution_time":0.015,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-37.54,
         "daily_schedule":[
@@ -29475,7 +29464,7 @@
     },
     {
         "id":6935627,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-33.195,
         "daily_schedule":[
@@ -29560,7 +29549,7 @@
     },
     {
         "id":6459207,
-        "execution_time":0.005,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-16.508,
         "daily_schedule":[
@@ -29634,7 +29623,7 @@
     },
     {
         "id":6682202,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -29719,8 +29708,8 @@
     },
     {
         "id":6961832,
-        "execution_time":0.084,
-        "DSSR_iterations":12,
+        "execution_time":0.079,
+        "DSSR_iterations":9,
         "utility":-34.91,
         "daily_schedule":[
             {
@@ -29815,8 +29804,8 @@
     },
     {
         "id":6682176,
-        "execution_time":0.033,
-        "DSSR_iterations":5,
+        "execution_time":0.076,
+        "DSSR_iterations":8,
         "utility":-10.5,
         "daily_schedule":[
             {
@@ -29878,7 +29867,7 @@
     },
     {
         "id":7058040,
-        "execution_time":0.021,
+        "execution_time":0.028,
         "DSSR_iterations":3,
         "utility":-20.74,
         "daily_schedule":[
@@ -29952,7 +29941,7 @@
     },
     {
         "id":6682844,
-        "execution_time":0.01,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-29.2,
         "daily_schedule":[
@@ -30037,8 +30026,8 @@
     },
     {
         "id":7133192,
-        "execution_time":0.057,
-        "DSSR_iterations":9,
+        "execution_time":0.026,
+        "DSSR_iterations":3,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -30122,9 +30111,9 @@
     },
     {
         "id":6936922,
-        "execution_time":0.072,
-        "DSSR_iterations":9,
-        "utility":-31.366,
+        "execution_time":0.046,
+        "DSSR_iterations":5,
+        "utility":-32.262,
         "daily_schedule":[
             {
                 "acity":0,
@@ -30164,31 +30153,31 @@
                 "facility":"home3076176",
                 "group":"home",
                 "start":127,
-                "duration":57,
-                "time":184,
+                "duration":58,
+                "time":185,
                 "cum_utility":-18.7,
                 "x":2569570,
                 "y":1192480
             },
             {
-                "acity":5,
-                "facility":370107,
+                "acity":7,
+                "facility":377155,
                 "group":"leisure",
-                "start":184,
+                "start":186,
                 "duration":2,
-                "time":186,
-                "cum_utility":-20.966,
-                "x":2575916,
-                "y":1191020
+                "time":188,
+                "cum_utility":-21.862,
+                "x":2577784,
+                "y":1183910
             },
             {
                 "acity":9,
                 "facility":381921,
                 "group":"shop",
-                "start":187,
+                "start":189,
                 "duration":2,
-                "time":189,
-                "cum_utility":-31.366,
+                "time":191,
+                "cum_utility":-32.262,
                 "x":2567684,
                 "y":1190696
             },
@@ -30196,10 +30185,10 @@
                 "acity":16,
                 "facility":"home3076176",
                 "group":"home",
-                "start":189,
-                "duration":15,
+                "start":191,
+                "duration":13,
                 "time":204,
-                "cum_utility":-31.366,
+                "cum_utility":-32.262,
                 "x":2569570,
                 "y":1192480
             },
@@ -30210,7 +30199,7 @@
                 "start":204,
                 "duration":84,
                 "time":288,
-                "cum_utility":-31.366,
+                "cum_utility":-32.262,
                 "x":2569570,
                 "y":1192480
             }
@@ -30218,7 +30207,7 @@
     },
     {
         "id":6640178,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-27.04,
         "daily_schedule":[
@@ -30292,7 +30281,7 @@
     },
     {
         "id":7074631,
-        "execution_time":0.013,
+        "execution_time":0.02,
         "DSSR_iterations":2,
         "utility":-30.463,
         "daily_schedule":[
@@ -30388,7 +30377,7 @@
     },
     {
         "id":6682419,
-        "execution_time":0.014,
+        "execution_time":0.021,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -30473,7 +30462,7 @@
     },
     {
         "id":7059328,
-        "execution_time":0.01,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-10.3,
         "daily_schedule":[
@@ -30536,9 +30525,9 @@
     },
     {
         "id":7043047,
-        "execution_time":0.018,
+        "execution_time":0.019,
         "DSSR_iterations":2,
-        "utility":-21.24,
+        "utility":-26.69,
         "daily_schedule":[
             {
                 "acity":0,
@@ -30600,20 +30589,31 @@
                 "facility":"home3104430",
                 "group":"home",
                 "start":169,
-                "duration":4,
-                "time":173,
+                "duration":33,
+                "time":202,
                 "cum_utility":-21.24,
                 "x":2569959,
                 "y":1192459
             },
             {
+                "acity":9,
+                "facility":381921,
+                "group":"shop",
+                "start":202,
+                "duration":2,
+                "time":204,
+                "cum_utility":-26.69,
+                "x":2567684,
+                "y":1190696
+            },
+            {
                 "acity":17,
                 "facility":"home3104430",
                 "group":"home",
-                "start":173,
-                "duration":115,
+                "start":204,
+                "duration":84,
                 "time":288,
-                "cum_utility":-21.24,
+                "cum_utility":-26.69,
                 "x":2569959,
                 "y":1192459
             }
@@ -30621,8 +30621,8 @@
     },
     {
         "id":6682650,
-        "execution_time":0.039,
-        "DSSR_iterations":5,
+        "execution_time":0.053,
+        "DSSR_iterations":6,
         "utility":-29.2,
         "daily_schedule":[
             {
@@ -30706,7 +30706,7 @@
     },
     {
         "id":6459150,
-        "execution_time":0.004,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-29.6,
         "daily_schedule":[
@@ -30791,7 +30791,7 @@
     },
     {
         "id":6681602,
-        "execution_time":0.021,
+        "execution_time":0.026,
         "DSSR_iterations":3,
         "utility":-31.74,
         "daily_schedule":[
@@ -30876,8 +30876,8 @@
     },
     {
         "id":6459197,
-        "execution_time":0.07,
-        "DSSR_iterations":8,
+        "execution_time":0.026,
+        "DSSR_iterations":3,
         "utility":-50.64,
         "daily_schedule":[
             {
@@ -31005,8 +31005,8 @@
     },
     {
         "id":6649969,
-        "execution_time":0.06,
-        "DSSR_iterations":10,
+        "execution_time":0.045,
+        "DSSR_iterations":5,
         "utility":-15.75,
         "daily_schedule":[
             {
@@ -31079,7 +31079,7 @@
     },
     {
         "id":6682968,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-16.252,
         "daily_schedule":[
@@ -31153,8 +31153,8 @@
     },
     {
         "id":6964371,
-        "execution_time":0.053,
-        "DSSR_iterations":8,
+        "execution_time":0.034,
+        "DSSR_iterations":3,
         "utility":-18.5,
         "daily_schedule":[
             {
@@ -31205,7 +31205,7 @@
     },
     {
         "id":6326427,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-7.246,
         "daily_schedule":[
@@ -31257,8 +31257,8 @@
     },
     {
         "id":6326461,
-        "execution_time":0.067,
-        "DSSR_iterations":11,
+        "execution_time":0.06,
+        "DSSR_iterations":7,
         "utility":-31.14,
         "daily_schedule":[
             {
@@ -31353,7 +31353,7 @@
     },
     {
         "id":6682693,
-        "execution_time":0.01,
+        "execution_time":0.016,
         "DSSR_iterations":1,
         "utility":-27.44,
         "daily_schedule":[
@@ -31438,7 +31438,7 @@
     },
     {
         "id":6459189,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-21.215,
         "daily_schedule":[
@@ -31512,8 +31512,8 @@
     },
     {
         "id":6627495,
-        "execution_time":0.064,
-        "DSSR_iterations":11,
+        "execution_time":0.097,
+        "DSSR_iterations":12,
         "utility":-28.746,
         "daily_schedule":[
             {
@@ -31608,8 +31608,8 @@
     },
     {
         "id":6459066,
-        "execution_time":0.025,
-        "DSSR_iterations":4,
+        "execution_time":0.032,
+        "DSSR_iterations":3,
         "utility":-23.275,
         "daily_schedule":[
             {
@@ -31693,8 +31693,8 @@
     },
     {
         "id":6917368,
-        "execution_time":0.065,
-        "DSSR_iterations":9,
+        "execution_time":0.094,
+        "DSSR_iterations":12,
         "utility":-37.94,
         "daily_schedule":[
             {
@@ -31778,7 +31778,7 @@
     },
     {
         "id":7026958,
-        "execution_time":0.008,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-10.3,
         "daily_schedule":[
@@ -31841,7 +31841,7 @@
     },
     {
         "id":6681866,
-        "execution_time":0.004,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-27.24,
         "daily_schedule":[
@@ -31926,7 +31926,7 @@
     },
     {
         "id":6682943,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-23.2,
         "daily_schedule":[
@@ -32011,7 +32011,7 @@
     },
     {
         "id":6326743,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-22.958,
         "daily_schedule":[
@@ -32085,7 +32085,7 @@
     },
     {
         "id":6682158,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-29.0,
         "daily_schedule":[
@@ -32170,7 +32170,7 @@
     },
     {
         "id":6681670,
-        "execution_time":0.016,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-32.89,
         "daily_schedule":[
@@ -32266,7 +32266,7 @@
     },
     {
         "id":6959505,
-        "execution_time":0.01,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-38.84,
         "daily_schedule":[
@@ -32362,7 +32362,7 @@
     },
     {
         "id":6682159,
-        "execution_time":0.004,
+        "execution_time":0.007,
         "DSSR_iterations":0,
         "utility":-10.9,
         "daily_schedule":[
@@ -32425,8 +32425,8 @@
     },
     {
         "id":6682867,
-        "execution_time":0.073,
-        "DSSR_iterations":10,
+        "execution_time":0.04,
+        "DSSR_iterations":4,
         "utility":-30.74,
         "daily_schedule":[
             {
@@ -32521,8 +32521,8 @@
     },
     {
         "id":7037610,
-        "execution_time":0.009,
-        "DSSR_iterations":1,
+        "execution_time":0.007,
+        "DSSR_iterations":0,
         "utility":-30.74,
         "daily_schedule":[
             {
@@ -32617,8 +32617,8 @@
     },
     {
         "id":6459141,
-        "execution_time":0.066,
-        "DSSR_iterations":8,
+        "execution_time":0.082,
+        "DSSR_iterations":11,
         "utility":-37.84,
         "daily_schedule":[
             {
@@ -32681,18 +32681,29 @@
                 "facility":377159,
                 "group":"leisure",
                 "start":162,
-                "duration":40,
-                "time":202,
+                "duration":16,
+                "time":178,
                 "cum_utility":-37.84,
                 "x":2577930,
                 "y":1184036
             },
             {
+                "acity":16,
+                "facility":"home2907955",
+                "group":"home",
+                "start":178,
+                "duration":26,
+                "time":204,
+                "cum_utility":-37.84,
+                "x":2570010,
+                "y":1192646
+            },
+            {
                 "acity":17,
                 "facility":"home2907955",
                 "group":"home",
-                "start":202,
-                "duration":86,
+                "start":204,
+                "duration":84,
                 "time":288,
                 "cum_utility":-37.84,
                 "x":2570010,
@@ -32702,7 +32713,7 @@
     },
     {
         "id":7123995,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-20.735,
         "daily_schedule":[
@@ -32776,8 +32787,8 @@
     },
     {
         "id":6682554,
-        "execution_time":0.053,
-        "DSSR_iterations":7,
+        "execution_time":0.101,
+        "DSSR_iterations":12,
         "utility":-31.664,
         "daily_schedule":[
             {
@@ -32872,8 +32883,8 @@
     },
     {
         "id":6917366,
-        "execution_time":0.07,
-        "DSSR_iterations":12,
+        "execution_time":0.088,
+        "DSSR_iterations":13,
         "utility":-32.66,
         "daily_schedule":[
             {
@@ -32968,7 +32979,7 @@
     },
     {
         "id":6681853,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-33.735,
         "daily_schedule":[
@@ -33053,8 +33064,8 @@
     },
     {
         "id":7106137,
-        "execution_time":0.046,
-        "DSSR_iterations":6,
+        "execution_time":0.015,
+        "DSSR_iterations":1,
         "utility":-30.875,
         "daily_schedule":[
             {
@@ -33138,7 +33149,7 @@
     },
     {
         "id":6682942,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-20.814,
         "daily_schedule":[
@@ -33212,8 +33223,8 @@
     },
     {
         "id":6642315,
-        "execution_time":0.095,
-        "DSSR_iterations":13,
+        "execution_time":0.02,
+        "DSSR_iterations":2,
         "utility":-44.44,
         "daily_schedule":[
             {
@@ -33319,8 +33330,8 @@
     },
     {
         "id":6459230,
-        "execution_time":0.024,
-        "DSSR_iterations":4,
+        "execution_time":0.041,
+        "DSSR_iterations":6,
         "utility":-49.34,
         "daily_schedule":[
             {
@@ -33415,7 +33426,7 @@
     },
     {
         "id":6326449,
-        "execution_time":0.015,
+        "execution_time":0.022,
         "DSSR_iterations":2,
         "utility":-19.24,
         "daily_schedule":[
@@ -33500,8 +33511,8 @@
     },
     {
         "id":7035022,
-        "execution_time":0.016,
-        "DSSR_iterations":2,
+        "execution_time":0.015,
+        "DSSR_iterations":1,
         "utility":-47.019,
         "daily_schedule":[
             {
@@ -33607,7 +33618,7 @@
     },
     {
         "id":6326580,
-        "execution_time":0.005,
+        "execution_time":0.008,
         "DSSR_iterations":0,
         "utility":-18.5,
         "daily_schedule":[
@@ -33670,7 +33681,7 @@
     },
     {
         "id":6681766,
-        "execution_time":0.009,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-37.54,
         "daily_schedule":[
@@ -33755,8 +33766,8 @@
     },
     {
         "id":6458913,
-        "execution_time":0.062,
-        "DSSR_iterations":11,
+        "execution_time":0.07,
+        "DSSR_iterations":9,
         "utility":-19.04,
         "daily_schedule":[
             {
@@ -33840,8 +33851,8 @@
     },
     {
         "id":6600179,
-        "execution_time":0.058,
-        "DSSR_iterations":9,
+        "execution_time":0.096,
+        "DSSR_iterations":12,
         "utility":-34.176,
         "daily_schedule":[
             {
@@ -33947,7 +33958,7 @@
     },
     {
         "id":6682279,
-        "execution_time":0.009,
+        "execution_time":0.013,
         "DSSR_iterations":1,
         "utility":-49.04,
         "daily_schedule":[
@@ -34054,8 +34065,8 @@
     },
     {
         "id":6682064,
-        "execution_time":0.031,
-        "DSSR_iterations":5,
+        "execution_time":0.029,
+        "DSSR_iterations":3,
         "utility":-28.8,
         "daily_schedule":[
             {
@@ -34139,7 +34150,7 @@
     },
     {
         "id":6458738,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-27.395,
         "daily_schedule":[
@@ -34235,8 +34246,8 @@
     },
     {
         "id":6326747,
-        "execution_time":0.05,
-        "DSSR_iterations":7,
+        "execution_time":0.058,
+        "DSSR_iterations":6,
         "utility":-10.5,
         "daily_schedule":[
             {
@@ -34298,8 +34309,8 @@
     },
     {
         "id":6326539,
-        "execution_time":0.047,
-        "DSSR_iterations":9,
+        "execution_time":0.058,
+        "DSSR_iterations":8,
         "utility":-49.14,
         "daily_schedule":[
             {
@@ -34405,7 +34416,7 @@
     },
     {
         "id":6459233,
-        "execution_time":0.04,
+        "execution_time":0.044,
         "DSSR_iterations":5,
         "utility":-33.156,
         "daily_schedule":[
@@ -34512,8 +34523,8 @@
     },
     {
         "id":7125966,
-        "execution_time":0.036,
-        "DSSR_iterations":5,
+        "execution_time":0.082,
+        "DSSR_iterations":9,
         "utility":-32.739,
         "daily_schedule":[
             {
@@ -34586,7 +34597,7 @@
     },
     {
         "id":7094367,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-35.92,
         "daily_schedule":[
@@ -34682,7 +34693,7 @@
     },
     {
         "id":6681837,
-        "execution_time":0.009,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-18.742,
         "daily_schedule":[
@@ -34756,7 +34767,7 @@
     },
     {
         "id":7079472,
-        "execution_time":0.009,
+        "execution_time":0.015,
         "DSSR_iterations":1,
         "utility":-37.94,
         "daily_schedule":[
@@ -34864,7 +34875,7 @@
     {
         "id":6920609,
         "execution_time":0.017,
-        "DSSR_iterations":2,
+        "DSSR_iterations":1,
         "utility":-11.962,
         "daily_schedule":[
             {
@@ -34948,8 +34959,8 @@
     },
     {
         "id":6682160,
-        "execution_time":0.015,
-        "DSSR_iterations":2,
+        "execution_time":0.016,
+        "DSSR_iterations":1,
         "utility":-19.24,
         "daily_schedule":[
             {
@@ -35033,7 +35044,7 @@
     },
     {
         "id":6458924,
-        "execution_time":0.01,
+        "execution_time":0.014,
         "DSSR_iterations":1,
         "utility":-40.5,
         "daily_schedule":[
@@ -35118,8 +35129,8 @@
     },
     {
         "id":6681606,
-        "execution_time":0.045,
-        "DSSR_iterations":7,
+        "execution_time":0.032,
+        "DSSR_iterations":4,
         "utility":-41.5,
         "daily_schedule":[
             {

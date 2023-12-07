@@ -45,7 +45,7 @@ def filter_and_sort_activities(df):
 def reorder_columns(df):
     new_order = [
         'id', 'group', 'facility', 'start', 'duration', 'end_time', 'x', 'y',# mandatory info
-        'utility', 'DSSR_iterations', 'execution_time', 'cum_utility' # additional info
+        'utility', 'deviation_start', 'deviation_dur', 'DSSR_iterations', 'execution_time', 'cum_utility' # additional info
     ]
     df.rename({'group': 'type', 'start': 'start_time', 'duration': 'duration_time', 'cum_utility':'cumulative_utility'})
     df = df[new_order]

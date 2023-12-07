@@ -319,6 +319,8 @@ def compile_and_initialize():
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
+    lib.get_deviation_start.restype = c_int
+    lib.get_deviation_dur.restype = c_int
                                                     
     util_params = initialize_utility() 
     asc_array = (c_double * len(util_params.asc))(*util_params.asc)
@@ -340,6 +342,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
     constraints_array = (c_int * len(constraints))(*constraints)
     lib.set_scenario_constraints(constraints_array)
 
+    deviations_start = []
+    deviations_dur = []
     DSSR_iterations = []
     execution_times = []
     final_utilities = []
@@ -367,6 +371,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         lib.main()
 
         iter = lib.get_count()
+        deviation_start = lib.get_deviation_start()
+        deviation_dur = lib.get_deviation_dur()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
         schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual, num_activities)
@@ -375,6 +381,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         execution_times.append(time)
         schedules.append(schedule_data) 
         ids.append(individual['id'])
+        deviations_start.append(deviation_start)
+        deviations_dur.append(deviation_dur)
 
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
@@ -391,10 +399,12 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         'execution_time': execution_times,
         'DSSR_iterations': DSSR_iterations,
         'utility': final_utilities,
+        'deviation_start' : deviations_start,
+        'deviation_dur' : deviations_dur,
         'daily_schedule': schedules  
     })
 
-    results.to_json(f"Data/3_Generated/{scenario}_HEUR.json", orient='records', lines=False, indent = 4) 
+    results.to_json(f"Data/3_Generated/{scenario}.json", orient='records', lines=False, indent = 4) 
 
 
 if __name__ == "__main__":
@@ -420,11 +430,11 @@ if __name__ == "__main__":
         'Impact_of_leisure' :    [1, 0, 0, 0, 0, 0, 0]
     }
 
-    scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
-                'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    # scenari = ['Finding_balance']    
+    # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
+    #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
+    scenari = ['Normal_life']    
 
-    i = 10000
+    i = 10
     n = 15
     elapsed_times = []
     for scenario_name in scenari:
@@ -435,6 +445,6 @@ if __name__ == "__main__":
         elapsed_times.append(round(elapsed_time, 2))
         print(f"For {len(population_csv) if i > 5000 else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
 
-    print(elapsed_times)
+    # print(elapsed_times)
     print("Creating the Post-processed files...")
     Post_processing.create_postprocess_files(LOCAL, TIME_INTERVAL, scenari, i)

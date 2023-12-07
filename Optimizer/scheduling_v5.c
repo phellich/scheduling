@@ -62,6 +62,8 @@ Activity* activities = NULL;
 int DSSR_count;
 double total_time;
 Label* final_schedule;
+int deviation_start = 0;
+int deviation_dur = 0;
 
 /// utility_parameters 
 double asc_parameters[5];
@@ -81,6 +83,8 @@ int leisure_close, shop_close, education_close, work_close, outings_limitation, 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int get_count() {return DSSR_count;}
+int get_deviation_start() {return deviation_start;}
+int get_deviation_dur() {return deviation_dur;} // final_schedule->deviation_dur ? 
 double get_total_time() {return total_time;}
 Label* get_final_schedule() {return final_schedule;}
 

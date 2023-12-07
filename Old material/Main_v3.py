@@ -9,7 +9,7 @@ import Post_processing
 
 # LOCAL = 'Lausanne'
 LOCAL = 'Avenches'
-SCHEDULING_VERSION = 6
+SCHEDULING_VERSION = 5
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
 SPEED = 19*16.667                                                       # 1km/h = 16.667 m/min
@@ -70,8 +70,6 @@ Label._fields_ = [
     ("time", c_int),
     ("start_time", c_int),
     ("duration", c_int),
-    ("deviation_start", c_int),
-    ("deviation_dur", c_int),
     ("utility", c_double),
     ("mem", POINTER(Group_mem)),
     ("previous", POINTER(Label)),
@@ -249,7 +247,7 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
             activity_row_from_csv = activity_df.iloc[acity-1]
             facility_id = activity_row_from_csv['facility']
             x = activity_row_from_csv['x']
-            y = activity_row_from_csv['y']      
+            y = activity_row_from_csv['y']        
         elif (acity == num_activities-3):                           # work
             facility_id = individual['work_id']
             x = individual['work_x']
@@ -267,8 +265,6 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
             "duration": label.duration,
             "time": label.time,
             "cum_utility": label.utility,
-            "deviation_start": label.deviation_start,
-            "deviation_dur": label.deviation_dur,
             "x": x,
             "y": y
         }
@@ -323,6 +319,8 @@ def compile_and_initialize():
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
     lib.get_count.restype = c_int
+    lib.get_deviation_start.restype = c_int
+    lib.get_deviation_dur.restype = c_int
                                                     
     util_params = initialize_utility() 
     asc_array = (c_double * len(util_params.asc))(*util_params.asc)
@@ -344,8 +342,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
     constraints_array = (c_int * len(constraints))(*constraints)
     lib.set_scenario_constraints(constraints_array)
 
-    total_deviations_start = []
-    total_deviations_dur = []
+    deviations_start = []
+    deviations_dur = []
     DSSR_iterations = []
     execution_times = []
     final_utilities = []
@@ -373,6 +371,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         lib.main()
 
         iter = lib.get_count()
+        deviation_start = lib.get_deviation_start()
+        deviation_dur = lib.get_deviation_dur()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
         schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual, num_activities)
@@ -381,16 +381,14 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         execution_times.append(time)
         schedules.append(schedule_data) 
         ids.append(individual['id'])
+        deviations_start.append(deviation_start)
+        deviations_dur.append(deviation_dur)
 
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
             # print(f"\n UTILITY = {schedule_pointer.contents.utility}")
-            total_deviations_start.append(schedule_pointer.contents.deviation_start)
-            total_deviations_dur.append(schedule_pointer.contents.deviation_dur)
         else:
             final_utilities.append(0)
-            total_deviations_start.append(0)
-            total_deviations_dur.append(0)
 
         # recursive_print(schedule_pointer)
         lib.free_bucket()
@@ -401,8 +399,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         'execution_time': execution_times,
         'DSSR_iterations': DSSR_iterations,
         'utility': final_utilities,
-        'total_deviation_start' : total_deviations_start,
-        'total_deviation_dur' : total_deviations_dur,
+        'deviation_start' : deviations_start,
+        'deviation_dur' : deviations_dur,
         'daily_schedule': schedules  
     })
 
@@ -432,11 +430,11 @@ if __name__ == "__main__":
         'Impact_of_leisure' :    [1, 0, 0, 0, 0, 0, 0]
     }
 
-    scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
-                'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    # scenari = ['Normal_life']    
+    # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
+    #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
+    scenari = ['Normal_life']    
 
-    i = 10000
+    i = 10
     n = 15
     elapsed_times = []
     for scenario_name in scenari:

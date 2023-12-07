@@ -44,8 +44,8 @@ def filter_and_sort_activities(df):
 
 def reorder_columns(df):
     new_order = [
-        'id', 'group', 'facility', 'start', 'duration', 'end_time', 'x', 'y',# mandatory info
-        'utility', 'deviation_start', 'deviation_dur', 'DSSR_iterations', 'execution_time', 'cum_utility' # additional info
+        'id', 'group', 'facility', 'start', 'duration', 'end_time', 'x', 'y', 'deviation_start', 'deviation_dur', # mandatory info
+        'total_deviation_start', 'total_deviation_dur', 'utility', 'DSSR_iterations', 'execution_time', 'cum_utility' # additional info
     ]
     df.rename({'group': 'type', 'start': 'start_time', 'duration': 'duration_time', 'cum_utility':'cumulative_utility'})
     df = df[new_order]
@@ -73,6 +73,10 @@ def process_flat_df(df):
     df['start'] = df['start'].apply(minutes_to_time)
     df['duration'] = df['duration'].apply(minutes_to_time)
     df['time'] = df['time'].apply(minutes_to_time)
+    df['deviation_start'] = df['deviation_start'].apply(minutes_to_time)
+    df['deviation_dur'] = df['deviation_dur'].apply(minutes_to_time)
+    df['total_deviation_start'] = df['total_deviation_start'].apply(minutes_to_time)
+    df['total_deviation_dur'] = df['total_deviation_dur'].apply(minutes_to_time)
 
     df['execution_time'] = round(df['execution_time'], 4)
     filtered_df = filter_and_sort_activities(df)

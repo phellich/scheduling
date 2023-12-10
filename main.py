@@ -341,8 +341,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
     for i, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
         # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-        if (i >= i_break): 
-            break
+        # if (i >= i_break): 
+        #     break
                 
         act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
         # print(f"\nIndividual : {individual['id']} || home : ({individual['home_x']}, {individual['home_y']}) || home : ({individual['work_x']}, {individual['work_y']})")
@@ -417,20 +417,20 @@ if __name__ == "__main__":
         'Impact_of_leisure' :    [1, 0, 0, 0, 0, 0, 0]
     }
 
-    scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
-                'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    # scenari = ['Normal_life']    
+    # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
+    #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
+    scenari = ['Normal_life']    
 
-    i = 10
+    i = 4000
     n = 15
     elapsed_times = []
     for scenario_name in scenari:
         start_time = time.time()
-        call_to_optimizer(activity_csv, population_csv, scenario_name, constraints[scenario_name], num_act_to_select=n, i_break=i)
+        call_to_optimizer(activity_csv, population_csv[:i], scenario_name, constraints[scenario_name], num_act_to_select=n)
         end_time = time.time()
         elapsed_time = end_time - start_time
         elapsed_times.append(round(elapsed_time, 2))
-        print(f"For {len(population_csv) if i > 5000 else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
+        print(f"For {len(population_csv) if i > 1000000 else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
 
     # print(elapsed_times)
     print("Creating the Post-processed files...")

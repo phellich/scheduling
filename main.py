@@ -419,7 +419,7 @@ if __name__ == "__main__":
 
     # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
     #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    scenari = ['Normal_life']    
+    scenari = ['Impact_of_leisure']    
 
     i = 4000
     n = 15

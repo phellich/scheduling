@@ -71,7 +71,6 @@ double early_parameters[5];
 double late_parameters[5];
 double long_parameters[5];
 double short_parameters[5];
-double part_penal[5];
 int flex, mid_flex, not_flex;
 int h8, h12, h13, h17, h20;
 
@@ -131,7 +130,7 @@ void set_scenario_constraints(int* scenario_const) {
             // leisure_close, shop_close, education_close, work_close, outings_limitation, early_curfew, finding_balance);
 }
 
-void set_activities_and_particip(Activity* activities_data, double* pypart, int pynum_activities){
+void set_activities(Activity* activities_data, int pynum_activities){
     num_activities = pynum_activities;
     activities = (Activity*)malloc(num_activities * sizeof(Activity));
     if (activities == NULL) {
@@ -141,11 +140,6 @@ void set_activities_and_particip(Activity* activities_data, double* pypart, int 
     // Copy data from activities_data to activities
     for (int i = 0; i < num_activities; i++) {
         activities[i] = activities_data[i];
-    }
-
-    for(int i = 0; i < 5; i++) {
-        part_penal[i] = pypart[i];
-        // printf("part[%d] = %f", i, part_penal[i]);
     }
     // printf("\n");
 };
@@ -610,7 +604,7 @@ double update_utility(Label* L){
 
     L->utility = previous_L->utility;
 
-    L->utility -= asc_parameters[group] * part_penal[group];
+    L->utility -= asc_parameters[group];
     L->utility += travel_time_penalty*travel_time(previous_act, act); 
     // if (group != 2){ // NO TRAVEL TIME PENALTY TO GO TO WORK
     //     L->utility += travel_time_penalty*travel_time(previous_act, act); 

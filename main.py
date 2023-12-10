@@ -7,8 +7,8 @@ from collections import namedtuple
 import time
 import Post_processing
 
-# LOCAL = 'Lausanne'
-LOCAL = 'Avenches'
+LOCAL = 'Lausanne'
+# LOCAL = 'Avenches'
 SCHEDULING_VERSION = 6
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
@@ -192,19 +192,6 @@ def initialize_utility():
 
     return params
 
-def participation_vector(individual, groups): 
-    ''' If a people hasn't take part to an activity, its utility to do this activity is reduced '''
-    penalty_part = []
-    for i, group in enumerate(groups):
-        if (i == 0): # home 
-            penalty_part.append(1) # + terme random centre sur 1 et tres proche en vrai 
-        elif (individual[f"{group}_part"] == 1): 
-            penalty_part.append(1)
-        else: 
-            penalty_part.append(1)
-
-    return penalty_part
-
 ##### END OF INITIALIZATION ################################################################################
 ############################################################################################################
 ##### START OF FUNCTIONS ###################################################################################
@@ -363,10 +350,8 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         num_activities = len(act_in_peri)+4
         perso_activities_array = (Activity * num_activities)()
         activities_array = initialize_activities(act_in_peri, num_activities) 
-        participation = participation_vector(individual, groups)
-        pyparticipation = (c_double * len(participation))(*participation)
         perso_activities_array = personalize(activities_array, num_activities, individual, group_to_type)
-        lib.set_activities_and_particip(perso_activities_array, pyparticipation, num_activities)
+        lib.set_activities(perso_activities_array, num_activities)
         # for activity in perso_activities_array:
         #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
@@ -434,9 +419,9 @@ if __name__ == "__main__":
 
     scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
                 'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    # scenari = ['Normal_life']    
+    scenari = ['Normal_life']    
 
-    i = 10000
+    i = 100
     n = 15
     elapsed_times = []
     for scenario_name in scenari:

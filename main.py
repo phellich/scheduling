@@ -91,28 +91,11 @@ L_list._fields_ = [
 ############################################################################################################
 ##### START OF INITIALIZATION ##############################################################################
 
-def initialize_activities(df, num_activities): # utiliser les data et enlever le none by default
-    ''' Cree un vecteur d activite en les initialisant en fonction d'un dataframe en input '''
+def initialize_and_personalize_activities(df, num_activities, individual):
+    ''' Create and personalize an array of activities based on the given dataframe and individual data. '''
     activities_array = (Activity * num_activities)()
 
-    for index, row in df.iterrows(): # index + 1 to let some place to home dawn
-        activities_array[index+1].id = index+1
-        activities_array[index+1].x = row['x']
-        activities_array[index+1].y = row['y']
-        activities_array[index+1].earliest_start = row['earliest_start']
-        activities_array[index+1].latest_start = row['latest_start']
-        activities_array[index+1].max_duration = row['max_duration']
-        activities_array[index+1].min_duration = row['min_duration']
-        activities_array[index+1].group = row['group']
-
-    return activities_array
-
-
-def personalize(activities_array, num_activities, individual, group_to_type):
-    ''' Pour chaque individu, personnalise le vecteur d'activite en fonction 
-        de sa home et de ses preferences '''
-
-    # dawn
+    # Initialize dawn and dusk activities with the individual's home coordinates
     activities_array[0].id = 0
     activities_array[0].x = individual['home_x']
     activities_array[0].y = individual['home_y']
@@ -120,11 +103,8 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[0].latest_start = 0      
     activities_array[0].max_duration = HORIZON-2   
     activities_array[0].min_duration = 1
-    activities_array[0].des_duration = 0 
-    activities_array[0].des_start_time = 0 
     activities_array[0].group = 0
 
-    # dusk
     activities_array[num_activities-1].id = num_activities-1
     activities_array[num_activities-1].x = individual['home_x']
     activities_array[num_activities-1].y = individual['home_y']
@@ -132,8 +112,6 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-1].latest_start = HORIZON-2
     activities_array[num_activities-1].max_duration = HORIZON-2                       
     activities_array[num_activities-1].min_duration = 1 
-    activities_array[num_activities-1].des_duration = 0   
-    activities_array[num_activities-1].des_start_time = 0   
     activities_array[num_activities-1].group = 0
 
     # home
@@ -157,14 +135,27 @@ def personalize(activities_array, num_activities, individual, group_to_type):
     activities_array[num_activities-3].max_duration = round(12*60/TIME_INTERVAL) # 12h
     activities_array[num_activities-3].min_duration = round(10/TIME_INTERVAL) # 10m
     activities_array[num_activities-3].group = 2
+    activities_array[num_activities-3].des_duration = individual['work_dur']
+    activities_array[num_activities-3].des_start_time = individual['work_start']
 
-    for activity in activities_array:
-        group = activity.group
-        if (group == 0): 
-            continue
-        activity_type = group_to_type[group]
-        activity.des_duration = individual[f'{activity_type}_dur']
-        activity.des_start_time = individual[f'{activity_type}_start']          
+    # Initialize the rest of the activities from the dataframe
+    for index, row in df.iterrows():
+        activity_index = index + 1  # leave index 0 for the dawn activity
+        activities_array[activity_index].id = activity_index
+        activities_array[activity_index].x = row['x']
+        activities_array[activity_index].y = row['y']
+        activities_array[activity_index].earliest_start = row['earliest_start']
+        activities_array[activity_index].latest_start = row['latest_start']
+        activities_array[activity_index].max_duration = row['max_duration']
+        activities_array[activity_index].min_duration = row['min_duration']
+        activities_array[activity_index].group = row['group']
+        
+        # Personalize the activity based on the individual's preferences
+        group = activities_array[activity_index].group
+        if group > 0:  # Assuming group 0 is 'home' and doesn't need personalization
+            activity_type = group_to_type[group]
+            activities_array[activity_index].des_duration = individual[f'{activity_type}_dur']
+            activities_array[activity_index].des_start_time = individual[f'{activity_type}_start']
 
     return activities_array
 
@@ -325,33 +316,29 @@ def compile_and_initialize():
 
     return activity_csv, population_csv, lib
 
-def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_act_to_select = 30, i_break= None):
+def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_act_to_select = 15):
 
     print(f"Running scenario: {scenario}")
     constraints_array = (c_int * len(constraints))(*constraints)
     lib.set_scenario_constraints(constraints_array)
 
-    total_deviations_start = []
+    total_deviations_start = [] 
     total_deviations_dur = []
     DSSR_iterations = []
     execution_times = []
     final_utilities = []
     schedules = []
-    ids = []
     for i, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
         # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-        # if (i >= i_break): 
-        #     break
                 
-        act_in_peri = filter_closest(activity_csv, individual, num_act_to_select)
+        closest_facilities = filter_closest(activity_csv, individual, num_act_to_select)
         # print(f"\nIndividual : {individual['id']} || home : ({individual['home_x']}, {individual['home_y']}) || home : ({individual['work_x']}, {individual['work_y']})")
-        # print(act_in_peri.sample(20))
-        num_activities = len(act_in_peri)+4
-        perso_activities_array = (Activity * num_activities)()
-        activities_array = initialize_activities(act_in_peri, num_activities) 
-        perso_activities_array = personalize(activities_array, num_activities, individual, group_to_type)
-        lib.set_activities(perso_activities_array, num_activities)
+        # print(closest_facilities.head(17))
+        num_activities = len(closest_facilities)+4
+        activities_array = initialize_and_personalize_activities(closest_facilities, num_activities, individual)
+        # print(activities_array)
+        lib.set_activities(activities_array, num_activities)
         # for activity in perso_activities_array:
         #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
@@ -360,12 +347,11 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         iter = lib.get_count()
         time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
-        schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual, num_activities)
+        schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual, num_activities) # perso activities array
 
         DSSR_iterations.append(iter)
         execution_times.append(time)
         schedules.append(schedule_data) 
-        ids.append(individual['id'])
 
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
@@ -378,11 +364,11 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
             total_deviations_dur.append(0)
 
         # recursive_print(schedule_pointer)
-        lib.free_bucket()
-        lib.free_activities()
+        lib.free_bucket() # doit etre ici pour extraire les infos
+        # lib.free_activities() # a utiliser dans le C ? 
 
     results = pd.DataFrame({
-        'id': ids,
+        'id': population_csv['id'], 
         'execution_time': execution_times,
         'DSSR_iterations': DSSR_iterations,
         'utility': final_utilities,
@@ -412,14 +398,14 @@ if __name__ == "__main__":
         'Outings_limitation' :   [1, 0, 0, 0, 1, 0, 0], # partial shop close
         'Only_economy' :         [1, 1, 1, 0, 0, 0, 0],
         'Early_curfew' :         [0, 0, 0, 0, 0, 1, 0],
-        'Essential_needs' :      [0, 1, 0, 1, 0, 0, 0],
+        'Essential_needs' :      [1, 0, 1, 0, 0, 0, 0],
         'Finding_balance' :      [0, 0, 0, 0, 0, 0, 1],
         'Impact_of_leisure' :    [1, 0, 0, 0, 0, 0, 0]
     }
 
     # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
     #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    scenari = ['Impact_of_leisure']    
+    scenari = ['Essential_needs']    
 
     i = 4000
     n = 15

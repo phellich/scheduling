@@ -131,18 +131,9 @@ void set_scenario_constraints(int* scenario_const) {
 }
 
 void set_activities(Activity* activities_data, int pynum_activities){
+    activities = activities_data;
     num_activities = pynum_activities;
-    activities = (Activity*)malloc(num_activities * sizeof(Activity));
-    if (activities == NULL) {
-        fprintf(stderr, "Failed to allocate memory for activities\n");
-        exit(EXIT_FAILURE);
-    }
-    // Copy data from activities_data to activities
-    for (int i = 0; i < num_activities; i++) {
-        activities[i] = activities_data[i];
-    }
-    // printf("\n");
-};
+}
 
 double distance_x(Activity* a1, Activity* a2){
     // Distance en metres
@@ -225,23 +216,6 @@ void free_bucket(){
     free(bucket);
     bucket = NULL;
 };
-
-void free_activities() {
-    // printf("\nFreeing activities...\n");
-    if (activities != NULL) {
-        for (int i = 0; i < num_activities; i++) {
-            // printf("Activity %d, memory: %p\n", i, (void*)activities[i].memory);
-            // Make sure i is within the bounds of the allocated array
-            if (i < num_activities && activities[i].memory != NULL) {
-                delete_group(activities[i].memory);
-                activities[i].memory = NULL;
-            }
-        }
-        free(activities);
-        activities = NULL;
-        // printf("Activities freed.\n"); // Should print if everything goes right
-    }
-}
 
 Group_mem* createNode(int data) {
     /* Purpose: Allocates memory for and initializes a new Group_mem node with provided data */

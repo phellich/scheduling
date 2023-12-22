@@ -405,9 +405,9 @@ if __name__ == "__main__":
 
     # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
     #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    scenari = ['Essential_needs']    
+    scenari = ['Normal_life']    
 
-    i = 4000
+    i = 100
     n = 15
     elapsed_times = []
     for scenario_name in scenari:
@@ -416,7 +416,7 @@ if __name__ == "__main__":
         end_time = time.time()
         elapsed_time = end_time - start_time
         elapsed_times.append(round(elapsed_time, 2))
-        print(f"For {len(population_csv) if i > 1000000 else i} individuals and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
+        print(f"For {len(population_csv) if i > 1000000 else i} individuals of {LOCAL} and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
 
     # print(elapsed_times)
     print("Creating the Post-processed files...")

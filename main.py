@@ -377,7 +377,7 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
         'daily_schedule': schedules  
     })
 
-    results.to_json(f"Data/3_Generated/{scenario}.json", orient='records', lines=False, indent = 4) 
+    results.to_json(f"Data/3_Generated/{scenario}2.json", orient='records', lines=False, indent = 4) 
 
 
 if __name__ == "__main__":
@@ -405,9 +405,9 @@ if __name__ == "__main__":
 
     # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
     #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    scenari = ['Normal_life']    
+    scenari = ['Impact_of_leisure']    
 
-    i = 100
+    i = 4000
     n = 15
     elapsed_times = []
     for scenario_name in scenari:

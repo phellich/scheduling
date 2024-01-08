@@ -109,3 +109,24 @@ def create_postprocess_files(LOCAL, time_interval, scenari, i):
     for scenario in scenari:
         activity = process_scenario_json(scenario)
         activity.to_csv(f'Data/4_PostProcessed/activities_{scenario}.csv', index=False) 
+
+def create_postprocess_files_SCITAS(LOCAL, time_interval, scenari):
+    global TIME_INTERVAL  
+    TIME_INTERVAL = time_interval
+    
+    ######################################################################################
+    ## Population file ###################################################################
+
+    vaud_pop_path = 'Data/1_Original/vaud_population.csv.gz'
+    with gzip.open(vaud_pop_path, 'rt') as file:
+        vaud_pop = pd.read_csv(file) # pre filter on local?
+
+    ######################################################################################
+    ## Activity files ####################################################################
+
+    for scenario_index, scenario in enumerate(scenari):
+        activity = process_scenario_json(scenario)
+        activity.to_csv(f'Data/4_PostProcessed/activities_{scenario}.csv', index=False) 
+        if scenario_index==0:
+            pop_local = vaud_pop[vaud_pop['id'].isin(activity['id'].unique())]
+            pop_local.to_csv(f'Data/4_PostProcessed/population_{LOCAL}.csv', index=False) 

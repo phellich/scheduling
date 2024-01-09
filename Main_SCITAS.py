@@ -166,14 +166,6 @@ def initialize_utility():
     ''' Initialise les parametres de la utility function'''
 
     UtilityParams = namedtuple('UtilityParams', 'asc early late long short')
-    # params = UtilityParams( # TRUE PARAMETERS
-    #     # order = [home, education, work, leisure, shop]
-    #     asc=[0, 18.7, 13.1, 8.74, 10.5],
-    #     early=[0, 1.35, 0.619, 0.0996, 1.01],
-    #     late=[0, 1.63, 0.338, 0.239, 0.858],
-    #     long=[0, 1.14, 1.22, 0.08, 0.683],
-    #     short=[0, 1.75, 0.932, 0.101, 1.81]
-    # )
     params = UtilityParams( 
         # order = [home, education, work, leisure, shop]
         asc=[0, 18.7, 13.1, 8.74, 10.5],
@@ -182,7 +174,6 @@ def initialize_utility():
         long=[0, 1.14, 1.22, 0.08, 0.683],
         short=[0, 1.75, 0.932, 0.101, 1.81]
     )
-
     return params
 
 ##### END OF INITIALIZATION ################################################################################

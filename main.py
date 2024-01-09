@@ -6,6 +6,9 @@ import pandas as pd
 from collections import namedtuple
 import time
 import Post_processing
+import warnings
+
+warnings.filterwarnings('ignore', category=pd.errors.SettingWithCopyWarning)
 
 LOCAL = 'Lausanne'
 # LOCAL = 'Avenches'
@@ -159,19 +162,9 @@ def initialize_and_personalize_activities(df, num_activities, individual):
 
     return activities_array
 
-
 def initialize_utility(): 
     ''' Initialise les parametres de la utility function'''
-
     UtilityParams = namedtuple('UtilityParams', 'asc early late long short')
-    # params = UtilityParams( # TRUE PARAMETERS
-    #     # order = [home, education, work, leisure, shop]
-    #     asc=[0, 18.7, 13.1, 8.74, 10.5],
-    #     early=[0, 1.35, 0.619, 0.0996, 1.01],
-    #     late=[0, 1.63, 0.338, 0.239, 0.858],
-    #     long=[0, 1.14, 1.22, 0.08, 0.683],
-    #     short=[0, 1.75, 0.932, 0.101, 1.81]
-    # )
     params = UtilityParams( 
         # order = [home, education, work, leisure, shop]
         asc=[0, 18.7, 13.1, 8.74, 10.5],
@@ -180,7 +173,6 @@ def initialize_utility():
         long=[0, 1.14, 1.22, 0.08, 0.683],
         short=[0, 1.75, 0.932, 0.101, 1.81]
     )
-
     return params
 
 ##### END OF INITIALIZATION ################################################################################
@@ -193,20 +185,6 @@ def compile_code():
                    f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll", 
                    f"Optimizer/scheduling_v{SCHEDULING_VERSION}.c", "-lm"]
     subprocess.run(compile_command)
-
-def recursive_print(label_pointer):
-    """
-    Recursively prints information about the given Label and all of its predecessors 
-    Parameters: label_pointer: ctypes.POINTER(Label)
-    """
-    if label_pointer:
-        label = label_pointer.contents
-        
-        if label.previous:
-            recursive_print(label.previous)
-        
-        activity = label.act.contents 
-        print(f"(act = {label.acity}, group = {group_to_type[activity.group]}, start = {label.start_time}, desired start = {activity.des_start_time}, duration = {label.duration}, desired duration = {activity.des_duration}, cumulative utility = {label.utility})\n", end="")
 
 def extract_schedule_data(label_pointer, activity_df, individual, num_activities):
     """
@@ -244,9 +222,9 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
             "start": label.start_time,
             "duration": label.duration,
             "time": label.time,
-            "cum_utility": label.utility,
-            "deviation_start": label.deviation_start,
-            "deviation_dur": label.deviation_dur,
+            # "cum_utility": label.utility,
+            # "deviation_start": label.deviation_start,
+            # "deviation_dur": label.deviation_dur,
             "x": x,
             "y": y
         }
@@ -259,44 +237,54 @@ def extract_schedule_data(label_pointer, activity_df, individual, num_activities
     schedule_data = list(schedule_data_dict.values())
     return schedule_data
 
-def filter_closest(all_activities, individual, num_act_to_select):
+def filter_closest(all_activities, individual, num_act_to_select, constraints, activities_locations):
     home = np.array((individual['home_x'], individual['home_y']))
     work = np.array((individual['work_x'], individual['work_y']))
 
-    # Calculate distances using numpy for better performance
-    activities_locations = all_activities[['x', 'y']].to_numpy()
-    distances_home = np.linalg.norm(activities_locations - home, axis=1)
-    distances_work = np.linalg.norm(activities_locations - work, axis=1)
+    # Apply constraints
+    mask = np.ones(len(all_activities), dtype=bool)  # Initialize mask to include all activities
+    if constraints[0]:  # If leisure is closed
+        mask &= (all_activities['group'] != 3)
+    if constraints[1]:  # If shops are closed
+        mask &= (all_activities['group'] != 4)
+    if constraints[2]:  # If education is closed
+        mask &= (all_activities['group'] != 1)
+
+    # Apply the mask to both all_activities and activities_locations
+    filtered_activities = all_activities[mask]
+    filtered_locations = activities_locations[mask]
+
+    # Calculate fraction of each facility type in the filtered DataFrame
+    type_fractions = filtered_activities['type'].value_counts(normalize=True)
+
+    # Calculate distances
+    distances_home = np.linalg.norm(filtered_locations - home, axis=1)
+    distances_work = np.linalg.norm(filtered_locations - work, axis=1)
     min_distances = np.minimum(distances_home, distances_work)
 
     # Add distances to DataFrame
-    closest_activities = all_activities.copy()
-    closest_activities['distance'] = min_distances
-
-    # Calculate fraction of each facility type in the original DataFrame
-    type_fractions = all_activities['type'].value_counts(normalize=True)
+    filtered_activities['distance'] = min_distances
 
     # Select closest facilities for each type based on the fraction
     selected_activities = pd.DataFrame()
     for facility_type, fraction in type_fractions.items():
-        type_activities = closest_activities[closest_activities['type'] == facility_type]
+        type_activities = filtered_activities[filtered_activities['type'] == facility_type]
         n_closest = int(num_act_to_select * fraction)
         selected_activities = pd.concat([selected_activities, type_activities.sort_values('distance').head(n_closest)])
-        
+    
     return selected_activities.reset_index(drop=True)
 
 ##### END OF FUNCTIONS #####################################################################################
 ############################################################################################################
 ##### START OF EXECUTION ###################################################################################
 
-
-def compile_and_initialize(): 
+def compile_and_initialize(i): 
     
     compile_code()
     lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
 
     activity_csv = pd.read_csv(f"Data/2_PreProcessed/activities_{LOCAL}.csv")
-    population_csv = pd.read_csv(f"Data/2_PreProcessed/population_{LOCAL}.csv")
+    population_csv = pd.read_csv(f"Data/2_PreProcessed/population_{LOCAL}.csv", nrows=i)
      
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
@@ -321,41 +309,40 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
     print(f"Running scenario: {scenario}")
     constraints_array = (c_int * len(constraints))(*constraints)
     lib.set_scenario_constraints(constraints_array)
+    activities_locations = activity_csv[['x', 'y']].to_numpy()
 
     total_deviations_start = [] 
     total_deviations_dur = []
-    DSSR_iterations = []
-    execution_times = []
+    # DSSR_iterations = []
+    # execution_times = []
     final_utilities = []
     schedules = []
+    ids=[]
     for i, individual in tqdm(population_csv.iterrows(), total=population_csv.shape[0]):
         
-        # print(f"\nIndividual : {individual['id']} || leisure_dur : {individual['leisure_dur']} || work_dur : {individual['work_dur']} || work_start : {individual['work_start']} ")
-                
-        closest_facilities = filter_closest(activity_csv, individual, num_act_to_select)
+        closest_facilities = filter_closest(activity_csv, individual, num_act_to_select, constraints, activities_locations)
+        # print(closest_facilities)
         # print(f"\nIndividual : {individual['id']} || home : ({individual['home_x']}, {individual['home_y']}) || home : ({individual['work_x']}, {individual['work_y']})")
-        # print(closest_facilities.head(17))
         num_activities = len(closest_facilities)+4
         activities_array = initialize_and_personalize_activities(closest_facilities, num_activities, individual)
-        # print(activities_array)
         lib.set_activities(activities_array, num_activities)
         # for activity in perso_activities_array:
         #     print(f"ID: {activity.id}, Group: {activity.group}, desired start: {activity.des_start_time}, desired duration: {activity.des_duration}")
 
         lib.main()
 
-        iter = lib.get_count()
-        time = lib.get_total_time()
+        # iter = lib.get_count()
+        # time = lib.get_total_time()
         schedule_pointer = lib.get_final_schedule()   
         schedule_data = extract_schedule_data(schedule_pointer, activity_csv, individual, num_activities) # perso activities array
 
-        DSSR_iterations.append(iter)
-        execution_times.append(time)
+        # DSSR_iterations.append(iter)
+        # execution_times.append(time)
         schedules.append(schedule_data) 
+        ids.append(individual['id'])
 
         if schedule_pointer and schedule_pointer.contents:
             final_utilities.append(schedule_pointer.contents.utility)
-            # print(f"\n UTILITY = {schedule_pointer.contents.utility}")
             total_deviations_start.append(schedule_pointer.contents.deviation_start)
             total_deviations_dur.append(schedule_pointer.contents.deviation_dur)
         else:
@@ -363,26 +350,40 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
             total_deviations_start.append(0)
             total_deviations_dur.append(0)
 
-        # recursive_print(schedule_pointer)
-        lib.free_bucket() # doit etre ici pour extraire les infos
-        # lib.free_activities() # a utiliser dans le C ? 
+        lib.free_bucket() # doit etre ici pour extraire les infos avant
+        # lib.free_activities() # deja fait par le garbage collector de python
 
-    results = pd.DataFrame({
-        'id': population_csv['id'], 
-        'execution_time': execution_times,
-        'DSSR_iterations': DSSR_iterations,
-        'utility': final_utilities,
-        'total_deviation_start' : total_deviations_start,
-        'total_deviation_dur' : total_deviations_dur,
-        'daily_schedule': schedules  
-    })
+        # Append results every 1000 iterations or at the end
+        if i % 1000 == 0 or i == population_csv.shape[0] - 1:
+            print(f"\n i={i}, saving intermediate results...")
 
-    results.to_json(f"Data/3_Generated/{scenario}2.json", orient='records', lines=False, indent = 4) 
+            # Append to the existing file or create new if it doesn't exist
+            mode = 'a' if i != 0 else 'w'
+            results = pd.DataFrame({
+                'id': ids, 
+                'utility': final_utilities,
+                'total_deviation_start' : total_deviations_start,
+                'total_deviation_dur' : total_deviations_dur,
+                'daily_schedule': schedules  
+            })
+            results.to_json(f"Data/3_Generated/{scenario}3.json", orient='records', lines=True, indent=4, mode=mode)
+
+            # Reset lists to free memory
+            ids.clear()
+            final_utilities.clear()
+            schedules.clear()
+            total_deviations_start.clear()
+            total_deviations_dur.clear()
 
 
 if __name__ == "__main__":
         
-    activity_csv, population_csv, lib = compile_and_initialize()    
+    # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
+    #             'Early_curfew', 'Finding_balance', 'Impact_of_leisure']
+    scenari = ['Impact_of_leisure']    
+    i = 4000
+    n = 15    
+    activity_csv, population_csv, lib = compile_and_initialize(i)    
 
     # constraints = [
     #     leisure closure,
@@ -392,10 +393,9 @@ if __name__ == "__main__":
     #     Outings limitation,
     #     Early curfew,
     #     Finding balance]
-
     constraints = {
-        'Normal_life' :          [0, 0, 0, 0, 0, 0, 0],
-        'Outings_limitation' :   [1, 0, 0, 0, 1, 0, 0], # partial shop close
+        'Normal_life' :          [0, 0, 0, 0, 0, 0, 0], # 8m29
+        'Outings_limitation' :   [1, 0, 0, 0, 1, 0, 0], 
         'Only_economy' :         [1, 1, 1, 0, 0, 0, 0],
         'Early_curfew' :         [0, 0, 0, 0, 0, 1, 0],
         'Essential_needs' :      [1, 0, 1, 0, 0, 0, 0],
@@ -403,12 +403,6 @@ if __name__ == "__main__":
         'Impact_of_leisure' :    [1, 0, 0, 0, 0, 0, 0]
     }
 
-    # scenari = ['Normal_life', 'Outings_limitation', 'Only_economy', 'Early_curfew', 
-    #             'Essential_needs', 'Finding_balance', 'Impact_of_leisure']
-    scenari = ['Impact_of_leisure']    
-
-    i = 4000
-    n = 15
     elapsed_times = []
     for scenario_name in scenari:
         start_time = time.time()
@@ -419,5 +413,5 @@ if __name__ == "__main__":
         print(f"For {len(population_csv) if i > 1000000 else i} individuals of {LOCAL} and {n} closest activities around their home/work, the execution time of scenario {scenario_name} is {elapsed_time:.1f} seconds\n")
 
     # print(elapsed_times)
-    print("Creating the Post-processed files...")
-    Post_processing.create_postprocess_files(LOCAL, TIME_INTERVAL, scenari, i)
+    # print("Creating the Post-processed files...")
+    # Post_processing.create_postprocess_files(LOCAL, TIME_INTERVAL, scenari, i)

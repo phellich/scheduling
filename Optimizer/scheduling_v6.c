@@ -64,6 +64,7 @@ Activity* activities = NULL;
 int DSSR_count;
 double total_time;
 Label* final_schedule;
+int h8, h12, h13, h17, h20;
 
 /// utility_parameters 
 double asc_parameters[5];
@@ -72,7 +73,6 @@ double late_parameters[5];
 double long_parameters[5];
 double short_parameters[5];
 int flex, mid_flex, not_flex;
-int h8, h12, h13, h17, h20;
 
 // scenario constraints
 int leisure_close, shop_close, education_close, work_close, outings_limitation, early_curfew, finding_balance;

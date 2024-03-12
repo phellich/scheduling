@@ -13,16 +13,20 @@ warnings.filterwarnings('ignore', category=pd.errors.SettingWithCopyWarning)
 LOCAL = 'Lausanne'
 # LOCAL = 'Avenches'
 SCHEDULING_VERSION = 6
+FRAC_POP = 0.5
+FRAC_ACT = 0.5
+
+
 TIME_INTERVAL = 5
 HORIZON = round(24*60/TIME_INTERVAL) + 1
 SPEED = 19*16.667                                                       # 1km/h = 16.667 m/min
-TRAVEL_TIME_PENALTY = 0.1                                              # we will add dusk, home, dawn and work
+TRAVEL_TIME_PENALTY = 0.1                                               # we will add dusk, home, dawn and work
 H8 = round(8*60/TIME_INTERVAL) + 1                
 H12 = round(12*60/TIME_INTERVAL) + 1  
 H13 = round(13*60/TIME_INTERVAL) + 1  
 H17 = round(17*60/TIME_INTERVAL) + 1  
 H20 = round(20*60/TIME_INTERVAL) + 1  
-FLEXIBLE = round(60/TIME_INTERVAL)
+FLEXIBLE = round(60/TIME_INTERVAL)  # ie 60 minutes
 MIDDLE_FLEXIBLE = round(30/TIME_INTERVAL)
 NOT_FLEXIBLE = round(10/TIME_INTERVAL)
 group_to_type = {
@@ -283,8 +287,8 @@ def compile_and_initialize(i):
     compile_code()
     lib = CDLL(f"Optimizer/scheduling_v{SCHEDULING_VERSION}.dll")            # python is 64 bits and compiler too (check with gcc --version)
 
-    activity_csv = pd.read_csv(f"Data/2_PreProcessed/activities_{LOCAL}.csv")
-    population_csv = pd.read_csv(f"Data/2_PreProcessed/population_{LOCAL}.csv", nrows=i)
+    activity_csv = pd.read_csv(f"Data/2_PreProcessed/activities_{LOCAL}_{FRAC_POP}pop_{FRAC_ACT}act.csv")
+    population_csv = pd.read_csv(f"Data/2_PreProcessed/population_{LOCAL}_{FRAC_POP}pop_{FRAC_ACT}act.csv", nrows=i)
      
     lib.get_final_schedule.restype = POINTER(Label)
     lib.get_total_time.restype = c_double
@@ -366,7 +370,7 @@ def call_to_optimizer(activity_csv, population_csv, scenario, constraints, num_a
                 'total_deviation_dur' : total_deviations_dur,
                 'daily_schedule': schedules  
             })
-            results.to_json(f"Data/3_Generated/{scenario}3.json", orient='records', lines=True, indent=4, mode=mode)
+            results.to_json(f"Data/3_Generated/{scenario}4.json.gz", orient='records', lines=True, indent=4, mode=mode)
 
             # Reset lists to free memory
             ids.clear()

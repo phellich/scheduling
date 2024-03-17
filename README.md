@@ -1,4 +1,4 @@
-# See [associated paper of the project])(./Semester_project.pdf)
+# See [associated paper of the project](./Semester_project.pdf)
 
 ## What is the structure of the github ? 
 
